@@ -1,0 +1,403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2D3D06DAF25404BF9EF96699 /* Pods_chatspot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */; };
+		32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */; };
+		32963D651F8B1BAD00E05CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32963D641F8B1BAD00E05CF3 /* ViewController.swift */; };
+		32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D661F8B1BAD00E05CF3 /* Main.storyboard */; };
+		32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32963D691F8B1BAD00E05CF3 /* Assets.xcassets */; };
+		32963D6D1F8B1BAD00E05CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */; };
+		32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.release.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.release.xcconfig"; sourceTree = "<group>"; };
+		32963D5F1F8B1BAD00E05CF3 /* chatspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		32963D641F8B1BAD00E05CF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		32963D671F8B1BAD00E05CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		32963D691F8B1BAD00E05CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		32963D6C1F8B1BAD00E05CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		32963D6E1F8B1BAD00E05CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32963D5C1F8B1BAD00E05CF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D3D06DAF25404BF9EF96699 /* Pods_chatspot.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		32963D561F8B1BAD00E05CF3 = {
+			isa = PBXGroup;
+			children = (
+				32963D611F8B1BAD00E05CF3 /* chatspot */,
+				32963D601F8B1BAD00E05CF3 /* Products */,
+				48F18CA576106E6205144A7D /* Pods */,
+				7E8120D353190548F2D84F64 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		32963D601F8B1BAD00E05CF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				32963D5F1F8B1BAD00E05CF3 /* chatspot.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32963D611F8B1BAD00E05CF3 /* chatspot */ = {
+			isa = PBXGroup;
+			children = (
+				32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */,
+				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
+				32963D641F8B1BAD00E05CF3 /* ViewController.swift */,
+				32963D661F8B1BAD00E05CF3 /* Main.storyboard */,
+				32963D691F8B1BAD00E05CF3 /* Assets.xcassets */,
+				32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */,
+				32963D6E1F8B1BAD00E05CF3 /* Info.plist */,
+			);
+			path = chatspot;
+			sourceTree = "<group>";
+		};
+		48F18CA576106E6205144A7D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */,
+				28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7E8120D353190548F2D84F64 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		32963D5E1F8B1BAD00E05CF3 /* chatspot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32963D711F8B1BAD00E05CF3 /* Build configuration list for PBXNativeTarget "chatspot" */;
+			buildPhases = (
+				E5309314D079673B0326E0D3 /* [CP] Check Pods Manifest.lock */,
+				32963D5B1F8B1BAD00E05CF3 /* Sources */,
+				32963D5C1F8B1BAD00E05CF3 /* Frameworks */,
+				32963D5D1F8B1BAD00E05CF3 /* Resources */,
+				821B4D5033CEC2F9D2F16857 /* [CP] Embed Pods Frameworks */,
+				6A80A705E2A125BBE3AC7485 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = chatspot;
+			productName = chatspot;
+			productReference = 32963D5F1F8B1BAD00E05CF3 /* chatspot.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		32963D571F8B1BAD00E05CF3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = g7;
+				TargetAttributes = {
+					32963D5E1F8B1BAD00E05CF3 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 897G5XG3Q2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 32963D5A1F8B1BAD00E05CF3 /* Build configuration list for PBXProject "chatspot" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 32963D561F8B1BAD00E05CF3;
+			productRefGroup = 32963D601F8B1BAD00E05CF3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				32963D5E1F8B1BAD00E05CF3 /* chatspot */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32963D5D1F8B1BAD00E05CF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32963D6D1F8B1BAD00E05CF3 /* LaunchScreen.storyboard in Resources */,
+				32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */,
+				32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */,
+				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6A80A705E2A125BBE3AC7485 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		821B4D5033CEC2F9D2F16857 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5309314D079673B0326E0D3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-chatspot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32963D5B1F8B1BAD00E05CF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32963D651F8B1BAD00E05CF3 /* ViewController.swift in Sources */,
+				32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		32963D661F8B1BAD00E05CF3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32963D671F8B1BAD00E05CF3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32963D6C1F8B1BAD00E05CF3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		32963D6F1F8B1BAD00E05CF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		32963D701F8B1BAD00E05CF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		32963D721F8B1BAD00E05CF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 897G5XG3Q2;
+				INFOPLIST_FILE = chatspot/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.g7.chatspot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		32963D731F8B1BAD00E05CF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 897G5XG3Q2;
+				INFOPLIST_FILE = chatspot/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.g7.chatspot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32963D5A1F8B1BAD00E05CF3 /* Build configuration list for PBXProject "chatspot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32963D6F1F8B1BAD00E05CF3 /* Debug */,
+				32963D701F8B1BAD00E05CF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32963D711F8B1BAD00E05CF3 /* Build configuration list for PBXNativeTarget "chatspot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32963D721F8B1BAD00E05CF3 /* Debug */,
+				32963D731F8B1BAD00E05CF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 32963D571F8B1BAD00E05CF3 /* Project object */;
+}
