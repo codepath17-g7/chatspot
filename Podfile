@@ -6,6 +6,7 @@ target 'chatspot' do
   use_frameworks!
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
+  pod 'RealmSwift'
 
   # Pods for chatspot
 
