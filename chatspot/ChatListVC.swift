@@ -11,7 +11,7 @@ import UIKit
 class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
-	var chats: [Chat] = [Chat]()
+	var chats: [ChatRoom] = [ChatRoom]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as! ChatListCell
 		//set properties of cell
-		cell.chat = chats[indexPath.row]
+		cell.chatRoom = chats[indexPath.row]
 
 		return cell
 	}

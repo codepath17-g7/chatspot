@@ -10,7 +10,7 @@ import UIKit
 
 class ChatListCell: UITableViewCell {
 	
-	var chat: Chat! {
+	var chatRoom: ChatRoom! {
 		didSet {
 			//set chat name
 			//set chat current members number (optional, because of PMs)

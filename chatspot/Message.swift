@@ -9,5 +9,12 @@
 import UIKit
 
 class Message: NSObject {
+	var guid: String!
+	var user: User!
+	var createdAt: Date!
+	var image: String?
+	var message: String?
 	
+	// define later
+	// Reaction
 }
