@@ -9,7 +9,16 @@
 import UIKit
 
 class ChatMessageCell: UITableViewCell {
-
+	
+	
+	var message: Message! {
+		didSet {
+			//set sender name
+			//set message text 
+			//set message time
+		}
+	}
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

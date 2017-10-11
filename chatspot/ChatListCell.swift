@@ -9,6 +9,14 @@
 import UIKit
 
 class ChatListCell: UITableViewCell {
+	
+	var chat: Chat! {
+		didSet {
+			//set chat name
+			//set chat current members number (optional, because of PMs)
+			//set other things
+		}
+	}
 
     override func awakeFromNib() {
         super.awakeFromNib()

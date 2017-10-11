@@ -9,27 +9,52 @@
 import UIKit
 
 class ChatListVC: UIViewController {
-
+	
+	@IBOutlet weak var tableView: UITableView!
+	var chats: [Chat] = [Chat]()
+	
     override func viewDidLoad() {
         super.viewDidLoad()
+		tableView.delegate = self
+		tableView.dataSource = self
+		tableView.estimatedRowHeight = 120
+		tableView.rowHeight = UITableViewAutomaticDimension
 
-        // Do any additional setup after loading the view.
+// Function to populate array of chats
+		
+//		ChatSpotClient.sharedInstance.someFunctionToGetMyCurrentChats(someParam: Stringorsomething, success: { (chats: [Chat]) in
+//			self.chats = chats
+//			self.tableView.reloadData()
+//			KRProgressHUD.showSuccess()
+//		}, failure: { (error: Error) in
+//			print("Could not find chats: \(error.localizedDescription)")
+//		})
+
     }
+	
+	
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+}
 
-    /*
-    // MARK: - Navigation
+// TableView Methods
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as! ChatListCell
+		//set properties of cell
+		cell.chat = chats[indexPath.row]
 
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return chats.count
+	}
+	
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated:true)
+	}
+	
 }

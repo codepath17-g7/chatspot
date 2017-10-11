@@ -6,4 +6,8 @@
 //  Copyright © 2017 g7. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class Message: NSObject {
+	
+}
