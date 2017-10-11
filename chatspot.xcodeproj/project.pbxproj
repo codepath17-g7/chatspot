@@ -25,7 +25,7 @@
 		32963D691F8B1BAD00E05CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32963D6C1F8B1BAD00E05CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32963D6E1F8B1BAD00E05CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "chatspot/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
 		F2719EFD1F8D54E700417517 /* chatspot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = chatspot.entitlements; sourceTree = "<group>"; };
