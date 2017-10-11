@@ -14,6 +14,9 @@
 		32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32963D691F8B1BAD00E05CF3 /* Assets.xcassets */; };
 		32963D6D1F8B1BAD00E05CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */; };
 		32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */; };
+		7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7A1F8DF27A00DE16FA /* User.swift */; };
+		7679EA7D1F8DFE5300DE16FA /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7C1F8DFE5300DE16FA /* ChatMessage.swift */; };
+		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		32963D6E1F8B1BAD00E05CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "chatspot/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7679EA7A1F8DF27A00DE16FA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7679EA7C1F8DFE5300DE16FA /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
 		F2719EFD1F8D54E700417517 /* chatspot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = chatspot.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +70,7 @@
 		32963D611F8B1BAD00E05CF3 /* chatspot */ = {
 			isa = PBXGroup;
 			children = (
+				7679EA791F8DF1CA00DE16FA /* Model */,
 				F2719EFD1F8D54E700417517 /* chatspot.entitlements */,
 				32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */,
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
@@ -83,6 +90,16 @@
 				28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		7679EA791F8DF1CA00DE16FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7679EA7A1F8DF27A00DE16FA /* User.swift */,
+				7679EA7C1F8DFE5300DE16FA /* ChatMessage.swift */,
+				7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		7E8120D353190548F2D84F64 /* Frameworks */ = {
@@ -234,7 +251,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				32963D651F8B1BAD00E05CF3 /* ViewController.swift in Sources */,
+				7679EA7D1F8DFE5300DE16FA /* ChatMessage.swift in Sources */,
 				32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */,
+				7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */,
+				7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
