@@ -20,6 +20,7 @@ class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
     @objc dynamic var userCount: Int = 0
     @objc dynamic var roomBanner: String?
     @objc dynamic var roomActivity: Int = 0
+
     
     // linking between a chat room and all of its messages
     let messages = LinkingObjects(fromType: Message.self, property: "chatRoom")

@@ -20,6 +20,7 @@ class ChatListVC: UIViewController {
 		tableView.estimatedRowHeight = 120
 		tableView.rowHeight = UITableViewAutomaticDimension
 
+		self.chats = [ChatRoom()]
 // Function to populate array of chats
 		
 //		ChatSpotClient.sharedInstance.someFunctionToGetMyCurrentChats(someParam: Stringorsomething, success: { (chats: [Chat]) in
