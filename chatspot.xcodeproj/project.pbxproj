@@ -80,10 +80,11 @@
 		32963D611F8B1BAD00E05CF3 /* chatspot */ = {
 			isa = PBXGroup;
 			children = (
-				7679EA791F8DF1CA00DE16FA /* Model */,
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
 				F2719F061F8DF56E00417517 /* View Controllers */,
 				F2719F0C1F8DF72000417517 /* Cells */,
+				7679EA791F8DF1CA00DE16FA /* Model */,
+				8B4294991F8F0019003163D7 /* Data Store */,
 				32963D661F8B1BAD00E05CF3 /* Main.storyboard */,
 				32963D691F8B1BAD00E05CF3 /* Assets.xcassets */,
 				32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */,
@@ -119,6 +120,13 @@
 				3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B4294991F8F0019003163D7 /* Data Store */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Store";
 			sourceTree = "<group>";
 		};
 		F2719F061F8DF56E00417517 /* View Controllers */ = {

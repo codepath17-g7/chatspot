@@ -6,17 +6,25 @@
 //  Copyright © 2017 g7. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
 
-class ChatRoom: NSObject {
-    var guid: String!
-    var name: String!
-    var createdAt: Date!
+@objcMembers class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
     
-    var longitude: Double!
-    var latitude: Double!
+    dynamic var guid: String!
+    dynamic var name: String!
+    dynamic var createdAt: Date!
     
-    var userCount: Int!
-    var roomBanner: String?
-    var roomActivity: Int!
+    dynamic var longitude: Double!
+    dynamic var latitude: Double!
+    
+    dynamic var userCount: Int!
+    dynamic var roomBanner: String?
+    dynamic var roomActivity: Int!
+    
+    // linking between a chat room and all of its messages
+    let messages = LinkingObjects(fromType: Message.self, property: "chatRoom")
+    
+    override static func primaryKey() -> String? {
+        return "guid"
+    }
 }
