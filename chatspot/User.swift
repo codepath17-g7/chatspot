@@ -8,15 +8,15 @@
 
 import RealmSwift
 
-@objcMembers class User: Object { // Object is from Realm, this also extends a NSObject.
+class User: Object { // Object is from Realm, this also extends a NSObject.
     
-    dynamic var guid: String!
-    dynamic var createdAt: Date!
+    @objc dynamic var guid: String!
+    @objc dynamic var createdAt: Date!
 
-    dynamic var name: String!
-    dynamic var tagline: String?
-    dynamic var profileImage: String?
-    dynamic var bannerImage: String?
+    @objc dynamic var name: String!
+    @objc dynamic var tagline: String?
+    @objc dynamic var profileImage: String?
+    @objc dynamic var bannerImage: String?
     
     // linking between user and their messages.
     let messages = LinkingObjects(fromType: Message.self, property: "user")

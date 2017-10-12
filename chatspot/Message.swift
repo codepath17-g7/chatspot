@@ -8,16 +8,16 @@
 
 import RealmSwift
 
-@objcMembers class Message: Object { // Object is from Realm, this also extends a NSObject.
+class Message: Object { // Object is from Realm, this also extends a NSObject.
     
-	dynamic var guid: String!
-    dynamic var createdAt: Date!
-	dynamic var image: String?
-	dynamic var message: String?
+	@objc dynamic var guid: String!
+    @objc dynamic var createdAt: Date!
+	@objc dynamic var image: String?
+	@objc dynamic var message: String?
     
     // linked items
-    dynamic var user: User?
-    dynamic var chatRoom: ChatRoom?
+    @objc dynamic var user: User?
+    @objc dynamic var chatRoom: ChatRoom?
     
     override static func primaryKey() -> String? {
         return "guid"

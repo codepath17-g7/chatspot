@@ -8,18 +8,18 @@
 
 import RealmSwift
 
-@objcMembers class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
+class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
     
-    dynamic var guid: String!
-    dynamic var name: String!
-    dynamic var createdAt: Date!
+    @objc dynamic var guid: String!
+    @objc dynamic var name: String!
+    @objc dynamic var createdAt: Date!
     
-    dynamic var longitude: Double!
-    dynamic var latitude: Double!
+    @objc dynamic var longitude: Double = 0
+    @objc dynamic var latitude: Double = 0
     
-    dynamic var userCount: Int!
-    dynamic var roomBanner: String?
-    dynamic var roomActivity: Int!
+    @objc dynamic var userCount: Int = 0
+    @objc dynamic var roomBanner: String?
+    @objc dynamic var roomActivity: Int = 0
     
     // linking between a chat room and all of its messages
     let messages = LinkingObjects(fromType: Message.self, property: "chatRoom")
