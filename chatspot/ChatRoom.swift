@@ -13,15 +13,13 @@ class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
     @objc dynamic var guid: String!
     @objc dynamic var name: String!
     @objc dynamic var createdAt: Date!
-    
-    @objc dynamic var longitude: Double = 0
-    @objc dynamic var latitude: Double = 0
-    
-    @objc dynamic var userCount: Int = 0
     @objc dynamic var roomBanner: String?
-    @objc dynamic var roomActivity: Int = 0
 
-    
+    let longitude = RealmOptional<Double>() // primitive types can be made optional in realm by using a `RealmOptional`
+    let latitude = RealmOptional<Double>()
+    let userCount = RealmOptional<Int>()
+    let roomActivity = RealmOptional<Int>()
+
     // linking between a chat room and all of its messages
     let messages = LinkingObjects(fromType: Message.self, property: "chatRoom")
     
