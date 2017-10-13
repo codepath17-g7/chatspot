@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserView" customModule="chatspot" customModuleProvider="target">
+            <connections>
+                <outlet property="bannerImage" destination="DMP-Wt-t9I" id="zmG-nF-Den"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="nRS-MQ-J0x"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-Wt-t9I">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="DMP-Wt-t9I" secondAttribute="height" multiplier="375:196" id="jIE-sJ-OZN"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Z8-pf-xG3">
+                    <rect key="frame" x="100" y="116" width="175" height="175"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="2Z8-pf-xG3" secondAttribute="height" multiplier="1:1" id="B9m-q6-23G"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="zHf-wk-e28" appends="YES" id="SWM-fW-W6y"/>
+                    </connections>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fluffy Squirrel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2F-PH-5cg">
+                    <rect key="frame" x="100" y="311" width="175" height="32"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some witty tag line" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekW-ha-oUq">
+                    <rect key="frame" x="50" y="353" width="275" height="39"/>
+                    <fontDescription key="fontDescription" name="SavoyeLetPlain" family="Savoye LET" pointSize="32"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVI-jP-9TZ">
+                    <rect key="frame" x="88" y="402" width="200" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="KOK-zv-sc6"/>
+                        <constraint firstAttribute="height" constant="50" id="ZAe-lA-GYV"/>
+                    </constraints>
+                    <state key="normal" title="Send Message"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ekW-ha-oUq" firstAttribute="top" secondItem="y2F-PH-5cg" secondAttribute="bottom" constant="10" id="2Me-gX-NBZ"/>
+                <constraint firstAttribute="trailing" secondItem="DMP-Wt-t9I" secondAttribute="trailing" id="7k3-hP-1so"/>
+                <constraint firstItem="PVI-jP-9TZ" firstAttribute="top" secondItem="ekW-ha-oUq" secondAttribute="bottom" constant="10" id="9az-tu-Vbo"/>
+                <constraint firstItem="DMP-Wt-t9I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HHE-Hm-nsD"/>
+                <constraint firstAttribute="trailing" secondItem="y2F-PH-5cg" secondAttribute="trailing" constant="100" id="Hbj-Gj-VUF"/>
+                <constraint firstItem="PVI-jP-9TZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Js2-cK-xSe"/>
+                <constraint firstItem="2Z8-pf-xG3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="NTz-zx-5to"/>
+                <constraint firstItem="2Z8-pf-xG3" firstAttribute="top" secondItem="DMP-Wt-t9I" secondAttribute="bottom" constant="-80" id="NWm-bt-eJ6"/>
+                <constraint firstItem="ekW-ha-oUq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="SEo-in-F6m"/>
+                <constraint firstAttribute="trailing" secondItem="ekW-ha-oUq" secondAttribute="trailing" constant="50" id="cCe-td-5P9"/>
+                <constraint firstItem="2Z8-pf-xG3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fay-vG-Yjf"/>
+                <constraint firstItem="y2F-PH-5cg" firstAttribute="top" secondItem="2Z8-pf-xG3" secondAttribute="bottom" constant="20" id="gZH-LX-sfM"/>
+                <constraint firstItem="DMP-Wt-t9I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hGp-KQ-B8z"/>
+                <constraint firstItem="ekW-ha-oUq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ozw-vp-79P"/>
+                <constraint firstItem="y2F-PH-5cg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="yqp-F3-HDI"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="profileImage" destination="2Z8-pf-xG3" id="r9I-FC-1pb"/>
+                <outlet property="userName" destination="y2F-PH-5cg" id="dIY-aB-mru"/>
+                <outlet property="userTagline" destination="ekW-ha-oUq" id="LCw-d6-sCS"/>
+            </connections>
+            <point key="canvasLocation" x="26.5" y="48.5"/>
+        </view>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="zHf-wk-e28">
+            <connections>
+                <action selector="onPan:" destination="-1" id="nPT-In-AJV"/>
+            </connections>
+        </panGestureRecognizer>
+    </objects>
+</document>
