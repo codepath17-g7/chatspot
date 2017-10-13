@@ -196,7 +196,35 @@
                             <constraint firstItem="ATW-MG-nIq" firstAttribute="top" secondItem="4SP-Rs-xGb" secondAttribute="top" id="rh7-GA-CGy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8n8-0v-btE"/>
+                    <navigationItem key="navigationItem" id="8n8-0v-btE">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="IQP-KJ-oMo">
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-4M-Aju">
+                                    <rect key="frame" x="25" y="-3.5" width="99.5" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiR-MF-mHb">
+                                    <rect key="frame" x="32.5" y="10" width="84.5" height="31.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="oiR-MF-mHb" firstAttribute="top" secondItem="IQP-KJ-oMo" secondAttribute="top" constant="10" id="cdM-BQ-GGO"/>
+                                <constraint firstItem="qBJ-4M-Aju" firstAttribute="top" secondItem="IQP-KJ-oMo" secondAttribute="top" constant="-3.5" id="eX9-2g-0Ye"/>
+                                <constraint firstAttribute="bottom" secondItem="oiR-MF-mHb" secondAttribute="bottom" constant="-1.5" id="hQS-U2-leK"/>
+                                <constraint firstItem="qBJ-4M-Aju" firstAttribute="centerX" secondItem="IQP-KJ-oMo" secondAttribute="centerX" id="qFo-G4-11U"/>
+                                <constraint firstItem="oiR-MF-mHb" firstAttribute="centerX" secondItem="IQP-KJ-oMo" secondAttribute="centerX" id="ruY-Hg-r93"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="addEmojiButton" destination="e0d-bS-Zka" id="7J9-o4-DWU"/>
                         <outlet property="addPhotoButton" destination="ACi-5m-u6y" id="xm3-Re-blZ"/>
