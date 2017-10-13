@@ -52,8 +52,6 @@ class ChatRoomVC: UIViewController {
 	
 	func setUpUI(){
 
-		addPhotoButton.imageView?.changeToColor(color: .lightGray)
-		addEmojiButton.imageView?.changeToColor(color: .lightGray)
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
 		messageTextField.autoresizingMask = .flexibleWidth

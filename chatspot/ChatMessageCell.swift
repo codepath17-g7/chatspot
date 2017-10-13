@@ -10,9 +10,18 @@ import UIKit
 
 class ChatMessageCell: UITableViewCell {
 	
+	@IBOutlet weak var authorLabel: UILabel!
+	@IBOutlet weak var createdAtLabel: UILabel!
+	@IBOutlet weak var messageTextLabel: UILabel!
 	
 	var message: Message! {
 		didSet {
+			if let author = message.user {
+				authorLabel.text = author.name
+			}
+			if let text = message.message {
+				messageTextLabel.text = text
+			}
 			//set sender name
 			//set message text 
 			//set message time
