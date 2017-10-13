@@ -199,7 +199,7 @@
                     <navigationItem key="navigationItem" id="8n8-0v-btE">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="IQP-KJ-oMo">
-                            <rect key="frame" x="112.5" y="2" width="150" height="40"/>
+                            <rect key="frame" x="112.5" y="5.5" width="150" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-4M-Aju">
