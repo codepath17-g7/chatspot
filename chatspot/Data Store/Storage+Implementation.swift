@@ -18,7 +18,7 @@ struct Sorted {
 // Create
 extension Storage {
     
-    // Safe write. use is everywhere
+    // Safe write. use this everywhere
     fileprivate func safeWrite(_ block: (() throws -> Void)) throws {
         guard let realm = self.realm else {
             throw NSError()
