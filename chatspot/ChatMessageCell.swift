@@ -22,6 +22,9 @@ class ChatMessageCell: UITableViewCell {
 			if let text = message.message {
 				messageTextLabel.text = text
 			}
+            //fix this
+            createdAtLabel.text = "\(Date(timeIntervalSince1970: message.createdAt))"
+            
 			//set sender name
 			//set message text 
 			//set message time
