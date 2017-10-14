@@ -44,6 +44,10 @@ class User: Object { // Object is from Realm, this also extends a NSObject.
         self.bannerImage = bannerImage
     }
     
+    convenience init(dict: NSDictionary?) {
+        self.init()
+    }
+    
     // The required initializers
     required init(realm: RLMRealm, schema: RLMObjectSchema) {
         super.init(realm: realm, schema: schema)

@@ -11,6 +11,7 @@ import UIKit
 class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
+    var observer: UInt!
 	var chats: [ChatRoom] = [ChatRoom]()
 	
     override func viewDidLoad() {
@@ -21,6 +22,10 @@ class ChatListVC: UIViewController {
 		tableView.rowHeight = UITableViewAutomaticDimension
 
 		setupMockChatList()
+        observer = ChatSpotClient.observeChatRooms { (rooms: [ChatRoom]) in
+            //update tableview
+            print(rooms);
+        }
 // Function to populate array of chats
 		
 //		ChatSpotClient.sharedInstance.someFunctionToGetMyCurrentChats(someParam: Stringorsomething, success: { (chats: [Chat]) in
@@ -31,6 +36,10 @@ class ChatListVC: UIViewController {
 //			print("Could not find chats: \(error.localizedDescription)")
 //		})
 
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ChatSpotClient.removeObserver(handle: observer)
     }
 	
     func setupMockChatList(){
