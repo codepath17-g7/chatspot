@@ -12,9 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UserView" customModule="chatspot" customModuleProvider="target">
             <connections>
-                <outlet property="bannerImage" destination="DMP-Wt-t9I" id="zmG-nF-Den"/>
+                <outlet property="bannerImage" destination="I2a-Tj-jtE" id="Lg9-MH-8dq"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="dMm-8O-8kY"/>
-                <outlet property="profileImage" destination="2Z8-pf-xG3" id="mkv-4X-BHM"/>
+                <outlet property="editProfileButton" destination="QRA-km-SJT" id="FXM-oL-NT2"/>
+                <outlet property="profileImage" destination="jBb-wA-n7J" id="y7Z-aS-zkz"/>
+                <outlet property="sendMessageButton" destination="PVI-jP-9TZ" id="6rq-7V-q6b"/>
                 <outlet property="userName" destination="y2F-PH-5cg" id="Cte-jD-XtC"/>
                 <outlet property="userTagline" destination="ekW-ha-oUq" id="SZf-Ff-Zl1"/>
             </connections>
@@ -24,28 +26,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="DMP-Wt-t9I">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
-                    <gestureRecognizers/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="DMP-Wt-t9I" secondAttribute="height" multiplier="375:196" id="jIE-sJ-OZN"/>
-                    </constraints>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="4jM-32-GO7" appends="YES" id="VuA-OK-UI0"/>
-                    </connections>
-                </imageView>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_person" translatesAutoresizingMaskIntoConstraints="NO" id="2Z8-pf-xG3">
-                    <rect key="frame" x="100" y="116" width="175" height="175"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <gestureRecognizers/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="2Z8-pf-xG3" secondAttribute="height" multiplier="1:1" id="B9m-q6-23G"/>
-                    </constraints>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="zHf-wk-e28" appends="YES" id="SWM-fW-W6y"/>
-                        <outletCollection property="gestureRecognizers" destination="cfP-oF-jRi" appends="YES" id="9vN-mX-K3j"/>
-                    </connections>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jon Snow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2F-PH-5cg">
                     <rect key="frame" x="100" y="311" width="175" height="32"/>
                     <fontDescription key="fontDescription" type="system" pointSize="26"/>
@@ -69,8 +49,15 @@
                         <color key="titleShadowColor" red="0.93089704949999996" green="0.93089704949999996" blue="0.93089704949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRA-km-SJT">
-                    <rect key="frame" x="87" y="460" width="200" height="50"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-Tj-jtE" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="I2a-Tj-jtE" secondAttribute="height" multiplier="60:49" constant="135" id="0Bq-mk-sX7"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRA-km-SJT">
+                    <rect key="frame" x="87" y="402" width="200" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="HtW-eP-FPe"/>
                         <constraint firstAttribute="width" constant="200" id="ZE3-lE-umo"/>
@@ -80,33 +67,41 @@
                         <color key="titleShadowColor" red="0.93089704949999996" green="0.93089704949999996" blue="0.93089704949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jBb-wA-n7J" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
+                    <rect key="frame" x="100" y="116" width="175" height="175"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="jBb-wA-n7J" secondAttribute="height" multiplier="1:1" id="wD5-hS-9qU"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="zHf-wk-e28" appends="YES" id="bNB-Vf-zXV"/>
+                    </connections>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="I2a-Tj-jtE" secondAttribute="trailing" id="1pN-hv-alj"/>
                 <constraint firstItem="ekW-ha-oUq" firstAttribute="top" secondItem="y2F-PH-5cg" secondAttribute="bottom" constant="10" id="2Me-gX-NBZ"/>
-                <constraint firstAttribute="trailing" secondItem="DMP-Wt-t9I" secondAttribute="trailing" id="7k3-hP-1so"/>
                 <constraint firstItem="PVI-jP-9TZ" firstAttribute="top" secondItem="ekW-ha-oUq" secondAttribute="bottom" constant="10" id="9az-tu-Vbo"/>
-                <constraint firstItem="DMP-Wt-t9I" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HHE-Hm-nsD"/>
+                <constraint firstItem="QRA-km-SJT" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ab0-Rt-c7e"/>
+                <constraint firstItem="jBb-wA-n7J" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="CHH-bJ-qA2"/>
+                <constraint firstItem="jBb-wA-n7J" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="FgS-da-4XH"/>
+                <constraint firstItem="I2a-Tj-jtE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GYR-sS-SkO"/>
                 <constraint firstAttribute="trailing" secondItem="y2F-PH-5cg" secondAttribute="trailing" constant="100" id="Hbj-Gj-VUF"/>
+                <constraint firstItem="QRA-km-SJT" firstAttribute="top" secondItem="ekW-ha-oUq" secondAttribute="bottom" constant="10" id="Irr-cH-jCU"/>
                 <constraint firstItem="PVI-jP-9TZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Js2-cK-xSe"/>
-                <constraint firstItem="2Z8-pf-xG3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="NTz-zx-5to"/>
-                <constraint firstItem="2Z8-pf-xG3" firstAttribute="top" secondItem="DMP-Wt-t9I" secondAttribute="bottom" constant="-80" id="NWm-bt-eJ6"/>
+                <constraint firstItem="I2a-Tj-jtE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Noy-Gq-mUo"/>
                 <constraint firstItem="ekW-ha-oUq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="SEo-in-F6m"/>
+                <constraint firstItem="y2F-PH-5cg" firstAttribute="top" secondItem="jBb-wA-n7J" secondAttribute="bottom" constant="20" id="YX0-6H-2V3"/>
                 <constraint firstAttribute="trailing" secondItem="ekW-ha-oUq" secondAttribute="trailing" constant="50" id="cCe-td-5P9"/>
-                <constraint firstItem="2Z8-pf-xG3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fay-vG-Yjf"/>
-                <constraint firstItem="y2F-PH-5cg" firstAttribute="top" secondItem="2Z8-pf-xG3" secondAttribute="bottom" constant="20" id="gZH-LX-sfM"/>
-                <constraint firstItem="DMP-Wt-t9I" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hGp-KQ-B8z"/>
+                <constraint firstItem="jBb-wA-n7J" firstAttribute="top" secondItem="I2a-Tj-jtE" secondAttribute="bottom" constant="-80" id="hGl-ge-wx7"/>
                 <constraint firstItem="ekW-ha-oUq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ozw-vp-79P"/>
                 <constraint firstItem="y2F-PH-5cg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="yqp-F3-HDI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="26.5" y="48.5"/>
         </view>
-        <panGestureRecognizer minimumNumberOfTouches="1" id="zHf-wk-e28" userLabel="profile pan">
-            <connections>
-                <action selector="onPan:" destination="-1" id="nPT-In-AJV"/>
-            </connections>
-        </panGestureRecognizer>
         <tapGestureRecognizer id="cfP-oF-jRi" userLabel="profile image tap">
             <connections>
                 <action selector="onProfileImageTapped:" destination="-1" id="pU7-8s-zhv"/>
@@ -119,9 +114,10 @@
                 <outlet property="delegate" destination="iN0-l3-epB" id="LlW-0Q-7IX"/>
             </connections>
         </tapGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="zHf-wk-e28" userLabel="profile pan">
+            <connections>
+                <action selector="onPan:" destination="-1" id="nPT-In-AJV"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
-    <resources>
-        <image name="ic_image" width="674" height="410"/>
-        <image name="ic_person" width="468" height="475"/>
-    </resources>
 </document>

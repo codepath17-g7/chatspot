@@ -11,8 +11,10 @@ import AFNetworking
 
 class UserView: UIView {
     
-    @IBOutlet fileprivate weak var profileImage: UIImageView!
-    @IBOutlet fileprivate weak var bannerImage: UIImageView!
+    
+    @IBOutlet weak var bannerImage: UIImageWithEditView!
+    @IBOutlet weak var profileImage: UIImageWithEditView!
+
     @IBOutlet fileprivate weak var userName: UILabel!
     @IBOutlet fileprivate weak var userTagline: UILabel!
     
@@ -22,27 +24,54 @@ class UserView: UIView {
     private var profileImageOriginalCenter: CGPoint!
     
     
+    @IBOutlet weak var sendMessageButton: UIButton!
+    @IBOutlet weak var editProfileButton: UIButton!
+    
+    
     private var isSelf: Bool!
     private var user: User!
+    private var editMode: Bool = false
     
+    fileprivate var imageToPick: ImageToPick?
+    
+    enum ImageToPick {
+        case profile, banner
+    }
     
     func prepare(user: User, isSelf: Bool) {
         self.user = user
         self.isSelf = isSelf
         
         if let imgUrlStr = user.profileImage {
-            profileImage.setImageWith(URL(string: imgUrlStr)!)
+            profileImage.imageView.setImageWith(URL(string: imgUrlStr)!)
+        } else {
+            profileImage.imageView.image = #imageLiteral(resourceName: "ic_person")
         }
         
         if let bannerUrlStr = user.bannerImage {
-            bannerImage.setImageWith(URL(string: bannerUrlStr)!)
-
+            bannerImage.imageView.setImageWith(URL(string: bannerUrlStr)!)
+        } else {
+            bannerImage.imageView.image = #imageLiteral(resourceName: "ic_image")
         }
         
         userName.text = user.name
         
         if let tagline = user.tagline {
             userTagline.text = tagline
+        }
+        
+        if isSelf {
+            profileImage.showEditView()
+            bannerImage.showEditView()
+            
+            editProfileButton.isHidden = false
+            sendMessageButton.isHidden = true
+        } else {
+            profileImage.hideEditView()
+            bannerImage.hideEditView()
+            
+            editProfileButton.isHidden = true
+            sendMessageButton.isHidden = false
         }
         
     }
@@ -54,6 +83,17 @@ class UserView: UIView {
         profileImage.layer.masksToBounds = true
         profileImage.layer.borderWidth = 5
         profileImage.layer.borderColor = UIColor.white.cgColor
+        
+        profileImage.onEditTapped = {
+            print("Picking profile image")
+            self.imageToPick = .profile
+            self.pickImage()
+        }
+        bannerImage.onEditTapped = {
+            print("Picking baner image")
+            self.imageToPick = .banner
+            self.pickImage()
+        }
     }
     
     override init(frame: CGRect) {
@@ -73,22 +113,32 @@ class UserView: UIView {
         addSubview(contentView)
     }
 
-    @IBAction func onBannerTapped(_ sender: Any) {
-        print("Tapped banner")
-    }
     
-    @IBAction func onProfileImageTapped(_ sender: Any) {
-        print("Tapped profile")
-        
+    private func pickImage() {
         let vc = UIImagePickerController()
         vc.delegate = self
-        vc.allowsEditing = true
+        vc.allowsEditing = false
         vc.sourceType = .photoLibrary
         
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         let viewcon = appdelegate.window?.rootViewController
         
+        
         viewcon?.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func onBannerTapped(_ sender: Any) {
+        print("Tapped banner")
+        
+        imageToPick = .banner
+        pickImage()
+    }
+    
+    @IBAction func onProfileImageTapped(_ sender: Any) {
+        print("Tapped profile")
+        
+        imageToPick = .profile
+        pickImage()
     }
     
     //MARK:- Gestures
@@ -96,9 +146,8 @@ class UserView: UIView {
         let translation = panGestureRecognizer.translation(in: contentView)
         let point = panGestureRecognizer.location(in: profileImage)
         
-        
-        print(point)
-        print(translation)
+//        print(point)
+//        print(translation)
         
         if panGestureRecognizer.state == .began {
             profileImageOriginalCenter = profileImage.center
@@ -139,8 +188,17 @@ extension UIViewController: UIGestureRecognizerDelegate {
 extension UserView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        profileImage.image = originalImage
         picker.dismiss(animated: true, completion: nil)
+
+        switch imageToPick! {
+        case .profile:
+            profileImage.imageView.image = originalImage
+
+            break
+        case .banner:
+            bannerImage.imageView.image = originalImage
+            break
+        }
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
