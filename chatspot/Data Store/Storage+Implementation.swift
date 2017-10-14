@@ -32,7 +32,7 @@ extension Storage {
     }
     
     // Save an object to Realm
-    func save(object: Object) throws {
+    func save(_ object: Object) throws {
         guard let realm = self.realm else {
             throw NSError()
         }
@@ -47,7 +47,7 @@ extension Storage {
 extension Storage {
     
     // Fetch objects matching a filter/predicate
-    func fetch<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil, completion: (([T]) -> ())) {
+    func fetch<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil) -> [T] {
         var objects = self.realm?.objects(model)
         
         if let predicate = predicate {
@@ -63,7 +63,21 @@ extension Storage {
             accumulate.append(object)
         }
         
-        completion(accumulate)
+        return accumulate
+    }
+    
+    func fetchResults<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, sorted: Sorted? = nil) -> Results<T> {
+        var objects = self.realm?.objects(model)
+        
+        if let predicate = predicate {
+            objects = objects?.filter(predicate)
+        }
+        
+        if let sorted = sorted {
+            objects = objects?.sorted(byKeyPath: sorted.key, ascending: sorted.ascending)
+        }
+        
+        return objects!
     }
 }
 
@@ -82,7 +96,7 @@ extension Storage {
 extension Storage {
     
     // Delete an object
-    func delete(object: Object) throws {
+    func delete(_ object: Object) throws {
         guard let realm = self.realm else {
             throw NSError()
         }
@@ -93,16 +107,15 @@ extension Storage {
     }
     
     // Delte objects matching a filter/predicate
-    func delete<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, completion: () -> Void) throws {
+    func delete<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (() -> ())?) throws {
         guard let realm = self.realm else {
             throw NSError()
         }
         
         try self.safeWrite {
-            fetch(model, completion: { objectsToDelete in
-                realm.delete(objectsToDelete)
-                completion()
-            })
+            let objectsToDelete = fetch(model)
+            realm.delete(objectsToDelete)
+            completion?()
         }
     }
     

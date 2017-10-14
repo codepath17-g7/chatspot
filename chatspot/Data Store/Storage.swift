@@ -20,22 +20,66 @@ class Storage {
         self.realm = try? Realm()
     }
     
-    // ChatRoom operations
-    func createChatRoom(_ chatRoom: ChatRoom) {
-        
+    // ChatRoom operations ---------------
+    /**
+     Create a chat room.
+     
+     - parameter chatRoom: Chatroom to be created
+     
+     - returns: true if creation was successful
+     */
+    func createChatRoom(_ chatRoom: ChatRoom)-> Bool {
+        do {
+            try save(chatRoom)
+            return true
+        } catch {
+            return false
+        }
     }
     
-    func getAllChatRooms() {
-        
+    /**
+     Get an array of chatrooms!
+     
+     - returns: An `Array` of `ChatRoom`
+     */
+    func getAllChatRooms() -> [ChatRoom] {
+        return fetch(ChatRoom.self)
     }
     
-    func removeChatRoom(_ chatRoom: ChatRoom) {
-        
+    
+    /**
+     Get all chatrooms in a live result format
+     
+     - returns: A live result object that autoupdates itself when data is added, updated, removed
+     */
+    func getAllChatRooms() -> Results<ChatRoom> {
+        return fetchResults(ChatRoom.self)
     }
     
-    // User operations
-    func saveUser(_ user: User) {
-        
+    /**
+     Remove a chat room.
+     
+     - parameter chatRoom: Chatroom to be removed
+     
+     - returns: true if removal was successful
+     */
+    func removeChatRoom(_ chatRoom: ChatRoom) -> Bool {
+        do {
+            try delete(chatRoom)
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    // User operations ---------------
+    func saveUser(_ user: User) -> Bool {
+        do {
+            try save(user)
+            return true
+        } catch {
+            return false
+        }
     }
     
     func getLoggedInUser() {
@@ -54,7 +98,13 @@ class Storage {
         
     }
     
-    func removeUser(_ user: User) {
+    func removeUser(_ user: User) -> Bool {
+        do {
+            try delete(user)
+            return true
+        } catch {
+            return false
+        }
         
     }
     
@@ -62,7 +112,7 @@ class Storage {
         
     }
     
-    // Message operations
+    // Message operations ---------------
     func saveMessage(_ message: Message) {
         
     }
@@ -71,7 +121,13 @@ class Storage {
         
     }
     
-    func removeMessage(_ message: Message) {
+    func removeMessage(_ message: Message) -> Bool {
+        do {
+            try delete(message)
+            return true
+        } catch {
+            return false
+        }
         
     }
     
