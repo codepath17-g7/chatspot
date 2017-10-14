@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "around me small.png",
+      "filename" : "around me.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "around me@2x.png",
       "scale" : "2x"
     },
     {

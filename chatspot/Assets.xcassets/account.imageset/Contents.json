@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "around me 30x30.png",
+      "filename" : "account.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "account@2x.png",
       "scale" : "2x"
     },
     {

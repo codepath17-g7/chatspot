@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qGN-Ra-ftD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="qGN-Ra-ftD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -50,9 +50,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TlF-l3-fx9" id="yvz-QH-fyY">
-
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="107.5"/>
-
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hi-Xi-W1Y">
@@ -150,9 +148,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9WS-4L-9Pn" id="uvT-7R-xVL">
-
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
-
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
@@ -263,7 +259,7 @@
                     <navigationItem key="navigationItem" id="8n8-0v-btE">
                         <nil key="title"/>
                         <view key="titleView" contentMode="scaleToFill" id="IQP-KJ-oMo">
-                            <rect key="frame" x="112.5" y="5.5" width="150" height="40"/>
+                            <rect key="frame" x="112.5" y="2" width="150" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-4M-Aju">
@@ -386,7 +382,7 @@
         <scene sceneID="MZK-Ye-5do">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Around Me" image="pin" id="DEi-1I-pBR"/>
+                    <tabBarItem key="tabBarItem" title="Around Me" image="around me" id="DEi-1I-pBR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -405,7 +401,7 @@
         <scene sceneID="VcB-tt-D7v">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="0M2-oz-a3L"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="account" id="0M2-oz-a3L"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -422,11 +418,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="messages" width="40" height="40"/>
+        <image name="account" width="30" height="30"/>
+        <image name="around me" width="30" height="30"/>
+        <image name="messages" width="30" height="30"/>
         <image name="people2" width="35" height="35"/>
         <image name="photo" width="35" height="30"/>
         <image name="pin" width="35" height="35"/>
-        <image name="profile" width="40" height="40"/>
         <image name="smiley" width="35" height="30"/>
     </resources>
 </document>
