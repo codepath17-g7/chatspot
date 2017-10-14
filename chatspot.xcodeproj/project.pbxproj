@@ -18,6 +18,8 @@
 		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
 		7679EA821F8E054600DE16FA /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679EA811F8E054600DE16FA /* UserView.xib */; };
 		7679EA841F8E071A00DE16FA /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA831F8E071A00DE16FA /* UserView.swift */; };
+		76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */; };
+		76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */; };
 		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
 		8B92720C1F9082590041FC35 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92720B1F9082590041FC35 /* Storage.swift */; };
 		F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719EFE1F8DF50300417517 /* ChatListVC.swift */; };
@@ -44,6 +46,8 @@
 		7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		7679EA811F8E054600DE16FA /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
 		7679EA831F8E071A00DE16FA /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIImageWithEditView.xib; sourceTree = "<group>"; };
+		76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageWithEditView.swift; sourceTree = "<group>"; };
 		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
 		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 			children = (
 				7679EA811F8E054600DE16FA /* UserView.xib */,
 				7679EA831F8E071A00DE16FA /* UserView.swift */,
+				76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */,
+				76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -214,7 +220,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -247,6 +253,7 @@
 				32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */,
 				32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */,
 				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
+				76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */,
 				7679EA821F8E054600DE16FA /* UserView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,8 +268,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
-				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -281,6 +290,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -291,6 +301,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
@@ -330,6 +341,7 @@
 			files = (
 				F2719F051F8DF56300417517 /* ProfileVC.swift in Sources */,
 				8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */,
+				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
 				8B92720C1F9082590041FC35 /* Storage.swift in Sources */,
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
@@ -467,6 +479,7 @@
 			baseConfigurationReference = EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = chatspot/chatspot.entitlements;
 				DEVELOPMENT_TEAM = 875WVS57Q6;
 				INFOPLIST_FILE = chatspot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -481,6 +494,7 @@
 			baseConfigurationReference = 28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = chatspot/chatspot.entitlements;
 				DEVELOPMENT_TEAM = 875WVS57Q6;
 				INFOPLIST_FILE = chatspot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

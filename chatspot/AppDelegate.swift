@@ -26,19 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Successfully running this sample requires an app in Firebase and an
         // accompanying valid GoogleService-Info.plist file.
         
-        GTMSessionFetcher.setLoggingEnabled(true)
+       // GTMSessionFetcher.setLoggingEnabled(true)
         return true
     }
     
     @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
-        return self.handleOpenUrl(url, sourceApplication: sourceApplication)
+       // return self.handleOpenUrl(url, sourceApplication: sourceApplication)
+       return  (FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication))!
     }
     
     @available(iOS 8.0, *)
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return self.handleOpenUrl(url, sourceApplication: sourceApplication)
+        //return self.handleOpenUrl(url, sourceApplication: sourceApplication)
+        return (FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication))!
     }
     
     func application(_ application: UIApplication,
@@ -48,19 +50,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Auth.auth().canHandleNotification(notification) {
             completionHandler(.noData)
         }
+        
     }
     
     
     func handleOpenUrl(_ url: URL, sourceApplication: String?) -> Bool {
         print("url: \(url)")
-        print("sourceApp: \(sourceApplication ?? "")")
-        FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication)
-        return true;
-        /*if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+       
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
             return true
         }
         // other URL handling goes here.
-        return false*/
+        return false
     }
 }
 

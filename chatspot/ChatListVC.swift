@@ -17,10 +17,10 @@ class ChatListVC: UIViewController {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.estimatedRowHeight = 120
+		tableView.estimatedRowHeight = 108
 		tableView.rowHeight = UITableViewAutomaticDimension
 
-		self.chats = [ChatRoom()]
+		setupMockChatList()
 // Function to populate array of chats
 		
 //		ChatSpotClient.sharedInstance.someFunctionToGetMyCurrentChats(someParam: Stringorsomething, success: { (chats: [Chat]) in
@@ -33,6 +33,24 @@ class ChatListVC: UIViewController {
 
     }
 	
+    func setupMockChatList(){
+        let chatroom1 = ChatRoom(guid: "234cdwf", createdAt: 123432254, name: "Oracle Arena")
+        let chatroom2 = ChatRoom(guid: "234cfffdwf", createdAt: 1234334532254, name: "Rengstorff Park")
+        self.chats = [chatroom1, chatroom2]
+        self.tableView.reloadData()
+    }
+	
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("in prep for segue")
+        if segue.identifier == "ChatRoomVCSegue"{
+            let chatRoomVC = segue.destination as! ChatRoomVC
+//            chatRoomVC.delegate = self
+            if let cell = sender as? ChatListCell, let indexPath = tableView.indexPath(for: cell) {
+                chatRoomVC.chatRoom = chats[indexPath.row]
+            }
+        }
+    }
+
 	
 
 }

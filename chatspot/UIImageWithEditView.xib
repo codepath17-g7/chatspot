@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="CbB-nv-W9D"/>
+                <outlet property="editImage" destination="wrn-1c-g8B" id="Y6n-1s-rND"/>
+                <outlet property="editText" destination="HH0-cy-pPU" id="bIj-U9-Crq"/>
+                <outlet property="editView" destination="K9F-d2-biW" id="jEu-Z8-AhA"/>
+                <outlet property="editViewBottomConstraint" destination="7fl-vb-7r4" id="bLK-j0-yo2"/>
+                <outlet property="editViewHeightConstraint" destination="hC1-DV-Elw" id="rrp-Ln-JtW"/>
+                <outlet property="imageView" destination="EiW-fJ-nCk" id="N5j-EZ-p3O"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="216" height="202"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EiW-fJ-nCk">
+                    <rect key="frame" x="0.0" y="0.0" width="216" height="202"/>
+                </imageView>
+                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9F-d2-biW" userLabel="Edit View">
+                    <rect key="frame" x="156" y="180" width="60" height="20"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_image" translatesAutoresizingMaskIntoConstraints="NO" id="wrn-1c-g8B">
+                            <rect key="frame" x="3" y="3" width="19" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="19" id="Sue-mZ-4Im"/>
+                                <constraint firstAttribute="height" constant="14" id="Tao-ig-SZP"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HH0-cy-pPU">
+                            <rect key="frame" x="30" y="3" width="22" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstItem="HH0-cy-pPU" firstAttribute="leading" secondItem="wrn-1c-g8B" secondAttribute="trailing" constant="8" id="IKD-Fw-1oW"/>
+                        <constraint firstAttribute="width" constant="60" id="WJG-Ry-HKE"/>
+                        <constraint firstAttribute="height" constant="20" id="hC1-DV-Elw"/>
+                        <constraint firstItem="wrn-1c-g8B" firstAttribute="leading" secondItem="K9F-d2-biW" secondAttribute="leading" constant="3" id="lfa-3g-DpT"/>
+                        <constraint firstItem="HH0-cy-pPU" firstAttribute="centerY" secondItem="K9F-d2-biW" secondAttribute="centerY" id="uBe-Kg-tFI"/>
+                        <constraint firstItem="wrn-1c-g8B" firstAttribute="centerY" secondItem="K9F-d2-biW" secondAttribute="centerY" id="w7o-6y-aJ9"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="nIK-We-3fk" appends="YES" id="V1p-7h-dW1"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="EiW-fJ-nCk" secondAttribute="bottom" id="7Tu-Z5-fQn"/>
+                <constraint firstAttribute="bottom" secondItem="K9F-d2-biW" secondAttribute="bottom" constant="2" id="7fl-vb-7r4"/>
+                <constraint firstItem="EiW-fJ-nCk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Suh-pF-1y0"/>
+                <constraint firstItem="EiW-fJ-nCk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gAE-MR-gvF"/>
+                <constraint firstAttribute="trailing" secondItem="EiW-fJ-nCk" secondAttribute="trailing" id="iEK-vy-MqX"/>
+                <constraint firstAttribute="trailing" secondItem="K9F-d2-biW" secondAttribute="trailing" id="uA0-yO-Lb6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-88" y="-302"/>
+        </view>
+        <tapGestureRecognizer id="nIK-We-3fk">
+            <connections>
+                <action selector="onEditTapped:" destination="-1" id="Prb-ZL-sIW"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="ic_image" width="674" height="410"/>
+    </resources>
+</document>

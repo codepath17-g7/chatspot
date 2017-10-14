@@ -9,6 +9,13 @@
 import UIKit
 import FirebaseAuthUI
 import FirebasePhoneAuthUI
+import FirebaseGoogleAuthUI
+
+
+enum Providers: Int, RawRepresentable {
+    case Google
+    case Phone
+}
 
 class AuthViewController: UIViewController, FUIAuthDelegate{
     fileprivate(set) var authStateDidChangeHandle: AuthStateDidChangeListenerHandle?
@@ -74,9 +81,12 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
             // If you haven't set up your authentications correctly these buttons
             // will still appear in the UI, but they'll crash the app when tapped.
             let provider = FUIPhoneAuth(authUI: self.authUI!)
-            self.authUI?.providers = [provider]
+            let googleProvider = FUIGoogleAuth(scopes: [kGoogleGamesScope,
+                                   kGooglePlusMeScope,
+                                   kGoogleUserInfoEmailScope,
+                                   kGoogleUserInfoProfileScope])
+            self.authUI?.providers = [provider, googleProvider]
             let controller = self.authUI!.authViewController()
-            //controller.navigationBar.isHidden = self.customAuthorizationSwitch.isOn
             self.present(controller, animated: true, completion: nil)
             
         }

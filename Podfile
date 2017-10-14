@@ -8,6 +8,7 @@ target 'chatspot' do
   pod 'Firebase/Core'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Phone'
+  pod 'FirebaseUI/Google'
   pod 'RealmSwift'
   pod 'AFNetworking'
   pod "MBProgressHUD"

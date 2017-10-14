@@ -25,8 +25,11 @@ class ProfileVC: UIViewController {
         userNoImage.name = "John Snow"
         userNoImage.tagline = "Winter is coming"
         
-        userView.prepare(user: userNoImage, isSelf: true)
+//        userView.prepare(user: userNoImage, isSelf: true)
         
+        userView.prepare(user: userWithImage, isSelf: false)
+//        userView.prepare(user: userWithImage, isSelf: true)
+
     }
 
 }
