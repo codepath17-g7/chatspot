@@ -107,7 +107,7 @@ extension Storage {
     }
     
     // Delte objects matching a filter/predicate
-    func delete<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (() -> ())?) throws {
+    func delete<T: Object>(_ model: T.Type, predicate: NSPredicate? = nil, completion: (() -> ())? = nil) throws {
         guard let realm = self.realm else {
             throw NSError()
         }
