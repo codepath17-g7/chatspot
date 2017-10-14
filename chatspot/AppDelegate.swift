@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Successfully running this sample requires an app in Firebase and an
         // accompanying valid GoogleService-Info.plist file.
-        
-       // GTMSessionFetcher.setLoggingEnabled(true)
+        // handleUserAuthentication()
+        GTMSessionFetcher.setLoggingEnabled(true)
         return true
     }
     
@@ -62,6 +62,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // other URL handling goes here.
         return false
+    }
+    
+    func handleUserAuthentication() {
+        if Auth.auth().currentUser != nil {
+            print("There is a current user")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "tabBarController") as! ChatListVC
+            window?.rootViewController = vc
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "authViewController") as! ChatListVC
+            window?.rootViewController = vc
+            print("There is no current user")
+        }
     }
 }
 

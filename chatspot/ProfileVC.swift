@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FirebaseAuthUI
+import FirebasePhoneAuthUI
+import FirebaseGoogleAuthUI
 
 class ProfileVC: UIViewController {
 
@@ -30,6 +33,15 @@ class ProfileVC: UIViewController {
         userView.prepare(user: userWithImage, isSelf: false)
 //        userView.prepare(user: userWithImage, isSelf: true)
 
+    }
+    
+    @IBAction func onLogout(_ sender: UIBarButtonItem) {
+        do {
+            try FUIAuth.defaultAuthUI()?.signOut()
+            self.performSegue(withIdentifier: "loggedOutSegue", sender: self)
+        } catch let error {
+            fatalError("Could not sign out: \(error)")
+        }
     }
 
 }

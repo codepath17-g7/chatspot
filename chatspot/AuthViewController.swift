@@ -96,6 +96,7 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
     func updateUI(auth: Auth, user: FirebaseAuth.User?) {
         if let user = self.auth?.currentUser {
             print("Signed In")
+            self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
             /*self.cellSignedIn.textLabel?.text = "Signed in"
             self.cellName.textLabel?.text = user.displayName ?? "(null)"
             self.cellEmail.textLabel?.text = user.email ?? "(null)"
@@ -103,6 +104,7 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
             self.cellPhone.textLabel?.text = user.phoneNumber
             
             self.authorizationButton.title = "Sign Out";*/
+            
         } else {
             print("couldn't login")
             /*self.cellSignedIn.textLabel?.text = "Not signed in"
