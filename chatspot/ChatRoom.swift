@@ -21,6 +21,8 @@ class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
     let userCount = RealmOptional<Int>()
     let roomActivity = RealmOptional<Int>()
     
+    let users = List<User>()
+    
     // linking between a chat room and all of its messages
     let messages = LinkingObjects(fromType: Message.self, property: "chatRoom")
     
