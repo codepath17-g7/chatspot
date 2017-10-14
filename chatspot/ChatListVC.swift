@@ -11,6 +11,7 @@ import UIKit
 class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
+    var observer: UInt!
 	var chats: [ChatRoom] = [ChatRoom]()
 	
     override func viewDidLoad() {
@@ -21,6 +22,10 @@ class ChatListVC: UIViewController {
 		tableView.rowHeight = UITableViewAutomaticDimension
 
 		setupMockChatList()
+        observer = ChatSpotClient.observeChatRooms { (rooms: [ChatRoom]) in
+            //update tableview
+            print(rooms);
+        }
 // Function to populate array of chats
 		
 //		ChatSpotClient.sharedInstance.someFunctionToGetMyCurrentChats(someParam: Stringorsomething, success: { (chats: [Chat]) in
@@ -32,8 +37,14 @@ class ChatListVC: UIViewController {
 //		})
 
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        ChatSpotClient.removeObserver(handle: observer)
+    }
 	
     func setupMockChatList(){
+        //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
+        
         let chatroom1 = ChatRoom(guid: "234cdwf", createdAt: 123432254, name: "Oracle Arena")
         let chatroom2 = ChatRoom(guid: "234cfffdwf", createdAt: 1234334532254, name: "Rengstorff Park")
         self.chats = [chatroom1, chatroom2]
