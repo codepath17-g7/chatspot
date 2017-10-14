@@ -43,6 +43,8 @@ class ChatListVC: UIViewController {
     }
 	
     func setupMockChatList(){
+        //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
+        
         let chatroom1 = ChatRoom(guid: "234cdwf", createdAt: 123432254, name: "Oracle Arena")
         let chatroom2 = ChatRoom(guid: "234cfffdwf", createdAt: 1234334532254, name: "Rengstorff Park")
         self.chats = [chatroom1, chatroom2]

@@ -12,7 +12,16 @@ import FirebaseAuth
 
 class ChatSpotClient {
 
-
+    static func createChatRoom(name: String, description: String, banner: String?) {
+        let room: [String: Any] = [
+            "name": name,
+            "description": description,
+            "banner": banner ?? ""
+        ]
+        let ref = Database.database().reference()
+        ref.child("chatrooms").childByAutoId().setValuesForKeys(room)
+    }
+    
     static func removeObserver(handle: UInt){
         let ref = Database.database().reference()
         ref.removeObserver(withHandle: handle)

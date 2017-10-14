@@ -37,8 +37,7 @@ class ChatRoomVC: UIViewController {
 		tableView.estimatedRowHeight = 85
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.separatorStyle = .none
-        
-		
+
 		setUpKeyboardNotifications()
         
         chatRoomNameLabel.text = chatRoom.name
