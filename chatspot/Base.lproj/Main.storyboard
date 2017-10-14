@@ -50,7 +50,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TlF-l3-fx9" id="yvz-QH-fyY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
@@ -95,7 +95,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="375" height="120"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9WS-4L-9Pn" id="uvT-7R-xVL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
@@ -243,6 +243,35 @@
             </objects>
             <point key="canvasLocation" x="-2322.4000000000001" y="2846.6266866566721"/>
         </scene>
+        <!--Login-->
+        <scene sceneID="yf4-ki-J7z">
+            <objects>
+                <viewController storyboardIdentifier="authViewController" title="Login" id="Y8P-rZ-HUd" customClass="AuthViewController" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Bfz-AB-6PK"/>
+                        <viewControllerLayoutGuide type="bottom" id="jqa-Wh-QFV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bEW-EC-zdz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-lJ-Faz">
+                                <rect key="frame" x="116" y="318" width="121" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="onLogin:" destination="Y8P-rZ-HUd" eventType="touchUpInside" id="7tr-3E-K9v"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Login" id="4Se-pY-6id"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ei6-Bo-c62" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-613.60000000000002" y="-1073.6131934032985"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="HL3-wo-mGY">
             <objects>
@@ -370,6 +399,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BZ-pA-koL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2322.4000000000001" y="2124.2878560719641"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2M5-Wg-a5q">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y8P-rZ-HUd" kind="relationship" relationship="rootViewController" id="Rp7-ls-NdM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fje-JW-vcS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1552.8" y="-1073.6131934032985"/>
         </scene>
     </scenes>
     <resources>

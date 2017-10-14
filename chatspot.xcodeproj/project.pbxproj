@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D3D06DAF25404BF9EF96699 /* Pods_chatspot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */; };
+		325F47991F91F71E00DE5C34 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F47981F91F71E00DE5C34 /* AuthViewController.swift */; };
 		32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */; };
 		32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D661F8B1BAD00E05CF3 /* Main.storyboard */; };
 		32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32963D691F8B1BAD00E05CF3 /* Assets.xcassets */; };
@@ -15,10 +16,10 @@
 		32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */; };
 		7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7A1F8DF27A00DE16FA /* User.swift */; };
 		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
-		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
-		8B92720C1F9082590041FC35 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92720B1F9082590041FC35 /* Storage.swift */; };
 		7679EA821F8E054600DE16FA /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679EA811F8E054600DE16FA /* UserView.xib */; };
 		7679EA841F8E071A00DE16FA /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA831F8E071A00DE16FA /* UserView.swift */; };
+		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
+		8B92720C1F9082590041FC35 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92720B1F9082590041FC35 /* Storage.swift */; };
 		F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719EFE1F8DF50300417517 /* ChatListVC.swift */; };
 		F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F001F8DF51600417517 /* ChatRoomVC.swift */; };
 		F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F021F8DF55200417517 /* AroundMeVC.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.release.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.release.xcconfig"; sourceTree = "<group>"; };
+		325F47981F91F71E00DE5C34 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		32963D5F1F8B1BAD00E05CF3 /* chatspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32963D671F8B1BAD00E05CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,10 +42,10 @@
 		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679EA7A1F8DF27A00DE16FA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
-		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
-		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		7679EA811F8E054600DE16FA /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
 		7679EA831F8E071A00DE16FA /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
+		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
 		F2719EFD1F8D54E700417517 /* chatspot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = chatspot.entitlements; sourceTree = "<group>"; };
 		F2719EFE1F8DF50300417517 /* ChatListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
@@ -89,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				7679EA801F8E052400DE16FA /* View */,
-				7679EA791F8DF1CA00DE16FA /* Model */,
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
 				F2719F061F8DF56E00417517 /* View Controllers */,
 				F2719F0C1F8DF72000417517 /* Cells */,
@@ -157,6 +158,7 @@
 				F2719F001F8DF51600417517 /* ChatRoomVC.swift */,
 				F2719F021F8DF55200417517 /* AroundMeVC.swift */,
 				F2719F041F8DF56300417517 /* ProfileVC.swift */,
+				325F47981F91F71E00DE5C34 /* AuthViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -208,6 +210,9 @@
 						DevelopmentTeam = 875WVS57Q6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 0;
 							};
@@ -255,9 +260,13 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -329,6 +338,7 @@
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,
 				F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */,
 				7679EA841F8E071A00DE16FA /* UserView.swift in Sources */,
+				325F47991F91F71E00DE5C34 /* AuthViewController.swift in Sources */,
 				32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */,
 				7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */,
 				7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */,
