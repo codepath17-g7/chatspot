@@ -14,16 +14,22 @@ import FirebaseGoogleAuthUI
 class ProfileVC: UIViewController {
 
     @IBOutlet weak var userView: UserView!
+    var user = Auth.auth().currentUser!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Backedn is conencted, we can get current user info like this
+        
         
         let userWithImage = User()
-        userWithImage.profileImage = "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/15/09/jon-snow.jpg"
-        userWithImage.bannerImage = "https://i.ytimg.com/vi/uWmUdFIUtYs/maxresdefault.jpg"
-        userWithImage.name = "John Snow"
-        userWithImage.tagline = "Winter is coming"
         
+        userWithImage.profileImage = user.photoURL?.absoluteString
+        userWithImage.bannerImage = "https://i.ytimg.com/vi/uWmUdFIUtYs/maxresdefault.jpg"
+        
+        userWithImage.name = user.displayName //"John Snow"
+        userWithImage.tagline = "Winter is coming"
+    
         let userNoImage = User()
         userNoImage.name = "John Snow"
         userNoImage.tagline = "Winter is coming"
@@ -32,6 +38,7 @@ class ProfileVC: UIViewController {
         
         userView.prepare(user: userWithImage, isSelf: false)
 //        userView.prepare(user: userWithImage, isSelf: true)
+        
 
     }
     
