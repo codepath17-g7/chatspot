@@ -78,7 +78,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people2" translatesAutoresizingMaskIntoConstraints="NO" id="NiM-bB-EmD">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people" translatesAutoresizingMaskIntoConstraints="NO" id="NiM-bB-EmD">
                                                     <rect key="frame" x="332" y="8" width="35" height="35"/>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSD-gs-QcR">
@@ -421,7 +421,7 @@
         <image name="account" width="30" height="30"/>
         <image name="around me" width="30" height="30"/>
         <image name="messages" width="30" height="30"/>
-        <image name="people2" width="35" height="35"/>
+        <image name="people" width="35" height="35"/>
         <image name="photo" width="35" height="30"/>
         <image name="pin" width="35" height="35"/>
         <image name="smiley" width="35" height="30"/>
