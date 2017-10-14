@@ -16,7 +16,9 @@ class UserView: UIView {
     @IBOutlet weak var profileImage: UIImageWithEditView!
 
     @IBOutlet fileprivate weak var userName: UILabel!
+    @IBOutlet fileprivate weak var userNameField: UITextField!
     @IBOutlet fileprivate weak var userTagline: UILabel!
+    @IBOutlet fileprivate weak var userTaglineField: UITextField!
     
     @IBOutlet fileprivate var contentView: UIView!
     
@@ -25,13 +27,16 @@ class UserView: UIView {
     
     
     @IBOutlet weak var sendMessageButton: UIButton!
-    @IBOutlet weak var editProfileButton: UIButton!
     
+    @IBOutlet fileprivate weak var editUserNameButton: UIButton!
+    @IBOutlet fileprivate weak var editUserTaglineButton: UIButton!
     
     private var isSelf: Bool!
     private var user: User!
     private var editMode: Bool = false
-    
+    private var editingUserName: Bool = false
+    private var editingUserTagline: Bool = false
+
     fileprivate var imageToPick: ImageToPick?
     
     enum ImageToPick {
@@ -55,24 +60,30 @@ class UserView: UIView {
         }
         
         userName.text = user.name
+        userNameField.text = user.name
         
         if let tagline = user.tagline {
             userTagline.text = tagline
+            userTaglineField.text = tagline
         }
         
         if isSelf {
             profileImage.showEditView()
             bannerImage.showEditView()
             
-            editProfileButton.isHidden = false
+            
             sendMessageButton.isHidden = true
+            editUserNameButton.isHidden = false
+            editUserTaglineButton.isHidden = false
         } else {
             profileImage.hideEditView()
             bannerImage.hideEditView()
-            
-            editProfileButton.isHidden = true
+
             sendMessageButton.isHidden = false
+            editUserNameButton.isHidden = true
+            editUserTaglineButton.isHidden = true
         }
+        
         
     }
     
@@ -94,6 +105,9 @@ class UserView: UIView {
             self.imageToPick = .banner
             self.pickImage()
         }
+        
+        contentView.bringSubview(toFront: userName)
+        contentView.bringSubview(toFront: userTagline)
     }
     
     override init(frame: CGRect) {
@@ -126,20 +140,37 @@ class UserView: UIView {
         
         viewcon?.present(vc, animated: true, completion: nil)
     }
+
     
-    @IBAction func onBannerTapped(_ sender: Any) {
-        print("Tapped banner")
-        
-        imageToPick = .banner
-        pickImage()
+    func persistUserEdit() {
+        // TODO !!!!
     }
     
-    @IBAction func onProfileImageTapped(_ sender: Any) {
-        print("Tapped profile")
-        
-        imageToPick = .profile
-        pickImage()
+    //MARK:- Edit
+    @IBAction func onEditUserName(_ sender: Any) {
+        if !editingUserName {
+            contentView.bringSubview(toFront: userNameField)
+            userNameField.becomeFirstResponder()
+        } else {
+            userName.text = userNameField.text
+            contentView.bringSubview(toFront: userName)
+            persistUserEdit()
+        }
+        editingUserName = !editingUserName
     }
+   
+    @IBAction func onEditUserTagline(_ sender: Any) {
+        if !editingUserTagline {
+            contentView.bringSubview(toFront: userTaglineField)
+            userTaglineField.becomeFirstResponder()
+        } else {
+            userTagline.text = userTaglineField.text
+            contentView.bringSubview(toFront: userTagline)
+            persistUserEdit()
+        }
+        editingUserTagline = !editingUserTagline
+    }
+    
     
     //MARK:- Gestures
     @IBAction func onPan(_ panGestureRecognizer: UIPanGestureRecognizer) {
