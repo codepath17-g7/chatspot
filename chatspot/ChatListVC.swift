@@ -26,10 +26,9 @@ class ChatListVC: UIViewController {
         setupAndTriggerHUD()
         
         // Uncomment to add rooms for testing statically
-        //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil, longitude: 37.7502)
-        ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: 37.750278, latitude: -122.203056)
-        ChatSpotClient.createChatRoom(name: "Golden Gate Bridge", description: "San Francisco, California", banner: nil, longitude: 37.819722, latitude: -122.478611)
-        ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: 37.332778, latitude: -121.901111)
+        // ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: -122.203056, latitude: 37.750278)
+        // ChatSpotClient.createChatRoom(name: "Golden Gate Bridge", description: "San Francisco, California", banner: nil, longitude: -122.478611, latitude: 37.819722)
+        // ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: -121.901111, latitude: 37.332778)
         self.tableView.reloadData()
         KRProgressHUD.showSuccess()
         
