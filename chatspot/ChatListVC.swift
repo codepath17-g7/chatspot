@@ -21,15 +21,19 @@ class ChatListVC: UIViewController {
 		tableView.estimatedRowHeight = 108
 		tableView.rowHeight = UITableViewAutomaticDimension
 
+        // Uncomment to add rooms for testing statically
         //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
         
-        observer = ChatSpotClient.observeChatRooms(success: { (rooms: [ChatRoom1]) in
-            self.chats = rooms
+        startObservingChatRoomList()
+    }
+    
+    func startObservingChatRoomList() {
+        observer = ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
+            self.chats.append(room)
             self.tableView.reloadData()
             //KRProgressHUD.showSuccess()
-            print(rooms)
-        }, failure: {
-            print("Could not find chats")
+        }, failure: { (error: Error?) in
+            print(error)
         })
     }
     

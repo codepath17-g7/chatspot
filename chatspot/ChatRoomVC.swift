@@ -51,7 +51,7 @@ class ChatRoomVC: UIViewController {
     }
     
     private func startObservingMessages() {
-        observer = ChatSpotClient.listenNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
+        observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
             print(message)
             self.messages.append(message)
             self.tableView.reloadData()

@@ -27,37 +27,27 @@ class ChatSpotClient {
         ref.removeObserver(withHandle: handle)
     }
     
-    static func observeChatRooms(success: @escaping ([ChatRoom1]) -> (), failure: () -> ()) -> UInt{
+    static func observeChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatroomsRef = ref.child("chatrooms")
-        let refHandle = chatroomsRef.observe(DataEventType.value, with: { (snapshot) in
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            print(postDict)
-            let rooms = ChatRoom1.roomsWithArray(dicts: postDict)
-            success(rooms)
-        })
+        
+        let refHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot: DataSnapshot) in
+            let dict = snapshot.value as? NSDictionary ?? [:]
+            let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            success(room)
+        }) { (error: Error?) in
+            failure(error)
+        }
+    
         return refHandle
     }
     
-    static func observeChat(roomId: String, success: @escaping ([Message1]) -> (), failure: () -> ()) -> UInt{
-        let ref = Database.database().reference()
-        let chatRef = ref.child("messages").child(roomId)
-        let refHandle = chatRef.observe(DataEventType.value, with: { (snapshot) in
-            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            print(postDict)
-            let messages = Message1.messagesWithArray(dicts: postDict)
-            success(messages)
-        })
-        return refHandle
-    }
-    
-    static func listenNewMessages(roomId: String, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
+    static func observeNewMessages(roomId: String, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatRef = ref.child("messages").child(roomId)
         let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
             let postDict = snapshot.value as? NSDictionary ?? [:]
-            print(postDict)
-            let message = Message1(guid: snapshot.key, obj: snapshot.value as! NSDictionary)
+            let message = Message1(guid: snapshot.key, obj: postDict)
             success(message)
         })
         return refHandle
