@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import FirebaseAuthUI
+
 
 class AroundMeView: UIView {
 
@@ -54,18 +56,12 @@ extension AroundMeView: MKMapViewDelegate {
         mapView.removeAnnotations(mapView.annotations)
 
         for room in rooms {
-            addAnnotationAtCoordinate(coordinate:
-                CLLocationCoordinate2D(latitude: room.latitude!, longitude: room.longitude!), title: room.name!)
+            let annotation = ChatRoomAnnotation(room: room, coordinate:
+                CLLocationCoordinate2D(latitude: room.latitude!, longitude: room.longitude!))
+            mapView.addAnnotation(annotation)
         }
         
         mapView.showAnnotations(mapView.annotations, animated: true)
-    }
-    
-    func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, title: String) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = title
-        mapView.addAnnotation(annotation)
     }
     
     func centerMap() {
@@ -73,33 +69,23 @@ extension AroundMeView: MKMapViewDelegate {
         mapView.setRegion(rgn, animated: false)
         mapView.isZoomEnabled = true
         mapView.showsCompass = true
-        
     }
     
-    func joinRoom(_ sender: Any) {
-        print("joining room")
-        
-        
-        
-    }
+
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseIdentifier = "chatroom"
+        
+        let chatRoomAnnotation = annotation as! ChatRoomAnnotation
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
         
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            let button = UIButton(type: .detailDisclosure)
-            button.addTarget(self, action: #selector(joinRoom(_:)), for: .touchUpInside)
-
-            annotationView?.rightCalloutAccessoryView = button
-            annotationView?.canShowCallout = true
-            
+            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: reuseIdentifier)
         } else {
-            annotationView?.annotation = annotation
+            annotationView?.annotation = chatRoomAnnotation
         }
 
-        annotationView?.image = #imageLiteral(resourceName: "around me")
         return annotationView
     }
 }

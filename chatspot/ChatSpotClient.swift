@@ -24,9 +24,36 @@ class ChatSpotClient {
         ref.child("chatrooms").childByAutoId().setValue(room)
     }
     
+    static func joinChatRoom(userGuid: String, roomGuid: String) {
+        let ref = Database.database().reference()
+        ref.child("chatrooms").child(roomGuid).child("users").updateChildValues([userGuid: true])
+    }
+    
+    static func leaveChatRoom(userGuid: String, roomGuid: String) {
+        let ref = Database.database().reference()
+        ref.child("chatrooms").child(roomGuid).child("users").child(userGuid).removeValue()
+    }
+    
     static func removeObserver(handle: UInt){
         let ref = Database.database().reference()
         ref.removeObserver(withHandle: handle)
+    }
+    
+    static func observeMyChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+        let ref = Database.database().reference()
+        let chatroomsRef = ref.child("chatrooms")
+        
+        let userGuid = Auth.auth().currentUser!.uid
+        
+        let refHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(DataEventType.childAdded, with: { (snapshot: DataSnapshot) in
+            let dict = snapshot.value as? NSDictionary ?? [:]
+            let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            success(room)
+        }) { (error: Error?) in
+            failure(error)
+        }
+    
+        return refHandle
     }
     
     static func observeChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
@@ -40,7 +67,7 @@ class ChatSpotClient {
         }) { (error: Error?) in
             failure(error)
         }
-    
+        
         return refHandle
     }
     
