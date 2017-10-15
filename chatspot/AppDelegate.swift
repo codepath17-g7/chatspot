@@ -27,6 +27,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // accompanying valid GoogleService-Info.plist file.
         // handleUserAuthentication()
         GTMSessionFetcher.setLoggingEnabled(true)
+        
+        // check if app (terminated by system) was launched in background as a result of location change
+        if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
+            print("app killed by sytem launched by a location update")
+            LocationManager.instance.listenForSignificantLocationChanges()
+        }
+        /** Commented as we are listening for location in AuthVC incase a logged in user is found **/
+        //else if Auth.auth().currentUser != nil {
+            // when current user is not nil start listening to realtime location update
+        //    print("found a logged in user, starting realtime location")
+        //    LocationManager.instance.listenForRealtimeLocationChanges()
+        //}
+        
         return true
     }
     
@@ -53,6 +66,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print("applicationWillEnterForeground")
+        LocationManager.instance.stopListeningSignificantChanges()
+        LocationManager.instance.listenForRealtimeLocationChanges()
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        print("applicationDidEnterBackground")
+        LocationManager.instance.stopListeningRealtimeLocation()
+        LocationManager.instance.listenForSignificantLocationChanges()
+    }
     
     func handleOpenUrl(_ url: URL, sourceApplication: String?) -> Bool {
         print("url: \(url)")

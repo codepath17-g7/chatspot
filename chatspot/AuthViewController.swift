@@ -98,6 +98,9 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
             print("Signed In")
             self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
             ChatSpotClient.registerIfNeeded(guid: user.uid, user: user)
+            
+            // We have a logged in user, listen for location changes.
+            LocationManager.instance.listenForRealtimeLocationChanges()
         } else {
             print("couldn't login")
             /*self.cellSignedIn.textLabel?.text = "Not signed in"

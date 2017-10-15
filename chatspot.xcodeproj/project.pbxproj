@@ -27,6 +27,7 @@
 		76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */; };
 		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
 		8B92720C1F9082590041FC35 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92720B1F9082590041FC35 /* Storage.swift */; };
+		8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2DB701F92FBC20073ABBC /* LocationManager.swift */; };
 		F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719EFE1F8DF50300417517 /* ChatListVC.swift */; };
 		F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F001F8DF51600417517 /* ChatRoomVC.swift */; };
 		F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F021F8DF55200417517 /* AroundMeVC.swift */; };
@@ -60,6 +61,7 @@
 		76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageWithEditView.swift; sourceTree = "<group>"; };
 		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
 		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		8BD2DB701F92FBC20073ABBC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
 		F2719EFD1F8D54E700417517 /* chatspot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = chatspot.entitlements; sourceTree = "<group>"; };
 		F2719EFE1F8DF50300417517 /* ChatListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
 				F2719F061F8DF56E00417517 /* View Controllers */,
 				F2719F0C1F8DF72000417517 /* Cells */,
+				8BD2DB6F1F92FB980073ABBC /* Location */,
 				7679EA791F8DF1CA00DE16FA /* Model */,
 				8B4294991F8F0019003163D7 /* Data Store */,
 				32963D661F8B1BAD00E05CF3 /* Main.storyboard */,
@@ -178,6 +181,14 @@
 				8B275A181F908D36004BBA00 /* Storage+Implementation.swift */,
 			);
 			path = "Data Store";
+			sourceTree = "<group>";
+		};
+		8BD2DB6F1F92FB980073ABBC /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				8BD2DB701F92FBC20073ABBC /* LocationManager.swift */,
+			);
+			name = Location;
 			sourceTree = "<group>";
 		};
 		F2719F061F8DF56E00417517 /* View Controllers */ = {
@@ -375,6 +386,7 @@
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
 				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,
+				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,
