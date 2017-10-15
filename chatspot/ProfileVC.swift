@@ -46,6 +46,10 @@ class ProfileVC: UIViewController {
         do {
             try FUIAuth.defaultAuthUI()?.signOut()
             self.performSegue(withIdentifier: "loggedOutSegue", sender: self)
+            
+            // Stop location updates when logged out.
+            LocationManager.instance.stopListeningRealtimeLocation()
+            
         } catch let error {
             fatalError("Could not sign out: \(error)")
         }
