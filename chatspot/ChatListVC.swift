@@ -23,6 +23,10 @@ class ChatListVC: UIViewController {
 
         // Uncomment to add rooms for testing statically
         //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
+//        ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: 37.750278, latitude: -122.203056)
+//        ChatSpotClient.createChatRoom(name: "Golden Gate Bridge", description: "San Francisco, California", banner: nil, longitude: 37.819722, latitude: -122.478611)
+//        ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: 37.332778, latitude: -121.901111)
+        
         
         startObservingChatRoomList()
     }

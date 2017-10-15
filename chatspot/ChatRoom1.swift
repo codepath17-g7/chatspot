@@ -12,12 +12,16 @@ class ChatRoom1 {
     static let KEY_NAME = "name"
     static let KEY_BANNER = "banner"
     static let KEY_DESCRIPTION = "description"
+    static let KEY_LATITUDE = "latitude"
+    static let KEY_LONGITUDE = "longitude"
     
     var guid: String!
     var name: String!
     var title: String!
     var createdAt: Double = 0
     var baner: String?
+    var longitude: Double!
+    var latitude: Double!
     
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
@@ -33,6 +37,16 @@ class ChatRoom1 {
         if let title = obj[ChatRoom1.KEY_DESCRIPTION] as? String {
             self.title = title
         }
+        
+        if let longitude = obj[ChatRoom1.KEY_LONGITUDE] as? String {
+            self.longitude = Double.init(longitude)
+        }
+        
+        if let latitude = obj[ChatRoom1.KEY_LATITUDE] as? String {
+            self.latitude = Double.init(latitude)
+        }
+        
+        
     }
     
     class func roomsWithArray(dicts: [String: AnyObject]) -> [ChatRoom1]{

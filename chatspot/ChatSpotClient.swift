@@ -12,11 +12,13 @@ import FirebaseAuth
 
 class ChatSpotClient {
 
-    static func createChatRoom(name: String, description: String, banner: String?) {
+    static func createChatRoom(name: String, description: String, banner: String?, longitude: Double, latitude: Double) {
         let room: [String: String] = [
             ChatRoom1.KEY_NAME: name,
             ChatRoom1.KEY_DESCRIPTION: description,
-            ChatRoom1.KEY_BANNER: banner ?? ""
+            ChatRoom1.KEY_BANNER: banner ?? "",
+            ChatRoom1.KEY_LONGITUDE: longitude.description,
+            ChatRoom1.KEY_LATITUDE: latitude.description
         ]
         let ref = Database.database().reference()
         ref.child("chatrooms").childByAutoId().setValue(room)

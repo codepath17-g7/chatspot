@@ -19,6 +19,8 @@
 		3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF611F92F8DF00F9BBEE /* User1.swift */; };
 		3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF631F92F8E900F9BBEE /* ChatRoom1.swift */; };
 		3298CF661F92F91000F9BBEE /* Message1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF651F92F91000F9BBEE /* Message1.swift */; };
+		7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7626201D1F9338A7008404F6 /* AroundMeView.xib */; };
+		762620201F9338BB008404F6 /* AroundMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7626201F1F9338BB008404F6 /* AroundMeView.swift */; };
 		7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7A1F8DF27A00DE16FA /* User.swift */; };
 		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
 		7679EA821F8E054600DE16FA /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679EA811F8E054600DE16FA /* UserView.xib */; };
@@ -53,6 +55,8 @@
 		3298CF631F92F8E900F9BBEE /* ChatRoom1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom1.swift; sourceTree = "<group>"; };
 		3298CF651F92F91000F9BBEE /* Message1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message1.swift; sourceTree = "<group>"; };
 		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7626201D1F9338A7008404F6 /* AroundMeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AroundMeView.xib; sourceTree = "<group>"; };
+		7626201F1F9338BB008404F6 /* AroundMeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundMeView.swift; sourceTree = "<group>"; };
 		7679EA7A1F8DF27A00DE16FA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		7679EA811F8E054600DE16FA /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 				7679EA831F8E071A00DE16FA /* UserView.swift */,
 				76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */,
 				76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */,
+				7626201D1F9338A7008404F6 /* AroundMeView.xib */,
+				7626201F1F9338BB008404F6 /* AroundMeView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -288,6 +294,7 @@
 				32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */,
 				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
 				76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */,
+				7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */,
 				7679EA821F8E054600DE16FA /* UserView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +392,7 @@
 				3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */,
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
+				762620201F9338BB008404F6 /* AroundMeView.swift in Sources */,
 				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,
 				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
