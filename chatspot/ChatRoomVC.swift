@@ -36,8 +36,6 @@ class ChatRoomVC: UIViewController {
 	var initialY: CGFloat!
     
     var observer: UInt!
-//    var containerViewMoved: Bool = False
-
     override func viewDidLoad() {
         super.viewDidLoad()
 		tableView.delegate = self
@@ -50,7 +48,14 @@ class ChatRoomVC: UIViewController {
 		setUpKeyboardNotifications()
         
         chatRoomNameLabel.text = chatRoom.name
-        chatRoomMemberCountLabel.text = "\(chatRoom.users?.count) members"
+        if let memberCount = chatRoom.users?.count {
+            if memberCount == 0 {
+                chatRoomMemberCountLabel.text = "You're the first one here!"
+            } else {
+                chatRoomMemberCountLabel.text = "\(memberCount) members"
+            }
+        }
+        
 		
 		setUpUI()
 //        setupAndTriggerHUD()
@@ -110,9 +115,8 @@ class ChatRoomVC: UIViewController {
                 
                 UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
                     self.view.layoutIfNeeded()
-//                    self.containerViewMoved = true
                 }, completion: nil)
-            }
+            } //add else 
             
 		}
         
@@ -129,6 +133,9 @@ class ChatRoomVC: UIViewController {
 		}
 	}
 	
+    func moveTextFieldUp(){
+        
+    }
 	
 	@IBAction func didTapAwayFromKeyboard(_ sender: UITapGestureRecognizer) {
         
