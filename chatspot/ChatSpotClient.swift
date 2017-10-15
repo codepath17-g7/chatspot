@@ -51,6 +51,32 @@ class ChatSpotClient {
         return refHandle
     }
     
+    static func listenNewMessages(roomId: String, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
+        let ref = Database.database().reference()
+        let chatRef = ref.child("messages").child(roomId)
+        let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
+            let postDict = snapshot.value as? NSDictionary ?? [:]
+            print(postDict)
+            let message = Message1(guid: snapshot.key, obj: snapshot.value as! NSDictionary)
+            success(message)
+        })
+        return refHandle
+    }
+    
+    static func getMessagesForRoom(roomId: String, success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
+        let ref = Database.database().reference()
+        let chatRef = ref.child("messages").child(roomId)
+        
+        chatRef.queryOrderedByKey().observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            print(postDict)
+            let messages = Message1.messagesWithArray(dicts: postDict)
+            success(messages)
+        }) { (error: Error) in
+            failure(error)
+        }
+    }
+    
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User) {
         let value: [String: String] = [
             User1.KEY_DISPLAY_NAME: user.displayName!,

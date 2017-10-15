@@ -47,15 +47,17 @@ class ChatRoomVC: UIViewController {
         //chatRoomMemberCountLabel.text = chatRoom.userCount
 		
 		setUpUI()
-		
-        observer = ChatSpotClient.observeChat(roomId: chatRoom.guid, success: { (messages: [Message1]) in
-            self.messages = messages
+        self.startObservingMessages()
+    }
+    
+    private func startObservingMessages() {
+        observer = ChatSpotClient.listenNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
+            print(message)
+            self.messages.append(message)
             self.tableView.reloadData()
-            //KRProgressHUD.showSuccess()
         }, failure: {
             print("error")
         })
-		
     }
     
     override func viewWillAppear(_ animated: Bool) {
