@@ -97,14 +97,7 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
         if let user = self.auth?.currentUser {
             print("Signed In")
             self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
-            /*self.cellSignedIn.textLabel?.text = "Signed in"
-            self.cellName.textLabel?.text = user.displayName ?? "(null)"
-            self.cellEmail.textLabel?.text = user.email ?? "(null)"
-            self.cellUid.textLabel?.text = user.uid
-            self.cellPhone.textLabel?.text = user.phoneNumber
-            
-            self.authorizationButton.title = "Sign Out";*/
-            
+            ChatSpotClient.registerIfNeeded(guid: user.uid, user: user)
         } else {
             print("couldn't login")
             /*self.cellSignedIn.textLabel?.text = "Not signed in"

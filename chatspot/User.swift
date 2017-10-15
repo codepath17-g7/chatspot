@@ -11,6 +11,11 @@ import RealmSwift
 
 class User: Object { // Object is from Realm, this also extends a NSObject.
     
+    static let KEY_DISPLAY_NAME = "name"
+    static let KEY_PROFILE_IMAGE = "profileImageUrl"
+    static let KEY_TAG_LINE = "tagline"
+    static let KEY_BANNER_IMAGE = "bannerImageUrl"
+    
     @objc dynamic var guid: String!
     let createdAt = RealmOptional<Double>()
     
@@ -24,6 +29,13 @@ class User: Object { // Object is from Realm, this also extends a NSObject.
     
     override static func primaryKey() -> String? {
         return "guid"
+    }
+    
+    convenience init(guid: String, obj: [String: String]) {
+        self.init()
+        self.guid = guid
+        self.name = obj[User.KEY_DISPLAY_NAME]
+        self.profileImage = obj[User.KEY_DISPLAY_NAME]
     }
     
     // our initializer with non-optional properties
@@ -59,5 +71,15 @@ class User: Object { // Object is from Realm, this also extends a NSObject.
     
     required init(value: Any, schema: RLMSchema) {
         super.init(value: value, schema: schema)
+    }
+    
+    class func usersWithArray(dicts: [String: AnyObject]) -> [User]{
+        var users = [User]()
+        for dict in dicts {
+            print(dict)
+            let user =  User(guid: dict.key, obj: dict.value as! [String : String])
+            users.append(user)
+        }
+        return users
     }
 }

@@ -14,9 +14,9 @@ class ChatSpotClient {
 
     static func createChatRoom(name: String, description: String, banner: String?) {
         let room: [String: String] = [
-            "name": name,
-            "description": description,
-            "banner": banner ?? ""
+            ChatRoom.KEY_NAME: name,
+            ChatRoom.KEY_DESCRIPTION: description,
+            ChatRoom.KEY_BANNER: banner ?? ""
         ]
         let ref = Database.database().reference()
         ref.child("chatrooms").childByAutoId().setValue(room)
@@ -37,5 +37,14 @@ class ChatSpotClient {
             success(rooms)
         })
         return refHandle
+    }
+    
+    static func registerIfNeeded(guid: String, user: FirebaseAuth.User) {
+        let value: [String: String] = [
+            User.KEY_DISPLAY_NAME: user.displayName!,
+            User.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
+        ]
+        let ref = Database.database().reference()
+        ref.child("users").child(guid).setValue(value)
     }
 }
