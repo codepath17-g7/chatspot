@@ -14,6 +14,7 @@ class ChatRoom1 {
     static let KEY_DESCRIPTION = "description"
     static let KEY_LATITUDE = "latitude"
     static let KEY_LONGITUDE = "longitude"
+    static let KEY_USERS = "users"
     
     var guid: String!
     var name: String!
@@ -22,6 +23,7 @@ class ChatRoom1 {
     var baner: String?
     var longitude: Double!
     var latitude: Double!
+    var users: [String:Bool]?
     
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
@@ -46,6 +48,9 @@ class ChatRoom1 {
             self.latitude = Double.init(latitude)
         }
         
+        if let users = obj[ChatRoom1.KEY_USERS] as? [String:Bool] {
+            self.users = users
+        }
         
     }
     
