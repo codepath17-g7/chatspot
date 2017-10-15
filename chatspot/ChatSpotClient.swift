@@ -39,6 +39,18 @@ class ChatSpotClient {
         return refHandle
     }
     
+    static func observeChat(roomId: String, success: @escaping ([Message1]) -> (), failure: () -> ()) -> UInt{
+        let ref = Database.database().reference()
+        let chatRef = ref.child("messages").child(roomId)
+        let refHandle = chatRef.observe(DataEventType.value, with: { (snapshot) in
+            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            print(postDict)
+            let messages = Message1.messagesWithArray(dicts: postDict)
+            success(messages)
+        })
+        return refHandle
+    }
+    
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User) {
         let value: [String: String] = [
             User1.KEY_DISPLAY_NAME: user.displayName!,
@@ -46,5 +58,11 @@ class ChatSpotClient {
         ]
         let ref = Database.database().reference()
         ref.child("users").child(guid).setValue(value)
+    }
+    
+    static func sendMessage(message: Message1, roomId: String, success: () -> (), failure: () -> ()) {
+        let ref = Database.database().reference()
+        ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
+        success()
     }
 }

@@ -13,16 +13,29 @@ class Message1 {
     static let KEY_MESSAGE = "message"
     static let KEY_NAME = "name"
     static let KEY_TIMESTAMP = "timestamp"
+    static let KEY_ROOM_ID = "roomId"
     
     var guid: String?
+    var roomId: String?
     var message: String?
     var name: String?
     var timestamp: Int?
+    
+    convenience init(roomId: String, message: String, name: String) {
+        self.init()
+        self.roomId = roomId
+        self.message = message
+        self.name = name
+    }
     
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
         
         self.guid = guid
+        
+        if let roomId = obj[Message1.KEY_ROOM_ID] as? String {
+            self.roomId = roomId
+        }
         
         if let message = obj[Message1.KEY_MESSAGE] as? String{
             self.message = message
@@ -35,6 +48,16 @@ class Message1 {
         if let timestamp = obj[Message1.KEY_TIMESTAMP] as? Int {
             self.timestamp = timestamp
         }
+    }
+    
+    func toValue() -> NSDictionary {
+        let value: NSDictionary = [
+            Message1.KEY_MESSAGE: self.message ?? "",
+            Message1.KEY_NAME: self.name ?? "Unknown",
+            Message1.KEY_TIMESTAMP: self.timestamp ?? "Unknown"
+        ]
+        
+        return value
     }
     
     class func messagesWithArray(dicts: [String: AnyObject]) -> [Message1]{

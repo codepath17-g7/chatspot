@@ -14,16 +14,16 @@ class ChatMessageCell: UITableViewCell {
 	@IBOutlet weak var createdAtLabel: UILabel!
 	@IBOutlet weak var messageTextLabel: UILabel!
 	
-	var message: Message! {
+	var message: Message1! {
 		didSet {
-			if let author = message.user {
-				authorLabel.text = author.name
+			if let author = message.name {
+				authorLabel.text = author
 			}
 			if let text = message.message {
 				messageTextLabel.text = text
 			}
             //fix this
-            createdAtLabel.text = "\(Date(timeIntervalSince1970: message.createdAt))"
+            //createdAtLabel.text = "\(Date(timeIntervalSince1970: message.createdAt))"
             
 			//set sender name
 			//set message text 

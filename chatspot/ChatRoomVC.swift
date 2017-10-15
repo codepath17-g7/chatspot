@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ChatRoomVC: UIViewController {
 	@IBOutlet weak var containerView: UIView!
@@ -26,10 +27,12 @@ class ChatRoomVC: UIViewController {
     @IBOutlet weak var chatRoomMemberCountLabel: UILabel!
     
 	
-	var messages: [Message] = [Message]()
+	var messages: [Message1] = [Message1]()
     var chatRoom: ChatRoom1!
 	var initialY: CGFloat!
-	
+    
+    var observer: UInt!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		tableView.delegate = self
@@ -45,17 +48,13 @@ class ChatRoomVC: UIViewController {
 		
 		setUpUI()
 		
-		
-		// Function to populate array of chatroom messages
-		//		ChatSpotClient.sharedInstance.someFunctionToGetChatRoomMessages(someParam: Stringorsomething, success: { (messages: [Message]) in
-		//			self.messages = messages
-		//			self.tableView.reloadData()
-		//			KRProgressHUD.showSuccess()
-		//		}, failure: { (error: Error) in
-		//			print("Could not find chats: \(error.localizedDescription)")
-		//		})
-
-        setupMockData()
+        observer = ChatSpotClient.observeChat(roomId: chatRoom.guid, success: { (messages: [Message1]) in
+            self.messages = messages
+            self.tableView.reloadData()
+            //KRProgressHUD.showSuccess()
+        }, failure: {
+            print("error")
+        })
 		
     }
     
@@ -65,6 +64,7 @@ class ChatRoomVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        ChatSpotClient.removeObserver(handle: observer)
     }
 	
 	func setUpUI(){
@@ -91,10 +91,22 @@ class ChatRoomVC: UIViewController {
 		view.endEditing(true)
 	}
     
+    @IBAction func onSendMessage(_ sender: UIButton) {
+        if !(messageTextField.text?.isEmpty)! {
+            let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!, name: Auth.auth().currentUser!.displayName!)
+            
+            ChatSpotClient.sendMessage(message: tm, roomId: chatRoom.guid, success: {
+                messageTextField.text = ""
+                print("message sent!")
+            }, failure: {
+                print("message sending failed")
+            })
+        }
+    }
 	
     
     func setupMockData(){
-        let chatroom = ChatRoom(guid: "6", createdAt: 11.11, name: "Rengstorff Park")
+        /*let chatroom = ChatRoom(guid: "6", createdAt: 11.11, name: "Rengstorff Park")
         let user1 = User(guid: "1111", createdAt: 13.00, name: "Eden")
         let user2 = User(guid: "2222", createdAt: 14.00, name: "Phuong")
         let user3 = User(guid: "3333", createdAt: 15.00, name: "Hakeem")
@@ -108,7 +120,7 @@ class ChatRoomVC: UIViewController {
         let message7 = Message(guid: "17", createdAt: 1507930655, image: nil, message: "Hey hing to do around here? kjfshdflks jahdflkjs dhflk jasdh fkljsd hfkj sad fhkjs jhgdjfhgsd gfd, what's up?", user: user3, chatRoom: chatroom)
         let message8 = Message(guid: "18", createdAt: 1507930655, image: nil, message: "yooooooo", user: user4, chatRoom: chatroom)
         let message9 = Message(guid: "19", createdAt: 1507930655, image: nil, message: "Hey, what's up?", user: user1, chatRoom: chatroom)
-        messages = [message1, message2, message3, message4, message5, message6, message7, message8, message9]
+        messages = [message1, message2, message3, message4, message5, message6, message7, message8, message9]*/
         self.tableView.reloadData()
     }
 	
@@ -119,11 +131,7 @@ class ChatRoomVC: UIViewController {
 extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        FirebaseClient.sharedInstance.sendMessage(messageText: textField.text! as String, user: User.currentUser!, success: { (message: Message) in
-//            self.delegate?.updateTableViewWithMessage(message: message)
-//        }, failure: { (e: Error) in
-//            print("Error: \(e.localizedDescription)")
-//        })
+
         return true
     }
     
