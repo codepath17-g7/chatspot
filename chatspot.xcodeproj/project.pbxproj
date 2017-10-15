@@ -21,6 +21,9 @@
 		3298CF661F92F91000F9BBEE /* Message1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF651F92F91000F9BBEE /* Message1.swift */; };
 		7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7626201D1F9338A7008404F6 /* AroundMeView.xib */; };
 		762620201F9338BB008404F6 /* AroundMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7626201F1F9338BB008404F6 /* AroundMeView.swift */; };
+		762620221F93D32E008404F6 /* ChatRoomAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 762620211F93D32E008404F6 /* ChatRoomAnnotationView.xib */; };
+		762620241F93D33D008404F6 /* ChatRoomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762620231F93D33D008404F6 /* ChatRoomAnnotationView.swift */; };
+		762620261F93D51D008404F6 /* ChatRoomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762620251F93D51D008404F6 /* ChatRoomAnnotation.swift */; };
 		7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7A1F8DF27A00DE16FA /* User.swift */; };
 		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
 		7679EA821F8E054600DE16FA /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679EA811F8E054600DE16FA /* UserView.xib */; };
@@ -57,6 +60,9 @@
 		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7626201D1F9338A7008404F6 /* AroundMeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AroundMeView.xib; sourceTree = "<group>"; };
 		7626201F1F9338BB008404F6 /* AroundMeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AroundMeView.swift; sourceTree = "<group>"; };
+		762620211F93D32E008404F6 /* ChatRoomAnnotationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationView.xib; sourceTree = "<group>"; };
+		762620231F93D33D008404F6 /* ChatRoomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationView.swift; sourceTree = "<group>"; };
+		762620251F93D51D008404F6 /* ChatRoomAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotation.swift; sourceTree = "<group>"; };
 		7679EA7A1F8DF27A00DE16FA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		7679EA811F8E054600DE16FA /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
@@ -168,6 +174,9 @@
 				76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */,
 				7626201D1F9338A7008404F6 /* AroundMeView.xib */,
 				7626201F1F9338BB008404F6 /* AroundMeView.swift */,
+				762620211F93D32E008404F6 /* ChatRoomAnnotationView.xib */,
+				762620231F93D33D008404F6 /* ChatRoomAnnotationView.swift */,
+				762620251F93D51D008404F6 /* ChatRoomAnnotation.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -295,6 +304,7 @@
 				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
 				76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */,
 				7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */,
+				762620221F93D32E008404F6 /* ChatRoomAnnotationView.xib in Resources */,
 				7679EA821F8E054600DE16FA /* UserView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,9 +319,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -386,6 +396,7 @@
 			files = (
 				F2719F051F8DF56300417517 /* ProfileVC.swift in Sources */,
 				3298CF601F92E65A00F9BBEE /* Constants.swift in Sources */,
+				762620241F93D33D008404F6 /* ChatRoomAnnotationView.swift in Sources */,
 				8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */,
 				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
@@ -394,6 +405,7 @@
 				3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */,
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
+				762620261F93D51D008404F6 /* ChatRoomAnnotation.swift in Sources */,
 				762620201F9338BB008404F6 /* AroundMeView.swift in Sources */,
 				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,
 				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
