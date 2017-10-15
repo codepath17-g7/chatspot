@@ -28,6 +28,7 @@ class ChatRoomVC: UIViewController {
     
     @IBOutlet weak var chatRoomMemberCountLabel: UILabel!
     
+    @IBOutlet weak var containerTopMarginConstraint: NSLayoutConstraint!
 	
 	var messages: [Message1] = [Message1]()
     var chatRoom: ChatRoom1!
@@ -39,26 +40,29 @@ class ChatRoomVC: UIViewController {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.estimatedRowHeight = 85
+		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.separatorStyle = .none
 
 		setUpKeyboardNotifications()
         
         chatRoomNameLabel.text = chatRoom.name
-        //chatRoomMemberCountLabel.text = chatRoom.userCount
+//        chatRoomMemberCountLabel.text = chatRoom.userCount
 		
 		setUpUI()
         self.startObservingMessages()
     }
     
     private func startObservingMessages() {
+        
         observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
             print(message)
+            
             self.messages.append(message)
-            self.tableView.reloadData()
+            self.reloadTable()
+            
         }, failure: {
-            print("error")
+            print("Error")
         })
     }
     
@@ -70,6 +74,8 @@ class ChatRoomVC: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         ChatSpotClient.removeObserver(handle: observer)
     }
+    
+    
 	
 	func setUpUI(){
 		addPhotoButton.changeImageViewTo(color: .lightGray)
@@ -79,19 +85,40 @@ class ChatRoomVC: UIViewController {
 	}
 	
 	func setUpKeyboardNotifications(){
-		initialY = containerView.frame.origin.y
+        
+        initialY = containerTopMarginConstraint.constant
+        
 		NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (notification: Notification) in
 			let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 			let keyboardHeight = frame.size.height
-			self.containerView.frame.origin.y = self.initialY - keyboardHeight
-		}		
+            
+            self.containerTopMarginConstraint.constant = self.initialY - keyboardHeight
+            
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+            let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+            
+            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+            
+		}
+        
 		NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (notification: Notification) in
-			self.containerView.frame.origin.y = self.initialY
+            
+            self.containerTopMarginConstraint.constant = self.initialY
+            
+            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+            let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+            
+            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
 		}
 	}
 	
 	
 	@IBAction func didTapAwayFromKeyboard(_ sender: UITapGestureRecognizer) {
+        
 		view.endEditing(true)
 	}
     
@@ -103,19 +130,43 @@ class ChatRoomVC: UIViewController {
             ChatSpotClient.sendMessage(message: tm, roomId: chatRoom.guid, success: {
                 messageTextField.text = ""
                 print("message sent!")
+                
             }, failure: {
                 print("message sending failed")
             })
         }
+        
     }
 }
 
-extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
-        return true
+// TableView Methods
+
+extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell") as! ChatMessageCell
+		//set properties of cell
+		cell.message = messages[indexPath.row]
+		cell.selectionStyle = UITableViewCellSelectionStyle.none
+		//TODO: set cell delegate
+
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return messages.count
+	}
+    
+    func reloadTable(){
+        self.tableView.reloadData()
+        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
+	
+}
+
+extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBAction func didTapAddPhoto(_ sender: AnyObject) {
         let picker = UIImagePickerController()
@@ -147,28 +198,16 @@ extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINa
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion:nil)
     }
-
+    
 }
 
+extension ChatRoomVC: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        self.messageTextField.resignFirstResponder()
 
-// TableView Methods
-
-extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell") as! ChatMessageCell
-		//set properties of cell
-		cell.message = messages[indexPath.row]
-		cell.selectionStyle = UITableViewCellSelectionStyle.none
-		//TODO: set cell delegate
-
-		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return messages.count
-	}
-	
+    }
+    
 }
 
 extension UIImageView {

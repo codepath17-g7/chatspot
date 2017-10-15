@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -155,31 +155,31 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATW-MG-nIq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="85" id="9WS-4L-9Pn" customClass="ChatMessageCell" customModule="chatspot" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="85"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="60" id="9WS-4L-9Pn" customClass="ChatMessageCell" customModule="chatspot" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9WS-4L-9Pn" id="uvT-7R-xVL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
-                                                            <rect key="frame" x="8" y="8" width="41" height="21"/>
+                                                            <rect key="frame" x="8" y="8" width="41" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:52 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLi-4i-V4R">
-                                                            <rect key="frame" x="57" y="10" width="65" height="18"/>
+                                                            <rect key="frame" x="57" y="9.5" width="65" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="8" y="37" width="359" height="31.5"/>
+                                                            <rect key="frame" x="8" y="32.5" width="359" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -190,9 +190,9 @@
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" id="Dns-u4-o4i"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="leading" secondItem="uvT-7R-xVL" secondAttribute="leadingMargin" id="KnN-FY-7oI"/>
-                                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="8" id="Sbf-nF-koN"/>
+                                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="topMargin" id="Tq6-Wa-5kh"/>
-                                                        <constraint firstItem="csA-tj-VwX" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="8" id="Wbe-vU-mBf"/>
+                                                        <constraint firstItem="csA-tj-VwX" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="4" id="Wbe-vU-mBf"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="leading" id="eYv-Dw-uwY"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -257,9 +257,9 @@
                                     <constraint firstAttribute="trailing" secondItem="M6h-xv-TnC" secondAttribute="trailing" id="66j-y8-nbc"/>
                                     <constraint firstAttribute="trailing" secondItem="Tbb-1z-WBL" secondAttribute="trailing" id="KRu-jY-zSI"/>
                                     <constraint firstItem="M6h-xv-TnC" firstAttribute="top" secondItem="Tbb-1z-WBL" secondAttribute="bottom" id="LZO-ag-quJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="M6h-xv-TnC" secondAttribute="bottom" id="ZH8-Qb-CIp"/>
                                     <constraint firstItem="Tbb-1z-WBL" firstAttribute="leading" secondItem="ATW-MG-nIq" secondAttribute="leading" id="dS3-nn-Yxm"/>
                                     <constraint firstItem="Tbb-1z-WBL" firstAttribute="top" secondItem="ATW-MG-nIq" secondAttribute="top" id="m0R-pT-n5d"/>
+                                    <constraint firstAttribute="bottom" secondItem="M6h-xv-TnC" secondAttribute="bottom" id="p9C-by-nSs"/>
                                 </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="BYG-cg-r6n" appends="YES" id="rqt-q6-qgE"/>
@@ -270,6 +270,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="ATW-MG-nIq" secondAttribute="bottom" id="0J8-5N-Sar"/>
                             <constraint firstItem="ATW-MG-nIq" firstAttribute="leading" secondItem="4SP-Rs-xGb" secondAttribute="leading" id="4kc-rx-tvn"/>
+                            <constraint firstItem="ATW-MG-nIq" firstAttribute="height" secondItem="4SP-Rs-xGb" secondAttribute="height" id="AsR-Nc-JfY"/>
                             <constraint firstAttribute="trailing" secondItem="ATW-MG-nIq" secondAttribute="trailing" id="Mpr-mr-6P8"/>
                             <constraint firstItem="ATW-MG-nIq" firstAttribute="top" secondItem="4SP-Rs-xGb" secondAttribute="top" id="rh7-GA-CGy"/>
                         </constraints>
@@ -309,6 +310,7 @@
                         <outlet property="addPhotoButton" destination="vaC-Rt-UDV" id="A2o-LY-wbs"/>
                         <outlet property="chatRoomMemberCountLabel" destination="oiR-MF-mHb" id="lh4-sq-QoN"/>
                         <outlet property="chatRoomNameLabel" destination="qBJ-4M-Aju" id="KEb-tM-tjo"/>
+                        <outlet property="containerTopMarginConstraint" destination="rh7-GA-CGy" id="1Nn-yV-oKb"/>
                         <outlet property="containerView" destination="ATW-MG-nIq" id="NKv-SE-GWe"/>
                         <outlet property="messageTextField" destination="Oh8-5y-94u" id="hcQ-Is-3Et"/>
                         <outlet property="sendMessageButton" destination="AWo-Wy-oBi" id="KtR-2k-HZG"/>
@@ -422,7 +424,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Chats" image="messages" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -441,7 +443,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="around me" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -460,7 +462,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="account" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -478,7 +480,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yyh-KS-hMb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhN-pp-VEH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WhN-pp-VEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -496,7 +498,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
