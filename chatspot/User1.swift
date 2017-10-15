@@ -22,16 +22,24 @@ class User1 {
     var profileImage: String?
     var bannerImage: String?
 
-    convenience init(guid: String, obj: [String: String]) {
+    convenience init(guid: String, obj: NSDictionary) {
         self.init()
         self.guid = guid
-        if let name = obj[User1.KEY_DISPLAY_NAME] {
+        if let name = obj[User1.KEY_DISPLAY_NAME] as? String {
             self.name = name
         }
-        if let profileImage = obj[User1.KEY_DISPLAY_NAME] {
+        if let profileImage = obj[User1.KEY_DISPLAY_NAME] as? String {
             self.profileImage = profileImage
         }
     }
     
-    
+    class func usersWithArray(dicts: [String: AnyObject]) -> [User1]{
+        var users = [User1]()
+        for dict in dicts {
+            print(dict)
+            let user =  User1(guid: dict.key, obj: dict.value as! NSDictionary)
+            users.append(user)
+        }
+        return users
+    }
 }

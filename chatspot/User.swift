@@ -64,15 +64,5 @@ class User: Object { // Object is from Realm, this also extends a NSObject.
     
     required init(value: Any, schema: RLMSchema) {
         super.init(value: value, schema: schema)
-    }
-    
-    class func usersWithArray(dicts: [String: AnyObject]) -> [User1]{
-        var users = [User1]()
-        for dict in dicts {
-            print(dict)
-            let user =  User1(guid: dict.key, obj: dict.value as! [String : String])
-            users.append(user)
-        }
-        return users
-    }
+    }    
 }
