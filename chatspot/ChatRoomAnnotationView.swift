@@ -11,10 +11,16 @@ import MapKit
 import FirebaseAuthUI
 
 class ChatRoomAnnotationView: MKAnnotationView {
-    var roomGuid: String!
+    
+    var roomGuid: String {
+        get {
+            let chatRoomAnnotation = annotation as! ChatRoomAnnotation
+            return chatRoomAnnotation.room.guid
+        }
+    }
+    
     init(roomAnnotation: ChatRoomAnnotation, reuseIdentifier: String?) {
         super.init(annotation: roomAnnotation, reuseIdentifier: reuseIdentifier)
-        self.roomGuid = roomAnnotation.room.guid
         
         let button = UIButton(type: .detailDisclosure)
         button.addTarget(self, action: #selector(joinRoom(_:)), for: .touchUpInside)

@@ -83,7 +83,7 @@ extension AroundMeView: MKMapViewDelegate {
         if annotationView == nil {
             annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: reuseIdentifier)
         } else {
-            annotationView?.annotation = annotation
+            annotationView?.annotation = chatRoomAnnotation
         }
 
         return annotationView
