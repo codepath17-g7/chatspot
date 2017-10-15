@@ -21,9 +21,24 @@
                     <view key="view" contentMode="scaleToFill" id="7ew-ZM-xDQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkf-AU-1So" customClass="AroundMeView" customModule="chatspot" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cmV-2v-Rcc" firstAttribute="top" secondItem="mkf-AU-1So" secondAttribute="bottom" id="XHM-Cz-i4O"/>
+                            <constraint firstItem="mkf-AU-1So" firstAttribute="leading" secondItem="7ew-ZM-xDQ" secondAttribute="leading" id="jgc-vM-Jo8"/>
+                            <constraint firstAttribute="trailing" secondItem="mkf-AU-1So" secondAttribute="trailing" id="mdy-D3-wiO"/>
+                            <constraint firstItem="mkf-AU-1So" firstAttribute="top" secondItem="n00-Nj-AMc" secondAttribute="bottom" id="zUa-vn-ElW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wC0-e1-ltr"/>
+                    <connections>
+                        <outlet property="aroundMeView" destination="mkf-AU-1So" id="n5H-ax-LRa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJP-K9-TBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

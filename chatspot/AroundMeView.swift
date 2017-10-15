@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class AroundMeView: UIView {
 
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,12 +30,28 @@ class AroundMeView: UIView {
         contentView.frame = bounds
         addSubview(contentView)
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
 
+        centerMap()
+    }
+    
+    func updateRooms(_ rooms: [ChatRoom1]) {
+        
+    }
+
+}
+
+extension AroundMeView: MKMapViewDelegate {
+    func reloadMap() {
+    }
+    
+    func centerMap() {
+        let rgn = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(37.7833, -122.4067), 2000, 2000);
+        mapView.setRegion(rgn, animated: false)
+        mapView.isZoomEnabled = true
+        mapView.showsCompass = true
+        
+    }
 }
