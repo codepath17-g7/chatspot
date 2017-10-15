@@ -32,7 +32,7 @@ class ChatListVC: UIViewController {
     }
     
     func startObservingChatRoomList() {
-        observer = ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
+        observer = ChatSpotClient.observeMyChatRooms(success: { (room: ChatRoom1) in
             self.chats.append(room)
             self.tableView.reloadData()
             //KRProgressHUD.showSuccess()
