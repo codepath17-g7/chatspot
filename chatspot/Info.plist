@@ -33,11 +33,16 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access for uploading Images</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Allow chatspot to access your location to notify you of chatspots nearby.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Allow chatspot to access your location to notify you of chatspots nearby.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>NeedLibrary access for uploading Images</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>location</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
