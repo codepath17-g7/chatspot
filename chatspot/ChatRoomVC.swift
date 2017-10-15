@@ -14,26 +14,21 @@ import KRProgressHUD
 
 class ChatRoomVC: UIViewController {
 	@IBOutlet weak var containerView: UIView!
-
 	@IBOutlet weak var tableView: UITableView!
-	
 	@IBOutlet weak var addPhotoButton: UIButton!
-	
 	@IBOutlet weak var addEmojiButton: UIButton!
-	
 	@IBOutlet weak var messageTextField: UITextField!
-	
 	@IBOutlet weak var sendMessageButton: UIButton!
-	
     @IBOutlet weak var chatRoomNameLabel: UILabel!
-    
     @IBOutlet weak var chatRoomMemberCountLabel: UILabel!
-    
+    @IBOutlet weak var toolbarView: UIView!
     @IBOutlet weak var containerTopMarginConstraint: NSLayoutConstraint!
+    @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
 	
 	var messages: [Message1] = [Message1]()
     var chatRoom: ChatRoom1!
 	var initialY: CGFloat!
+    var toolbarInitialY: CGFloat!
     
     var observer: UInt!
     override func viewDidLoad() {
@@ -101,6 +96,7 @@ class ChatRoomVC: UIViewController {
 	func setUpKeyboardNotifications(){
         
         initialY = containerTopMarginConstraint.constant
+        toolbarInitialY = toolbarBottomConstraint.constant
         
 		NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (notification: Notification) in
             
@@ -109,36 +105,34 @@ class ChatRoomVC: UIViewController {
             
             if self.needToMoveContainerView(keyboardHeight: keyboardHeight){
                 self.containerTopMarginConstraint.constant = self.initialY - keyboardHeight
+                self.adjustViewsForKeyboardMove(notification: notification)
+
+            } else {
+                self.toolbarBottomConstraint.constant = self.toolbarInitialY + keyboardHeight
+                self.adjustViewsForKeyboardMove(notification: notification)
                 
-                let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-                let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-                
-                UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
-                    self.view.layoutIfNeeded()
-                }, completion: nil)
-            } //add else 
+            }
             
 		}
         
 		NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (notification: Notification) in
             
             self.containerTopMarginConstraint.constant = self.initialY
-            
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-            let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-            
-            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            self.toolbarBottomConstraint.constant = self.toolbarInitialY
+            self.adjustViewsForKeyboardMove(notification: notification)
 		}
 	}
-	
-    func moveTextFieldUp(){
+    
+    func adjustViewsForKeyboardMove(notification: Notification){
+        let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
         
+        UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 	
 	@IBAction func didTapAwayFromKeyboard(_ sender: UITapGestureRecognizer) {
-        
 		view.endEditing(true)
 	}
     

@@ -15,6 +15,7 @@ target 'chatspot' do
   pod 'Firebase/Database'
   pod 'NSDateMinimalTimeAgo'
   pod 'KRProgressHUD'
+  pod 'FLEX'
 
   # Pods for chatspot
 
