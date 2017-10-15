@@ -324,7 +324,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2322.4000000000001" y="2218.7406296851577"/>
+            <point key="canvasLocation" x="-2418" y="2249"/>
         </scene>
         <!--Login-->
         <scene sceneID="yf4-ki-J7z">
@@ -491,7 +491,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BZ-pA-koL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2322.4000000000001" y="2124.2878560719641"/>
+            <point key="canvasLocation" x="-1631" y="2082"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2M5-Wg-a5q">
@@ -522,6 +522,6 @@
         <image name="smiley" width="35" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nVZ-qM-vWL"/>
+        <segue reference="Gn9-yJ-qcY"/>
     </inferredMetricsTieBreakers>
 </document>

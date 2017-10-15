@@ -23,12 +23,14 @@ class ChatMessageCell: UITableViewCell {
 			if let text = message.message {
 				messageTextLabel.text = text
 			}
-            //fix this
-            createdAtLabel.text = message.timestamp?.timeAgo()
             
-			//set sender name
-			//set message text 
-			//set message time
+            if message.timestamp?.timeAgo() == "0 s" {
+                createdAtLabel.text = "Now"
+            } else {
+                createdAtLabel.text = message.timestamp?.timeAgo()
+            }
+            
+            
 		}
 	}
 	

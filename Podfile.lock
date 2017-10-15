@@ -69,6 +69,9 @@ PODS:
   - GTMSessionFetcher/Core (1.1.12)
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
+  - KRActivityIndicatorView (2.1.1)
+  - KRProgressHUD (3.1.1):
+    - KRActivityIndicatorView (= 2.1.1)
   - leveldb-library (1.18.3)
   - MBProgressHUD (1.0.0)
   - nanopb (0.3.8):
@@ -91,6 +94,7 @@ DEPENDENCIES:
   - FirebaseUI/Auth
   - FirebaseUI/Google
   - FirebaseUI/Phone
+  - KRProgressHUD
   - MBProgressHUD
   - NSDateMinimalTimeAgo
   - RealmSwift
@@ -108,6 +112,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  KRActivityIndicatorView: fa5df9f4cf039651ad8b0f9c11c3159d1e19299f
+  KRProgressHUD: 0e380cf5386365e6821c43ef51388d3a680a1cc6
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
@@ -115,6 +121,6 @@ SPEC CHECKSUMS:
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
   RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
 
-PODFILE CHECKSUM: a69fa8bff425bee444e3f3783cbec5053f1e171e
+PODFILE CHECKSUM: f2e24a198a132571d29cdc4d9dd44de728f57fb2
 
 COCOAPODS: 1.3.1

@@ -14,6 +14,7 @@ target 'chatspot' do
   pod 'MBProgressHUD'
   pod 'Firebase/Database'
   pod 'NSDateMinimalTimeAgo'
+  pod 'KRProgressHUD'
 
   # Pods for chatspot
 

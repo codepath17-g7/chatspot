@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import Firebase
+import KRProgressHUD
 
 class ChatRoomVC: UIViewController {
 	@IBOutlet weak var containerView: UIView!
@@ -35,6 +36,7 @@ class ChatRoomVC: UIViewController {
 	var initialY: CGFloat!
     
     var observer: UInt!
+//    var containerViewMoved: Bool = False
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +44,16 @@ class ChatRoomVC: UIViewController {
 		tableView.dataSource = self
 		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
-		tableView.separatorStyle = .none
+//		tableView.separatorStyle = .none
+        tableView.tableFooterView = UIView(frame: .zero)
 
 		setUpKeyboardNotifications()
         
         chatRoomNameLabel.text = chatRoom.name
-//        chatRoomMemberCountLabel.text = chatRoom.userCount
+        chatRoomMemberCountLabel.text = "\(chatRoom.users?.count) members"
 		
 		setUpUI()
+//        setupAndTriggerHUD()
         self.startObservingMessages()
     }
     
@@ -75,7 +79,12 @@ class ChatRoomVC: UIViewController {
         ChatSpotClient.removeObserver(handle: observer)
     }
     
-    
+//    func setupAndTriggerHUD(){
+//        KRProgressHUD.set(style: .white)
+//        KRProgressHUD.set(font: .systemFont(ofSize: 17))
+//        KRProgressHUD.set(activityIndicatorViewStyle: .gradationColor(head: UIColor.ChatSpotColors.Blue, tail: UIColor.ChatSpotColors.DarkBlue))
+//        KRProgressHUD.show(withMessage: "Loading messages...")
+//    }
 	
 	func setUpUI(){
 		addPhotoButton.changeImageViewTo(color: .lightGray)
@@ -89,17 +98,21 @@ class ChatRoomVC: UIViewController {
         initialY = containerTopMarginConstraint.constant
         
 		NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main) { (notification: Notification) in
+            
 			let frame = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
 			let keyboardHeight = frame.size.height
             
-            self.containerTopMarginConstraint.constant = self.initialY - keyboardHeight
-            
-            let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
-            let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
-            
-            UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+            if self.needToMoveContainerView(keyboardHeight: keyboardHeight){
+                self.containerTopMarginConstraint.constant = self.initialY - keyboardHeight
+                
+                let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+                let curve = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber
+                
+                UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: [UIViewAnimationOptions(rawValue: UInt(curve))], animations: {
+                    self.view.layoutIfNeeded()
+//                    self.containerViewMoved = true
+                }, completion: nil)
+            }
             
 		}
         
@@ -136,6 +149,16 @@ class ChatRoomVC: UIViewController {
             })
         }
         
+    }
+    
+    func needToMoveContainerView(keyboardHeight: CGFloat) -> Bool {
+        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+        let frameForRow = self.tableView.rectForRow(at: indexPath)
+        let rectOfRowInSuperview = self.tableView.convert(frameForRow, to: self.tableView.superview)
+        if rectOfRowInSuperview.maxY > (self.view.frame.height - keyboardHeight){
+            return true
+        }
+        return false
     }
 }
 
