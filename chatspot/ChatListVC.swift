@@ -21,36 +21,22 @@ class ChatListVC: UIViewController {
 		tableView.estimatedRowHeight = 108
 		tableView.rowHeight = UITableViewAutomaticDimension
 
-		setupMockChatList()
-        observer = ChatSpotClient.observeChatRooms { (rooms: [ChatRoom]) in
-            //update tableview
-            print(rooms);
-        }
-// Function to populate array of chats
-		
-//		ChatSpotClient.sharedInstance.someFunctionToGetMyCurrentChats(someParam: Stringorsomething, success: { (chats: [Chat]) in
-//			self.chats = chats
-//			self.tableView.reloadData()
-//			KRProgressHUD.showSuccess()
-//		}, failure: { (error: Error) in
-//			print("Could not find chats: \(error.localizedDescription)")
-//		})
-
+        //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
+        
+        observer = ChatSpotClient.observeChatRooms(success: { (rooms: [ChatRoom]) in
+            self.chats = rooms
+            self.tableView.reloadData()
+            //KRProgressHUD.showSuccess()
+            print(rooms)
+        }, failure: {
+            print("Could not find chats")
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         ChatSpotClient.removeObserver(handle: observer)
     }
-	
-    func setupMockChatList(){
-        //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
-        
-        let chatroom1 = ChatRoom(guid: "234cdwf", createdAt: 123432254, name: "Oracle Arena")
-        let chatroom2 = ChatRoom(guid: "234cfffdwf", createdAt: 1234334532254, name: "Rengstorff Park")
-        self.chats = [chatroom1, chatroom2]
-        self.tableView.reloadData()
-    }
-	
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("in prep for segue")
         if segue.identifier == "ChatRoomVCSegue"{
@@ -74,7 +60,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as! ChatListCell
 		//set properties of cell
 		cell.chatRoom = chats[indexPath.row]
-
+        
 		return cell
 	}
 	
