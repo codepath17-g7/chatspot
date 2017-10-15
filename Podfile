@@ -11,8 +11,9 @@ target 'chatspot' do
   pod 'FirebaseUI/Google'
   pod 'RealmSwift'
   pod 'AFNetworking'
-  pod "MBProgressHUD"
+  pod 'MBProgressHUD'
   pod 'Firebase/Database'
+  pod 'NSDateMinimalTimeAgo'
 
   # Pods for chatspot
 

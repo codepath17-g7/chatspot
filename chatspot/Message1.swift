@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class Message1 {
     
@@ -19,7 +20,7 @@ class Message1 {
     var roomId: String?
     var message: String?
     var name: String?
-    var timestamp: Int?
+    var timestamp: NSDate?
     
     convenience init(roomId: String, message: String, name: String) {
         self.init()
@@ -44,9 +45,10 @@ class Message1 {
         if let name = obj[Message1.KEY_NAME] as? String{
             self.name = name
         }
-        
-        if let timestamp = obj[Message1.KEY_TIMESTAMP] as? Int {
-            self.timestamp = timestamp
+    
+        if let timestamp = obj[Message1.KEY_TIMESTAMP] as? Double {
+            let epochTime = TimeInterval(timestamp)/1000
+            self.timestamp = NSDate(timeIntervalSince1970: epochTime)
         }
     }
     
@@ -54,7 +56,7 @@ class Message1 {
         let value: NSDictionary = [
             Message1.KEY_MESSAGE: self.message ?? "",
             Message1.KEY_NAME: self.name ?? "Unknown",
-            Message1.KEY_TIMESTAMP: self.timestamp ?? "Unknown"
+            Message1.KEY_TIMESTAMP: ServerValue.timestamp()
         ]
         
         return value

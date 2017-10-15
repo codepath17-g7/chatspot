@@ -76,6 +76,7 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NSDateMinimalTimeAgo (0.1.0)
   - Realm (2.10.2):
     - Realm/Headers (= 2.10.2)
   - Realm/Headers (2.10.2)
@@ -91,6 +92,7 @@ DEPENDENCIES:
   - FirebaseUI/Google
   - FirebaseUI/Phone
   - MBProgressHUD
+  - NSDateMinimalTimeAgo
   - RealmSwift
 
 SPEC CHECKSUMS:
@@ -109,9 +111,10 @@ SPEC CHECKSUMS:
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NSDateMinimalTimeAgo: 71102cc43bb1aa0b5692c953a1abb8c305691475
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
   RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
 
-PODFILE CHECKSUM: 7ec70ca5fac0c435a4e4034a0154a597c7869ac2
+PODFILE CHECKSUM: a69fa8bff425bee444e3f3783cbec5053f1e171e
 
 COCOAPODS: 1.3.1

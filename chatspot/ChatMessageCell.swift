@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NSDateMinimalTimeAgo
 
 class ChatMessageCell: UITableViewCell {
 	
@@ -23,7 +24,7 @@ class ChatMessageCell: UITableViewCell {
 				messageTextLabel.text = text
 			}
             //fix this
-            //createdAtLabel.text = "\(Date(timeIntervalSince1970: message.createdAt))"
+            createdAtLabel.text = message.timestamp?.timeAgo()
             
 			//set sender name
 			//set message text 

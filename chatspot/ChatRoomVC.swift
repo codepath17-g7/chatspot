@@ -8,6 +8,8 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import Firebase
 
 class ChatRoomVC: UIViewController {
 	@IBOutlet weak var containerView: UIView!
@@ -95,7 +97,8 @@ class ChatRoomVC: UIViewController {
     
     @IBAction func onSendMessage(_ sender: UIButton) {
         if !(messageTextField.text?.isEmpty)! {
-            let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!, name: Auth.auth().currentUser!.displayName!)
+            let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!,
+                              name: Auth.auth().currentUser!.displayName!)
             
             ChatSpotClient.sendMessage(message: tm, roomId: chatRoom.guid, success: {
                 messageTextField.text = ""
@@ -105,29 +108,6 @@ class ChatRoomVC: UIViewController {
             })
         }
     }
-	
-    
-    func setupMockData(){
-        /*let chatroom = ChatRoom(guid: "6", createdAt: 11.11, name: "Rengstorff Park")
-        let user1 = User(guid: "1111", createdAt: 13.00, name: "Eden")
-        let user2 = User(guid: "2222", createdAt: 14.00, name: "Phuong")
-        let user3 = User(guid: "3333", createdAt: 15.00, name: "Hakeem")
-        let user4 = User(guid: "4444", createdAt: 16.00, name: "Varun")
-        let message1 = Message(guid: "11", createdAt: 1507930655, image: nil, message: "Hey everyone, what's up?", user: user1, chatRoom: chatroom)
-        let message2 = Message(guid: "12", createdAt: 1507930655, image: nil, message: "Hey guys", user: user2, chatRoom: chatroom)
-        let message3 = Message(guid: "13", createdAt: 1507930655, image: nil, message: "Anything to do around here? kjfshdflks it jj jjj jahdflkjs dhflk jasdh fkljsd hfkj sad fhkjs jhgdjfhgsd gfdhgfdhf", user: user3, chatRoom: chatroom)
-        let message4 = Message(guid: "14", createdAt: 1507930655, image: nil, message: "Hey everyone, what's up?", user: user4, chatRoom: chatroom)
-        let message5 = Message(guid: "15", createdAt: 1507930655, image: nil, message: "Hi", user: user1, chatRoom: chatroom)
-        let message6 = Message(guid: "16", createdAt: 1507930655, image: nil, message: "what's up?", user: user2, chatRoom: chatroom)
-        let message7 = Message(guid: "17", createdAt: 1507930655, image: nil, message: "Hey hing to do around here? kjfshdflks jahdflkjs dhflk jasdh fkljsd hfkj sad fhkjs jhgdjfhgsd gfd, what's up?", user: user3, chatRoom: chatroom)
-        let message8 = Message(guid: "18", createdAt: 1507930655, image: nil, message: "yooooooo", user: user4, chatRoom: chatroom)
-        let message9 = Message(guid: "19", createdAt: 1507930655, image: nil, message: "Hey, what's up?", user: user1, chatRoom: chatroom)
-        messages = [message1, message2, message3, message4, message5, message6, message7, message8, message9]*/
-        self.tableView.reloadData()
-    }
-	
-	
-
 }
 
 extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
