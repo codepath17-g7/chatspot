@@ -26,7 +26,12 @@ class ChatSpotClient {
     
     static func joinChatRoom(userGuid: String, roomGuid: String) {
         let ref = Database.database().reference()
-        ref.child("chatrooms").child(roomGuid).child("users").setValue(true, forKey: userGuid)
+        ref.child("chatrooms").child(roomGuid).child("users").updateChildValues([userGuid: true])
+    }
+    
+    static func leaveChatRoom(userGuid: String, roomGuid: String) {
+        let ref = Database.database().reference()
+        ref.child("chatrooms").child(roomGuid).child("users").child(userGuid).removeValue()
     }
     
     static func removeObserver(handle: UInt){
