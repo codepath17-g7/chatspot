@@ -16,6 +16,9 @@
 		32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */; };
 		3298CF5E1F92A6DB00F9BBEE /* ChatSpotClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF5D1F92A6DB00F9BBEE /* ChatSpotClient.swift */; };
 		3298CF601F92E65A00F9BBEE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF5F1F92E65A00F9BBEE /* Constants.swift */; };
+		3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF611F92F8DF00F9BBEE /* User1.swift */; };
+		3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF631F92F8E900F9BBEE /* ChatRoom1.swift */; };
+		3298CF661F92F91000F9BBEE /* Message1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF651F92F91000F9BBEE /* Message1.swift */; };
 		7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7A1F8DF27A00DE16FA /* User.swift */; };
 		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
 		7679EA821F8E054600DE16FA /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679EA811F8E054600DE16FA /* UserView.xib */; };
@@ -45,6 +48,9 @@
 		32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "chatspot/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3298CF5D1F92A6DB00F9BBEE /* ChatSpotClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSpotClient.swift; sourceTree = "<group>"; };
 		3298CF5F1F92E65A00F9BBEE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3298CF611F92F8DF00F9BBEE /* User1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User1.swift; sourceTree = "<group>"; };
+		3298CF631F92F8E900F9BBEE /* ChatRoom1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom1.swift; sourceTree = "<group>"; };
+		3298CF651F92F91000F9BBEE /* Message1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message1.swift; sourceTree = "<group>"; };
 		3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_chatspot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7679EA7A1F8DF27A00DE16FA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
@@ -139,6 +145,9 @@
 				7679EA7A1F8DF27A00DE16FA /* User.swift */,
 				7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */,
 				F2719F0D1F8DFCD900417517 /* Message.swift */,
+				3298CF611F92F8DF00F9BBEE /* User1.swift */,
+				3298CF631F92F8E900F9BBEE /* ChatRoom1.swift */,
+				3298CF651F92F91000F9BBEE /* Message1.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -358,11 +367,14 @@
 				F2719F051F8DF56300417517 /* ProfileVC.swift in Sources */,
 				3298CF601F92E65A00F9BBEE /* Constants.swift in Sources */,
 				8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */,
+				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
 				8B92720C1F9082590041FC35 /* Storage.swift in Sources */,
 				3298CF5E1F92A6DB00F9BBEE /* ChatSpotClient.swift in Sources */,
+				3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */,
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
+				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,

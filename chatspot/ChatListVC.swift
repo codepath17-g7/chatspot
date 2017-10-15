@@ -12,7 +12,7 @@ class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
     var observer: UInt!
-	var chats: [ChatRoom] = [ChatRoom]()
+	var chats: [ChatRoom1] = [ChatRoom1]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class ChatListVC: UIViewController {
 
         //ChatSpotClient.createChatRoom(name: "Cupertino", description: "whatupp!", banner: nil)
         
-        observer = ChatSpotClient.observeChatRooms(success: { (rooms: [ChatRoom]) in
+        observer = ChatSpotClient.observeChatRooms(success: { (rooms: [ChatRoom1]) in
             self.chats = rooms
             self.tableView.reloadData()
             //KRProgressHUD.showSuccess()

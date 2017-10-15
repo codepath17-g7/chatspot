@@ -11,9 +11,9 @@ import RealmSwift
 
 class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
     
-    static let KEY_NAME = "name"
+    /*static let KEY_NAME = "name"
     static let KEY_BANNER = "banner"
-    static let KEY_DESCRIPTION = "description"
+    static let KEY_DESCRIPTION = "description"*/
     
     @objc dynamic var guid: String!
     @objc dynamic var name: String!
@@ -35,14 +35,6 @@ class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
         return "guid"
     }
     
-    convenience init(guid: String, obj: [String: String]) {
-        self.init()
-        self.guid = guid
-        self.roomBanner = obj[ChatRoom.KEY_BANNER]
-        self.name = obj[ChatRoom.KEY_NAME]
-        self.title = obj[ChatRoom.KEY_DESCRIPTION]
-    }
-    
     // our initializer with non-optional properties
     convenience init(guid: String, createdAt: Double, name: String) {
         self.init()
@@ -61,16 +53,6 @@ class ChatRoom: Object { // Object is from Realm, this also extends a NSObject.
         self.longitude.value = longitude
         self.userCount.value = userCount
         self.roomActivity.value = roomActivity
-    }
-    
-    class func roomsWithArray(dicts: [String: AnyObject]) -> [ChatRoom]{
-        var rooms = [ChatRoom]()
-        for dict in dicts {
-            print(dict)
-            let room =  ChatRoom(guid: dict.key, obj: dict.value as! [String : String])
-            rooms.append(room)
-        }
-        return rooms
     }
     
     convenience init(dictionary: [String: String]) {

@@ -19,7 +19,7 @@ class ChatListCell: UITableViewCell {
     
     @IBOutlet weak var viewOnMapButton: UIButton!
     
-	var chatRoom: ChatRoom! {
+	var chatRoom: ChatRoom1! {
 		didSet {
             
             chatRoomNameLabel.text = chatRoom.name // do special things if "around me" chat

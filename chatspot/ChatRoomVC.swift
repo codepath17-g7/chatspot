@@ -27,7 +27,7 @@ class ChatRoomVC: UIViewController {
     
 	
 	var messages: [Message] = [Message]()
-    var chatRoom: ChatRoom!
+    var chatRoom: ChatRoom1!
 	var initialY: CGFloat!
 	
     override func viewDidLoad() {
