@@ -135,10 +135,8 @@ class UserView: UIView {
         vc.sourceType = .photoLibrary
         
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        let viewcon = appdelegate.window?.rootViewController
-        
-        
-        viewcon?.present(vc, animated: true, completion: nil)
+        let navCon = appdelegate.window?.rootViewController as! UINavigationController
+        navCon.visibleViewController?.present(vc, animated: true, completion: nil)
     }
 
     
