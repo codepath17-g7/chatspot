@@ -127,6 +127,17 @@ class UserView: UIView {
         addSubview(contentView)
     }
 
+    func topViewController(from viewController: UIViewController?) -> UIViewController? {
+        if let tabBarViewController = viewController as? UITabBarController {
+            return topViewController(from: tabBarViewController.selectedViewController)
+        } else if let navigationController = viewController as? UINavigationController {
+            return topViewController(from: navigationController.visibleViewController)
+        } else if let presentedViewController = viewController?.presentedViewController {
+            return topViewController(from: presentedViewController)
+        } else {
+            return viewController
+        }
+    }
     
     private func pickImage() {
         let vc = UIImagePickerController()
@@ -134,9 +145,10 @@ class UserView: UIView {
         vc.allowsEditing = false
         vc.sourceType = .photoLibrary
         
+        
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        let navCon = appdelegate.window?.rootViewController as! UINavigationController
-        navCon.visibleViewController?.present(vc, animated: true, completion: nil)
+        let topVc = topViewController(from: appdelegate.window?.rootViewController)
+        topVc?.present(vc, animated: true, completion: nil)
     }
 
     
