@@ -28,7 +28,7 @@ class User1 {
         if let name = obj[User1.KEY_DISPLAY_NAME] as? String {
             self.name = name
         }
-        if let profileImage = obj[User1.KEY_DISPLAY_NAME] as? String {
+        if let profileImage = obj[User1.KEY_PROFILE_IMAGE] as? String {
             self.profileImage = profileImage
         }
     }

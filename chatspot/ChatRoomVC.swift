@@ -138,8 +138,10 @@ class ChatRoomVC: UIViewController {
     
     @IBAction func onSendMessage(_ sender: UIButton) {
         if !(messageTextField.text?.isEmpty)! {
-            let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!,
-                              name: Auth.auth().currentUser!.displayName!)
+            
+            let user = Auth.auth().currentUser!
+            
+            let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!, name: user.displayName!, userGuid: user.uid)
             
             ChatSpotClient.sendMessage(message: tm, roomId: chatRoom.guid, success: {
                 messageTextField.text = ""

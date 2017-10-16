@@ -110,4 +110,19 @@ class ChatSpotClient {
         ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
         success()
     }
+    
+    static func getUserProfile(userGuid: String, success: @escaping (User1) -> (), failure: @escaping () -> ()) {
+        let ref = Database.database().reference()
+        
+        ref.child("users").child(userGuid).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+            let userDict = snapshot.value as? NSDictionary ?? [:]
+            if userDict.count == 0 {
+                let user = User1(guid: userGuid, obj: userDict)
+                success(user)
+            } else {
+                failure()
+            }
+        })
+    }
+    
 }
