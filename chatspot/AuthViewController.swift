@@ -86,6 +86,7 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
                                    kGoogleUserInfoEmailScope,
                                    kGoogleUserInfoProfileScope])
             self.authUI?.providers = [provider, googleProvider]
+            self.authUI?.isSignInWithEmailHidden = true
             let controller = self.authUI!.authViewController()
             self.present(controller, animated: true, completion: nil)
             

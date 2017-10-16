@@ -8,8 +8,8 @@
 
 import UIKit
 import FirebaseAuthUI
-import FirebasePhoneAuthUI
-import FirebaseGoogleAuthUI
+
+
 
 class ProfileVC: UIViewController {
 
@@ -36,7 +36,7 @@ class ProfileVC: UIViewController {
         
 //        userView.prepare(user: userNoImage, isSelf: true)
         
-        userView.prepare(user: userWithImage, isSelf: false)
+        userView.prepare(user: userWithImage, isSelf: true)
 //        userView.prepare(user: userWithImage, isSelf: true)
         
 
