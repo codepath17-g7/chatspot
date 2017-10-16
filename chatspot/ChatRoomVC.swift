@@ -12,7 +12,7 @@ import FirebaseDatabase
 import Firebase
 import KRProgressHUD
 
-class ChatRoomVC: UIViewController {
+class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	@IBOutlet weak var containerView: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var addPhotoButton: UIButton!
@@ -37,7 +37,7 @@ class ChatRoomVC: UIViewController {
 		tableView.dataSource = self
 		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
-//		tableView.separatorStyle = .none
+		tableView.separatorStyle = .none
         tableView.tableFooterView = UIView(frame: .zero)
 
 		setUpKeyboardNotifications()
@@ -110,9 +110,7 @@ class ChatRoomVC: UIViewController {
             } else {
                 self.toolbarBottomConstraint.constant = self.toolbarInitialY + keyboardHeight
                 self.adjustViewsForKeyboardMove(notification: notification)
-                
             }
-            
 		}
         
 		NotificationCenter.default.addObserver(forName: Notification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main) { (notification: Notification) in
@@ -132,6 +130,17 @@ class ChatRoomVC: UIViewController {
         }, completion: nil)
     }
 	
+    func presentAlertViewController(alertController: UIAlertController){
+        self.present(alertController, animated: true)
+    }
+    
+    func sendPrivateMessageTo(user: User){
+        
+    }
+    func viewUserProfile(user: User){
+        
+    }
+    
 	@IBAction func didTapAwayFromKeyboard(_ sender: UITapGestureRecognizer) {
 		view.endEditing(true)
 	}
@@ -173,7 +182,7 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 		//set properties of cell
 		cell.message = messages[indexPath.row]
 		cell.selectionStyle = UITableViewCellSelectionStyle.none
-		//TODO: set cell delegate
+        cell.delegate = self
 
 		return cell
 	}
