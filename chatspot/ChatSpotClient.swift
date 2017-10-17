@@ -108,6 +108,7 @@ class ChatSpotClient {
     static func sendMessage(message: Message1, roomId: String, success: () -> (), failure: () -> ()) {
         let ref = Database.database().reference()
         ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
+        ref.child("chatrooms").child(roomId).child("lastMessage").setValue(message.message)
         success()
     }
     

@@ -27,7 +27,7 @@ class ChatListCell: UITableViewCell {
             locationLabel.text = ""// set to location if Around Me
             memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
 			
-            lastMessageLabel.text = chatRoom.title
+            lastMessageLabel.text = chatRoom.lastMessage ?? chatRoom.title
 			
 		}
 	}
