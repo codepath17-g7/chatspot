@@ -39,6 +39,23 @@ class ChatSpotClient {
         ref.removeObserver(withHandle: handle)
     }
     
+    static func observeLastMessageChange(success: @escaping (String, String) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+        let ref = Database.database().reference()
+        let chatroomsRef = ref.child("chatrooms")
+        
+        let userGuid = Auth.auth().currentUser!.uid
+        
+        let refHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(.childChanged, with: { (snapshot) in
+            let dict = snapshot.value as? NSDictionary ?? [:]
+            let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            success(room.guid!, room.lastMessage!)
+        }) { (error: Error?) in
+            failure(error)
+        }
+       
+        return refHandle
+    }
+    
     static func observeMyChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatroomsRef = ref.child("chatrooms")

@@ -12,7 +12,7 @@ import KRProgressHUD
 class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
-    var observer: UInt!
+    var observers = [UInt]()
 	var chats: [ChatRoom1] = [ChatRoom1]()
 	
     override func viewDidLoad() {
@@ -33,10 +33,12 @@ class ChatListVC: UIViewController {
         KRProgressHUD.showSuccess()
         
         startObservingChatRoomList()
+        
+        startObservingLastMessage()
     }
     
     func startObservingChatRoomList() {
-        observer = ChatSpotClient.observeMyChatRooms(success: { (room: ChatRoom1) in
+        let observer = ChatSpotClient.observeMyChatRooms(success: { (room: ChatRoom1) in
             self.chats.append(room)
             self.tableView.reloadData()
             KRProgressHUD.showSuccess()
@@ -44,10 +46,27 @@ class ChatListVC: UIViewController {
             print("Error in startObservingChatRoomList: \(error)")
             KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
         })
+        
+        observers.append(observer)
+    }
+    
+    func startObservingLastMessage() {
+        let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage) in
+            let chatRoomWithLastMessageChange = self.chats.filter { $0.guid == roomGuid }
+            if let room = chatRoomWithLastMessageChange.first {
+                room.lastMessage = lastMessage
+                self.tableView.reloadData()
+            }
+        }) { (error) in
+            // silent. doesn't break the feature.
+        }
+        
+        observers.append(lastMessageObserver)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        ChatSpotClient.removeObserver(handle: observer)
+        observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
+        observers.removeAll()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
