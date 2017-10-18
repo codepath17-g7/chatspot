@@ -53,7 +53,7 @@ class ChatSpotClient {
             failure(error)
         }
        
-        return refHandle
+return refHandle
     }
     
     static func observeMyChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
@@ -112,6 +112,28 @@ class ChatSpotClient {
             failure(error)
         }
     }
+
+    
+    static func sendMessage(message: Message1, roomId: String, success: () -> (), failure: () -> ()) {
+        let ref = Database.database().reference()
+        ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
+        ref.child("chatrooms").child(roomId).child("lastMessage").setValue(message.message)
+        success()
+    }
+    
+    //MARK:- User profile
+    
+
+    static func updateUserProfile(user: User1) {
+        let userData: [String: String] = [
+            User1.KEY_DISPLAY_NAME: user.name ?? "",
+            User1.KEY_PROFILE_IMAGE: user.profileImage ?? "",
+            User1.KEY_BANNER_IMAGE: user.bannerImage ?? "",
+            User1.KEY_TAG_LINE: user.tagline ?? "",
+        ]
+        let ref = Database.database().reference()
+        ref.child("users").child(user.guid!).setValue(userData)
+    }
     
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User) {
         let value: [String: String] = [
@@ -122,19 +144,12 @@ class ChatSpotClient {
         ref.child("users").child(guid).setValue(value)
     }
     
-    static func sendMessage(message: Message1, roomId: String, success: () -> (), failure: () -> ()) {
-        let ref = Database.database().reference()
-        ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
-        ref.child("chatrooms").child(roomId).child("lastMessage").setValue(message.message)
-        success()
-    }
-    
     static func getUserProfile(userGuid: String, success: @escaping (User1) -> (), failure: @escaping () -> ()) {
         let ref = Database.database().reference()
         
         ref.child("users").child(userGuid).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             let userDict = snapshot.value as? NSDictionary ?? [:]
-            if userDict.count == 0 {
+            if userDict.count != 0 {
                 let user = User1(guid: userGuid, obj: userDict)
                 success(user)
             } else {

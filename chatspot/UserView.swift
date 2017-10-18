@@ -32,7 +32,7 @@ class UserView: UIView {
     @IBOutlet fileprivate weak var editUserTaglineButton: UIButton!
     
     private var isSelf: Bool!
-    private var user: User!
+    private var user: User1!
     private var editMode: Bool = false
     private var editingUserName: Bool = false
     private var editingUserTagline: Bool = false
@@ -43,7 +43,7 @@ class UserView: UIView {
         case profile, banner
     }
     
-    func prepare(user: User, isSelf: Bool) {
+    func prepare(user: User1, isSelf: Bool) {
         self.user = user
         self.isSelf = isSelf
         
@@ -153,7 +153,7 @@ class UserView: UIView {
 
     
     func persistUserEdit() {
-        // TODO !!!!
+        ChatSpotClient.updateUserProfile(user: user)
     }
     
     //MARK:- Edit
@@ -164,6 +164,7 @@ class UserView: UIView {
         } else {
             userName.text = userNameField.text
             contentView.bringSubview(toFront: userName)
+            user.name = userNameField.text
             persistUserEdit()
         }
         editingUserName = !editingUserName
@@ -176,6 +177,7 @@ class UserView: UIView {
         } else {
             userTagline.text = userTaglineField.text
             contentView.bringSubview(toFront: userTagline)
+            user.tagline = userTaglineField.text
             persistUserEdit()
         }
         editingUserTagline = !editingUserTagline
@@ -243,6 +245,6 @@ extension UserView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
+        picker.dismiss(animated: true, completion: nil)
     }
 }
