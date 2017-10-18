@@ -74,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         print("applicationDidEnterBackground")
-        LocationManager.instance.stopListeningRealtimeLocation()
         LocationManager.instance.listenForSignificantLocationChanges()
     }
     
