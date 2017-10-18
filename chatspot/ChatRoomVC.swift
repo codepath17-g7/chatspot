@@ -22,6 +22,14 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     @IBOutlet weak var chatRoomNameLabel: UILabel!
     @IBOutlet weak var chatRoomMemberCountLabel: UILabel!
     @IBOutlet weak var toolbarView: UIView!
+    
+    @IBOutlet weak var roomImage: UIImageView!
+    
+    @IBOutlet weak var footerView: UIView!
+    
+    @IBOutlet weak var footerViewLabel: UILabel!
+
+    
     @IBOutlet weak var containerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
 	
@@ -38,11 +46,26 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
 		tableView.separatorStyle = .none
-        tableView.tableFooterView = UIView(frame: .zero)
-
+        
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        footerView.transform = tableView.transform
+        
 		setUpKeyboardNotifications()
         
         chatRoomNameLabel.text = chatRoom.name
+        footerViewLabel.text = chatRoom.name
+        
+        if let urlString = chatRoom.baner {
+            if let url = URL(string: urlString) {
+                roomImage.setImageWith(url)
+            }
+        } else {
+            roomImage.image = UIImage(named: "people")
+        }
+        roomImage.clipsToBounds = true
+        roomImage.layer.cornerRadius = 7
+        
+        
         if let memberCount = chatRoom.users?.count {
             if memberCount == 0 {
                 chatRoomMemberCountLabel.text = "You're the first one here!"
@@ -54,19 +77,28 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		
 		setUpUI()
 //        setupAndTriggerHUD()
-        self.startObservingMessages()
+        self.loadChatRoomMessages()
+    }
+    private func loadChatRoomMessages(){
+        ChatSpotClient.getMessagesForRoom(roomId: chatRoom.guid, success: { (messages: [Message1]) in
+            self.messages = messages
+            self.tableView.reloadData()
+            self.startObservingMessages()
+        }) { (e: Error?) in
+            print("Failure to load old messages: \(e)")
+        }
     }
     
     private func startObservingMessages() {
         
         observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
             print(message)
-            
-            self.messages.append(message)
-            self.reloadTable()
-            
+            self.messages.insert(message, at: 0)
+            let indexPath = IndexPath(row: 0, section: 0)
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
         }, failure: {
-            print("Error")
+            print("Error in observeNewMessages")
         })
     }
     
@@ -134,10 +166,10 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         self.present(alertController, animated: true)
     }
     
-    func sendPrivateMessageTo(user: User){
-        
+    func sendPrivateMessageTo(userID: String){
     }
-    func viewUserProfile(user: User){
+    
+    func viewUserProfile(userID: String){
         
     }
     
@@ -164,7 +196,12 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     }
     
     func needToMoveContainerView(keyboardHeight: CGFloat) -> Bool {
-        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+        var indexPath: IndexPath
+        if self.messages.count == 0 {
+            indexPath = IndexPath(row: 0, section: 0)
+        } else {
+            indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+        }
         let frameForRow = self.tableView.rectForRow(at: indexPath)
         let rectOfRowInSuperview = self.tableView.convert(frameForRow, to: self.tableView.superview)
         if rectOfRowInSuperview.maxY > (self.view.frame.height - keyboardHeight){
@@ -181,6 +218,8 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell") as! ChatMessageCell
+        
+        cell.transform = CGAffineTransform(scaleX: 1, y: -1)
 		//set properties of cell
 		cell.message = messages[indexPath.row]
 		cell.selectionStyle = UITableViewCellSelectionStyle.none
@@ -192,13 +231,6 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return messages.count
 	}
-    
-    func reloadTable(){
-        self.tableView.reloadData()
-        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-    }
-	
 }
 
 extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {

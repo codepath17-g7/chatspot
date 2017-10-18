@@ -94,7 +94,7 @@ return refHandle
         let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
             let postDict = snapshot.value as? NSDictionary ?? [:]
             let message = Message1(guid: snapshot.key, obj: postDict)
-            success(message)
+            success(message) 
         })
         return refHandle
     }

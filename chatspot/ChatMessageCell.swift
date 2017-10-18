@@ -11,8 +11,8 @@ import NSDateMinimalTimeAgo
 
 @objc protocol ChatMessageCellDelegate {
     func presentAlertViewController(alertController: UIAlertController)
-    func sendPrivateMessageTo(user: User)
-    func viewUserProfile(user: User)
+    func sendPrivateMessageTo(userID: String)
+    func viewUserProfile(userID: String)
 }
 
 class ChatMessageCell: UITableViewCell {
@@ -20,9 +20,10 @@ class ChatMessageCell: UITableViewCell {
 	@IBOutlet weak var authorLabel: UILabel!
 	@IBOutlet weak var createdAtLabel: UILabel!
 	@IBOutlet weak var messageTextLabel: UILabel!
-	
+    @IBOutlet weak var authorProfileImage: UIImageView!
+    
+    
     weak var delegate: ChatMessageCellDelegate?
-
     
 	var message: Message1! {
 		didSet {
@@ -38,27 +39,45 @@ class ChatMessageCell: UITableViewCell {
             } else {
                 createdAtLabel.text = message.timestamp?.timeAgo()
             }
-            
+            if let guid = message.userGuid {
+                setUpUserInfo(userGuid: guid)
+
+            }
 		}
 	}
+    
+    func setUpUserInfo(userGuid: String){
+        self.authorProfileImage.clipsToBounds = true
+        self.authorProfileImage.layer.cornerRadius = 7
+        self.authorProfileImage.changeToColor(color: .darkGray)
+        ChatSpotClient.getUserProfile(userGuid: userGuid, success: { (user: User1) in
+            //self.user = user
+            if let urlString = user.profileImage {
+                self.authorProfileImage.setImageWith(URL(string: urlString)!)
+            }
+        }, failure: {
+            print("Failure to find user")
+        })
+    }
+    
 	
     func handleUsernameTap(){
         print("Username tapped!")
         
-        let alertController = UIAlertController(title: self.message.name!, message: nil, preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: self.message.name, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
         
         let sendMessage = UIAlertAction(title: "Send Message", style: .default) { action in
-            //self.delegate?.sendPrivateMessageTo(user: user)
+            self.delegate?.sendPrivateMessageTo(userID: self.message.userGuid)
             
         }
 
         let viewProfile = UIAlertAction(title: "View Profile", style: .default) { action in
-                        //self.delegate?.viewUserProfile(user: user)
+            self.delegate?.viewUserProfile(userID: self.message.userGuid)
             
-            }
+        }
         alertController.addAction(sendMessage)
         alertController.addAction(viewProfile)
         self.delegate?.presentAlertViewController(alertController: alertController)
@@ -70,6 +89,7 @@ class ChatMessageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         
         // add tap gesture to authorLabel
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTap))
