@@ -155,8 +155,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATW-MG-nIq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="664"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="fEh-a4-kS5" userLabel="FooterView">
                                             <rect key="frame" x="0.0" y="88" width="375" height="104"/>
@@ -222,7 +222,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="60" y="32" width="359" height="15"/>
+                                                            <rect key="frame" x="60" y="32" width="307" height="15"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -232,7 +232,7 @@
                                                         <constraint firstItem="yME-fo-Zy6" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="top" constant="8" id="1zX-3T-xkq"/>
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="baseline" secondItem="Whv-6R-gEz" secondAttribute="baseline" id="41E-xm-GIi"/>
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
-                                                        <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" constant="52" id="Dns-u4-o4i"/>
+                                                        <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" id="Dns-u4-o4i"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="JBR-gA-eSH"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="topMargin" id="Tq6-Wa-5kh"/>
@@ -250,49 +250,55 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
-                                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
+                                        <rect key="frame" x="0.0" y="620" width="375" height="47"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaC-Rt-UDV">
-                                                <rect key="frame" x="8" y="7" width="35" height="30"/>
+                                                <rect key="frame" x="8" y="10" width="35" height="30"/>
                                                 <state key="normal" image="photo"/>
                                                 <connections>
-                                                    <action selector="didTapAddPhoto:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="c7q-lq-W0K"/>
+                                                    <action selector="addPhotoButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="9Zh-qc-Muv"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oh8-5y-94u">
-                                                <rect key="frame" x="94" y="7" width="229" height="30"/>
-                                                <nil key="textColor"/>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
+                                                <rect key="frame" x="94" y="7" width="229" height="33"/>
+                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="tlQ-pR-ueF" id="zmZ-gx-xB1"/>
+                                                </connections>
+                                            </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-Wy-oBi">
-                                                <rect key="frame" x="331" y="7" width="36" height="30"/>
+                                                <rect key="frame" x="331" y="10" width="36" height="30"/>
                                                 <state key="normal" title="Send"/>
                                                 <connections>
                                                     <action selector="onSendMessage:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="BWO-DT-MC8"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQJ-9i-BAx">
-                                                <rect key="frame" x="51" y="7" width="35" height="30"/>
+                                                <rect key="frame" x="51" y="10" width="35" height="30"/>
                                                 <state key="normal" image="smiley"/>
+                                                <connections>
+                                                    <action selector="addEmojiButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="bNa-0O-bWa"/>
+                                                </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="vaC-Rt-UDV" firstAttribute="top" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="3St-gV-ZHC"/>
+                                            <constraint firstItem="OGB-g9-AKX" firstAttribute="top" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="1UR-qa-aET"/>
+                                            <constraint firstItem="vaC-Rt-UDV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="3St-gV-ZHC"/>
                                             <constraint firstItem="nQJ-9i-BAx" firstAttribute="top" secondItem="vaC-Rt-UDV" secondAttribute="top" id="63K-kK-fGv"/>
+                                            <constraint firstItem="OGB-g9-AKX" firstAttribute="leading" secondItem="nQJ-9i-BAx" secondAttribute="trailing" constant="8" id="64c-F8-gpZ"/>
                                             <constraint firstAttribute="bottom" secondItem="AWo-Wy-oBi" secondAttribute="bottom" constant="7" id="Bq9-5T-hkB"/>
                                             <constraint firstAttribute="trailing" secondItem="AWo-Wy-oBi" secondAttribute="trailing" constant="8" id="FaZ-Ad-rSB"/>
-                                            <constraint firstItem="Oh8-5y-94u" firstAttribute="top" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="Iik-c1-Qb7"/>
-                                            <constraint firstAttribute="height" constant="44" id="Nsa-Ww-Rck"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Nsa-Ww-Rck"/>
                                             <constraint firstItem="vaC-Rt-UDV" firstAttribute="leading" secondItem="M6h-xv-TnC" secondAttribute="leading" constant="8" id="XJI-15-Ozl"/>
                                             <constraint firstAttribute="bottom" secondItem="vaC-Rt-UDV" secondAttribute="bottom" constant="7" id="bqf-9K-Vsn"/>
                                             <constraint firstItem="nQJ-9i-BAx" firstAttribute="leading" secondItem="vaC-Rt-UDV" secondAttribute="trailing" constant="8" id="gl6-I7-m41"/>
-                                            <constraint firstItem="AWo-Wy-oBi" firstAttribute="leading" secondItem="Oh8-5y-94u" secondAttribute="trailing" constant="8" id="hqI-H8-ZPa"/>
-                                            <constraint firstItem="AWo-Wy-oBi" firstAttribute="top" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="mgh-eL-lJH"/>
-                                            <constraint firstAttribute="bottom" secondItem="Oh8-5y-94u" secondAttribute="bottom" constant="7" id="v1N-VS-A6e"/>
-                                            <constraint firstItem="Oh8-5y-94u" firstAttribute="leading" secondItem="nQJ-9i-BAx" secondAttribute="trailing" constant="8" id="xjF-gb-GSR"/>
+                                            <constraint firstAttribute="bottom" secondItem="OGB-g9-AKX" secondAttribute="bottom" constant="7" id="jM6-EB-cw3"/>
+                                            <constraint firstItem="AWo-Wy-oBi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="mgh-eL-lJH"/>
+                                            <constraint firstItem="AWo-Wy-oBi" firstAttribute="leading" secondItem="OGB-g9-AKX" secondAttribute="trailing" constant="8" id="rM8-PZ-NFF"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -360,7 +366,7 @@
                         <outlet property="containerView" destination="ATW-MG-nIq" id="NKv-SE-GWe"/>
                         <outlet property="footerView" destination="fEh-a4-kS5" id="AQC-Ce-VG0"/>
                         <outlet property="footerViewLabel" destination="3ZD-sP-42s" id="Yim-wf-kmE"/>
-                        <outlet property="messageTextField" destination="Oh8-5y-94u" id="hcQ-Is-3Et"/>
+                        <outlet property="messageTextView" destination="OGB-g9-AKX" id="W8i-88-GrS"/>
                         <outlet property="roomImage" destination="wCp-j5-Aia" id="K4u-m7-FJ6"/>
                         <outlet property="sendMessageButton" destination="AWo-Wy-oBi" id="KtR-2k-HZG"/>
                         <outlet property="tableView" destination="Tbb-1z-WBL" id="94i-xs-V4o"/>

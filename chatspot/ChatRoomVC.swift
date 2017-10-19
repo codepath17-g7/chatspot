@@ -11,13 +11,15 @@ import FirebaseAuth
 import FirebaseDatabase
 import Firebase
 import KRProgressHUD
+import ISEmojiView
+import GrowingTextView
 
 class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	@IBOutlet weak var containerView: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var addPhotoButton: UIButton!
 	@IBOutlet weak var addEmojiButton: UIButton!
-	@IBOutlet weak var messageTextField: UITextField!
+	@IBOutlet weak var messageTextView: GrowingTextView!
 	@IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var chatRoomNameLabel: UILabel!
     @IBOutlet weak var chatRoomMemberCountLabel: UILabel!
@@ -141,10 +143,25 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             }
         }
         
+        addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .selected)
+        addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
+        
+//        addPhotoButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+        
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
-		messageTextField.autoresizingMask = .flexibleWidth
-	}
+		messageTextView.autoresizingMask = .flexibleWidth
+        
+        messageTextView.maxLength = 300
+        messageTextView.trimWhiteSpaceWhenEndEditing = false
+        messageTextView.placeHolder = "Message \(chatRoom.name!)"
+        messageTextView.layer.cornerRadius = 7.0
+        messageTextView.clipsToBounds = true
+        messageTextView.layer.borderWidth = 1
+        messageTextView.layer.borderColor = UIColor(netHex: 0xF1F1F1).cgColor
+        toolbarView.layer.borderWidth = 0.3
+        toolbarView.layer.borderColor = UIColor.lightGray.cgColor
+    }
 	
 	func setUpKeyboardNotifications(){
         
@@ -206,15 +223,52 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		view.endEditing(true)
 	}
     
+    
+    @IBAction func addEmojiButtonClicked(_ sender: Any) {
+        if addEmojiButton.isSelected {
+            addEmojiButton.isSelected = false
+            messageTextView.inputView = nil
+        } else {
+            addEmojiButton.isSelected = true
+            let emojiView = ISEmojiView()
+            emojiView.delegate = self
+            messageTextView.inputView = emojiView
+        }
+        messageTextView.reloadInputViews()
+    }
+    
+    
+    @IBAction func addPhotoButtonClicked(_ sender: AnyObject) {
+        addPhotoButton.isSelected = true
+        
+        let alert = UIAlertController(title: "Photos", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Photos", style: .default, handler: { _ in
+            self.openPhotos()
+        }))
+        
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+        
+    }
+    
+    
     @IBAction func onSendMessage(_ sender: UIButton) {
-        if !(messageTextField.text?.isEmpty)! {
+        if !(messageTextView.text?.isEmpty)! {
             
             let user = Auth.auth().currentUser!
             
-            let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!, name: user.displayName!, userGuid: user.uid)
+            let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: user.displayName!, userGuid: user.uid)
             
             ChatSpotClient.sendMessage(message: tm, roomId: chatRoom.guid, success: {
-                messageTextField.text = ""
+                messageTextView.text = ""
                 print("message sent!")
                 
             }, failure: {
@@ -260,44 +314,71 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 	}
 }
 
-//MARK: ============ Textfield and ImagePicker Methods ============
+//MARK: ============ TextView and ImagePicker Methods ============
 
-extension ChatRoomVC: UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ChatRoomVC: GrowingTextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBAction func didTapAddPhoto(_ sender: AnyObject) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-            picker.sourceType = .camera
-        } else {
-            picker.sourceType = .photoLibrary
+    
+    func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
         }
-        
-        present(picker, animated: true, completion:nil)
     }
-    
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
-        picker.dismiss(animated: true, completion:nil)
-        // TODO:
-        // if it's a photo from the library, not an image from the camera
-        //        if let referenceURL = info[UIImagePickerControllerReferenceURL] as? URL {
-        
-        //        } else {
-        //let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        //        }
-        
-        
+        var image: UIImage
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            image = editedImage
+        } else {
+            let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+            image = originalImage
+        }
+
+        picker.dismiss(animated: true, completion: { () in
+            self.addImageToTextView(image)
+            self.addPhotoButton.isSelected = false
+        })
+    }
+    
+    func addImageToTextView(_ image: UIImage){
+        let textAttachment = NSTextAttachment()
+        let oldWidth = image.size.width
+        let scaleFactor = oldWidth / (self.messageTextView.frame.size.width - 10)
+        textAttachment.image = UIImage(cgImage: image.cgImage!, scale: scaleFactor, orientation: .up).roundedCorners
+        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+        self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion:nil)
+        picker.dismiss(animated: true, completion: {() in self.addPhotoButton.isSelected = false })
+    }
+    
+    func openCamera(){
+        let picker = UIImagePickerController()
+        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.delegate = self
+            picker.allowsEditing = true
+            present(picker, animated: true, completion: nil)
+        } else {
+            let alert  = UIAlertController(title: "Warning", message: "No camera found.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func openPhotos() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        present(picker, animated: true, completion:nil)
     }
     
 }
 
-//MARK: ============ ScrollView Methods ============
+//MARK: ============ ScrollView Delegate Methods ============
 
 extension ChatRoomVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -335,6 +416,23 @@ extension ChatRoomVC: UIScrollViewDelegate {
     
 }
 
+//MARK: ============ Emoji Delegate Methods ============
+
+extension ChatRoomVC: ISEmojiViewDelegate {
+    
+    // callback when tap a emoji on keyboard
+    func emojiViewDidSelectEmoji(emojiView: ISEmojiView, emoji: String) {
+        messageTextView.insertText(emoji)
+    }
+    
+    // callback when tap delete button on keyboard
+    func emojiViewDidPressDeleteButton(emojiView: ISEmojiView) {
+        messageTextView.deleteBackward()
+    }
+    
+}
+
+
 //MARK: ============ Object Extensions ============
 
 extension UIImageView {
@@ -351,4 +449,17 @@ extension UIButton {
 		self.setImage(newColorImage, for: .normal)
 		self.tintColor = color
 	}
+}
+
+extension UIImage {
+    var roundedCorners: UIImage {
+        let rect = CGRect(origin:CGPoint(x: 0, y: 0), size: self.size)
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 1)
+        UIBezierPath(
+            roundedRect: rect,
+            cornerRadius: 7.0
+            ).addClip()
+        self.draw(in: rect)
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    }
 }

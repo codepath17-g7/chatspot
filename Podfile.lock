@@ -63,6 +63,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GrowingTextView (0.4.0)
   - GTMOAuth2 (1.1.5):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.12):
@@ -70,6 +71,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.12)
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
+  - ISEmojiView (0.0.5)
   - KRActivityIndicatorView (2.1.1)
   - KRProgressHUD (3.1.1):
     - KRActivityIndicatorView (= 2.1.1)
@@ -96,6 +98,8 @@ DEPENDENCIES:
   - FirebaseUI/Google
   - FirebaseUI/Phone
   - FLEX
+  - GrowingTextView (~> 0.4.0)
+  - ISEmojiView
   - KRProgressHUD
   - MBProgressHUD
   - NSDateMinimalTimeAgo
@@ -113,8 +117,10 @@ SPEC CHECKSUMS:
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GrowingTextView: b84085f4527a29d077364329d43e612ce7f26f43
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  ISEmojiView: 792c0ce32a1a4f375ea09b6c3f2e86a488ee2d8f
   KRActivityIndicatorView: fa5df9f4cf039651ad8b0f9c11c3159d1e19299f
   KRProgressHUD: 0e380cf5386365e6821c43ef51388d3a680a1cc6
   leveldb-library: 10fb39c39e243db4af1828441162405bbcec1404
@@ -124,6 +130,6 @@ SPEC CHECKSUMS:
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
   RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
 
-PODFILE CHECKSUM: cbe4c59735f3da4f785cb227c96e7c2a7aa5a305
+PODFILE CHECKSUM: 339ce41e0728f2de760ba20ce721cfa0554f2ecf
 
 COCOAPODS: 1.3.1

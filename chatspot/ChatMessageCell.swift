@@ -62,21 +62,24 @@ class ChatMessageCell: UITableViewCell {
     
 	
     func handleUsernameTap(){
-        print("Username tapped!")
+        self.delegate?.viewUserProfile(userID: self.message.userGuid)
         
+    }
+    
+    func handleCellLongPress(){
         let alertController = UIAlertController(title: self.message.name, message: nil, preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
-        
-        
+
+
         let sendMessage = UIAlertAction(title: "Send Message", style: .default) { action in
             self.delegate?.sendPrivateMessageTo(userID: self.message.userGuid)
-            
+
         }
 
         let viewProfile = UIAlertAction(title: "View Profile", style: .default) { action in
             self.delegate?.viewUserProfile(userID: self.message.userGuid)
-            
+
         }
         alertController.addAction(sendMessage)
         alertController.addAction(viewProfile)
@@ -86,16 +89,21 @@ class ChatMessageCell: UITableViewCell {
     
     
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
-        // add tap gesture to authorLabel
+        // add tap gesture to authorLabel and authorProfileImage
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTap))
         authorLabel.addGestureRecognizer(tapGesture)
+        authorProfileImage.addGestureRecognizer(tapGesture)
         authorLabel.isUserInteractionEnabled = true
+        authorProfileImage.isUserInteractionEnabled = true
         tapGesture.delegate = self
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleCellLongPress))
+        self.addGestureRecognizer(longPressGesture)
+        self.isUserInteractionEnabled = true
+        longPressGesture.delegate = self
         
     }
 

@@ -16,7 +16,8 @@ target 'chatspot' do
   pod 'NSDateMinimalTimeAgo'
   pod 'KRProgressHUD'
   pod 'FLEX'
-
+  pod 'ISEmojiView'
+  pod 'GrowingTextView', '~> 0.4.0'
   # Pods for chatspot
 
 end
