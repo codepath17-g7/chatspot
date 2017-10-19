@@ -12,6 +12,8 @@ import FirebaseAuth
 
 class ChatSpotClient {
 
+    static var userGuid: String!
+    
     static func createChatRoom(name: String, description: String, banner: String?, longitude: Double, latitude: Double) {
         let room: [String: String] = [
             ChatRoom1.KEY_NAME: name,
@@ -102,7 +104,6 @@ return refHandle
     static func getMessagesForRoom(roomId: String, success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
         let ref = Database.database().reference()
         let chatRef = ref.child("messages").child(roomId)
-        
         chatRef.queryOrderedByKey().observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             print(postDict)
@@ -136,6 +137,8 @@ return refHandle
     }
     
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User) {
+        userGuid = guid
+        
         let value: [String: String] = [
             User1.KEY_DISPLAY_NAME: user.displayName!,
             User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!

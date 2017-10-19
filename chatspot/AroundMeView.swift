@@ -58,6 +58,7 @@ extension AroundMeView: MKMapViewDelegate {
         for room in rooms {
             let annotation = ChatRoomAnnotation(room: room, coordinate:
                 CLLocationCoordinate2D(latitude: room.latitude!, longitude: room.longitude!))
+            
             mapView.addAnnotation(annotation)
         }
         
@@ -74,12 +75,12 @@ extension AroundMeView: MKMapViewDelegate {
 
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let reuseIdentifier = "chatroom"
+
         let chatRoomAnnotation = annotation as! ChatRoomAnnotation
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: chatRoomAnnotation.room.guid) as? ChatRoomAnnotationView
         
         if annotationView == nil {
-            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: reuseIdentifier)
+            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
         } else {
             annotationView?.annotation = chatRoomAnnotation
         }

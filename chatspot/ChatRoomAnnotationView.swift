@@ -25,8 +25,8 @@ class ChatRoomAnnotationView: MKAnnotationView {
         
         detailView = ChatRoomAnnotationDetailView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
         detailView.translatesAutoresizingMaskIntoConstraints = false
-        detailView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        detailView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        detailView.widthAnchor.constraint(equalToConstant: 170).isActive = true
+        detailView.heightAnchor.constraint(equalToConstant: 130).isActive = true
         detailView.joinButton.addTarget(self, action: #selector(joinRoom(_:)), for: .touchUpInside)
         detailCalloutAccessoryView = detailView
         
@@ -36,8 +36,8 @@ class ChatRoomAnnotationView: MKAnnotationView {
     
 
     func configureDetailView() {
-        let width = 200
-        let height = 150
+        let width = 150
+        let height = 100
        
         let options = MKMapSnapshotOptions()
         options.size = CGSize(width: width, height: height)
@@ -49,6 +49,15 @@ class ChatRoomAnnotationView: MKAnnotationView {
             if snapshot != nil {
                 self.detailView.roomImage.image = snapshot!.image
             }
+        }
+
+        let chatRoomAnnotation = annotation as! ChatRoomAnnotation
+        detailView.userCountLabel.text = chatRoomAnnotation.room.users?.count.description
+        
+        if chatRoomAnnotation.room.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+            detailView.joinButton.isHidden = true
+        } else {
+            detailView.joinButton.isHidden = false
         }
     }
 
