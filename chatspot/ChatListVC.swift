@@ -29,6 +29,15 @@ class ChatListVC: UIViewController {
         // ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: -122.203056, latitude: 37.750278)
         // ChatSpotClient.createChatRoom(name: "Golden Gate Bridge", description: "San Francisco, California", banner: nil, longitude: -122.478611, latitude: 37.819722)
         // ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: -121.901111, latitude: 37.332778)
+        
+        // add in our static room
+        let aroundMeRoom = ChatRoom1()
+        aroundMeRoom.name = "Around Me"
+        aroundMeRoom.guid = ChatSpotClient.currentUser.aroundMe
+        aroundMeRoom.isAroundMe = true
+        
+        chats.append(aroundMeRoom)
+        
         self.tableView.reloadData()
         KRProgressHUD.showSuccess()
         

@@ -97,9 +97,12 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
     func updateUI(auth: Auth, user: FirebaseAuth.User?) {
         if let user = self.auth?.currentUser {
             print("Signed In")
-            self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
-            ChatSpotClient.registerIfNeeded(guid: user.uid, user: user)
-            
+            ChatSpotClient.registerIfNeeded(guid: user.uid, user: user, success: {
+                // don't segue till we have user object
+                self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
+            }, failure: {
+                
+            })
             // We have a logged in user, listen for location changes.
             LocationManager.instance.listenForRealtimeLocationChanges()
         } else {

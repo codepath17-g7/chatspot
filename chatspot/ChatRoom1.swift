@@ -29,6 +29,9 @@ class ChatRoom1 {
     var lastMessage: String?
     var lastMessageTimestamp: Double?
     
+    // for use on client side only, don't send to server
+    var isAroundMe: Bool = false
+    
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
         self.guid = guid

@@ -74,12 +74,21 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        if chatRoom.guid == nil {
+            print("Not attached to a room")
+            return
+        }
+
         ChatSpotClient.removeObserver(handle: observer)
     }
     
 //MARK: ============ Initial Setup Methods ============
 
     private func loadChatRoomMessages(){
+        if chatRoom.guid == nil {
+            print("Not attached to a room")
+            return
+        }
         ChatSpotClient.getMessagesForRoom(roomId: chatRoom.guid, success: { (messages: [Message1]) in
             self.messages = messages
             self.tableView.reloadData()
@@ -90,7 +99,11 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     }
     
     private func startObservingMessages() {
-        
+        if chatRoom.guid == nil {
+            print("Not attached to a room")
+            return
+        }
+
         observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
             print(message)
             self.messages.insert(message, at: 0)
@@ -213,8 +226,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             
             let tm = Message1(roomId: chatRoom.guid, message: messageTextField.text!, name: user.displayName!, userGuid: user.uid)
             
-            ChatSpotClient.sendMessage(message: tm, roomId: chatRoom.guid, success: {
-                messageTextField.text = ""
+            ChatSpotClient.sendMessage(message: tm, room: chatRoom, success: {
+                self.messageTextField.text = ""
                 print("message sent!")
                 
             }, failure: {

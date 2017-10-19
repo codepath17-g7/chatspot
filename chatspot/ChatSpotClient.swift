@@ -13,6 +13,7 @@ import FirebaseAuth
 class ChatSpotClient {
 
     static var userGuid: String!
+    static var currentUser: User1!
     
     static func createChatRoom(name: String, description: String, banner: String?, longitude: Double, latitude: Double) {
         let room: [String: String] = [
@@ -116,11 +117,31 @@ class ChatSpotClient {
         }
     }
     
-    static func sendMessage(message: Message1, roomId: String, success: () -> (), failure: () -> ()) {
+    static func sendMessage(message: Message1, room: ChatRoom1, success: @escaping () -> (), failure: @escaping () -> ()) {
         let ref = Database.database().reference()
-        ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
-        ref.child("chatrooms").child(roomId).child("lastMessage").setValue(message.message)
-        ref.child("chatrooms").child(roomId).child("lastMessageTimestamp").setValue(ServerValue.timestamp())
+
+        let newMsgKey = ref.child("messages").child(room.guid).childByAutoId().key
+        
+        var updateData = ["messages/\(room.guid!)/\(newMsgKey)" : message.toValue(),
+            "chatrooms/\(room.guid!)/lastMessage": message.message!,
+            "chatrooms/\(room.guid!)/lastMessageTimestamp": ServerValue.timestamp()
+
+        ] as [String : Any]
+        
+        if let users = room.users {
+            for user in Array(users.keys) {
+                updateData["aroundme/\(user)/\(newMsgKey)"] = message.toValue()
+            }
+            
+        }
+        
+        ref.updateChildValues(updateData) { (error: Error?, DatabaseReference) in
+            if (error != nil) {
+                failure()
+            } else {
+                success()
+            }
+        }
         success()
     }
     
@@ -135,10 +156,10 @@ class ChatSpotClient {
             User1.KEY_TAG_LINE: user.tagline ?? "",
         ]
         let ref = Database.database().reference()
-        ref.child("users").child(user.guid!).setValue(userData)
+        ref.child("users").child(user.guid!).updateChildValues(userData)
     }
     
-    static func registerIfNeeded(guid: String, user: FirebaseAuth.User) {
+    static func registerIfNeeded(guid: String, user: FirebaseAuth.User, success: @escaping () -> (), failure: @escaping () -> ()) {
         userGuid = guid
         
         let value: [String: String] = [
@@ -146,7 +167,13 @@ class ChatSpotClient {
             User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
         ]
         let ref = Database.database().reference()
-        ref.child("users").child(guid).setValue(value)
+        ref.child("users").child(guid).updateChildValues(value)
+        
+        getUserProfile(userGuid: guid, success: { (user: User1) in
+            currentUser = user
+            success()
+        }) {
+        }
     }
     
     static func getUserProfile(userGuid: String, success: @escaping (User1) -> (), failure: @escaping () -> ()) {
