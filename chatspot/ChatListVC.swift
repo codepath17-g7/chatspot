@@ -51,10 +51,14 @@ class ChatListVC: UIViewController {
     }
     
     func startObservingLastMessage() {
-        let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage) in
+        let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage, lastMessageTimestamp) in
             let chatRoomWithLastMessageChange = self.chats.filter { $0.guid == roomGuid }
             if let room = chatRoomWithLastMessageChange.first {
                 room.lastMessage = lastMessage
+                room.lastMessageTimestamp = lastMessageTimestamp
+                self.chats.sort(by: { (first, second) -> Bool in
+                    first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
+                })
                 self.tableView.reloadData()
             }
         }) { (error) in

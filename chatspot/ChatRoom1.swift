@@ -16,6 +16,7 @@ class ChatRoom1 {
     static let KEY_LONGITUDE = "longitude"
     static let KEY_USERS = "users"
     static let KEY_LAST_MESSAGE = "lastMessage"
+    static let KEY_LAST_MESSAGE_TIMESTAMP = "lastMessageTimestamp"
     
     var guid: String!
     var name: String!
@@ -26,6 +27,7 @@ class ChatRoom1 {
     var latitude: Double!
     var users: [String:Bool]?
     var lastMessage: String?
+    var lastMessageTimestamp: Double?
     
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
@@ -58,6 +60,9 @@ class ChatRoom1 {
             self.lastMessage = lastMessage
         }
         
+        if let lastMessageTimestamp = obj[ChatRoom1.KEY_LAST_MESSAGE_TIMESTAMP] as? Double {
+            self.lastMessageTimestamp = lastMessageTimestamp
+        }
     }
     
     class func roomsWithArray(dicts: [String: AnyObject]) -> [ChatRoom1]{

@@ -41,21 +41,23 @@ class ChatSpotClient {
         ref.removeObserver(withHandle: handle)
     }
     
-    static func observeLastMessageChange(success: @escaping (String, String) -> (), failure: @escaping (Error?) -> ()) -> UInt{
-        let ref = Database.database().reference()
-        let chatroomsRef = ref.child("chatrooms")
+    static func observeLastMessageChange(success: @escaping (String, String, Double?) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+        let chatroomsRef =  Database.database().reference().child("chatrooms")
         
         let userGuid = Auth.auth().currentUser!.uid
         
-        let refHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(.childChanged, with: { (snapshot) in
-            let dict = snapshot.value as? NSDictionary ?? [:]
-            let room = ChatRoom1(guid: snapshot.key, obj: dict)
-            success(room.guid!, room.lastMessage!)
-        }) { (error: Error?) in
-            failure(error)
-        }
+        let refHandle = chatroomsRef
+            .queryOrdered(byChild: "/users/\(userGuid)")
+            .queryEqual(toValue: true)
+            .observe(.childChanged, with: { (snapshot) in
+                let dict = snapshot.value as? NSDictionary ?? [:]
+                let room = ChatRoom1(guid: snapshot.key, obj: dict)
+                success(room.guid!, room.lastMessage!, room.lastMessageTimestamp)
+            }) { (error: Error?) in
+                failure(error)
+            }
        
-return refHandle
+        return refHandle
     }
     
     static func observeMyChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
@@ -113,12 +115,12 @@ return refHandle
             failure(error)
         }
     }
-
     
     static func sendMessage(message: Message1, roomId: String, success: () -> (), failure: () -> ()) {
         let ref = Database.database().reference()
         ref.child("messages").child(roomId).childByAutoId().setValue(message.toValue())
         ref.child("chatrooms").child(roomId).child("lastMessage").setValue(message.message)
+        ref.child("chatrooms").child(roomId).child("lastMessageTimestamp").setValue(ServerValue.timestamp())
         success()
     }
     
