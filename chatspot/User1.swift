@@ -13,7 +13,8 @@ class User1 {
     static let KEY_PROFILE_IMAGE = "profileImageUrl"
     static let KEY_TAG_LINE = "tagline"
     static let KEY_BANNER_IMAGE = "bannerImageUrl"
-    
+    static let KEY_AROUND_ME = "aroundMe"
+
     let createdAt: String? = ""
     
     var guid: String?
@@ -21,6 +22,7 @@ class User1 {
     var tagline: String?
     var profileImage: String?
     var bannerImage: String?
+    var aroundMe: String?
 
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
@@ -28,8 +30,21 @@ class User1 {
         if let name = obj[User1.KEY_DISPLAY_NAME] as? String {
             self.name = name
         }
+        
         if let profileImage = obj[User1.KEY_PROFILE_IMAGE] as? String {
             self.profileImage = profileImage
+        }
+        
+        if let bannerImage = obj[User1.KEY_BANNER_IMAGE] as? String {
+            self.bannerImage = bannerImage
+        }
+        
+        if let tagline = obj[User1.KEY_TAG_LINE] as? String {
+            self.tagline = tagline
+        }
+        
+        if let aroundMe = obj[User1.KEY_AROUND_ME] as? String {
+            self.aroundMe = aroundMe
         }
     }
     

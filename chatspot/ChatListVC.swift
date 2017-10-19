@@ -29,6 +29,15 @@ class ChatListVC: UIViewController {
         // ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: -122.203056, latitude: 37.750278)
         // ChatSpotClient.createChatRoom(name: "Golden Gate Bridge", description: "San Francisco, California", banner: nil, longitude: -122.478611, latitude: 37.819722)
         // ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: -121.901111, latitude: 37.332778)
+        
+        // add in our static room
+        let aroundMeRoom = ChatRoom1()
+        aroundMeRoom.name = "Around Me"
+        aroundMeRoom.guid = ChatSpotClient.currentUser.aroundMe
+        aroundMeRoom.isAroundMe = true
+        
+        chats.append(aroundMeRoom)
+        
         self.tableView.reloadData()
         KRProgressHUD.showSuccess()
         
@@ -51,10 +60,14 @@ class ChatListVC: UIViewController {
     }
     
     func startObservingLastMessage() {
-        let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage) in
+        let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage, lastMessageTimestamp) in
             let chatRoomWithLastMessageChange = self.chats.filter { $0.guid == roomGuid }
             if let room = chatRoomWithLastMessageChange.first {
                 room.lastMessage = lastMessage
+                room.lastMessageTimestamp = lastMessageTimestamp
+                self.chats.sort(by: { (first, second) -> Bool in
+                    first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
+                })
                 self.tableView.reloadData()
             }
         }) { (error) in

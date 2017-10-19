@@ -48,13 +48,14 @@ class UserView: UIView {
         self.isSelf = isSelf
         
         if let imgUrlStr = user.profileImage {
-            profileImage.imageView.setImageWith(URL(string: imgUrlStr)!)
+            profileImage.imageView.safeSetImageWith(urlStr: imgUrlStr)
         } else {
             profileImage.imageView.image = #imageLiteral(resourceName: "ic_person")
         }
         
+        
         if let bannerUrlStr = user.bannerImage {
-            bannerImage.imageView.setImageWith(URL(string: bannerUrlStr)!)
+            bannerImage.imageView.safeSetImageWith(urlStr: bannerUrlStr)
         } else {
             bannerImage.imageView.image = #imageLiteral(resourceName: "ic_image")
         }
@@ -247,4 +248,19 @@ extension UserView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+}
+
+extension UIImageView {
+    open func safeSetImageWith(urlStr: String?) {
+        guard let urlStr = urlStr else {
+            return
+        }
+        
+        guard let url = URL(string: urlStr) else {
+            return
+        }
+        
+        setImageWith(url)
+    }
+
 }
