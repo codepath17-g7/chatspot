@@ -158,22 +158,20 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .selected)
         addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
-        
-//        addPhotoButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
-        
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
-		messageTextView.autoresizingMask = .flexibleWidth
         
+		messageTextView.autoresizingMask = .flexibleWidth
         messageTextView.maxLength = 300
         messageTextView.trimWhiteSpaceWhenEndEditing = false
         messageTextView.placeHolder = "Message \(chatRoom.name!)"
         messageTextView.layer.cornerRadius = 7.0
         messageTextView.clipsToBounds = true
         messageTextView.layer.borderWidth = 1
-        messageTextView.layer.borderColor = UIColor(netHex: 0xF1F1F1).cgColor
+        messageTextView.layer.borderColor = UIColor.ChatSpotColors.LighterGray.cgColor
+        
         toolbarView.layer.borderWidth = 0.3
-        toolbarView.layer.borderColor = UIColor.lightGray.cgColor
+        toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
     }
 	
 	func setUpKeyboardNotifications(){
@@ -277,7 +275,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         if !(messageTextView.text?.isEmpty)! {
             
             let user = Auth.auth().currentUser!
-            
             let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: user.displayName!, userGuid: user.uid)
             
 

@@ -22,13 +22,16 @@ class ChatListCell: UITableViewCell {
 	var chatRoom: ChatRoom1! {
 		didSet {
             
-            chatRoomNameLabel.text = chatRoom.name // do special things if "around me" chat
+            chatRoomNameLabel.text = chatRoom.name
+            if chatRoom.name == "Around Me" { //need better way to check if aroundme room
+                self.locationLabel.isHidden = false
+            }
             
             locationLabel.text = ""// set to location if Around Me
             memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
 			
-            lastMessageLabel.text = chatRoom.lastMessage ?? chatRoom.title
-			
+            lastMessageLabel.text = chatRoom.lastMessage ?? "Say hi the the folks around you!"
+            
 		}
 	}
 

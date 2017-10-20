@@ -13,7 +13,7 @@ class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
     var observers = [UInt]()
-	var chats: [ChatRoom1] = [ChatRoom1]()
+	var chatrooms: [ChatRoom1] = [ChatRoom1]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +34,10 @@ class ChatListVC: UIViewController {
         let aroundMeRoom = ChatRoom1()
         aroundMeRoom.name = "Around Me"
         aroundMeRoom.guid = ChatSpotClient.currentUser.aroundMe
+//        aroundMeRoom.latitude = ChatSpotClient.currentUser.
         aroundMeRoom.isAroundMe = true
         
-        chats.append(aroundMeRoom)
+        chatrooms.append(aroundMeRoom)
         
         self.tableView.reloadData()
         KRProgressHUD.showSuccess()
@@ -48,12 +49,12 @@ class ChatListVC: UIViewController {
     
     func startObservingChatRoomList() {
         let observer = ChatSpotClient.observeMyChatRooms(success: { (room: ChatRoom1) in
-            self.chats.append(room)
+            self.chatrooms.append(room)
             self.tableView.reloadData()
             KRProgressHUD.showSuccess()
         }, failure: { (error: Error?) in
             print("Error in startObservingChatRoomList: \(error)")
-            KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
+//            KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
         })
         
         observers.append(observer)
@@ -61,11 +62,11 @@ class ChatListVC: UIViewController {
     
     func startObservingLastMessage() {
         let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage, lastMessageTimestamp) in
-            let chatRoomWithLastMessageChange = self.chats.filter { $0.guid == roomGuid }
+            let chatRoomWithLastMessageChange = self.chatrooms.filter { $0.guid == roomGuid }
             if let room = chatRoomWithLastMessageChange.first {
                 room.lastMessage = lastMessage
                 room.lastMessageTimestamp = lastMessageTimestamp
-                self.chats.sort(by: { (first, second) -> Bool in
+                self.chatrooms.sort(by: { (first, second) -> Bool in
                     first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
                 })
                 self.tableView.reloadData()
@@ -88,7 +89,7 @@ class ChatListVC: UIViewController {
             let chatRoomVC = segue.destination as! ChatRoomVC
 //            chatRoomVC.delegate = self
             if let cell = sender as? ChatListCell, let indexPath = tableView.indexPath(for: cell) {
-                chatRoomVC.chatRoom = chats[indexPath.row]
+                chatRoomVC.chatRoom = chatrooms[indexPath.row]
             }
         }
     }
@@ -110,13 +111,13 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as! ChatListCell
 		//set properties of cell
-		cell.chatRoom = chats[indexPath.row]
+		cell.chatRoom = chatrooms[indexPath.row]
         
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return chats.count
+		return chatrooms.count
 	}
 	
 	
@@ -146,6 +147,10 @@ extension UIColor {
         static let Blue = UIColor(netHex: 0x0551be)
         static let Red = UIColor(netHex: 0xb61e23)
         static let Orange = UIColor(netHex: 0xff5f0d)
+        static let LightestGray = UIColor(netHex: 0xFAFAFA)
+        static let LighterGray = UIColor(netHex: 0xF1F1F1)
+        static let LightGray = UIColor.lightGray
+        
     }
 }
 
