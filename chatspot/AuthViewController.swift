@@ -98,8 +98,12 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
         if let user = self.auth?.currentUser {
             print("Signed In")
             ChatSpotClient.registerIfNeeded(guid: user.uid, user: user, success: {
-                // don't segue till we have user object
-                self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
+                // don't segue till we have user object and chat list
+                ChatSpotClient.getRooms(success: { (_: [ChatRoom1]) in
+                    self.performSegue(withIdentifier: "loggedInSegue", sender: nil)
+
+                }, failure: { (_: Error?) in
+                })
             }, failure: {
                 
             })

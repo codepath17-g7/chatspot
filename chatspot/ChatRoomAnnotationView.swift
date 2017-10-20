@@ -39,6 +39,7 @@ class ChatRoomAnnotationView: MKAnnotationView {
         let width = 150
         let height = 100
        
+        print("Generating snapshot \(String(describing: self.annotation?.coordinate)) \(self.description)")
         let options = MKMapSnapshotOptions()
         options.size = CGSize(width: width, height: height)
         options.mapType = .satelliteFlyover

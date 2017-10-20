@@ -31,14 +31,23 @@ class ChatListVC: UIViewController {
         // ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: -121.901111, latitude: 37.332778)
         
         // add in our static room
-        let aroundMeRoom = ChatRoom1()
-        aroundMeRoom.name = "Around Me"
-        aroundMeRoom.guid = ChatSpotClient.currentUser.aroundMe
-//        aroundMeRoom.latitude = ChatSpotClient.currentUser.
-        aroundMeRoom.isAroundMe = true
-        
-        chatrooms.append(aroundMeRoom)
-        
+
+        if let aroundMeRoomGuid = ChatSpotClient.currentUser.aroundMe {
+            let aroundMeRoom = ChatRoom1()
+            let userLocalRoom = ChatSpotClient.chatrooms[aroundMeRoomGuid]
+            
+            aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
+            aroundMeRoom.guid = aroundMeRoomGuid
+            aroundMeRoom.isAroundMe = true
+            aroundMeRoom.users = userLocalRoom?.users
+            aroundMeRoom.localUsers = userLocalRoom?.localUsers
+            aroundMeRoom.lastMessage = userLocalRoom?.lastMessage
+            aroundMeRoom.lastMessageTimestamp = userLocalRoom?.lastMessageTimestamp
+                
+            chatrooms.append(aroundMeRoom)
+        }
+
+
         self.tableView.reloadData()
         KRProgressHUD.showSuccess()
         
@@ -53,7 +62,7 @@ class ChatListVC: UIViewController {
             self.tableView.reloadData()
             KRProgressHUD.showSuccess()
         }, failure: { (error: Error?) in
-            print("Error in startObservingChatRoomList: \(error)")
+            print("Error in startObservingChatRoomList: \(error?.localizedDescription)")
 //            KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
         })
         
@@ -62,8 +71,9 @@ class ChatListVC: UIViewController {
     
     func startObservingLastMessage() {
         let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage, lastMessageTimestamp) in
-            let chatRoomWithLastMessageChange = self.chatrooms.filter { $0.guid == roomGuid }
-            if let room = chatRoomWithLastMessageChange.first {
+            let chatRoomsWithLastMessageChange = self.chatrooms.filter { $0.guid == roomGuid }
+            for room in chatRoomsWithLastMessageChange {
+
                 room.lastMessage = lastMessage
                 room.lastMessageTimestamp = lastMessageTimestamp
                 self.chatrooms.sort(by: { (first, second) -> Bool in

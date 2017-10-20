@@ -86,35 +86,62 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
 //MARK: ============ Initial Setup Methods ============
 
+    
+    private func loadChatMessages(_ messages: [Message1]) {
+        self.messages = messages
+        self.tableView.reloadData()
+        self.startObservingMessages()
+    }
     private func loadChatRoomMessages(){
         if chatRoom.guid == nil {
             print("Not attached to a room")
             return
         }
-        ChatSpotClient.getMessagesForRoom(roomId: chatRoom.guid, success: { (messages: [Message1]) in
-            self.messages = messages
-            self.tableView.reloadData()
-            self.startObservingMessages()
-        }) { (e: Error?) in
-            print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
+        if chatRoom.isAroundMe {
+            ChatSpotClient.getMessagesAroundMe(success: { (messages: [Message1]) in
+                self.loadChatMessages(messages)
+            }, failure: { (e: Error?) in
+                print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
+
+            })
+            return
+        } else {
+            ChatSpotClient.getMessagesForRoom(roomId: chatRoom.guid, success: { (messages: [Message1]) in
+                self.loadChatMessages(messages)
+            }) { (e: Error?) in
+                print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
+            }
         }
     }
     
+    private func onNewMessage(_ message: Message1) {
+        print(message)
+        self.messages.insert(message, at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        self.tableView.insertRows(at: [indexPath], with: .automatic)
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
     private func startObservingMessages() {
         if chatRoom.guid == nil {
             print("Not attached to a room")
             return
         }
 
-        observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
-            print(message)
-            self.messages.insert(message, at: 0)
-            let indexPath = IndexPath(row: 0, section: 0)
-            self.tableView.insertRows(at: [indexPath], with: .automatic)
-            self.tableView.reloadRows(at: [indexPath], with: .automatic)
-        }, failure: {
-            print("Error in observeNewMessages")
-        })
+        if chatRoom.isAroundMe {
+            observer = ChatSpotClient.observeNewMessagesAroundMe(success: { (message: Message1) in
+                self.onNewMessage(message)
+            }, failure: {
+                print("Error in observeNewMessages")
+            })
+            
+        } else {
+            
+            observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
+                self.onNewMessage(message)
+            }, failure: {
+                print("Error in observeNewMessages")
+            })
+        }
     }
 
 // TODO:
@@ -272,10 +299,11 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     
     @IBAction func onSendMessage(_ sender: UIButton) {
+        if chatRoom.guid == nil {
+            return
+        }
         if !(messageTextView.text?.isEmpty)! {
-            
-            let user = Auth.auth().currentUser!
-            let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: user.displayName!, userGuid: user.uid)
+            let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!)
             
 
             ChatSpotClient.sendMessage(message: tm, room: chatRoom, success: {

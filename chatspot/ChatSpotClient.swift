@@ -14,6 +14,7 @@ class ChatSpotClient {
 
     static var userGuid: String!
     static var currentUser: User1!
+    static var chatrooms: [String:ChatRoom1] = [:]
     
     static func createChatRoom(name: String, description: String, banner: String?, longitude: Double, latitude: Double) {
         let room: [String: String] = [
@@ -61,6 +62,8 @@ class ChatSpotClient {
         return refHandle
     }
     
+    //MARK:- ChatRoom
+    
     static func observeMyChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatroomsRef = ref.child("chatrooms")
@@ -85,6 +88,8 @@ class ChatSpotClient {
         let refHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot: DataSnapshot) in
             let dict = snapshot.value as? NSDictionary ?? [:]
             let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            // cache
+            chatrooms[room.guid] = room
             success(room)
         }) { (error: Error?) in
             failure(error)
@@ -93,6 +98,25 @@ class ChatSpotClient {
         return refHandle
     }
     
+    static func getRooms(success: @escaping ([ChatRoom1]) -> (), failure: @escaping (Error?) -> ()) {
+        let ref = Database.database().reference()
+        let chatRef = ref.child("chatrooms")
+        chatRef.queryOrderedByKey().observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+            let roomDicts = snapshot.value as? [String : AnyObject] ?? [:]
+            let rooms = ChatRoom1.roomsWithArray(dicts: roomDicts)
+            
+            // add to cache
+            for room in rooms {
+                chatrooms[room.guid] = room
+            }
+            // cache
+            success(rooms)
+        }) { (error: Error?) in
+            failure(error)
+        }
+    }
+    
+    //MARK:- Messages
     static func observeNewMessages(roomId: String, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatRef = ref.child("messages").child(roomId)
@@ -102,6 +126,31 @@ class ChatSpotClient {
             success(message) 
         })
         return refHandle
+    }
+    
+    static func observeNewMessagesAroundMe(success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
+        let ref = Database.database().reference()
+        let chatRef = ref.child("aroundme").child(userGuid)
+        let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
+            let postDict = snapshot.value as? NSDictionary ?? [:]
+            let message = Message1(guid: snapshot.key, obj: postDict)
+            success(message)
+        })
+        return refHandle
+    }
+    
+    
+    static func getMessagesAroundMe(success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
+        let ref = Database.database().reference()
+        let chatRef = ref.child("aroundme").child(userGuid)
+        chatRef.queryOrderedByKey().observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+            let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            print(postDict)
+            let messages = Message1.messagesWithArray(dicts: postDict)
+            success(messages)
+        }) { (error: Error) in
+            failure(error)
+        }
     }
     
     static func getMessagesForRoom(roomId: String, success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
@@ -128,12 +177,14 @@ class ChatSpotClient {
 
         ] as [String : Any]
         
-        if let users = room.users {
+        // for the user that is locally in the room, add message to their aroundme thread as well
+        if let users = room.localUsers {
             for user in Array(users.keys) {
                 updateData["aroundme/\(user)/\(newMsgKey)"] = message.toValue()
             }
-            
         }
+        
+        print(updateData)
         
         ref.updateChildValues(updateData) { (error: Error?, DatabaseReference) in
             if (error != nil) {
@@ -146,8 +197,6 @@ class ChatSpotClient {
     }
     
     //MARK:- User profile
-    
-
     static func updateUserProfile(user: User1) {
         let userData: [String: String] = [
             User1.KEY_DISPLAY_NAME: user.name ?? "",
