@@ -100,17 +100,30 @@
                                                     <rect key="frame" x="332" y="51" width="35" height="35"/>
                                                     <state key="normal" image="pin"/>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-qw-A2Y">
+                                                    <rect key="frame" x="300" y="60.5" width="24" height="24"/>
+                                                    <color key="backgroundColor" red="0.079739026602995117" green="0.80646858808290156" blue="0.05685969722709816" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="Bsg-Lw-87L"/>
+                                                        <constraint firstAttribute="width" constant="24" id="pLG-Tt-roK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="FSD-gs-QcR" firstAttribute="centerX" secondItem="NiM-bB-EmD" secondAttribute="centerX" id="2SP-Kf-iDN"/>
                                                 <constraint firstItem="FSD-gs-QcR" firstAttribute="trailing" secondItem="yvz-QH-fyY" secondAttribute="trailingMargin" id="B4F-YT-DXh"/>
-                                                <constraint firstItem="FSD-gs-QcR" firstAttribute="leading" secondItem="qw4-LH-Wbe" secondAttribute="trailing" constant="8" id="DSW-ob-PWa"/>
                                                 <constraint firstItem="Ult-E9-YBu" firstAttribute="leading" secondItem="yvz-QH-fyY" secondAttribute="leadingMargin" id="HIi-Hj-U9j"/>
+                                                <constraint firstItem="FSD-gs-QcR" firstAttribute="leading" secondItem="kNg-qw-A2Y" secondAttribute="trailing" constant="8" id="Jjg-21-Hz9"/>
                                                 <constraint firstItem="FSD-gs-QcR" firstAttribute="top" secondItem="NiM-bB-EmD" secondAttribute="bottom" constant="8" id="SxX-ua-TPI"/>
                                                 <constraint firstItem="Ult-E9-YBu" firstAttribute="top" secondItem="3hi-Xi-W1Y" secondAttribute="bottom" constant="1" id="U1z-wB-l0x"/>
+                                                <constraint firstItem="kNg-qw-A2Y" firstAttribute="leading" secondItem="qw4-LH-Wbe" secondAttribute="trailing" constant="8" id="UHe-XL-cob"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="qw4-LH-Wbe" secondAttribute="bottom" constant="16.5" id="Xvr-o7-jfh"/>
                                                 <constraint firstItem="NiM-bB-EmD" firstAttribute="trailing" secondItem="yvz-QH-fyY" secondAttribute="trailingMargin" id="Z6Y-ec-T50"/>
                                                 <constraint firstItem="3hi-Xi-W1Y" firstAttribute="leading" secondItem="yvz-QH-fyY" secondAttribute="leadingMargin" id="lpq-fQ-Kt6"/>
+                                                <constraint firstItem="kNg-qw-A2Y" firstAttribute="centerY" secondItem="qw4-LH-Wbe" secondAttribute="centerY" id="oOF-wx-3h4"/>
                                                 <constraint firstItem="qw4-LH-Wbe" firstAttribute="leading" secondItem="yvz-QH-fyY" secondAttribute="leadingMargin" id="otq-hh-7Dm"/>
                                                 <constraint firstItem="qw4-LH-Wbe" firstAttribute="top" secondItem="Ult-E9-YBu" secondAttribute="bottom" constant="12" id="qkE-bG-I5Y"/>
                                                 <constraint firstItem="3hi-Xi-W1Y" firstAttribute="top" secondItem="yvz-QH-fyY" secondAttribute="topMargin" id="scA-Zw-Ay3"/>
@@ -122,6 +135,7 @@
                                             <outlet property="lastMessageLabel" destination="qw4-LH-Wbe" id="KQs-PP-SVh"/>
                                             <outlet property="locationLabel" destination="Ult-E9-YBu" id="F30-gr-lcl"/>
                                             <outlet property="memberCountLabel" destination="e4Y-JC-7KX" id="0MD-oB-x9H"/>
+                                            <outlet property="unreadCountLabel" destination="kNg-qw-A2Y" id="n6b-Ad-0KQ"/>
                                             <outlet property="viewOnMapButton" destination="FSD-gs-QcR" id="pFu-7G-ZvC"/>
                                             <segue destination="tlQ-pR-ueF" kind="show" identifier="ChatRoomVCSegue" id="nVZ-qM-vWL"/>
                                         </connections>
