@@ -29,6 +29,7 @@
 		7679EA841F8E071A00DE16FA /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA831F8E071A00DE16FA /* UserView.swift */; };
 		76E229681F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */; };
 		76E2296A1F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */; };
+		76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2296B1F9B245B007049B0 /* StorageClient.swift */; };
 		76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */; };
 		76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */; };
 		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
@@ -83,6 +84,7 @@
 		7679EA831F8E071A00DE16FA /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationDetailView.xib; sourceTree = "<group>"; };
 		76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationDetailView.swift; sourceTree = "<group>"; };
+		76E2296B1F9B245B007049B0 /* StorageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageClient.swift; sourceTree = "<group>"; };
 		76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIImageWithEditView.xib; sourceTree = "<group>"; };
 		76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageWithEditView.swift; sourceTree = "<group>"; };
 		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				3298CF5D1F92A6DB00F9BBEE /* ChatSpotClient.swift */,
+				76E2296B1F9B245B007049B0 /* StorageClient.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */,
 				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
+				76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */,
 				8B92720C1F9082590041FC35 /* Storage.swift in Sources */,
 				3298CF5E1F92A6DB00F9BBEE /* ChatSpotClient.swift in Sources */,
 				3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */,

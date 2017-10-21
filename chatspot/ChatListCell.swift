@@ -9,15 +9,20 @@
 import UIKit
 
 class ChatListCell: UITableViewCell {
+    
     @IBOutlet weak var chatRoomNameLabel: UILabel!
-	
     @IBOutlet weak var locationLabel: UILabel!
-    
     @IBOutlet weak var memberCountLabel: UILabel!
-    
     @IBOutlet weak var lastMessageLabel: UILabel!
-    
     @IBOutlet weak var viewOnMapButton: UIButton!
+    @IBOutlet weak var unreadCountLabel: UILabel!
+    
+    var unreadCount: Int = 0 {
+        didSet {
+            unreadCountLabel.isHidden = (unreadCount == 0)
+            unreadCountLabel.text = "\(unreadCount)"
+        }
+    }
     
 	var chatRoom: ChatRoom1! {
 		didSet {
@@ -37,6 +42,8 @@ class ChatListCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        unreadCountLabel.layer.cornerRadius = 12
+        unreadCountLabel.layer.masksToBounds = true
         // Initialization code
     }
 

@@ -12,8 +12,10 @@ import KRProgressHUD
 class ChatListVC: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
+    
     var observers = [UInt]()
 	var chatrooms: [ChatRoom1] = [ChatRoom1]()
+    var unreadCount = [String: Int]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +58,16 @@ class ChatListVC: UIViewController {
         startObservingChatRoomList()
         
         startObservingLastMessage()
+        
+        ChatSpotClient.getUnreadCount { (unreadData) in
+            self.unreadCount = unreadData
+            self.sortChatRooms()
+            self.tableView.reloadData()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(appGoingToBackground(notification:)),
+                                               name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+
     }
     
     func startObservingChatRoomList() {
@@ -63,8 +75,8 @@ class ChatListVC: UIViewController {
             self.chatrooms.append(room)
             self.tableView.reloadData()
             KRProgressHUD.showSuccess()
-        }, failure: { (error: Error?) in
-            print("Error in startObservingChatRoomList: \(error?.localizedDescription)")
+        }, failure: { (error: Error!) in
+            print("Error in startObservingChatRoomList: \(error.localizedDescription)")
 //            KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
         })
         
@@ -75,12 +87,13 @@ class ChatListVC: UIViewController {
         let lastMessageObserver = ChatSpotClient.observeLastMessageChange(success: { (roomGuid, lastMessage, lastMessageTimestamp) in
             let chatRoomsWithLastMessageChange = self.chatrooms.filter { $0.guid == roomGuid }
             for room in chatRoomsWithLastMessageChange {
-
+                
+                let unreadCountForRoom = self.unreadCount[room.guid] ?? 0
+                self.unreadCount[room.guid] = unreadCountForRoom + 1
+                
                 room.lastMessage = lastMessage
                 room.lastMessageTimestamp = lastMessageTimestamp
-                self.chatrooms.sort(by: { (first, second) -> Bool in
-                    first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
-                })
+                self.sortChatRooms()
                 self.tableView.reloadData()
             }
         }) { (error) in
@@ -90,9 +103,42 @@ class ChatListVC: UIViewController {
         observers.append(lastMessageObserver)
     }
     
+    private func sortChatRooms() {
+        self.chatrooms.sort(by: { (first, second) -> Bool in
+            
+            let firstHasUnread = (self.unreadCount[first.guid] ?? 0) > 0
+            let secondHasUnread = (self.unreadCount[second.guid] ?? 0) > 0
+            
+            if firstHasUnread == secondHasUnread {
+                return first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
+            }
+            return firstHasUnread && !secondHasUnread
+        })
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
         observers.removeAll()
+    }
+    
+    @objc func appGoingToBackground(notification: NSNotification) {
+        saveAllUnreadCounts()
+    }
+    
+    func saveAllUnreadCounts() {
+        unreadCount.forEach {
+            ChatSpotClient.saveUnreadCount(forChatroom: $0, count: $1)
+        }
+    }
+    
+    func clearUnreadCount(chatroomGuid: String) {
+        let count = unreadCount[chatroomGuid]
+        if  count != nil && count! > 0 {
+            unreadCount[chatroomGuid] = 0
+            ChatSpotClient.saveUnreadCount(forChatroom: chatroomGuid, count: 0)
+            sortChatRooms()
+            tableView.reloadData()
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,6 +151,7 @@ class ChatListVC: UIViewController {
             }
         }
     }
+    
     func setupAndTriggerHUD(){
         KRProgressHUD.set(style: .white)
         KRProgressHUD.set(font: .systemFont(ofSize: 17))
@@ -112,7 +159,9 @@ class ChatListVC: UIViewController {
         KRProgressHUD.show(withMessage: "Loading ChatSpots...")
     }
 
-	
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
 }
 
@@ -123,8 +172,9 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as! ChatListCell
 		//set properties of cell
-		cell.chatRoom = chatrooms[indexPath.row]
-        
+        let chatroom = chatrooms[indexPath.row]
+		cell.chatRoom = chatroom
+        cell.unreadCount = unreadCount[chatroom.guid!] ?? 0
 		return cell
 	}
 	
@@ -134,6 +184,9 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 	
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        let selectedChatroomGuid = chatrooms[index].guid!
+        clearUnreadCount(chatroomGuid: selectedChatroomGuid)
 		tableView.deselectRow(at: indexPath, animated:true)
 	}
 	

@@ -14,6 +14,7 @@ class User1 {
     static let KEY_TAG_LINE = "tagline"
     static let KEY_BANNER_IMAGE = "bannerImageUrl"
     static let KEY_AROUND_ME = "aroundMe"
+    static let KEY_UNREAD_COUNT = "unreadMessageCount"
 
     let createdAt: String? = ""
     
@@ -23,6 +24,7 @@ class User1 {
     var profileImage: String?
     var bannerImage: String?
     var aroundMe: String?
+    var unreadMessageCount: [String: Int]?
 
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
@@ -45,6 +47,10 @@ class User1 {
         
         if let aroundMe = obj[User1.KEY_AROUND_ME] as? String {
             self.aroundMe = aroundMe
+        }
+        
+        if let unreadMessageCount = obj[User1.KEY_UNREAD_COUNT] as? [String: Int] {
+            self.unreadMessageCount = unreadMessageCount
         }
     }
     
