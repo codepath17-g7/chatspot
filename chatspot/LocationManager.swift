@@ -63,9 +63,12 @@ class LocationManager: NSObject {
 extension LocationManager: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
         if status == .authorizedAlways || status == .authorizedWhenInUse {
+            print("location update is authorized")
             manager.requestLocation()
         } else if (status == .notDetermined) {
+            print("requestion location permission")
             manager.requestAlwaysAuthorization()
         }
     }
@@ -77,7 +80,7 @@ extension LocationManager: CLLocationManagerDelegate {
             
             if let user = ChatSpotClient.currentUser {
                 ChatSpotClient.postUserLocation(userGuid: user.guid!, longitude: long, latitude: lat, success: {
-                    print("location updated")
+                    print("location updated \(long) \(lat)")
                     
                 }, failure: {
                     print("failed to update location")
