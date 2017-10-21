@@ -61,6 +61,7 @@ class ChatListVC: UIViewController {
         
         ChatSpotClient.getUnreadCount { (unreadData) in
             self.unreadCount = unreadData
+            self.sortChatRooms()
             self.tableView.reloadData()
         }
         
@@ -92,9 +93,7 @@ class ChatListVC: UIViewController {
                 
                 room.lastMessage = lastMessage
                 room.lastMessageTimestamp = lastMessageTimestamp
-                self.chatrooms.sort(by: { (first, second) -> Bool in
-                    first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
-                })
+                self.sortChatRooms()
                 self.tableView.reloadData()
             }
         }) { (error) in
@@ -102,6 +101,19 @@ class ChatListVC: UIViewController {
         }
         
         observers.append(lastMessageObserver)
+    }
+    
+    private func sortChatRooms() {
+        self.chatrooms.sort(by: { (first, second) -> Bool in
+            
+            let firstHasUnread = (self.unreadCount[first.guid] ?? 0) > 0
+            let secondHasUnread = (self.unreadCount[second.guid] ?? 0) > 0
+            
+            if firstHasUnread == secondHasUnread {
+                return first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
+            }
+            return firstHasUnread && !secondHasUnread
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,6 +136,7 @@ class ChatListVC: UIViewController {
         if  count != nil && count! > 0 {
             unreadCount[chatroomGuid] = 0
             ChatSpotClient.saveUnreadCount(forChatroom: chatroomGuid, count: 0)
+            sortChatRooms()
             tableView.reloadData()
         }
     }
