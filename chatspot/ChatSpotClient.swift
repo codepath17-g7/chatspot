@@ -51,8 +51,8 @@ class ChatSpotClient {
     static func getUnreadCount(success: @escaping ([String: Int]) -> ()) {
         let ref =  Database.database().reference()
         ref.child("users").child(currentUser.guid!).child(User1.KEY_UNREAD_COUNT).observeSingleEvent(of: .value, with: { (snapshot) in
-            print("unread count", snapshot.value!)
-            success(snapshot.value as! [String: Int])
+            let data = snapshot.value as? [String: Int] ?? [String: Int]()
+            success(data)
         })
     }
     
