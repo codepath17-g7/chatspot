@@ -28,7 +28,9 @@ class LocationManager: NSObject {
         if CLLocationManager.authorizationStatus() == .authorizedAlways ||
             CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             print("listenForRealtimeLocationChange")
-            manager.requestLocation()
+            //manager.requestLocation()
+            manager.distanceFilter = 500
+            manager.startUpdatingLocation()
         } else if (CLLocationManager.authorizationStatus() != .denied && CLLocationManager.authorizationStatus() != .restricted) {
             print("Requesting user to allow Chatspot to access their location")
             manager.requestAlwaysAuthorization()
@@ -42,7 +44,9 @@ class LocationManager: NSObject {
         if CLLocationManager.authorizationStatus() == .authorizedAlways {
             print("listenForSignificantLocationChanges")
             manager.allowsBackgroundLocationUpdates = true
+            
             manager.startMonitoringSignificantLocationChanges()
+            //manager.startUpdatingLocation()
         } else {
             print("User has not permitted chatspot to get location in background")
         }
@@ -67,8 +71,19 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.last?.coordinate ?? "No location?")
-        // TODO: send location to server
+        if let location = locations.last?.coordinate {
+            let lat = String(location.latitude)
+            let long = String(location.longitude)
+            
+            if let user = ChatSpotClient.currentUser {
+                ChatSpotClient.postUserLocation(userGuid: user.guid!, longitude: long, latitude: lat, success: {
+                    print("location updated")
+                    
+                }, failure: {
+                    print("failed to update location")
+                })
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
