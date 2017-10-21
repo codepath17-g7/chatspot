@@ -203,6 +203,10 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         toolbarView.layer.borderWidth = 0.3
         toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
+        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!]), for: .disabled)
+        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!])
+, for: .normal)
+        sendMessageButton.isEnabled = false
     }
 	
 	func setUpKeyboardNotifications(){
@@ -312,6 +316,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 
             ChatSpotClient.sendMessage(message: tm, room: chatRoom, success: {
                 self.messageTextView.text = ""
+                self.sendMessageButton.isEnabled = false
                 print("message sent!")
                 
             }, failure: {
@@ -365,6 +370,14 @@ extension ChatRoomVC: GrowingTextViewDelegate, UIImagePickerControllerDelegate, 
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
+        }
+    }
+    
+    func textViewDidChange(_ textView: GrowingTextView) {
+        if textView.text != "" {
+            self.sendMessageButton.isEnabled = true
+        } else {
+            self.sendMessageButton.isEnabled = false
         }
     }
     

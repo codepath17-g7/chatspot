@@ -128,7 +128,6 @@
 		32963D561F8B1BAD00E05CF3 = {
 			isa = PBXGroup;
 			children = (
-				F2BFE5F41F9AA81B006D9849 /* Libertad Font */,
 				32963D611F8B1BAD00E05CF3 /* chatspot */,
 				32963D601F8B1BAD00E05CF3 /* Products */,
 				48F18CA576106E6205144A7D /* Pods */,
@@ -161,6 +160,7 @@
 				32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */,
 				F2719EFD1F8D54E700417517 /* chatspot.entitlements */,
 				32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */,
+				F2BFE5F41F9AA81B006D9849 /* Libertad Font */,
 				32963D6E1F8B1BAD00E05CF3 /* Info.plist */,
 			);
 			path = chatspot;
@@ -278,6 +278,7 @@
 				F2BFE5E51F9AA806006D9849 /* Libertad.otf */,
 			);
 			name = "Libertad Font";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
