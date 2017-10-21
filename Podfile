@@ -6,6 +6,7 @@ target 'chatspot' do
   use_frameworks!
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
+  pod 'Firebase/Storage'
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Phone'
   pod 'FirebaseUI/Google'

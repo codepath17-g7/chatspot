@@ -68,14 +68,14 @@
                         <color key="titleShadowColor" red="0.93089704949999996" green="0.93089704949999996" blue="0.93089704949999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                 </button>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-Tj-jtE" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
+                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="I2a-Tj-jtE" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="I2a-Tj-jtE" secondAttribute="height" multiplier="60:49" constant="135" id="0Bq-mk-sX7"/>
                     </constraints>
                 </view>
-                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jBb-wA-n7J" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
+                <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="jBb-wA-n7J" customClass="UIImageWithEditView" customModule="chatspot" customModuleProvider="target">
                     <rect key="frame" x="100" y="116" width="175" height="175"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>

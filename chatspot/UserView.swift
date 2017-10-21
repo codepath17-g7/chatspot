@@ -32,7 +32,7 @@ class UserView: UIView {
     @IBOutlet fileprivate weak var editUserTaglineButton: UIButton!
     
     private var isSelf: Bool!
-    private var user: User1!
+    fileprivate var user: User1!
     private var editMode: Bool = false
     private var editingUserName: Bool = false
     private var editingUserTagline: Bool = false
@@ -237,10 +237,24 @@ extension UserView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         switch imageToPick! {
         case .profile:
             profileImage.imageView.image = originalImage
+            StorageClient.instance.storeProfileImage(userGuid: ChatSpotClient.userGuid, profileImage :originalImage, success: { (url :URL?) in
+                self.user.profileImage = url?.absoluteURL.absoluteString
+                self.persistUserEdit()
+            }, failure: { 
+                
+            })
 
             break
         case .banner:
             bannerImage.imageView.image = originalImage
+            
+            StorageClient.instance.storeBannerImage(userGuid: ChatSpotClient.userGuid, bannerImage :originalImage, success: { (url :URL?) in
+                self.user.bannerImage = url?.absoluteURL.absoluteString
+                self.persistUserEdit()
+            }, failure: {
+                
+            })
+
             break
         }
     }

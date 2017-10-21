@@ -225,8 +225,8 @@ class ChatSpotClient {
         userGuid = guid
         
         let value: [String: String] = [
-            User1.KEY_DISPLAY_NAME: user.displayName!,
-            User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
+            User1.KEY_DISPLAY_NAME: user.displayName!
+//            User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
         ]
         let ref = Database.database().reference()
         ref.child("users").child(guid).updateChildValues(value)
