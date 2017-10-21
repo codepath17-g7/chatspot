@@ -161,7 +161,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 //    }
 	
 	func setUpUI(){
-        chatRoomNameLabel.text = chatRoom.name
+        
+        chatRoomNameLabel.attributedText = NSAttributedString(string: chatRoom.name, attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 17)!])
         footerViewLabel.text = chatRoom.name
         
         if let urlString = chatRoom.baner {
@@ -176,11 +177,14 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         
         if let memberCount = chatRoom.users?.count {
+            let attributes = [NSForegroundColorAttributeName: UIColor.ChatSpotColors.LightestGray, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!]
+            
             if memberCount == 0 {
-                chatRoomMemberCountLabel.text = "You're the first one here!"
+                chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "You're the first one here!", attributes: attributes)
             } else {
-                chatRoomMemberCountLabel.text = "\(memberCount) members"
+                chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "\(memberCount) members", attributes: attributes)
             }
+            
         }
         
         addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .selected)
