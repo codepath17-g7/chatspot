@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,7 +83,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="oh cool, i can see you. blue shirt right?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qw4-LH-Wbe">
-                                                    <rect key="frame" x="8" y="135" width="359" height="20.5"/>
+                                                    <rect key="frame" x="8" y="135" width="272.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" name="Libertad" family="Libertad" pointSize="17"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -117,11 +117,23 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Dh-Cc-3Bl">
+                                                    <rect key="frame" x="335" y="133.5" width="24" height="24"/>
+                                                    <color key="backgroundColor" red="0.079739026599999999" green="0.80646858809999999" blue="0.056859697229999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="EOo-aK-MV1"/>
+                                                        <constraint firstAttribute="height" constant="24" id="MQQ-4B-bU3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ps2-tl-bcJ" firstAttribute="top" secondItem="yvz-QH-fyY" secondAttribute="top" id="ATH-Zu-LZz"/>
                                                 <constraint firstItem="3hi-Xi-W1Y" firstAttribute="leading" secondItem="yvz-QH-fyY" secondAttribute="leadingMargin" id="C5B-Pd-zUx"/>
                                                 <constraint firstItem="qw4-LH-Wbe" firstAttribute="top" secondItem="Ult-E9-YBu" secondAttribute="bottom" constant="4" id="EHI-s9-sWl"/>
+                                                <constraint firstAttribute="trailing" secondItem="2Dh-Cc-3Bl" secondAttribute="trailing" constant="16" id="FWd-HC-Rnv"/>
                                                 <constraint firstItem="NiM-bB-EmD" firstAttribute="leading" secondItem="3hi-Xi-W1Y" secondAttribute="trailing" constant="8" id="Gkm-jC-2cR"/>
                                                 <constraint firstItem="Ult-E9-YBu" firstAttribute="top" secondItem="3hi-Xi-W1Y" secondAttribute="bottom" constant="1" id="LUs-sZ-o25"/>
                                                 <constraint firstItem="NiM-bB-EmD" firstAttribute="centerY" secondItem="3hi-Xi-W1Y" secondAttribute="centerY" id="LmH-S8-cTr"/>
@@ -131,11 +143,11 @@
                                                 <constraint firstItem="Ult-E9-YBu" firstAttribute="leading" secondItem="3hi-Xi-W1Y" secondAttribute="leading" id="bcM-sb-k4C"/>
                                                 <constraint firstItem="qw4-LH-Wbe" firstAttribute="leading" secondItem="yvz-QH-fyY" secondAttribute="leadingMargin" id="cBG-bu-85W"/>
                                                 <constraint firstItem="ps2-tl-bcJ" firstAttribute="leading" secondItem="yvz-QH-fyY" secondAttribute="leading" id="eDm-ML-Pk5"/>
-                                                <constraint firstItem="qw4-LH-Wbe" firstAttribute="trailing" secondItem="yvz-QH-fyY" secondAttribute="trailingMargin" id="hy7-RM-2B0"/>
                                                 <constraint firstItem="e4Y-JC-7KX" firstAttribute="centerY" secondItem="NiM-bB-EmD" secondAttribute="centerY" id="jKd-3c-4pe"/>
                                                 <constraint firstItem="3hi-Xi-W1Y" firstAttribute="top" secondItem="ps2-tl-bcJ" secondAttribute="bottom" constant="8" id="nOV-RM-g7l"/>
                                                 <constraint firstItem="FSD-gs-QcR" firstAttribute="top" secondItem="yvz-QH-fyY" secondAttribute="topMargin" constant="50" id="q5M-LQ-xyI"/>
                                                 <constraint firstItem="e4Y-JC-7KX" firstAttribute="leading" secondItem="NiM-bB-EmD" secondAttribute="trailing" constant="4" id="rR5-m2-8U9"/>
+                                                <constraint firstItem="2Dh-Cc-3Bl" firstAttribute="centerY" secondItem="qw4-LH-Wbe" secondAttribute="centerY" id="vqh-xb-VKJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -143,6 +155,7 @@
                                             <outlet property="lastMessageLabel" destination="qw4-LH-Wbe" id="KQs-PP-SVh"/>
                                             <outlet property="locationLabel" destination="Ult-E9-YBu" id="F30-gr-lcl"/>
                                             <outlet property="memberCountLabel" destination="e4Y-JC-7KX" id="0MD-oB-x9H"/>
+                                            <outlet property="unreadCountLabel" destination="2Dh-Cc-3Bl" id="9ct-Xb-0IM"/>
                                             <outlet property="viewOnMapButton" destination="FSD-gs-QcR" id="pFu-7G-ZvC"/>
                                             <segue destination="tlQ-pR-ueF" kind="show" identifier="ChatRoomVCSegue" id="nVZ-qM-vWL"/>
                                         </connections>
