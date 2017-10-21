@@ -43,6 +43,19 @@ class ChatSpotClient {
         ref.removeObserver(withHandle: handle)
     }
     
+    static func saveUnreadCount(forChatroom guid: String, count: Int) {
+        let ref =  Database.database().reference()
+        ref.child("users/\(currentUser.guid!)/\(User1.KEY_UNREAD_COUNT)").updateChildValues([guid: count])
+    }
+    
+    static func getUnreadCount(success: @escaping ([String: Int]) -> ()) {
+        let ref =  Database.database().reference()
+        ref.child("users").child(currentUser.guid!).child(User1.KEY_UNREAD_COUNT).observeSingleEvent(of: .value, with: { (snapshot) in
+            print("unread count", snapshot.value!)
+            success(snapshot.value as! [String: Int])
+        })
+    }
+    
     static func observeLastMessageChange(success: @escaping (String, String, Double?) -> (), failure: @escaping (Error?) -> ()) -> UInt{
         let chatroomsRef =  Database.database().reference().child("chatrooms")
         
