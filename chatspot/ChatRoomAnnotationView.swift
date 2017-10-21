@@ -30,7 +30,7 @@ class ChatRoomAnnotationView: MKAnnotationView {
         detailView.joinButton.addTarget(self, action: #selector(joinRoom(_:)), for: .touchUpInside)
         detailCalloutAccessoryView = detailView
         
-        image = #imageLiteral(resourceName: "around me")
+        image = #imageLiteral(resourceName: "red-pin-with-circle")
         canShowCallout = true
     }
     

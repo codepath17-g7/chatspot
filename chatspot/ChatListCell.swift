@@ -21,7 +21,7 @@ class ChatListCell: UITableViewCell {
 		didSet {
             
             chatRoomNameLabel.text = chatRoom.name
-            if chatRoom.name == "Around Me" { //need better way to check if aroundme room
+            if chatRoom.isAroundMe {
                 self.locationLabel.isHidden = false
             }
             

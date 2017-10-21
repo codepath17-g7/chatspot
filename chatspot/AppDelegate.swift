@@ -40,6 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //    LocationManager.instance.listenForRealtimeLocationChanges()
         //}
         
+        
+        UINavigationBar.appearance().barTintColor = UIColor.ChatSpotColors.Red
+//        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 20)!]
+
+        UINavigationBar.appearance().tintColor = .white
+                
         return true
     }
     

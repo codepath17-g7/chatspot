@@ -41,6 +41,20 @@
 		F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F081F8DF6F500417517 /* ChatListCell.swift */; };
 		F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0A1F8DF71600417517 /* ChatMessageCell.swift */; };
 		F2719F0E1F8DFCD900417517 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1F8DFCD900417517 /* Message.swift */; };
+		F2BFE5E61F9AA806006D9849 /* Libertad-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5D81F9AA806006D9849 /* Libertad-Bold.otf */; };
+		F2BFE5E71F9AA806006D9849 /* Libertad-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5D91F9AA806006D9849 /* Libertad-BoldItalic.otf */; };
+		F2BFE5E81F9AA806006D9849 /* Libertad-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5DA1F9AA806006D9849 /* Libertad-Book.otf */; };
+		F2BFE5E91F9AA806006D9849 /* Libertad-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5DB1F9AA806006D9849 /* Libertad-BookItalic.otf */; };
+		F2BFE5EA1F9AA806006D9849 /* Libertad-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5DC1F9AA806006D9849 /* Libertad-ExtraBold.otf */; };
+		F2BFE5EB1F9AA806006D9849 /* Libertad-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5DD1F9AA806006D9849 /* Libertad-ExtraBoldItalic.otf */; };
+		F2BFE5EC1F9AA806006D9849 /* Libertad-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5DE1F9AA806006D9849 /* Libertad-Italic.otf */; };
+		F2BFE5ED1F9AA806006D9849 /* Libertad-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5DF1F9AA806006D9849 /* Libertad-Light.otf */; };
+		F2BFE5EE1F9AA806006D9849 /* Libertad-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5E01F9AA806006D9849 /* Libertad-LightItalic.otf */; };
+		F2BFE5EF1F9AA806006D9849 /* Libertad-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5E11F9AA806006D9849 /* Libertad-Medium.otf */; };
+		F2BFE5F01F9AA806006D9849 /* Libertad-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5E21F9AA806006D9849 /* Libertad-MediumItalic.otf */; };
+		F2BFE5F11F9AA806006D9849 /* Libertad-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5E31F9AA806006D9849 /* Libertad-Thin.otf */; };
+		F2BFE5F21F9AA806006D9849 /* Libertad-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5E41F9AA806006D9849 /* Libertad-ThinItalic.otf */; };
+		F2BFE5F31F9AA806006D9849 /* Libertad.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2BFE5E51F9AA806006D9849 /* Libertad.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +97,20 @@
 		F2719F081F8DF6F500417517 /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		F2719F0A1F8DF71600417517 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		F2719F0D1F8DFCD900417517 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F2BFE5D81F9AA806006D9849 /* Libertad-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-Bold.otf"; sourceTree = "<group>"; };
+		F2BFE5D91F9AA806006D9849 /* Libertad-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-BoldItalic.otf"; sourceTree = "<group>"; };
+		F2BFE5DA1F9AA806006D9849 /* Libertad-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-Book.otf"; sourceTree = "<group>"; };
+		F2BFE5DB1F9AA806006D9849 /* Libertad-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-BookItalic.otf"; sourceTree = "<group>"; };
+		F2BFE5DC1F9AA806006D9849 /* Libertad-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-ExtraBold.otf"; sourceTree = "<group>"; };
+		F2BFE5DD1F9AA806006D9849 /* Libertad-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		F2BFE5DE1F9AA806006D9849 /* Libertad-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-Italic.otf"; sourceTree = "<group>"; };
+		F2BFE5DF1F9AA806006D9849 /* Libertad-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-Light.otf"; sourceTree = "<group>"; };
+		F2BFE5E01F9AA806006D9849 /* Libertad-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-LightItalic.otf"; sourceTree = "<group>"; };
+		F2BFE5E11F9AA806006D9849 /* Libertad-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-Medium.otf"; sourceTree = "<group>"; };
+		F2BFE5E21F9AA806006D9849 /* Libertad-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-MediumItalic.otf"; sourceTree = "<group>"; };
+		F2BFE5E31F9AA806006D9849 /* Libertad-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-Thin.otf"; sourceTree = "<group>"; };
+		F2BFE5E41F9AA806006D9849 /* Libertad-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Libertad-ThinItalic.otf"; sourceTree = "<group>"; };
+		F2BFE5E51F9AA806006D9849 /* Libertad.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Libertad.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +128,7 @@
 		32963D561F8B1BAD00E05CF3 = {
 			isa = PBXGroup;
 			children = (
+				F2BFE5F41F9AA81B006D9849 /* Libertad Font */,
 				32963D611F8B1BAD00E05CF3 /* chatspot */,
 				32963D601F8B1BAD00E05CF3 /* Products */,
 				48F18CA576106E6205144A7D /* Pods */,
@@ -119,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
+				3298CF5F1F92E65A00F9BBEE /* Constants.swift */,
 				3298CF5C1F92A6B700F9BBEE /* Service */,
 				7679EA801F8E052400DE16FA /* View */,
 				F2719F061F8DF56E00417517 /* View Controllers */,
@@ -132,7 +162,6 @@
 				F2719EFD1F8D54E700417517 /* chatspot.entitlements */,
 				32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */,
 				32963D6E1F8B1BAD00E05CF3 /* Info.plist */,
-				3298CF5F1F92E65A00F9BBEE /* Constants.swift */,
 			);
 			path = chatspot;
 			sourceTree = "<group>";
@@ -230,6 +259,27 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		F2BFE5F41F9AA81B006D9849 /* Libertad Font */ = {
+			isa = PBXGroup;
+			children = (
+				F2BFE5D81F9AA806006D9849 /* Libertad-Bold.otf */,
+				F2BFE5D91F9AA806006D9849 /* Libertad-BoldItalic.otf */,
+				F2BFE5DA1F9AA806006D9849 /* Libertad-Book.otf */,
+				F2BFE5DB1F9AA806006D9849 /* Libertad-BookItalic.otf */,
+				F2BFE5DC1F9AA806006D9849 /* Libertad-ExtraBold.otf */,
+				F2BFE5DD1F9AA806006D9849 /* Libertad-ExtraBoldItalic.otf */,
+				F2BFE5DE1F9AA806006D9849 /* Libertad-Italic.otf */,
+				F2BFE5DF1F9AA806006D9849 /* Libertad-Light.otf */,
+				F2BFE5E01F9AA806006D9849 /* Libertad-LightItalic.otf */,
+				F2BFE5E11F9AA806006D9849 /* Libertad-Medium.otf */,
+				F2BFE5E21F9AA806006D9849 /* Libertad-MediumItalic.otf */,
+				F2BFE5E31F9AA806006D9849 /* Libertad-Thin.otf */,
+				F2BFE5E41F9AA806006D9849 /* Libertad-ThinItalic.otf */,
+				F2BFE5E51F9AA806006D9849 /* Libertad.otf */,
+			);
+			name = "Libertad Font";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -309,6 +359,20 @@
 				7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */,
 				76E229681F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib in Resources */,
 				7679EA821F8E054600DE16FA /* UserView.xib in Resources */,
+				F2BFE5E61F9AA806006D9849 /* Libertad-Bold.otf in Resources */,
+				F2BFE5E71F9AA806006D9849 /* Libertad-BoldItalic.otf in Resources */,
+				F2BFE5E81F9AA806006D9849 /* Libertad-Book.otf in Resources */,
+				F2BFE5E91F9AA806006D9849 /* Libertad-BookItalic.otf in Resources */,
+				F2BFE5EA1F9AA806006D9849 /* Libertad-ExtraBold.otf in Resources */,
+				F2BFE5EB1F9AA806006D9849 /* Libertad-ExtraBoldItalic.otf in Resources */,
+				F2BFE5EC1F9AA806006D9849 /* Libertad-Italic.otf in Resources */,
+				F2BFE5ED1F9AA806006D9849 /* Libertad-Light.otf in Resources */,
+				F2BFE5EE1F9AA806006D9849 /* Libertad-LightItalic.otf in Resources */,
+				F2BFE5EF1F9AA806006D9849 /* Libertad-Medium.otf in Resources */,
+				F2BFE5F01F9AA806006D9849 /* Libertad-MediumItalic.otf in Resources */,
+				F2BFE5F11F9AA806006D9849 /* Libertad-Thin.otf in Resources */,
+				F2BFE5F21F9AA806006D9849 /* Libertad-ThinItalic.otf in Resources */,
+				F2BFE5F31F9AA806006D9849 /* Libertad.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

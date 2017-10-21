@@ -19,11 +19,13 @@ class ChatListVC: UIViewController {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.estimatedRowHeight = 108
+		tableView.estimatedRowHeight = 172
 		tableView.rowHeight = UITableViewAutomaticDimension
         
         // Heads Up Display
         setupAndTriggerHUD()
+        
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         // Uncomment to add rooms for testing statically
         // ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: -122.203056, latitude: 37.750278)
