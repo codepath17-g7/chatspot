@@ -190,13 +190,6 @@ class ChatSpotClient {
 
         ] as [String : Any]
         
-        // for the user that is locally in the room, add message to their aroundme thread as well
-        if let users = room.localUsers {
-            for user in Array(users.keys) {
-                updateData["aroundme/\(user)/\(newMsgKey)"] = message.toValue()
-            }
-        }
-        
         print(updateData)
         
         ref.updateChildValues(updateData) { (error: Error?, DatabaseReference) in
