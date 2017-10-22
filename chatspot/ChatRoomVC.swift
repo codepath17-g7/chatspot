@@ -39,8 +39,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     var chatRoom: ChatRoom1!
 	var initialY: CGFloat!
     var toolbarInitialY: CGFloat!
-    var observer: UInt!
-    
+    var observers = [UInt]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +81,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             return
         }
 
-        ChatSpotClient.removeObserver(handle: observer)
+        observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
+        observers.removeAll()
     }
     
 //MARK: ============ Initial Setup Methods ============
@@ -121,6 +122,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         self.tableView.insertRows(at: [indexPath], with: .automatic)
         self.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
+    
     private func startObservingMessages() {
         if chatRoom.guid == nil {
             print("Not attached to a room")
@@ -128,19 +130,31 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         }
 
         if chatRoom.isAroundMe {
-            observer = ChatSpotClient.observeNewMessagesAroundMe(success: { (message: Message1) in
+            observers.append(ChatSpotClient.observeNewMessagesAroundMe(success: { (message: Message1) in
                 self.onNewMessage(message)
             }, failure: {
                 print("Error in observeNewMessages")
-            })
+            }))
             
+            observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
+                let newRoom = ChatSpotClient.chatrooms[roomGuid]
+                print("Chat room -> \(roomGuid)")
+
+                self.chatRoom.guid = roomGuid
+                self.chatRoom.name = "Around Me - " + newRoom!.name!
+                
+                self.setRoomName(self.chatRoom.name)
+            }, failure: { (error: Error?) in
+                
+            }))
+
         } else {
             
-            observer = ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
+            observers.append(ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
                 self.onNewMessage(message)
             }, failure: {
                 print("Error in observeNewMessages")
-            })
+            }))
         }
     }
 
@@ -160,10 +174,16 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 //        KRProgressHUD.show(withMessage: "Loading messages...")
 //    }
 	
+    func setRoomName (_ roomName: String) {
+        chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 17)!])
+        footerViewLabel.text = roomName
+        messageTextView.placeHolder = "Message \(roomName)"
+
+    }
+    
 	func setUpUI(){
-        
-        chatRoomNameLabel.attributedText = NSAttributedString(string: chatRoom.name, attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 17)!])
-        footerViewLabel.text = chatRoom.name
+        setRoomName(chatRoom.name)
+
         
         if let urlString = chatRoom.baner {
             if let url = URL(string: urlString) {
@@ -195,7 +215,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		messageTextView.autoresizingMask = .flexibleWidth
         messageTextView.maxLength = 300
         messageTextView.trimWhiteSpaceWhenEndEditing = false
-        messageTextView.placeHolder = "Message \(chatRoom.name!)"
         messageTextView.layer.cornerRadius = 7.0
         messageTextView.clipsToBounds = true
         messageTextView.layer.borderWidth = 1
