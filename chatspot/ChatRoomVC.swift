@@ -83,6 +83,13 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         observers.removeAll()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "chatroomDetailSegue") {
+            let destinationVC = segue.destination as! ChatRoomDetailVC
+            destinationVC.chatroom = self.chatRoom
+        }
+    }
+    
 //MARK: ============ Initial Setup Methods ============
     
     private func onNewMessage(_ message: Message1) {
@@ -207,6 +214,16 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!])
 , for: .normal)
         sendMessageButton.isEnabled = false
+        
+        // crate and add an info button in the navigation bar that links to chatroom details
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(openChatroomDetailScreen), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.rightBarButtonItem = infoBarButtonItem
+    }
+    
+    @objc private func openChatroomDetailScreen() {
+        performSegue(withIdentifier: "chatroomDetailSegue", sender: self)
     }
 	
 	func setUpKeyboardNotifications(){
