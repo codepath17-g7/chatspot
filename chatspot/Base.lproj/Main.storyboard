@@ -55,7 +55,7 @@
         <!--Chat Room DetailVC-->
         <scene sceneID="6G2-yG-0vX">
             <objects>
-                <viewController id="kER-1Q-3Mh" customClass="ChatRoomDetailVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kER-1Q-3Mh" customClass="ChatRoomDetailVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZLG-MI-Gee"/>
                         <viewControllerLayoutGuide type="bottom" id="Hws-Py-X5b"/>
