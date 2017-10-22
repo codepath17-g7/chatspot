@@ -10,7 +10,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import Firebase
-import KRProgressHUD
+import MBProgressHUD
 import ISEmojiView
 import GrowingTextView
 
@@ -34,7 +34,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     
 	var loadingMoreView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var isMoreDataLoading = false
+    var isLoading = false
 	var messages: [Message1] = [Message1]()
     var chatRoom: ChatRoom1!
 	var initialY: CGFloat!
@@ -59,14 +59,10 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         // UI setup
         setUpUI()
         
-        // Heads Up Display
-//        setupAndTriggerHUD()
-        
         // Infinite scrolling
 //        setUpInfiniteScrolling()
         
-        // Load chatroom messages and start the observer
-        loadChatRoomMessages()
+        self.startObservingMessages()
     }
     
     
@@ -93,27 +89,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         self.tableView.reloadData()
         self.startObservingMessages()
     }
-    private func loadChatRoomMessages(){
-        if chatRoom.guid == nil {
-            print("Not attached to a room")
-            return
-        }
-        if chatRoom.isAroundMe {
-            ChatSpotClient.getMessagesAroundMe(success: { (messages: [Message1]) in
-                self.loadChatMessages(messages)
-            }, failure: { (e: Error?) in
-                print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
-
-            })
-            return
-        } else {
-            ChatSpotClient.getMessagesForRoom(roomId: chatRoom.guid, success: { (messages: [Message1]) in
-                self.loadChatMessages(messages)
-            }) { (e: Error?) in
-                print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
-            }
-        }
-    }
     
     private func onNewMessage(_ message: Message1) {
         print(message)
@@ -130,12 +105,20 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         }
 
         if chatRoom.isAroundMe {
+            self.isLoading = true
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             observers.append(ChatSpotClient.observeNewMessagesAroundMe(success: { (message: Message1) in
                 self.onNewMessage(message)
+                self.isLoading = false
+                MBProgressHUD.hide(for: self.view, animated: true)
             }, failure: {
                 print("Error in observeNewMessages")
+                self.isLoading = false
+                MBProgressHUD.hide(for: self.view, animated: true)
             }))
             
+            self.isLoading = true
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
                 let newRoom = ChatSpotClient.chatrooms[roomGuid]
                 print("Chat room -> \(roomGuid)")
@@ -144,16 +127,24 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
                 self.chatRoom.name = "Around Me - " + newRoom!.name!
                 
                 self.setRoomName(self.chatRoom.name)
+                self.isLoading = false
+                MBProgressHUD.hide(for: self.view, animated: true)
             }, failure: { (error: Error?) in
-                
+                self.isLoading = false
+                MBProgressHUD.hide(for: self.view, animated: true)
             }))
 
         } else {
-            
+            self.isLoading = true
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             observers.append(ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
                 self.onNewMessage(message)
+                self.isLoading = false
+                MBProgressHUD.hide(for: self.view, animated: true)
             }, failure: {
                 print("Error in observeNewMessages")
+                self.isLoading = false
+                MBProgressHUD.hide(for: self.view, animated: true)
             }))
         }
     }
@@ -166,13 +157,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 //        self.tableView.tableFooterView = tableFooterView
 //    }
     
-// TODO:
-//    func setupAndTriggerHUD(){
-//        KRProgressHUD.set(style: .white)
-//        KRProgressHUD.set(font: .systemFont(ofSize: 17))
-//        KRProgressHUD.set(activityIndicatorViewStyle: .gradationColor(head: UIColor.ChatSpotColors.Blue, tail: UIColor.ChatSpotColors.DarkBlue))
-//        KRProgressHUD.show(withMessage: "Loading messages...")
-//    }
 	
     func setRoomName (_ roomName: String) {
         chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 17)!])
@@ -465,14 +449,14 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
 
 extension ChatRoomVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (!isMoreDataLoading) {
+        if (!self.isLoading) {
             // Calculate the position of one screen length before the bottom of the results
             let scrollViewContentHeight = tableView.contentSize.height
             let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
             
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-                isMoreDataLoading = true
+                self.isLoading = true
                 self.loadingMoreView.startAnimating()
                 loadMoreData()
             }
@@ -484,7 +468,7 @@ extension ChatRoomVC: UIScrollViewDelegate {
 
 //        ChatSpotClient.
 //        TwitterClient.sharedInstance.homeTimeline(maxID: tweets[tweets.count - 1].id!, success: { (tweets: [Tweet]) in
-            self.isMoreDataLoading = false
+            self.isLoading = false
 //            self.tweets.append(contentsOf: tweets.dropFirst())
 //            self.tableView.reloadData()
             self.loadingMoreView.stopAnimating()
