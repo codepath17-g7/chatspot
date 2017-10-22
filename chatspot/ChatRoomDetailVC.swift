@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ChatRoomDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var footerView: UIView!
     
     var chatroom: ChatRoom1!
     
@@ -21,14 +23,7 @@ class ChatRoomDetailVC: UIViewController {
         
         title = chatroom.name
         
-        tableView.estimatedRowHeight = 56
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "userCell")
+        setupUI()
         
         let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
         
@@ -39,6 +34,25 @@ class ChatRoomDetailVC: UIViewController {
                 self.tableView.reloadData()
             }, failure: {})
         })
+    }
+    
+    private func setupUI() {
+        tableView.estimatedRowHeight = 56
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        footerView.isHidden = chatroom.isAroundMe
+        
+        let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "userCell")
+    }
+    
+    @IBAction func leaveRoom(_ sender: UIButton) {
+        ChatSpotClient.leaveChatRoom(userGuid: Auth.auth().currentUser!.uid, roomGuid: chatroom.guid)
+        // ignoring the return value. `_ =` is a swift convention it appears!
+        _ = navigationController?.popToRootViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
