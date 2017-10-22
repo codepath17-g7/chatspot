@@ -43,6 +43,15 @@ class ChatMessageCell: UITableViewCell {
                 setUpUserInfo(userGuid: guid)
 
             }
+            
+            if let urls = message.attachments {
+                for url in urls {
+                    let imageView = UIImageView()
+                    imageView.setImageWith(url)
+                    let image = UIImage(
+                }
+//                let imageView = UIImageView(frame: CGRect(x: messageTextLabel.frame.origin.x, y: messageTextLabel.frame.maxY, width: messageTextLabel.frame.width, height: <#T##CGFloat#>))
+            }
 		}
 	}
     

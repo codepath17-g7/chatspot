@@ -43,8 +43,8 @@ class ChatListVC: UIViewController {
 
 
         self.tableView.reloadData()
-        
-        KRProgressHUD.showSuccess()
+        KRProgressHUD.dismiss()
+//        KRProgressHUD.showSuccess()
         
         startObservingAroundMeRoomGuid()
         
@@ -97,7 +97,8 @@ class ChatListVC: UIViewController {
         let observer = ChatSpotClient.observeMyChatRooms(success: { (room: ChatRoom1) in
             self.chatrooms.append(room)
             self.tableView.reloadData()
-            KRProgressHUD.showSuccess()
+//            KRProgressHUD.showSuccess()
+            KRProgressHUD.dismiss()
         }, failure: { (error: Error!) in
             print("Error in startObservingChatRoomList: \(error.localizedDescription)")
 //            KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
@@ -206,6 +207,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
         let chatroom = chatrooms[indexPath.row]
 		cell.chatRoom = chatroom
         cell.unreadCount = unreadCount[chatroom.guid!] ?? 0
+        cell.selectionStyle = .none
 		return cell
 	}
 	
@@ -218,6 +220,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
         let index = indexPath.row
         let selectedChatroomGuid = chatrooms[index].guid!
         clearUnreadCount(chatroomGuid: selectedChatroomGuid)
+        
 		tableView.deselectRow(at: indexPath, animated:true)
 	}
 	

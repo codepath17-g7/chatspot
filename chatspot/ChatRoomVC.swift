@@ -314,9 +314,51 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             return
         }
         if !(messageTextView.text?.isEmpty)! {
-            let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!)
             
-
+            let range = NSRange(location: 0, length: messageTextView.attributedText.length)
+            if messageTextView.textStorage.containsAttachments(in: range){
+                let attributedString = messageTextView.attributedText
+                var location = 0
+                var imageUrls = [URL]()
+//                var newMessageString = messageTextView.text
+//                print("here is original newMessageString:")
+//                print(newMessageString)
+                while location < range.length {
+                    var r = NSRange()
+                    if let attributedDictionary = attributedString?.attributes(at: location, effectiveRange: &r) {
+                        if let attachment = attributedDictionary[NSAttachmentAttributeName] as? NSTextAttachment {
+                            if let image = attachment.image {
+                                StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
+                                    if let url = url {
+                                        print("There is a url")
+                                        imageUrls.append(url)
+//                                        newMessageString?.insert(url.absoluteString, at: location)
+//                                        newMessageString?.replacingCharacters(in: r, with: url.absoluteString)
+//                                        newMessageString?.replaceSubrange(r, with: url.absoluteString)
+//                                        newMessageString.replaceCharacters(in: r, with: url.absoluteString)
+//                                        print(newMessageString)
+                                    }
+                                    
+                                    
+                                }, failure: {
+                                    print("Failure trying to store images")
+                                })
+//                                imageArray.append( attachment!.image!)
+                            }
+                        }
+                        location += r.length
+                    }
+                }
+            }
+            print("here is final message text:")
+            print(messageTextView.attributedText.string)
+            
+            let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!)
+//            let message = Message1(
+//            if messageTextView.attributedText.containsAttachments(in: range){
+            
+//            }
+//
             ChatSpotClient.sendMessage(message: tm, room: chatRoom, success: {
                 self.messageTextView.text = ""
                 self.sendMessageButton.isEnabled = false
@@ -375,15 +417,16 @@ extension ChatRoomVC: GrowingTextViewDelegate {
     }
     
     func textViewDidChange(_ textView: GrowingTextView) {
-        if textView.text != "" {
-            self.sendMessageButton.isEnabled = true
-        } else {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             self.sendMessageButton.isEnabled = false
+        } else {
+            
+            self.sendMessageButton.isEnabled = true
         }
     }
 }
 
-//MARK: ============ TextView and ImagePicker Methods ============
+//MARK: ============ ImagePicker Methods ============
 
 extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -403,9 +446,12 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     
     func openPhotos() {
         let picker = UIImagePickerController()
+//        self.messageTextView.inputView = picker.view
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+//        messageTextView.becomeFirstResponder()
+//        messageTextView.reloadInputViews()
         present(picker, animated: true, completion:nil)
     }
     
@@ -431,7 +477,8 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         let scaleFactor = oldWidth / (self.messageTextView.frame.size.width - 10)
         textAttachment.image = UIImage(cgImage: image.cgImage!, scale: scaleFactor, orientation: .up).roundedCorners
         let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-        self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
+//        self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
+        self.messageTextView.textStorage.append(attrStringWithImage)
         self.messageTextView.becomeFirstResponder()
         self.sendMessageButton.isEnabled = true
     }
