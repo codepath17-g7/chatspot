@@ -142,7 +142,7 @@ class ChatSpotClient {
     }
     
     //MARK:- Messages
-    static func observeNewMessages(roomId: String, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
+    static func observeNewMessages(roomId: String, limit: UInt, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatRef = ref.child("messages").child(roomId)
         let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
@@ -153,7 +153,7 @@ class ChatSpotClient {
         return refHandle
     }
     
-    static func observeNewMessagesAroundMe(success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
+    static func observeNewMessagesAroundMe(limit: UInt, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatRef = ref.child("aroundme").child(userGuid)
         let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
@@ -165,10 +165,11 @@ class ChatSpotClient {
     }
     
     
-    static func getMessagesAroundMe(success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
+    static func getMessagesAroundMe(limit: UInt, lastMsgId: String,
+                                    success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
         let ref = Database.database().reference()
         let chatRef = ref.child("aroundme").child(userGuid)
-        chatRef.queryOrderedByKey().observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+        chatRef.queryOrderedByKey().queryLimited(toLast: limit).queryEnding(atValue: lastMsgId).observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             print(postDict)
             let messages = Message1.messagesWithArray(dicts: postDict)
@@ -178,10 +179,13 @@ class ChatSpotClient {
         }
     }
     
-    static func getMessagesForRoom(roomId: String, success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
+    static func getMessagesForRoom(roomId: String,
+                                   limit: UInt,
+                                   lastMsgId: String,
+                                   success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
         let ref = Database.database().reference()
         let chatRef = ref.child("messages").child(roomId)
-        chatRef.queryOrderedByKey().observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+        chatRef.queryOrderedByKey().queryLimited(toLast: limit).queryEnding(atValue: lastMsgId).observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             print(postDict)
             let messages = Message1.messagesWithArray(dicts: postDict)

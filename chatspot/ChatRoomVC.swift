@@ -15,6 +15,8 @@ import ISEmojiView
 import GrowingTextView
 
 class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
+    static var MAX_MESSAGES_LIMIT: UInt = 10
+    
 	@IBOutlet weak var containerView: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var addPhotoButton: UIButton!
@@ -60,7 +62,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         setUpUI()
         
         // Infinite scrolling
-//        setUpInfiniteScrolling()
+        //setUpInfiniteScrolling()
         
         self.startObservingMessages()
     }
@@ -82,13 +84,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     }
     
 //MARK: ============ Initial Setup Methods ============
-
-    
-    private func loadChatMessages(_ messages: [Message1]) {
-        self.messages = messages
-        self.tableView.reloadData()
-        self.startObservingMessages()
-    }
     
     private func onNewMessage(_ message: Message1) {
         print(message)
@@ -107,7 +102,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         if chatRoom.isAroundMe {
             self.isLoading = true
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            observers.append(ChatSpotClient.observeNewMessagesAroundMe(success: { (message: Message1) in
+            observers.append(ChatSpotClient.observeNewMessagesAroundMe(limit: ChatRoomVC.MAX_MESSAGES_LIMIT, success: { (message: Message1) in
                 self.onNewMessage(message)
                 self.isLoading = false
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -137,10 +132,13 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         } else {
             self.isLoading = true
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            observers.append(ChatSpotClient.observeNewMessages(roomId: chatRoom.guid, success: { (message: Message1) in
-                self.onNewMessage(message)
-                self.isLoading = false
-                MBProgressHUD.hide(for: self.view, animated: true)
+            observers.append(ChatSpotClient.observeNewMessages(
+                roomId: chatRoom.guid,
+                limit: ChatRoomVC.MAX_MESSAGES_LIMIT,
+                success: { (message: Message1) in
+                    self.onNewMessage(message)
+                    self.isLoading = false
+                    MBProgressHUD.hide(for: self.view, animated: true)
             }, failure: {
                 print("Error in observeNewMessages")
                 self.isLoading = false
@@ -149,13 +147,12 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         }
     }
 
-// TODO:
-//    func setUpInfiniteScrolling(){
-//        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-//        loadingMoreView.center = tableFooterView.center
-//        tableFooterView.insertSubview(loadingMoreView, at: 0)
-//        self.tableView.tableFooterView = tableFooterView
-//    }
+    func setUpInfiniteScrolling(){
+        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        loadingMoreView.center = tableFooterView.center
+        tableFooterView.insertSubview(loadingMoreView, at: 0)
+        self.tableView.tableFooterView = tableFooterView
+    }
     
 	
     func setRoomName (_ roomName: String) {
@@ -344,7 +341,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     func viewUserProfile(userID: String){
         
     }
-    
 }
 
 //MARK: ============ TableView Methods ============
@@ -352,6 +348,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell") as! ChatMessageCell
         
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -444,7 +441,6 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     }
     
 }
-
 //MARK: ============ ScrollView Delegate Methods ============
 
 extension ChatRoomVC: UIScrollViewDelegate {
@@ -456,32 +452,56 @@ extension ChatRoomVC: UIScrollViewDelegate {
             
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-                self.isLoading = true
-                self.loadingMoreView.startAnimating()
-                loadMoreData()
+                //loadMoreMessages()
             }
         }
     }
     
-    func loadMoreData() {
-// TODO:
-
-//        ChatSpotClient.
-//        TwitterClient.sharedInstance.homeTimeline(maxID: tweets[tweets.count - 1].id!, success: { (tweets: [Tweet]) in
-            self.isLoading = false
-//            self.tweets.append(contentsOf: tweets.dropFirst())
-//            self.tableView.reloadData()
-            self.loadingMoreView.stopAnimating()
-//        }, failure: { (error: Error) in
-//            print("Could not find tweets: \(error.localizedDescription)")
-//            KRProgressHUD.set(font: .systemFont(ofSize: 15))
-//            KRProgressHUD.showError(withMessage: "Unable to load tweets.")
-//            self.isMoreDataLoading = false
-//            self.loadingMoreView.stopAnimating()
-//        })
+    // TODO - fix me
+    private func loadMoreMessages(){
+        if chatRoom.guid == nil{
+            print("Not attached to a room")
+            return
+        }
+        
+        if chatRoom.isAroundMe {
+            self.isLoading = true;
+            self.loadingMoreView.startAnimating()
+            ChatSpotClient.getMessagesAroundMe(limit: UInt(ChatRoomVC.MAX_MESSAGES_LIMIT), lastMsgId: (messages.last?.guid)!, success: { (messages: [Message1]) in
+                //var newMsgs: [Message1] = messages
+                //newMsgs += self.messages
+                self.messages = messages
+                self.tableView.reloadData()
+                self.isLoading = false;
+                self.loadingMoreView.stopAnimating()
+            }, failure: { (e: Error?) in
+                print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
+                self.isLoading = false;
+                self.loadingMoreView.stopAnimating()
+            })
+            return
+        } else {
+            self.isLoading = true;
+            self.loadingMoreView.startAnimating()
+            ChatSpotClient.getMessagesForRoom(roomId: chatRoom.guid,
+                                              limit: UInt(ChatRoomVC.MAX_MESSAGES_LIMIT),
+                                              lastMsgId: (messages.last?.guid)!,
+                                              success: { (messages: [Message1]) in
+                //var newMsgs: [Message1] = messages
+                //newMsgs += self.messages
+                self.messages = messages
+                self.tableView.reloadData()
+                self.isLoading = false;
+                self.loadingMoreView.stopAnimating()
+            }) { (e: Error?) in
+                print("Failure to load old messages: \(String(describing: e?.localizedDescription))")
+                self.isLoading = false;
+                self.loadingMoreView.stopAnimating()
+            }
+        }
     }
-    
 }
+ 
 
 //MARK: ============ Emoji Delegate Methods ============
 
