@@ -42,11 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         UINavigationBar.appearance().barTintColor = UIColor.ChatSpotColors.Red
-//        UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 20)!]
 
         UINavigationBar.appearance().tintColor = .white
-                
+        UITabBar.appearance().tintColor = UIColor.ChatSpotColors.Red
+//        UITabBar.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
         return true
     }
     

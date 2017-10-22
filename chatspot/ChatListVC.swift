@@ -21,8 +21,9 @@ class ChatListVC: UIViewController {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.estimatedRowHeight = 172
+		tableView.estimatedRowHeight = 182
 		tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
         
         // Heads Up Display
         setupAndTriggerHUD()
@@ -53,6 +54,7 @@ class ChatListVC: UIViewController {
 
 
         self.tableView.reloadData()
+        
         KRProgressHUD.showSuccess()
         
         startObservingChatRoomList()

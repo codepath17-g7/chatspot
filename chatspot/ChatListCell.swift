@@ -11,11 +11,15 @@ import UIKit
 class ChatListCell: UITableViewCell {
     
     @IBOutlet weak var chatRoomNameLabel: UILabel!
+    @IBOutlet weak var chatRoomImageView: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var memberCountLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var viewOnMapButton: UIButton!
     @IBOutlet weak var unreadCountLabel: UILabel!
+    
+    @IBOutlet weak var cardView: UIView!
+    
     
     var unreadCount: Int = 0 {
         didSet {
@@ -28,6 +32,17 @@ class ChatListCell: UITableViewCell {
 		didSet {
             
             chatRoomNameLabel.text = chatRoom.name
+            
+            ////////// change back later //////////
+            self.locationLabel.isHidden = false
+            locationLabel.text = "Oakland, CA"
+            if chatRoom.name == "Golden Gate Bridge"{
+                chatRoomImageView.image = #imageLiteral(resourceName: "goldengate")
+            } else {
+                chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
+            }
+            //////////////////////////////////////////////
+
             if chatRoom.isAroundMe {
                 self.locationLabel.isHidden = false
             }
@@ -44,7 +59,12 @@ class ChatListCell: UITableViewCell {
         super.awakeFromNib()
         unreadCountLabel.layer.cornerRadius = 12
         unreadCountLabel.layer.masksToBounds = true
-        // Initialization code
+        
+        cardView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        cardView.layer.shadowRadius = 3.0
+        cardView.layer.shadowOpacity = 0.6
+        cardView.layer.masksToBounds = false
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -279,6 +279,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             let emojiView = ISEmojiView()
             emojiView.delegate = self
             messageTextView.inputView = emojiView
+            messageTextView.becomeFirstResponder()
         }
         messageTextView.reloadInputViews()
     }
@@ -404,6 +405,8 @@ extension ChatRoomVC: GrowingTextViewDelegate, UIImagePickerControllerDelegate, 
         textAttachment.image = UIImage(cgImage: image.cgImage!, scale: scaleFactor, orientation: .up).roundedCorners
         let attrStringWithImage = NSAttributedString(attachment: textAttachment)
         self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
+        self.messageTextView.becomeFirstResponder()
+        self.sendMessageButton.isEnabled = true
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
