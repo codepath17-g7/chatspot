@@ -16,20 +16,27 @@ class Message1 {
     static let KEY_USER_GUID = "userGuid"
     static let KEY_TIMESTAMP = "timestamp"
     static let KEY_ROOM_ID = "roomId"
-    
+    static let KEY_ATTACHMENT = "attachment"
+
     var guid: String?
     var roomId: String?
     var message: String?
     var name: String?
     var timestamp: NSDate?
     var userGuid: String!
-    
-    convenience init(roomId: String, message: String, name: String, userGuid: String) {
+    var attachment: String?
+
+    convenience init(roomId: String, message: String, name: String, userGuid: String, attachment: String?) {
         self.init()
         self.roomId = roomId
         self.message = message
         self.name = name
         self.userGuid = userGuid
+        self.attachment = attachment
+    }
+
+    convenience init(roomId: String, message: String, name: String, userGuid: String) {
+        self.init(roomId: roomId, message: message, name: name, userGuid: userGuid, attachment: nil)
     }
     
     convenience init(guid: String, obj: NSDictionary) {
@@ -57,6 +64,10 @@ class Message1 {
         if let userGuid = obj[Message1.KEY_USER_GUID] as? String {
             self.userGuid = userGuid
         }
+        
+        if let attachment = obj[Message1.KEY_ATTACHMENT] as? String {
+            self.attachment = attachment
+        }
     }
     
     func toValue() -> NSDictionary {
@@ -64,7 +75,8 @@ class Message1 {
             Message1.KEY_MESSAGE: self.message ?? "",
             Message1.KEY_NAME: self.name ?? "Unknown",
             Message1.KEY_TIMESTAMP: ServerValue.timestamp(),
-            Message1.KEY_USER_GUID: self.userGuid
+            Message1.KEY_USER_GUID: self.userGuid,
+            Message1.KEY_ATTACHMENT: self.attachment
         ]
         
         return value

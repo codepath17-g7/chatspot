@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,6 +51,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hJP-K9-TBQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1495" y="1411"/>
+        </scene>
+        <!--Chat Room DetailVC-->
+        <scene sceneID="6G2-yG-0vX">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="kER-1Q-3Mh" customClass="ChatRoomDetailVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZLG-MI-Gee"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hws-Py-X5b"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZYh-03-2DV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RqF-un-Kmi">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="RqF-un-Kmi" secondAttribute="trailing" id="HPl-aX-mNU"/>
+                            <constraint firstItem="RqF-un-Kmi" firstAttribute="top" secondItem="ZLG-MI-Gee" secondAttribute="bottom" id="Zwb-7L-VaB"/>
+                            <constraint firstItem="RqF-un-Kmi" firstAttribute="leading" secondItem="ZYh-03-2DV" secondAttribute="leading" id="pjC-Ze-nyv"/>
+                            <constraint firstItem="Hws-Py-X5b" firstAttribute="top" secondItem="RqF-un-Kmi" secondAttribute="bottom" id="wHe-Rr-bC1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="RqF-un-Kmi" id="8ja-2q-78l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x8I-DN-hja" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3441" y="2266"/>
         </scene>
         <!--My Chats-->
         <scene sceneID="sxw-v0-Edt">
@@ -425,6 +458,7 @@
                         <outlet property="tableView" destination="Tbb-1z-WBL" id="94i-xs-V4o"/>
                         <outlet property="toolbarBottomConstraint" destination="p9C-by-nSs" id="Ch1-f5-17B"/>
                         <outlet property="toolbarView" destination="M6h-xv-TnC" id="l5c-aw-pAG"/>
+                        <segue destination="kER-1Q-3Mh" kind="show" identifier="chatroomDetailSegue" id="OzT-Ab-FVH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CF-ys-sA4" userLabel="First Responder" sceneMemberID="firstResponder"/>

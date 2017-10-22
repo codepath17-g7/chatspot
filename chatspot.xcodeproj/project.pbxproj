@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2D3D06DAF25404BF9EF96699 /* Pods_chatspot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */; };
+		2D93B1051F9D2B6800D6B80C /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D93B1031F9D2B6800D6B80C /* UserCell.swift */; };
+		2D93B1061F9D2B6800D6B80C /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D93B1041F9D2B6800D6B80C /* UserCell.xib */; };
+		2DCF58E11F9CB8050014BBD0 /* ChatRoomDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCF58E01F9CB8050014BBD0 /* ChatRoomDetailVC.swift */; };
 		325F47991F91F71E00DE5C34 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325F47981F91F71E00DE5C34 /* AuthViewController.swift */; };
 		32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */; };
 		32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D661F8B1BAD00E05CF3 /* Main.storyboard */; };
@@ -60,6 +63,9 @@
 
 /* Begin PBXFileReference section */
 		28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.release.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.release.xcconfig"; sourceTree = "<group>"; };
+		2D93B1031F9D2B6800D6B80C /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		2D93B1041F9D2B6800D6B80C /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
+		2DCF58E01F9CB8050014BBD0 /* ChatRoomDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomDetailVC.swift; sourceTree = "<group>"; };
 		325F47981F91F71E00DE5C34 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		32963D5F1F8B1BAD00E05CF3 /* chatspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = chatspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -263,6 +269,7 @@
 				F2719F021F8DF55200417517 /* AroundMeVC.swift */,
 				F2719F041F8DF56300417517 /* ProfileVC.swift */,
 				325F47981F91F71E00DE5C34 /* AuthViewController.swift */,
+				2DCF58E01F9CB8050014BBD0 /* ChatRoomDetailVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -272,6 +279,8 @@
 			children = (
 				F2719F081F8DF6F500417517 /* ChatListCell.swift */,
 				F2719F0A1F8DF71600417517 /* ChatMessageCell.swift */,
+				2D93B1031F9D2B6800D6B80C /* UserCell.swift */,
+				2D93B1041F9D2B6800D6B80C /* UserCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -378,6 +387,7 @@
 				F2FEEFA11F9C719D008923D3 /* Libertad-Light.otf in Resources */,
 				F2FEEFA51F9C719D008923D3 /* Libertad-Thin.otf in Resources */,
 				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
+				2D93B1061F9D2B6800D6B80C /* UserCell.xib in Resources */,
 				F2FEEF9F1F9C719D008923D3 /* Libertad-ExtraBoldItalic.otf in Resources */,
 				76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */,
 				F2FEEFA61F9C719D008923D3 /* Libertad-ThinItalic.otf in Resources */,
@@ -493,6 +503,7 @@
 				3298CF601F92E65A00F9BBEE /* Constants.swift in Sources */,
 				762620241F93D33D008404F6 /* ChatRoomAnnotationView.swift in Sources */,
 				8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */,
+				2DCF58E11F9CB8050014BBD0 /* ChatRoomDetailVC.swift in Sources */,
 				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
 				76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */,
@@ -508,6 +519,7 @@
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,
+				2D93B1051F9D2B6800D6B80C /* UserCell.swift in Sources */,
 				76E2296A1F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift in Sources */,
 				F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */,
 				7679EA841F8E071A00DE16FA /* UserView.swift in Sources */,
