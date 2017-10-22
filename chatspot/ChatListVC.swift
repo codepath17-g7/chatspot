@@ -38,24 +38,15 @@ class ChatListVC: UIViewController {
         // add in our static room
 
         if let aroundMeRoomGuid = ChatSpotClient.currentUser.aroundMe {
-            let aroundMeRoom = ChatRoom1()
-            let userLocalRoom = ChatSpotClient.chatrooms[aroundMeRoomGuid]
-            
-            aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
-            aroundMeRoom.guid = aroundMeRoomGuid
-            aroundMeRoom.isAroundMe = true
-            aroundMeRoom.users = userLocalRoom?.users
-            aroundMeRoom.localUsers = userLocalRoom?.localUsers
-            aroundMeRoom.lastMessage = userLocalRoom?.lastMessage
-            aroundMeRoom.lastMessageTimestamp = userLocalRoom?.lastMessageTimestamp
-                
-            chatrooms.append(aroundMeRoom)
+            updateAroundMeRoom(aroundMeRoomGuid)
         }
 
 
         self.tableView.reloadData()
         
         KRProgressHUD.showSuccess()
+        
+        startObservingAroundMeRoomGuid()
         
         startObservingChatRoomList()
         
@@ -70,6 +61,35 @@ class ChatListVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appGoingToBackground(notification:)),
                                                name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 
+    }
+    
+    func updateAroundMeRoom(_ roomGuid: String) {
+        print("Around me room -> \(roomGuid)")
+
+        let aroundMeRoom = ChatRoom1()
+        let userLocalRoom = ChatSpotClient.chatrooms[roomGuid]
+        
+        aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
+        aroundMeRoom.guid = roomGuid
+        aroundMeRoom.isAroundMe = true
+        aroundMeRoom.users = userLocalRoom?.users
+        aroundMeRoom.localUsers = userLocalRoom?.localUsers
+        aroundMeRoom.lastMessage = userLocalRoom?.lastMessage
+        aroundMeRoom.lastMessageTimestamp = userLocalRoom?.lastMessageTimestamp
+        if (chatrooms.count > 0 && chatrooms[0].isAroundMe) {
+            chatrooms[0] = aroundMeRoom
+        } else {
+            chatrooms.append(aroundMeRoom)
+        }
+    }
+
+    func startObservingAroundMeRoomGuid() {
+        let observer = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
+            self.updateAroundMeRoom(roomGuid)
+        }) { (error: Error?) in
+            
+        }
+        observers.append(observer)
     }
     
     func startObservingChatRoomList() {
@@ -107,6 +127,14 @@ class ChatListVC: UIViewController {
     
     private func sortChatRooms() {
         self.chatrooms.sort(by: { (first, second) -> Bool in
+            // Make sure that around me room is always sticky at top
+            if first.isAroundMe {
+                return true
+            }
+            
+            if second.isAroundMe {
+                return false
+            }
             
             let firstHasUnread = (self.unreadCount[first.guid] ?? 0) > 0
             let secondHasUnread = (self.unreadCount[second.guid] ?? 0) > 0
