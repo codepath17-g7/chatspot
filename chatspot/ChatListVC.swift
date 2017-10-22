@@ -81,6 +81,7 @@ class ChatListVC: UIViewController {
         } else {
             chatrooms.append(aroundMeRoom)
         }
+        self.tableView.reloadData()
     }
 
     func startObservingAroundMeRoomGuid() {
