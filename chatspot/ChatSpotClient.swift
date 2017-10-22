@@ -252,4 +252,14 @@ class ChatSpotClient {
         })
     }
     
+    static func postUserLocation(userGuid: String, longitude: String, latitude: String, success: @escaping () -> (), failure: @escaping () -> ()) {
+        let ref = Database.database().reference()
+        let locVal : [String: String] = [
+            "long": longitude,
+            "lat" : latitude
+        ]
+        ref.child("users").child(userGuid).child("location").setValue(locVal)
+        success()
+    }
+    
 }

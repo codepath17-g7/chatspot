@@ -85,6 +85,9 @@
 		76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationDetailView.xib; sourceTree = "<group>"; };
 		76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationDetailView.swift; sourceTree = "<group>"; };
 		76E2296B1F9B245B007049B0 /* StorageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageClient.swift; sourceTree = "<group>"; };
+		76E229701F9BFE8E007049B0 /* Golden Gate.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Golden Gate.gpx"; path = "locations/Golden Gate.gpx"; sourceTree = "<group>"; };
+		76E229711F9C005C007049B0 /* Oracle Arena.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Oracle Arena.gpx"; path = "locations/Oracle Arena.gpx"; sourceTree = "<group>"; };
+		76E229721F9C0D47007049B0 /* SAP Center.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "SAP Center.gpx"; path = "locations/SAP Center.gpx"; sourceTree = "<group>"; };
 		76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIImageWithEditView.xib; sourceTree = "<group>"; };
 		76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageWithEditView.swift; sourceTree = "<group>"; };
 		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
@@ -130,6 +133,8 @@
 		32963D561F8B1BAD00E05CF3 = {
 			isa = PBXGroup;
 			children = (
+				76E2296D1F9BFE39007049B0 /* Locations */,
+				F2BFE5F41F9AA81B006D9849 /* Libertad Font */,
 				32963D611F8B1BAD00E05CF3 /* chatspot */,
 				32963D601F8B1BAD00E05CF3 /* Products */,
 				48F18CA576106E6205144A7D /* Pods */,
@@ -214,6 +219,16 @@
 				76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		76E2296D1F9BFE39007049B0 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				76E229701F9BFE8E007049B0 /* Golden Gate.gpx */,
+				76E229711F9C005C007049B0 /* Oracle Arena.gpx */,
+				76E229721F9C0D47007049B0 /* SAP Center.gpx */,
+			);
+			name = Locations;
 			sourceTree = "<group>";
 		};
 		7E8120D353190548F2D84F64 /* Frameworks */ = {
