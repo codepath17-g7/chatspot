@@ -62,20 +62,24 @@ extension AroundMeView: MKMapViewDelegate {
             mapView.addAnnotation(annotation)
         }
         
-        mapView.showAnnotations(mapView.annotations, animated: true)
+//        mapView.showAnnotations(mapView.annotations, animated: true)
     }
     
     func centerMap() {
-        let rgn = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(37.7833, -122.4067), 2000, 2000);
+        let rgn = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(37.5644565, -122.1683781), 65000, 65000);
         mapView.setRegion(rgn, animated: false)
         mapView.isZoomEnabled = true
         mapView.showsCompass = true
+        mapView.showsUserLocation = true
     }
     
 
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-
+        if (annotation is MKUserLocation) {
+            return nil
+        }
+        
         let chatRoomAnnotation = annotation as! ChatRoomAnnotation
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: chatRoomAnnotation.room.guid) as? ChatRoomAnnotationView
         
