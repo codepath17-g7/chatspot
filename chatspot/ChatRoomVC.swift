@@ -288,7 +288,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     @IBAction func addPhotoButtonClicked(_ sender: AnyObject) {
         addPhotoButton.isSelected = true
         
-        let alert = UIAlertController(title: "Photos", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
@@ -297,7 +297,9 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             self.openPhotos()
         }))
         
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: {_ in
+            self.addPhotoButton.isSelected = false
+        }))
         
         self.present(alert, animated: true, completion: nil)
         
@@ -363,10 +365,8 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 	}
 }
 
-//MARK: ============ TextView and ImagePicker Methods ============
-
-extension ChatRoomVC: GrowingTextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+//MARK: ============ TextView Delegate Methods ============
+extension ChatRoomVC: GrowingTextViewDelegate {
     
     func textViewDidChangeHeight(_ textView: GrowingTextView, height: CGFloat) {
         UIView.animate(withDuration: 0.2) {
@@ -380,6 +380,33 @@ extension ChatRoomVC: GrowingTextViewDelegate, UIImagePickerControllerDelegate, 
         } else {
             self.sendMessageButton.isEnabled = false
         }
+    }
+}
+
+//MARK: ============ TextView and ImagePicker Methods ============
+
+extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func openCamera(){
+        let picker = UIImagePickerController()
+        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+            picker.sourceType = UIImagePickerControllerSourceType.camera
+            picker.delegate = self
+            picker.allowsEditing = true
+            present(picker, animated: true, completion: nil)
+        } else {
+            let alert  = UIAlertController(title: "Warning", message: "No camera found.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func openPhotos() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        present(picker, animated: true, completion:nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController,
@@ -411,28 +438,6 @@ extension ChatRoomVC: GrowingTextViewDelegate, UIImagePickerControllerDelegate, 
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: {() in self.addPhotoButton.isSelected = false })
-    }
-    
-    func openCamera(){
-        let picker = UIImagePickerController()
-        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-            picker.delegate = self
-            picker.allowsEditing = true
-            present(picker, animated: true, completion: nil)
-        } else {
-            let alert  = UIAlertController(title: "Warning", message: "No camera found.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func openPhotos() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        present(picker, animated: true, completion:nil)
     }
     
 }
