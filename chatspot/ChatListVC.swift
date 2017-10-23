@@ -102,7 +102,15 @@ class ChatListVC: UIViewController {
             
         }, onRemove: { (room: ChatRoom1) in
             
-            if let itemToRemoveIndex = self.chatrooms.index(where: { $0.guid == room.guid }) {
+            var itemToRemoveIndex = -1
+            for index in 1..<self.chatrooms.count {
+                if (self.chatrooms[index].guid == room.guid) {
+                    itemToRemoveIndex = index
+                    break;
+                }
+            }
+            
+            if itemToRemoveIndex != -1 {
                 self.chatrooms.remove(at: itemToRemoveIndex)
                 self.tableView.reloadData()
             }
