@@ -67,15 +67,17 @@ class ChatListVC: UIViewController {
         print("Around me room -> \(roomGuid)")
 
         let aroundMeRoom = ChatRoom1()
-        let userLocalRoom = ChatSpotClient.chatrooms[roomGuid]
+        guard let userLocalRoom = ChatSpotClient.chatrooms[roomGuid] else {
+            return;
+        }
         
-        aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
+        aroundMeRoom.name = "Around Me - " + userLocalRoom.name
         aroundMeRoom.guid = roomGuid
         aroundMeRoom.isAroundMe = true
-        aroundMeRoom.users = userLocalRoom?.users
-        aroundMeRoom.localUsers = userLocalRoom?.localUsers
-        aroundMeRoom.lastMessage = userLocalRoom?.lastMessage
-        aroundMeRoom.lastMessageTimestamp = userLocalRoom?.lastMessageTimestamp
+        aroundMeRoom.users = userLocalRoom.users
+        aroundMeRoom.localUsers = userLocalRoom.localUsers
+        aroundMeRoom.lastMessage = userLocalRoom.lastMessage
+        aroundMeRoom.lastMessageTimestamp = userLocalRoom.lastMessageTimestamp
         if (chatrooms.count > 0 && chatrooms[0].isAroundMe) {
             chatrooms[0] = aroundMeRoom
         } else {
@@ -136,7 +138,7 @@ class ChatListVC: UIViewController {
                 self.unreadCount[room.guid] = unreadCountForRoom + 1
                 
                 room.lastMessage = lastMessage
-                room.lastMessageTimestamp = lastMessageTimestamp
+                room.lastMessageTimestamp = lastMessageTimestamp!
                 self.sortChatRooms()
                 self.tableView.reloadData()
             }

@@ -56,6 +56,8 @@ class AroundMeView: UIView {
     
     override func willMove(toWindow newWindow: UIWindow?) {
         if (newWindow != nil) {
+            print("Map - Adding observer")
+
             observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
                 self.aroundMeRoomGuid = roomGuid
                 self.reloadMap()
@@ -63,7 +65,7 @@ class AroundMeView: UIView {
             })
             
             observers.append(ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
-                print("Room \(room.name) has changed")
+                print("Map - Room \(room.name!) has changed")
                 self.chats[room.guid] = room
                 self.rooms = Array(self.chats.values)
                 self.reloadMap()
@@ -71,6 +73,7 @@ class AroundMeView: UIView {
                 print(error ?? "")
             }))
         } else {
+            print("Map - Removing observer \(observers)")
             observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
             observers.removeAll()
         }

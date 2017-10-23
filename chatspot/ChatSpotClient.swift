@@ -39,6 +39,7 @@ class ChatSpotClient {
     }
     
     static func removeObserver(handle: UInt){
+        print("Removing observers \(handle)")
         let ref = Database.database().reference()
         ref.removeObserver(withHandle: handle)
     }
@@ -67,7 +68,7 @@ class ChatSpotClient {
             .observe(.childChanged, with: { (snapshot) in
                 let dict = snapshot.value as? NSDictionary ?? [:]
                 let room = ChatRoom1(guid: snapshot.key, obj: dict)
-                success(room.guid!, room.lastMessage!, room.lastMessageTimestamp)
+                success(room.guid!, room.lastMessage, room.lastMessageTimestamp)
             }) { (error: Error?) in
                 failure(error)
             }

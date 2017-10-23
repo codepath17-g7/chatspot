@@ -28,8 +28,8 @@ class ChatRoom1 {
     var latitude: Double!
     var users: [String:Bool]? // these users joined the room manually
     var localUsers: [String:Bool]? // these users auto joined the room
-    var lastMessage: String?
-    var lastMessageTimestamp: Double?
+    var lastMessage: String = ""
+    var lastMessageTimestamp: Double = 0
     
     // for use on client side only, don't send to server
     var isAroundMe: Bool = false
