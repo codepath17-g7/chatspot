@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import MapKit
 
 class ChatRoomDetailVC: UIViewController {
     
@@ -47,6 +48,16 @@ class ChatRoomDetailVC: UIViewController {
         
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
+        
+        if let latitude = chatroom.latitude,
+            let longitude = chatroom.longitude {
+            
+            let headerView = MapBannerView()
+            headerView.loadFromXib()
+            tableView.tableHeaderView = headerView
+            
+            headerView.setLocation(latitude, longitude)
+        }
     }
     
     @IBAction func leaveRoom(_ sender: UIButton) {
@@ -60,6 +71,22 @@ class ChatRoomDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let headerView = tableView.tableHeaderView {
+            
+            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            var headerFrame = headerView.frame
+            
+            //Comparison necessary to avoid infinite loop
+            if height != headerFrame.size.height {
+                headerFrame.size.height = height
+                headerView.frame = headerFrame
+                tableView.tableHeaderView = headerView
+            }
+        }
+    }
     
     /*
      // MARK: - Navigation
