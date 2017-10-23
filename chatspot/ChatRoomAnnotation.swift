@@ -19,4 +19,17 @@ class ChatRoomAnnotation: MKPointAnnotation {
         self.title = room.name
     }
     
+    func isUserJoined() -> Bool {
+        if room.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+            return true
+        }
+        return false
+    }
+    
+    func isUserNearBy() -> Bool {
+        if room.localUsers?.index(forKey: ChatSpotClient.userGuid) != nil {
+            return true
+        }
+        return false
+    }
 }

@@ -20,6 +20,7 @@ class ChatRoomAnnotationView: MKAnnotationView {
         }
     }
     
+    
     init(roomAnnotation: ChatRoomAnnotation, reuseIdentifier: String?) {
         super.init(annotation: roomAnnotation, reuseIdentifier: reuseIdentifier)
         
@@ -28,9 +29,7 @@ class ChatRoomAnnotationView: MKAnnotationView {
         detailView.widthAnchor.constraint(equalToConstant: 170).isActive = true
         detailView.heightAnchor.constraint(equalToConstant: 130).isActive = true
         detailView.joinButton.addTarget(self, action: #selector(joinRoom(_:)), for: .touchUpInside)
-        detailCalloutAccessoryView = detailView
-        
-        image = #imageLiteral(resourceName: "red-pin-with-circle")
+        detailCalloutAccessoryView = detailView        
         canShowCallout = true
     }
     
@@ -39,7 +38,7 @@ class ChatRoomAnnotationView: MKAnnotationView {
         let width = 150
         let height = 100
        
-        print("Generating snapshot \(String(describing: self.annotation?.coordinate)) \(self.description)")
+//        print("Generating snapshot \(String(describing: self.annotation?.coordinate)) \(self.description)")
         let options = MKMapSnapshotOptions()
         options.size = CGSize(width: width, height: height)
         options.mapType = .satelliteFlyover

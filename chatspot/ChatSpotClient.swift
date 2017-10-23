@@ -120,7 +120,7 @@ class ChatSpotClient {
         let ref = Database.database().reference()
         let chatroomsRef = ref.child("chatrooms")
         
-        let refHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot: DataSnapshot) in
+        let refHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childChanged, with: { (snapshot: DataSnapshot) in
             let dict = snapshot.value as? NSDictionary ?? [:]
             let room = ChatRoom1(guid: snapshot.key, obj: dict)
             // cache

@@ -16,17 +16,17 @@ class AroundMeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        observer = ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
-            self.chats[room.guid] = room
-            self.aroundMeView.updateRooms(Array(self.chats.values))
-        }, failure: { (error: Error?) in
-            print(error ?? "")
-        })
+//
+//        observer = ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
+//            self.chats[room.guid] = room
+//            self.aroundMeView.updateRooms(Array(self.chats.values))
+//        }, failure: { (error: Error?) in
+//            print(error ?? "")
+//        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        ChatSpotClient.removeObserver(handle: observer)
+//        ChatSpotClient.removeObserver(handle: observer)
     }
 
 }
