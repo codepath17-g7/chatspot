@@ -89,21 +89,31 @@ class ChatSpotClient {
         }
     }
 
-    static func observeMyChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+    static func observeMyChatRooms(onAdd: @escaping (ChatRoom1) -> (), onRemove: @escaping (ChatRoom1) -> (),
+                                   addFailure: @escaping (Error?) -> (), removeFailure: @escaping (Error?) -> ()) -> [UInt]{
+        
         let ref = Database.database().reference()
         let chatroomsRef = ref.child("chatrooms")
         
         let userGuid = Auth.auth().currentUser!.uid
         
-        let refHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(DataEventType.childAdded, with: { (snapshot: DataSnapshot) in
+        let addRefHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(.childAdded, with: { (snapshot: DataSnapshot) in
             let dict = snapshot.value as? NSDictionary ?? [:]
             let room = ChatRoom1(guid: snapshot.key, obj: dict)
-            success(room)
+            onAdd(room)
         }) { (error: Error?) in
-            failure(error)
+            addFailure(error)
         }
-    
-        return refHandle
+        
+        let removeRefHadle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(.childRemoved, with: { (snapshot: DataSnapshot) in
+            let dict = snapshot.value as? NSDictionary ?? [:]
+            let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            onRemove(room)
+        }) { (error: Error?) in
+            removeFailure(error)
+        }
+        
+        return [addRefHandle, removeRefHadle]
     }
     
     static func observeChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{

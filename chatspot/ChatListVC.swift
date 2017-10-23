@@ -94,16 +94,29 @@ class ChatListVC: UIViewController {
     }
     
     func startObservingChatRoomList() {
-        let observer = ChatSpotClient.observeMyChatRooms(success: { (room: ChatRoom1) in
+        let chatRoomObsevers = ChatSpotClient.observeMyChatRooms(onAdd: { (room: ChatRoom1) in
+            
             self.chatrooms.append(room)
             self.tableView.reloadData()
             KRProgressHUD.showSuccess()
-        }, failure: { (error: Error!) in
+            
+        }, onRemove: { (room: ChatRoom1) in
+            
+            if let itemToRemoveIndex = self.chatrooms.index(where: { $0.guid == room.guid }) {
+                self.chatrooms.remove(at: itemToRemoveIndex)
+                self.tableView.reloadData()
+            }
+            
+        }, addFailure: { (error: Error!) in
+            
             print("Error in startObservingChatRoomList: \(error.localizedDescription)")
-//            KRProgressHUD.showError(withMessage: "Unable to load ChatSpots")
+            
+        }, removeFailure:  { (error: Error!) in
+            
+            print("Error in startObservingChatRoomList: \(error.localizedDescription)")
         })
         
-        observers.append(observer)
+        observers.append(contentsOf: chatRoomObsevers)
     }
     
     func startObservingLastMessage() {
