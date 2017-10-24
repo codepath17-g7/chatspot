@@ -13,6 +13,8 @@ import Firebase
 import MBProgressHUD
 import ISEmojiView
 import GrowingTextView
+import ImagePickerSheetController
+import Photos
 
 class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     static var MAX_MESSAGES_LIMIT: UInt = 10
@@ -50,6 +52,9 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		tableView.dataSource = self
 		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.setNeedsLayout()
+        tableView.layoutIfNeeded()
+        
 		tableView.separatorStyle = .none
         
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
@@ -304,78 +309,18 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     @IBAction func addPhotoButtonClicked(_ sender: AnyObject) {
         addPhotoButton.isSelected = true
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Photos", style: .default, handler: { _ in
-            self.openPhotos()
-        }))
-        
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: {_ in
-            self.addPhotoButton.isSelected = false
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
-        
-        
+        openImagePickerActionSheet()
     }
     
     
-    @IBAction func onSendMessage(_ sender: UIButton) {
+    @IBAction func sendMessageButtonClicked(_ sender: UIButton) {
         if chatRoom.guid == nil {
             return
         }
         if !(messageTextView.text?.isEmpty)! {
             
-            let range = NSRange(location: 0, length: messageTextView.attributedText.length)
-            if messageTextView.textStorage.containsAttachments(in: range){
-                let attributedString = messageTextView.attributedText
-                var location = 0
-                var imageUrls = [URL]()
-//                var newMessageString = messageTextView.text
-//                print("here is original newMessageString:")
-//                print(newMessageString)
-                while location < range.length {
-                    var r = NSRange()
-                    if let attributedDictionary = attributedString?.attributes(at: location, effectiveRange: &r) {
-                        if let attachment = attributedDictionary[NSAttachmentAttributeName] as? NSTextAttachment {
-                            if let image = attachment.image {
-                                StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
-                                    if let url = url {
-                                        print("There is a url")
-                                        imageUrls.append(url)
-//                                        newMessageString?.insert(url.absoluteString, at: location)
-//                                        newMessageString?.replacingCharacters(in: r, with: url.absoluteString)
-//                                        newMessageString?.replaceSubrange(r, with: url.absoluteString)
-//                                        newMessageString.replaceCharacters(in: r, with: url.absoluteString)
-//                                        print(newMessageString)
-                                    }
-                                    
-                                    
-                                }, failure: {
-                                    print("Failure trying to store images")
-                                })
-//                                imageArray.append( attachment!.image!)
-                            }
-                        }
-                        location += r.length
-                    }
-                }
-            }
-            print("here is final message text:")
-            print(messageTextView.attributedText.string)
-            
             let tm = Message1(roomId: chatRoom.guid, message: messageTextView.text!, name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!)
-//            let message = Message1(
-//            if messageTextView.attributedText.containsAttachments(in: range){
-            
-//            }
-//
+
             ChatSpotClient.sendMessage(message: tm, room: chatRoom, success: {
                 self.messageTextView.text = ""
                 self.sendMessageButton.isEnabled = false
@@ -387,6 +332,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         }
         
     }
+    
+    
     
 //MARK: ============ MessageCellDelegate Methods ============
     
@@ -445,32 +392,223 @@ extension ChatRoomVC: GrowingTextViewDelegate {
 
 //MARK: ============ ImagePicker Methods ============
 
-extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerSheetControllerDelegate {
     
-    func openCamera(){
-        let picker = UIImagePickerController()
-        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-            picker.delegate = self
-            picker.allowsEditing = true
-            present(picker, animated: true, completion: nil)
-        } else {
-            let alert  = UIAlertController(title: "Warning", message: "No camera found.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+//    func openCamera(){
+//        let picker = UIImagePickerController()
+//        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+//            picker.sourceType = UIImagePickerControllerSourceType.camera
+//            picker.delegate = self
+//            picker.allowsEditing = true
+//            present(picker, animated: true, completion: nil)
+//        } else {
+//            let alert  = UIAlertController(title: "Warning", message: "No camera found.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//            present(alert, animated: true, completion: nil)
+//        }
+//    }
+    
+    //        let picker = UIImagePickerController()
+    //        picker.delegate = self
+    //        picker.allowsEditing = true
+    //        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+    
+    //        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    //        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+    //            self.openCamera()
+    //        }))
+    //
+    //        alert.addAction(UIAlertAction(title: "Photos", style: .default, handler: { _ in
+    //            self.openPhotos()
+    //        }))
+    //
+    //        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: {_ in
+    //            self.addPhotoButton.isSelected = false
+    //        }))
+    //
+    //        self.present(alert, animated: true, completion: nil)
+    
+    
+    //        controller.addAction(ImagePickerAction(title: NSLocalizedString("Cancel", comment: "Action Title"), secondaryTitle: nil, style: .cancel, handler: { _ in
+    //             self.addPhotoButton.isSelected = false
+    //        }, secondaryHandler: nil))
+    
+    //    func addImageToTextView(_ image: UIImage){
+    //        let textAttachment = NSTextAttachment()
+    //        let oldWidth = image.size.width
+    //        let scaleFactor = oldWidth / (self.messageTextView.frame.size.width - 10)
+    //        textAttachment.image = UIImage(cgImage: image.cgImage!, scale: scaleFactor, orientation: .up).roundedCorners
+    //        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
+    ////        self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
+    //        self.messageTextView.textStorage.append(attrStringWithImage)
+    ////        self.messageTextView.becomeFirstResponder()
+    ////        self.messageTextView.isEditable = false
+    //        self.sendMessageButton.isEnabled = true
+    //    }
+    
+    
+    
+    func openImagePickerActionSheet() {
+        
+        // Backup plan of going to camera or camera roll if desired image not shown in action sheet
+        let presentImagePickerController: (UIImagePickerControllerSourceType) -> () = { source in
+            let controller = UIImagePickerController()
+            controller.delegate = self
+            controller.allowsEditing = true
+            var sourceType = source
+            if !UIImagePickerController.isSourceTypeAvailable(sourceType) {
+                sourceType = .photoLibrary
+                print("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
+            }
+            controller.sourceType = sourceType
+            
+            // Present camera or full photo gallery
+            self.present(controller, animated: true, completion: nil)
+        }
+        
+        
+        // Action sheet controller setup:
+        let controller = ImagePickerSheetController(mediaType: .imageAndVideo)
+        controller.delegate = self
+
+        // Add "Take Photo or Video" and "Add caption" buttons
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("Take Photo or Video", comment: "Action Title"), secondaryTitle: NSLocalizedString("Add caption", comment: "Action Title"), handler: { _ in
+            
+            presentImagePickerController(.camera)
+            
+        }, secondaryHandler: { _, numberOfPhotos in
+            
+            print("Caption \(numberOfPhotos) photos")
+            
+        }))
+        
+        // Add "Photo Library" and "Send photos" buttons
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("Photo Library", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("ImagePickerSheet.button1.Send %lu Photo", comment: "Action Title") as NSString, $0) as String}, handler: { _ in
+            
+            presentImagePickerController(.photoLibrary)
+            
+        }, secondaryHandler: { _, numberOfPhotos in
+            
+            self.sendAssets(selectedAssets: controller.selectedAssets)
+            
+        }))
+
+        // Add "Cancel" button
+        controller.addAction(ImagePickerAction(cancelTitle: NSLocalizedString("Cancel", comment: "Action Title"), handler: { _ in
+            
+            self.addPhotoButton.isSelected = false
+
+        }))
+        
+        // Presentation for different devices
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            controller.modalPresentationStyle = .popover
+            controller.popoverPresentationController?.sourceView = view
+            controller.popoverPresentationController?.sourceRect = CGRect(origin: view.center, size: CGSize())
+        }
+        
+        // Present ImagePickerActionSheet
+        present(controller, animated: true, completion: nil)
+    }
+    
+    
+    
+    // Send the pictures, videos, etc.
+    func sendAssets(selectedAssets: [PHAsset]){
+        
+        //for every asset in the asset array
+        for asset in selectedAssets {
+            
+            //retrieve small image for that asset
+            if asset.mediaType == .image {
+                getSmallImage(asset: asset, completion: {(image: UIImage?) -> Void in
+                    if let img = image {
+                        self.storeAndSendImage(image: img)
+                    }
+                })
+//            //retrieve full size image for that asset
+//            if let image = getFullImage(asset: asset){
+//
+//            }
+            } else if asset.mediaType == .video {
+                //    //retrieve video
+                //    if let video = getVideoForAsset(asset: asset){
+                //
+                //    }
+            }
         }
     }
     
-    func openPhotos() {
-        let picker = UIImagePickerController()
-//        self.messageTextView.inputView = picker.view
-        picker.delegate = self
-        picker.allowsEditing = true
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-//        messageTextView.becomeFirstResponder()
-//        messageTextView.reloadInputViews()
-        present(picker, animated: true, completion:nil)
+    func storeAndSendImage(image: UIImage){
+        //store asset in firebase by calling storeChatImage on UIImage
+        StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
+            if let url = url {
+                //send message with string of imageURL in it
+                let attachment = url.absoluteString
+                
+                let tm = Message1(roomId: self.chatRoom.guid, message: "", name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!, attachment: attachment)
+                
+                ChatSpotClient.sendMessage(message: tm, room: self.chatRoom, success: {
+                    print("photo sent!")
+                }, failure: {
+                    print("photo sending failed")
+                })
+                self.addPhotoButton.isSelected = false
+            }
+        }, failure: {
+            print("Failure trying to store images")
+        })
+
     }
+    
+    func getSmallImage(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.isSynchronous = true
+        manager.requestImage(for: asset, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFit, options: options, resultHandler: { (result: UIImage?, _) -> Void in
+            if let image = result {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        })
+    }
+    
+    // FOR LATER USE:
+    func getFullImage(asset: PHAsset) -> UIImage? {
+        
+        var image: UIImage?
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        options.version = .current
+//        options.isSynchronous = true //maybe should be false
+        
+        //retrieve real image for that asset
+        manager.requestImageData(for: asset, options: options) { (data: Data?, _, _, _) in
+            if let imageData = data {
+                image = UIImage(data: imageData)
+            }
+        }
+        return image
+    }
+    
+    // FOR LATER USE:
+    func getVideoForAsset(asset: PHAsset) -> AVPlayerItem? {
+        let manager = PHImageManager.default()
+        let options = PHVideoRequestOptions()
+//        options.progressHandler
+        options.deliveryMode = .fastFormat
+        options.version = .current
+        var video: AVPlayerItem?
+
+        manager.requestPlayerItem(forVideo: asset, options: options) { (playerItem: AVPlayerItem?, _) in
+            if let vid = playerItem {
+                video = vid
+            }
+        }
+        return video
+    }
+            
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -483,21 +621,8 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         }
 
         picker.dismiss(animated: true, completion: { () in
-            self.addImageToTextView(image)
-            self.addPhotoButton.isSelected = false
+            self.storeAndSendImage(image: image)
         })
-    }
-    
-    func addImageToTextView(_ image: UIImage){
-        let textAttachment = NSTextAttachment()
-        let oldWidth = image.size.width
-        let scaleFactor = oldWidth / (self.messageTextView.frame.size.width - 10)
-        textAttachment.image = UIImage(cgImage: image.cgImage!, scale: scaleFactor, orientation: .up).roundedCorners
-        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-//        self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
-        self.messageTextView.textStorage.append(attrStringWithImage)
-        self.messageTextView.becomeFirstResponder()
-        self.sendMessageButton.isEnabled = true
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

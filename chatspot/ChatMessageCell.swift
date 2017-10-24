@@ -21,6 +21,9 @@ class ChatMessageCell: UITableViewCell {
 	@IBOutlet weak var createdAtLabel: UILabel!
 	@IBOutlet weak var messageTextLabel: UILabel!
     @IBOutlet weak var authorProfileImage: UIImageView!
+    @IBOutlet weak var messageImageView: UIImageView!
+    
+    @IBOutlet var messageImageHeightConstraint: NSLayoutConstraint!
     
     
     weak var delegate: ChatMessageCellDelegate?
@@ -43,17 +46,33 @@ class ChatMessageCell: UITableViewCell {
                 setUpUserInfo(userGuid: guid)
 
             }
-            
-            if let urls = message.attachments {
-                for url in urls {
-                    let imageView = UIImageView()
-                    imageView.setImageWith(url)
-                    let image = UIImage(
+            if let urlString = message.attachment {
+                print("Has attachment")
+                if let url = URL(string: urlString) {
+                    print("urlString: \(urlString)")
+                    print("url: \(url)")
+                    
+                    messageImageView.setImageWith(url)
+                    messageTextLabel.isHidden = true
+                    messageImageView.isHidden = false
+                    messageImageHeightConstraint.isActive = true
+                    messageImageHeightConstraint.constant = 200
+                    messageImageView.contentMode = .scaleAspectFill
+                    messageImageView.layer.cornerRadius = 7
+                    messageImageView.clipsToBounds = true
+                    self.updateConstraints()
                 }
-//                let imageView = UIImageView(frame: CGRect(x: messageTextLabel.frame.origin.x, y: messageTextLabel.frame.maxY, width: messageTextLabel.frame.width, height: <#T##CGFloat#>))
+            } else {
+                messageTextLabel.isHidden = false
+                messageImageView.isHidden = true
+                messageImageHeightConstraint.isActive = false
+                self.updateConstraints()
+//                self.layoutIfNeeded()
             }
 		}
 	}
+    
+    
     
     func setUpUserInfo(userGuid: String){
         self.authorProfileImage.clipsToBounds = true
@@ -120,6 +139,12 @@ class ChatMessageCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+//        self.frame.height = 50
+//        messageTextLabel.isHidden = false
     }
 
 }

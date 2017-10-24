@@ -45,6 +45,8 @@
 		F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F081F8DF6F500417517 /* ChatListCell.swift */; };
 		F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0A1F8DF71600417517 /* ChatMessageCell.swift */; };
 		F2719F0E1F8DFCD900417517 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2719F0D1F8DFCD900417517 /* Message.swift */; };
+		F28898901F9EA091000C64DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F288988F1F9EA091000C64DF /* Localizable.stringsdict */; };
+		F28898921F9F0C87000C64DF /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28898911F9F0C87000C64DF /* Photos.framework */; };
 		F2FEEF9A1F9C7197008923D3 /* Libertad-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF8C1F9C7119008923D3 /* Libertad-Bold.otf */; };
 		F2FEEF9B1F9C719D008923D3 /* Libertad-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF8D1F9C7119008923D3 /* Libertad-BoldItalic.otf */; };
 		F2FEEF9C1F9C719D008923D3 /* Libertad-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF8E1F9C7119008923D3 /* Libertad-Book.otf */; };
@@ -108,6 +110,8 @@
 		F2719F081F8DF6F500417517 /* ChatListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		F2719F0A1F8DF71600417517 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		F2719F0D1F8DFCD900417517 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F288988F1F9EA091000C64DF /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		F28898911F9F0C87000C64DF /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		F2FEEF8C1F9C7119008923D3 /* Libertad-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Libertad-Bold.otf"; path = "chatspot/Libertad-Bold.otf"; sourceTree = "<group>"; };
 		F2FEEF8D1F9C7119008923D3 /* Libertad-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Libertad-BoldItalic.otf"; path = "chatspot/Libertad-BoldItalic.otf"; sourceTree = "<group>"; };
 		F2FEEF8E1F9C7119008923D3 /* Libertad-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Libertad-Book.otf"; path = "chatspot/Libertad-Book.otf"; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F28898921F9F0C87000C64DF /* Photos.framework in Frameworks */,
 				2D3D06DAF25404BF9EF96699 /* Pods_chatspot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -174,6 +179,7 @@
 				F2719EFD1F8D54E700417517 /* chatspot.entitlements */,
 				32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */,
 				32963D6E1F8B1BAD00E05CF3 /* Info.plist */,
+				F288988F1F9EA091000C64DF /* Localizable.stringsdict */,
 			);
 			path = chatspot;
 			sourceTree = "<group>";
@@ -239,6 +245,7 @@
 		7E8120D353190548F2D84F64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F28898911F9F0C87000C64DF /* Photos.framework */,
 				3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */,
 			);
 			name = Frameworks;
@@ -383,6 +390,7 @@
 				32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */,
 				32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */,
 				F2FEEFA21F9C719D008923D3 /* Libertad-LightItalic.otf in Resources */,
+				F28898901F9EA091000C64DF /* Localizable.stringsdict in Resources */,
 				F2FEEF9D1F9C719D008923D3 /* Libertad-BookItalic.otf in Resources */,
 				F2FEEFA11F9C719D008923D3 /* Libertad-Light.otf in Resources */,
 				F2FEEFA51F9C719D008923D3 /* Libertad-Thin.otf in Resources */,
@@ -442,6 +450,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GrowingTextView/GrowingTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/ISEmojiView/ISEmojiView.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePickerSheetController/ImagePickerSheetController.framework",
 				"${BUILT_PRODUCTS_DIR}/KRActivityIndicatorView/KRActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/KRProgressHUD/KRProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
@@ -460,6 +469,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GrowingTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISEmojiView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePickerSheetController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",

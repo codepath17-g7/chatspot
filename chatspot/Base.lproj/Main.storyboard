@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -124,13 +124,13 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4Y-JC-7KX">
-                                                            <rect key="frame" x="152" y="78" width="17.5" height="23"/>
+                                                            <rect key="frame" x="151.5" y="78" width="17.5" height="23"/>
                                                             <fontDescription key="fontDescription" name="Libertad" family="Libertad" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="NiM-bB-EmD">
-                                                            <rect key="frame" x="126" y="78.5" width="22" height="22"/>
+                                                            <rect key="frame" x="125.5" y="78.5" width="22" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="22" id="CvF-8w-SIU"/>
                                                                 <constraint firstAttribute="height" constant="22" id="rv5-dA-PG3"/>
@@ -141,7 +141,7 @@
                                                             <state key="normal" image="red-pin"/>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hi-Xi-W1Y">
-                                                            <rect key="frame" x="8" y="76" width="110" height="27"/>
+                                                            <rect key="frame" x="8" y="76" width="109.5" height="27"/>
                                                             <fontDescription key="fontDescription" name="Libertad-Bold" family="Libertad" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -246,7 +246,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="664"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="fEh-a4-kS5" userLabel="FooterView">
-                                            <rect key="frame" x="0.0" y="88" width="375" height="104"/>
+                                            <rect key="frame" x="0.0" y="273" width="375" height="104"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wolf" translatesAutoresizingMaskIntoConstraints="NO" id="wCp-j5-Aia">
@@ -281,11 +281,11 @@
                                             </constraints>
                                         </view>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="60" id="9WS-4L-9Pn" customClass="ChatMessageCell" customModule="chatspot" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="245" id="9WS-4L-9Pn" customClass="ChatMessageCell" customModule="chatspot" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="245"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9WS-4L-9Pn" id="uvT-7R-xVL">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="244.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_person" translatesAutoresizingMaskIntoConstraints="NO" id="yME-fo-Zy6">
@@ -296,20 +296,27 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
-                                                            <rect key="frame" x="60" y="8" width="41" height="20.5"/>
+                                                            <rect key="frame" x="60" y="8" width="41" height="21"/>
                                                             <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:52 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLi-4i-V4R">
-                                                            <rect key="frame" x="109" y="9" width="65" height="18"/>
+                                                            <rect key="frame" x="109" y="10" width="65" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="60" y="32" width="307" height="15"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zGT-Cy-ZXC">
+                                                            <rect key="frame" x="60" y="36.5" width="200" height="200"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="1hj-oe-rbJ"/>
+                                                                <constraint firstAttribute="width" constant="200" id="fS0-Db-GMg"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
+                                                            <rect key="frame" x="60" y="37" width="307" height="195.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -317,21 +324,26 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="yME-fo-Zy6" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="top" constant="8" id="1zX-3T-xkq"/>
-                                                        <constraint firstItem="MLi-4i-V4R" firstAttribute="baseline" secondItem="Whv-6R-gEz" secondAttribute="baseline" id="41E-xm-GIi"/>
+                                                        <constraint firstItem="zGT-Cy-ZXC" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="8" id="2pO-1z-XBW"/>
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" id="Dns-u4-o4i"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="JBR-gA-eSH"/>
-                                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="topMargin" id="Tq6-Wa-5kh"/>
+                                                        <constraint firstItem="zGT-Cy-ZXC" firstAttribute="bottom" secondItem="uvT-7R-xVL" secondAttribute="bottomMargin" id="VXW-cb-zh2"/>
                                                         <constraint firstItem="yME-fo-Zy6" firstAttribute="leading" secondItem="uvT-7R-xVL" secondAttribute="leading" constant="8" id="W9t-Qp-ba9"/>
-                                                        <constraint firstItem="csA-tj-VwX" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="4" id="Wbe-vU-mBf"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="leading" id="eYv-Dw-uwY"/>
+                                                        <constraint firstItem="MLi-4i-V4R" firstAttribute="baseline" secondItem="Whv-6R-gEz" secondAttribute="baseline" id="j7r-fE-9xa"/>
+                                                        <constraint firstItem="csA-tj-VwX" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="8" id="oma-4b-kAm"/>
+                                                        <constraint firstItem="zGT-Cy-ZXC" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="qdq-6L-6rj"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="authorLabel" destination="Whv-6R-gEz" id="NCL-dR-XVp"/>
                                                     <outlet property="authorProfileImage" destination="yME-fo-Zy6" id="SnC-hJ-ldE"/>
                                                     <outlet property="createdAtLabel" destination="MLi-4i-V4R" id="3Cc-iU-fkZ"/>
+                                                    <outlet property="messageImageHeightConstraint" destination="1hj-oe-rbJ" id="7wp-L3-zVg"/>
+                                                    <outlet property="messageImageView" destination="zGT-Cy-ZXC" id="9VG-Id-IJn"/>
                                                     <outlet property="messageTextLabel" destination="csA-tj-VwX" id="QLf-Md-6NF"/>
                                                 </connections>
                                             </tableViewCell>
@@ -360,7 +372,7 @@
                                                 <rect key="frame" x="331" y="10" width="36" height="30"/>
                                                 <state key="normal" title="Send"/>
                                                 <connections>
-                                                    <action selector="onSendMessage:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="BWO-DT-MC8"/>
+                                                    <action selector="sendMessageButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="eR9-pl-1er"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQJ-9i-BAx">
