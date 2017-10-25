@@ -292,11 +292,16 @@ class ChatSpotClient {
 
         let newMsgKey = ref.child("messages").child(room.guid).childByAutoId().key
         
-        var updateData = ["messages/\(room.guid!)/\(newMsgKey)" : message.toValue(),
-            "chatrooms/\(room.guid!)/lastMessage": message.message!,
-            "chatrooms/\(room.guid!)/lastMessageTimestamp": ServerValue.timestamp()
-
-        ] as [String : Any]
+        var updateData =
+            ["messages/\(room.guid!)/\(newMsgKey)" : message.toValue(),
+            "chatrooms/\(room.guid!)/lastMessageTimestamp": ServerValue.timestamp()]
+                as [String : Any]
+        
+        if ((message.message?.characters.count ?? 0) > 0) {
+            updateData["chatrooms/\(room.guid!)/lastMessage"] = message.message!
+        } else if ((message.attachment?.characters.count ?? 0) > 0) {
+            updateData["chatrooms/\(room.guid!)/lastMessage"] = "\(message.name!) sent a picture"
+        }
         
         print(updateData)
         
