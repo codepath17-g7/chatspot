@@ -15,6 +15,7 @@ class AroundMeView: UIView {
 
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var reCenter: UIImageView!
     var rooms: [ChatRoom1] = []
     var observers = [UInt]()
     var aroundMeRoomGuid: String?
@@ -52,6 +53,10 @@ class AroundMeView: UIView {
             self.reloadMap()
         }) { (error: Error?) in
         }
+
+        reCenter.layer.cornerRadius = 20
+        reCenter.layer.masksToBounds = true
+        
     }
     
     override func willMove(toWindow newWindow: UIWindow?) {
@@ -83,6 +88,13 @@ class AroundMeView: UIView {
         }
     }
 
+    
+    @IBAction func onRecenterMap(_ sender: UITapGestureRecognizer) {
+        print("Recenter map")
+        let rgn = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 65000, 65000);
+        mapView.setRegion(rgn, animated: true)
+    }
+    
 }
 
 //MARK:- MKMapViewDelegate
