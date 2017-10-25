@@ -289,6 +289,13 @@
                                                                 <constraint firstAttribute="width" constant="44" id="ibi-7W-9wZ"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown" translatesAutoresizingMaskIntoConstraints="NO" id="GlI-LD-BEN">
+                                                            <rect key="frame" x="-2" y="-2" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="25" id="8g6-OM-p2A"/>
+                                                                <constraint firstAttribute="height" constant="25" id="lfK-d9-fNT"/>
+                                                            </constraints>
+                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
                                                             <rect key="frame" x="60" y="8" width="41" height="21"/>
                                                             <gestureRecognizers/>
@@ -322,10 +329,12 @@
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" id="Dns-u4-o4i"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="JBR-gA-eSH"/>
+                                                        <constraint firstItem="yME-fo-Zy6" firstAttribute="top" secondItem="GlI-LD-BEN" secondAttribute="bottom" constant="-15" id="OMd-sy-86x"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="topMargin" id="Tq6-Wa-5kh"/>
                                                         <constraint firstItem="zGT-Cy-ZXC" firstAttribute="bottom" secondItem="uvT-7R-xVL" secondAttribute="bottomMargin" id="VXW-cb-zh2"/>
                                                         <constraint firstItem="yME-fo-Zy6" firstAttribute="leading" secondItem="uvT-7R-xVL" secondAttribute="leading" constant="8" id="W9t-Qp-ba9"/>
+                                                        <constraint firstItem="yME-fo-Zy6" firstAttribute="leading" secondItem="GlI-LD-BEN" secondAttribute="trailing" constant="-15" id="Xmx-TB-ZjQ"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="leading" id="eYv-Dw-uwY"/>
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="baseline" secondItem="Whv-6R-gEz" secondAttribute="baseline" id="j7r-fE-9xa"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="8" id="oma-4b-kAm"/>
@@ -334,6 +343,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="authorLabel" destination="Whv-6R-gEz" id="NCL-dR-XVp"/>
+                                                    <outlet property="authorLevelImage" destination="GlI-LD-BEN" id="3pG-7I-OTl"/>
                                                     <outlet property="authorProfileImage" destination="yME-fo-Zy6" id="SnC-hJ-ldE"/>
                                                     <outlet property="createdAtLabel" destination="MLi-4i-V4R" id="3Cc-iU-fkZ"/>
                                                     <outlet property="messageImageBottomConstraint" destination="VXW-cb-zh2" id="uco-Ca-0l1"/>
@@ -664,6 +674,7 @@
         <image name="24hourfitlong" width="375" height="76"/>
         <image name="account" width="30" height="30"/>
         <image name="around me" width="30" height="30"/>
+        <image name="crown" width="50" height="39"/>
         <image name="ic_person" width="468" height="475"/>
         <image name="messages" width="30" height="30"/>
         <image name="photo" width="35" height="30"/>

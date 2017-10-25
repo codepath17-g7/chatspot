@@ -37,7 +37,88 @@ class ChatSpotClient {
         let ref = Database.database().reference()
         ref.child("chatrooms").child(roomGuid).child("users").child(userGuid).removeValue()
     }
+
+    //MARK:- Activity
+    static func createActivtyForChatRoom(roomGuid: String, activity: Activity,
+                                         success: @escaping () -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        let newActivityGuid = ref.child("activities").child(roomGuid).childByAutoId().key
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .child(newActivityGuid)
+            .setValue(activity.toValue()) { (error, ref) in
+                if (error != nil) {
+                    failure()
+                } else {
+                    success()
+                }
+        }
+    }
     
+    static func joinActivity(roomGuid: String, activityGuid: String, userGuid: String,
+                             success: @escaping () -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .child(activityGuid)
+            .child(KEY_USERS_JOINED)
+            .child(userGuid)
+            .setValue(true) { (error, ref) in
+                if (error != nil) {
+                    failure()
+                } else {
+                    success()
+                }
+        }
+    }
+    
+    static func leaveActivity(roomGuid: String, activityGuid: String, userGuid: String,
+                              success: @escaping () -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .child(activityGuid)
+            .child(KEY_USERS_JOINED)
+            .child(userGuid)
+            .removeValue() {(error, ref) in
+                if (error != nil) {
+                    failure()
+                } else {
+                    success()
+                }
+        }
+    }
+    
+    static func getOngoingActivities(roomGuid: String, success: @escaping ([Activity]) -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .queryOrdered(byChild: KEY_ONGOING)
+            .queryEqual(toValue: true)
+            .observe(.value, with: { (snapshot) in
+                
+                let activityDicts = snapshot.value as? [String : AnyObject] ?? [:]
+                
+                var activities = [Activity]()
+                
+                for dict in activityDicts {
+                    let activity =  Activity(guid: dict.key, obj: dict.value as! NSDictionary)
+                    activities.append(activity)
+                }
+                
+                success(activities)
+            })
+    }
+
     static func removeObserver(handle: UInt){
         print("Removing observers \(handle)")
         let ref = Database.database().reference()
@@ -211,11 +292,16 @@ class ChatSpotClient {
 
         let newMsgKey = ref.child("messages").child(room.guid).childByAutoId().key
         
-        var updateData = ["messages/\(room.guid!)/\(newMsgKey)" : message.toValue(),
-            "chatrooms/\(room.guid!)/lastMessage": message.message!,
-            "chatrooms/\(room.guid!)/lastMessageTimestamp": ServerValue.timestamp()
-
-        ] as [String : Any]
+        var updateData =
+            ["messages/\(room.guid!)/\(newMsgKey)" : message.toValue(),
+            "chatrooms/\(room.guid!)/lastMessageTimestamp": ServerValue.timestamp()]
+                as [String : Any]
+        
+        if ((message.message?.characters.count ?? 0) > 0) {
+            updateData["chatrooms/\(room.guid!)/lastMessage"] = message.message!
+        } else if ((message.attachment?.characters.count ?? 0) > 0) {
+            updateData["chatrooms/\(room.guid!)/lastMessage"] = "\(message.name!) sent a picture"
+        }
         
         print(updateData)
         
@@ -231,14 +317,8 @@ class ChatSpotClient {
     
     //MARK:- User profile
     static func updateUserProfile(user: User1) {
-        let userData: [String: String] = [
-            User1.KEY_DISPLAY_NAME: user.name ?? "",
-            User1.KEY_PROFILE_IMAGE: user.profileImage ?? "",
-            User1.KEY_BANNER_IMAGE: user.bannerImage ?? "",
-            User1.KEY_TAG_LINE: user.tagline ?? "",
-        ]
         let ref = Database.database().reference()
-        ref.child("users").child(user.guid!).updateChildValues(userData)
+        ref.child("users").child(user.guid!).updateChildValues(user.toValue())
     }
     
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User, success: @escaping () -> (), failure: @escaping () -> ()) {

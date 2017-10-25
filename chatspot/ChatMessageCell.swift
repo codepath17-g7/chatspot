@@ -21,6 +21,7 @@ class ChatMessageCell: UITableViewCell {
 	@IBOutlet weak var createdAtLabel: UILabel!
 	@IBOutlet weak var messageTextLabel: UILabel!
     @IBOutlet weak var authorProfileImage: UIImageView!
+    @IBOutlet weak var authorLevelImage: UIImageView!
     @IBOutlet weak var messageImageView: UIImageView!
     
     @IBOutlet var messageImageHeightConstraint: NSLayoutConstraint!
@@ -82,6 +83,11 @@ class ChatMessageCell: UITableViewCell {
             //self.user = user
             if let urlString = user.profileImage {
                 self.authorProfileImage.setImageWith(URL(string: urlString)!)
+            }
+            if user.level > 0 {
+                self.authorLevelImage.isHidden = false
+            } else {
+                self.authorLevelImage.isHidden = true
             }
         }, failure: {
             print("Failure to find user")

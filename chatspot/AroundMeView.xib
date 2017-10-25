@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="contentView" destination="iN0-l3-epB" id="VLb-Jh-WOP"/>
                 <outlet property="mapView" destination="n6e-1s-5wP" id="Qdg-fg-nax"/>
+                <outlet property="reCenter" destination="y8M-GK-fjR" id="88a-0v-dsX"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,14 +24,38 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="n6e-1s-5wP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </mapView>
+                <imageView alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cross_hair" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-GK-fjR">
+                    <rect key="frame" x="315" y="607" width="40" height="40"/>
+                    <color key="backgroundColor" white="0.932373046875" alpha="1" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="4vs-DD-D0Q"/>
+                        <constraint firstAttribute="height" constant="40" id="ipT-8u-SL6"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="zBx-9d-s3s" appends="YES" id="0vh-Wo-chK"/>
+                    </connections>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="n6e-1s-5wP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LQh-hh-ps1"/>
                 <constraint firstItem="n6e-1s-5wP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YoM-La-4vE"/>
+                <constraint firstAttribute="bottom" secondItem="y8M-GK-fjR" secondAttribute="bottom" constant="20" id="fLK-h5-sGV"/>
                 <constraint firstAttribute="bottom" secondItem="n6e-1s-5wP" secondAttribute="bottom" id="tBI-Rd-M4R"/>
+                <constraint firstAttribute="trailing" secondItem="y8M-GK-fjR" secondAttribute="trailing" constant="20" id="vpS-8g-S1G"/>
                 <constraint firstAttribute="trailing" secondItem="n6e-1s-5wP" secondAttribute="trailing" id="xlL-b7-5aX"/>
             </constraints>
+            <point key="canvasLocation" x="29.5" y="59.5"/>
         </view>
+        <tapGestureRecognizer id="zBx-9d-s3s">
+            <connections>
+                <action selector="onRecenterMap:" destination="-1" id="rvr-Yu-HxP"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="cross_hair" width="100" height="100"/>
+    </resources>
 </document>

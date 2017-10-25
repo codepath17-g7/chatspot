@@ -15,6 +15,7 @@ class User1 {
     static let KEY_BANNER_IMAGE = "bannerImageUrl"
     static let KEY_AROUND_ME = "aroundMe"
     static let KEY_UNREAD_COUNT = "unreadMessageCount"
+    static let KEY_LEVEL = "level"
 
     let createdAt: String? = ""
     
@@ -25,6 +26,7 @@ class User1 {
     var bannerImage: String?
     var aroundMe: String?
     var unreadMessageCount: [String: Int]?
+    var level: Int = 0
 
     convenience init(guid: String, obj: NSDictionary) {
         self.init()
@@ -52,6 +54,10 @@ class User1 {
         if let unreadMessageCount = obj[User1.KEY_UNREAD_COUNT] as? [String: Int] {
             self.unreadMessageCount = unreadMessageCount
         }
+        
+        if let level = obj[User1.KEY_LEVEL] as? String {
+            self.level = Int(level)!
+        }
     }
     
     class func usersWithArray(dicts: [String: AnyObject]) -> [User1]{
@@ -62,5 +68,15 @@ class User1 {
             users.append(user)
         }
         return users
+    }
+    
+    func toValue() -> [String: String] {
+        return [
+            User1.KEY_DISPLAY_NAME: self.name ?? "",
+            User1.KEY_PROFILE_IMAGE: self.profileImage ?? "",
+            User1.KEY_BANNER_IMAGE: self.bannerImage ?? "",
+            User1.KEY_TAG_LINE: self.tagline ?? "",
+            User1.KEY_LEVEL: self.level.description,
+            ]
     }
 }
