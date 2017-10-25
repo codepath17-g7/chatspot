@@ -357,8 +357,9 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
         
         let message = messages[indexPath.row]
         if message.system {
-            let cell = UITableViewCell()
-            cell.textLabel?.text = message.message!
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SpecialAroundMeCell") as! SpecialAroundMeCell
+            cell.transform = CGAffineTransform(scaleX: 1, y: -1)
+            cell.locationChangeLabel.text = message.message!
             return cell
         }
         

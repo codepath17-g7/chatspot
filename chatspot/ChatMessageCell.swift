@@ -49,6 +49,11 @@ class ChatMessageCell: UITableViewCell {
                 setUpUserInfo(userGuid: guid)
 
             }
+            
+            messageTextLabel.isHidden = false
+            messageImageView.isHidden = true
+            messageImageHeightConstraint.constant = 0
+            messageImageBottomConstraint.isActive = false
             if let urlString = message.attachment {
                 guard let url = URL(string: urlString) else { return }
 //                print("urlString: \(urlString)")
@@ -61,14 +66,14 @@ class ChatMessageCell: UITableViewCell {
                 messageImageView.contentMode = .scaleAspectFill
                 messageImageView.layer.cornerRadius = 7
                 messageImageView.clipsToBounds = true
-                self.updateConstraints()
-            } else {
-                messageTextLabel.isHidden = false
-                messageImageView.isHidden = true
-                messageImageHeightConstraint.constant = 0
-                messageImageBottomConstraint.isActive = false
-                self.updateConstraints()
-            }
+            } //else {
+//                messageTextLabel.isHidden = false
+//                messageImageView.isHidden = true
+//                messageImageHeightConstraint.constant = 0
+//                messageImageBottomConstraint.isActive = false
+//                self.updateConstraints()
+//            }
+            self.updateConstraints()
 		}
 	}
     

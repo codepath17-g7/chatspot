@@ -51,6 +51,7 @@
 		F28898901F9EA091000C64DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F288988F1F9EA091000C64DF /* Localizable.stringsdict */; };
 		F28898921F9F0C87000C64DF /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28898911F9F0C87000C64DF /* Photos.framework */; };
 		F2A666511FA080A700EE8A4A /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A666501FA080A700EE8A4A /* ParallaxView.swift */; };
+		F2A666531FA11EB700EE8A4A /* SpecialAroundMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */; };
 		F2FEEF9A1F9C7197008923D3 /* Libertad-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF8C1F9C7119008923D3 /* Libertad-Bold.otf */; };
 		F2FEEF9B1F9C719D008923D3 /* Libertad-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF8D1F9C7119008923D3 /* Libertad-BoldItalic.otf */; };
 		F2FEEF9C1F9C719D008923D3 /* Libertad-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF8E1F9C7119008923D3 /* Libertad-Book.otf */; };
@@ -122,6 +123,7 @@
 		F288988F1F9EA091000C64DF /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		F28898911F9F0C87000C64DF /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		F2A666501FA080A700EE8A4A /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
+		F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialAroundMeCell.swift; sourceTree = "<group>"; };
 		F2FEEF8C1F9C7119008923D3 /* Libertad-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Libertad-Bold.otf"; path = "chatspot/Libertad-Bold.otf"; sourceTree = "<group>"; };
 		F2FEEF8D1F9C7119008923D3 /* Libertad-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Libertad-BoldItalic.otf"; path = "chatspot/Libertad-BoldItalic.otf"; sourceTree = "<group>"; };
 		F2FEEF8E1F9C7119008923D3 /* Libertad-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Libertad-Book.otf"; path = "chatspot/Libertad-Book.otf"; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				F2719F0A1F8DF71600417517 /* ChatMessageCell.swift */,
 				2D93B1031F9D2B6800D6B80C /* UserCell.swift */,
 				2D93B1041F9D2B6800D6B80C /* UserCell.xib */,
+				F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -439,9 +442,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -542,6 +545,7 @@
 				3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */,
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
+				F2A666531FA11EB700EE8A4A /* SpecialAroundMeCell.swift in Sources */,
 				762620261F93D51D008404F6 /* ChatRoomAnnotation.swift in Sources */,
 				762620201F9338BB008404F6 /* AroundMeView.swift in Sources */,
 				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,

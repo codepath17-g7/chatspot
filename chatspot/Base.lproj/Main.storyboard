@@ -316,8 +316,8 @@
                                                                 <constraint firstAttribute="width" constant="200" id="fS0-Db-GMg"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" misplaced="YES" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="60" y="37" width="307" height="64"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
+                                                            <rect key="frame" x="60" y="37" width="307" height="61"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -350,6 +350,49 @@
                                                     <outlet property="messageImageHeightConstraint" destination="1hj-oe-rbJ" id="7wp-L3-zVg"/>
                                                     <outlet property="messageImageView" destination="zGT-Cy-ZXC" id="9VG-Id-IJn"/>
                                                     <outlet property="messageTextLabel" destination="csA-tj-VwX" id="QLf-Md-6NF"/>
+                                                </connections>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpecialAroundMeCell" rowHeight="44" id="9tQ-hj-jfp" customClass="SpecialAroundMeCell" customModule="chatspot" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="273" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9tQ-hj-jfp" id="wNT-cy-p6L">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-r6-lax" userLabel="Right Line">
+                                                            <rect key="frame" x="215" y="21" width="136" height="1"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="gv2-Dz-EFP"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpD-1l-L1a">
+                                                            <rect key="frame" x="169.5" y="13" width="37.5" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5dW-oP-zN9" userLabel="Left Line">
+                                                            <rect key="frame" x="24" y="21" width="138" height="1"/>
+                                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="0JG-oE-N4e"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="CpD-1l-L1a" firstAttribute="centerX" secondItem="wNT-cy-p6L" secondAttribute="centerX" id="BMs-Ge-XyS"/>
+                                                        <constraint firstItem="CpD-1l-L1a" firstAttribute="centerY" secondItem="wNT-cy-p6L" secondAttribute="centerY" id="ELd-W3-qYL"/>
+                                                        <constraint firstItem="5dW-oP-zN9" firstAttribute="leading" secondItem="wNT-cy-p6L" secondAttribute="leadingMargin" constant="16" id="MCF-lj-iVx"/>
+                                                        <constraint firstItem="CpD-1l-L1a" firstAttribute="leading" secondItem="5dW-oP-zN9" secondAttribute="trailing" constant="8" id="Wm9-eP-Lzw"/>
+                                                        <constraint firstItem="iWE-r6-lax" firstAttribute="centerY" secondItem="CpD-1l-L1a" secondAttribute="centerY" id="X2n-pq-bsU"/>
+                                                        <constraint firstItem="CpD-1l-L1a" firstAttribute="centerY" secondItem="5dW-oP-zN9" secondAttribute="centerY" id="cfr-4I-Rmk"/>
+                                                        <constraint firstItem="iWE-r6-lax" firstAttribute="leading" secondItem="CpD-1l-L1a" secondAttribute="trailing" constant="8" id="gUk-nv-xCW"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="iWE-r6-lax" secondAttribute="trailing" constant="16" id="jGd-8W-iNk"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="locationChangeLabel" destination="CpD-1l-L1a" id="a8Y-ES-cx5"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
