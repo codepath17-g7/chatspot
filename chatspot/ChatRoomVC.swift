@@ -47,7 +47,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		tableView.dataSource = self
 		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.layoutIfNeeded()
 		tableView.separatorStyle = .none
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
@@ -101,53 +100,66 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             print("Not attached to a room")
             return
         }
-
-        if chatRoom.isAroundMe {
-            self.isLoading = true
-            MBProgressHUD.showAdded(to: self.view, animated: true)
-            observers.append(ChatSpotClient.observeNewMessagesAroundMe(limit: ChatRoomVC.MAX_MESSAGES_LIMIT, success: { (message: Message1) in
-                self.onNewMessage(message)
-                self.isLoading = false
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }, failure: {
-                print("Error in observeNewMessages")
-                self.isLoading = false
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }))
-            
-            self.isLoading = true
-            MBProgressHUD.showAdded(to: self.view, animated: true)
-            observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
-//                let newRoom = ChatSpotClient.chatrooms[roomGuid]
-                print("Chat room -> \(roomGuid)")
-
-                self.chatRoom.guid = roomGuid
-                self.chatRoom.name = "Around Me"
-//                self.chatRoom.location = newRoom!.name!
+        self.isLoading = true
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        DispatchQueue.global(qos: .userInitiated).async {
+            if self.chatRoom.isAroundMe {
+    //            self.isLoading = true
+    //            MBProgressHUD.showAdded(to: self.view, animated: true)
+                self.observers.append(ChatSpotClient.observeNewMessagesAroundMe(limit: ChatRoomVC.MAX_MESSAGES_LIMIT, success: { (message: Message1) in
+                    DispatchQueue.main.async {
+                        self.onNewMessage(message)
+                        self.isLoading = false
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+                }, failure: {
+                    DispatchQueue.main.async {
+                        print("Error in observeNewMessages")
+                        self.isLoading = false
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+                }))
                 
-                self.setRoomName(self.chatRoom.name)
-                self.isLoading = false
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }, failure: { (error: Error?) in
-                self.isLoading = false
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }))
+    //            self.isLoading = true
+    //            MBProgressHUD.showAdded(to: self.view, animated: true)
+                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
 
-        } else {
-            self.isLoading = true
-            MBProgressHUD.showAdded(to: self.view, animated: true)
-            observers.append(ChatSpotClient.observeNewMessages(
-                roomId: chatRoom.guid,
-                limit: ChatRoomVC.MAX_MESSAGES_LIMIT,
-                success: { (message: Message1) in
-                    self.onNewMessage(message)
-                    self.isLoading = false
-                    MBProgressHUD.hide(for: self.view, animated: true)
-            }, failure: {
-                print("Error in observeNewMessages")
-                self.isLoading = false
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }))
+                    
+                    print("Chat room -> \(roomGuid)")
+                    self.chatRoom.guid = roomGuid
+                    self.chatRoom.name = "Around Me"
+                    DispatchQueue.main.async {
+                        self.setRoomName(self.chatRoom.name)
+                        self.isLoading = false
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+                }, failure: { (error: Error?) in
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+                }))
+
+            } else {
+    //            self.isLoading = true
+    //            MBProgressHUD.showAdded(to: self.view, animated: true)
+                self.observers.append(ChatSpotClient.observeNewMessages(
+                    roomId: self.chatRoom.guid,
+                    limit: ChatRoomVC.MAX_MESSAGES_LIMIT,
+                    success: { (message: Message1) in
+                        DispatchQueue.main.async {
+                            self.onNewMessage(message)
+                            self.isLoading = false
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                        }
+                }, failure: {
+                    DispatchQueue.main.async {
+                        print("Error in observeNewMessages")
+                        self.isLoading = false
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    }
+                }))
+            }
         }
     }
 
@@ -207,24 +219,26 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         
         
-        // Many terrible things hardcoded below. will fix tomorrow
-        
-        
-        // TODO: change to default image
-        var roomBanner = #imageLiteral(resourceName: "goldengate")
-        if let urlString = chatRoom.banner {
-            if let url = URL(string: urlString) {
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        roomBanner = image
+        // TODO: Fix hardcoded stuff:
+        DispatchQueue.global(qos: .utility).async {
+            
+            // TODO: change to default image
+            var roomBanner = #imageLiteral(resourceName: "goldengate")
+            if let urlString = self.chatRoom.banner {
+                if let url = URL(string: urlString) {
+                    if let data = try? Data(contentsOf: url) {
+                        if let image = UIImage(data: data) {
+                            roomBanner = image
+                        }
                     }
                 }
             }
+            let footerView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: roomBanner)
+            DispatchQueue.main.async { // 2
+                self.tableView.tableFooterView = footerView
+                self.tableView.tableFooterView!.transform = self.tableView.transform
+            }
         }
-        
-        tableView.tableFooterView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: roomBanner)
-        tableView.tableFooterView!.transform = tableView.transform
-
     }
     
     @objc private func openChatroomDetailScreen() {
@@ -502,8 +516,11 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                 
                 let tm = Message1(roomId: self.chatRoom.guid, message: "", name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!, attachment: attachment)
                 
+                
+                
                 ChatSpotClient.sendMessage(message: tm, room: self.chatRoom, success: {
                     print("photo sent!")
+                    
                 }, failure: {
                     print("photo sending failed")
                 })
