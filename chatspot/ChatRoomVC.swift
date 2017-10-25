@@ -131,7 +131,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
                 print("Chat room -> \(roomGuid)")
 
                 self.chatRoom.guid = roomGuid
-                self.chatRoom.name = "Around Me - " + newRoom!.name!
+                self.chatRoom.name = "Around Me"
+//                self.chatRoom.location = newRoom!.name!
                 
                 self.setRoomName(self.chatRoom.name)
                 self.isLoading = false

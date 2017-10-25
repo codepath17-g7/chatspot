@@ -71,7 +71,6 @@ class ChatListVC: UIViewController {
         
 //        aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
         aroundMeRoom.name = "Around Me"
-        //        aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
         aroundMeRoom.guid = roomGuid
         aroundMeRoom.isAroundMe = true
         aroundMeRoom.users = userLocalRoom?.users
