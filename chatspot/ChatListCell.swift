@@ -20,6 +20,8 @@ class ChatListCell: UITableViewCell {
     
     @IBOutlet weak var cardView: UIView!
     
+    @IBOutlet weak var locationLabelHeightConstraint: NSLayoutConstraint!
+    
     
     var unreadCount: Int = 0 {
         didSet {
@@ -32,12 +34,15 @@ class ChatListCell: UITableViewCell {
 		didSet {
             
             chatRoomNameLabel.text = chatRoom.name
-            locationLabel.isHidden = true
+//            locationLabel.isHidden = true
             if chatRoom.isAroundMe {
                 if let currentLocationName = ChatSpotClient.chatrooms[chatRoom.guid]?.name {
                     locationLabel.text = "I'm at \(currentLocationName)"
-                    locationLabel.isHidden = false
+                    locationLabelHeightConstraint.constant = 19
+//                    locationLabel.isHidden = false
                 }
+            } else {
+                locationLabelHeightConstraint.constant = 0
             }
             
             

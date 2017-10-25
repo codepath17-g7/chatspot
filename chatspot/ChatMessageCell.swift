@@ -26,6 +26,7 @@ class ChatMessageCell: UITableViewCell {
     @IBOutlet var messageImageHeightConstraint: NSLayoutConstraint!
     
     
+    
     weak var delegate: ChatMessageCellDelegate?
     
 	var message: Message1! {
