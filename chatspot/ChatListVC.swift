@@ -43,8 +43,8 @@ class ChatListVC: UIViewController {
 
 
         self.tableView.reloadData()
-        
-        KRProgressHUD.showSuccess()
+        KRProgressHUD.dismiss()
+//        KRProgressHUD.showSuccess()
         
         startObservingAroundMeRoomGuid()
         
@@ -71,7 +71,8 @@ class ChatListVC: UIViewController {
             return;
         }
         
-        aroundMeRoom.name = "Around Me - " + userLocalRoom.name
+//        aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
+        aroundMeRoom.name = "Around Me"
         aroundMeRoom.guid = roomGuid
         aroundMeRoom.isAroundMe = true
         aroundMeRoom.users = userLocalRoom.users
@@ -100,6 +101,7 @@ class ChatListVC: UIViewController {
             
             self.chatrooms.append(room)
             self.tableView.reloadData()
+<<<<<<< HEAD
             KRProgressHUD.showSuccess()
             
         }, onRemove: { (room: ChatRoom1) in
@@ -123,6 +125,11 @@ class ChatListVC: UIViewController {
             
         }, removeFailure:  { (error: Error!) in
             
+=======
+//            KRProgressHUD.showSuccess()
+            KRProgressHUD.dismiss()
+        }, failure: { (error: Error!) in
+>>>>>>> imagechatupdate
             print("Error in startObservingChatRoomList: \(error.localizedDescription)")
         })
         
@@ -229,6 +236,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
         let chatroom = chatrooms[indexPath.row]
 		cell.chatRoom = chatroom
         cell.unreadCount = unreadCount[chatroom.guid!] ?? 0
+        cell.selectionStyle = .none
 		return cell
 	}
 	
@@ -241,6 +249,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
         let index = indexPath.row
         let selectedChatroomGuid = chatrooms[index].guid!
         clearUnreadCount(chatroomGuid: selectedChatroomGuid)
+        
 		tableView.deselectRow(at: indexPath, animated:true)
 	}
 	
