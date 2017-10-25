@@ -37,7 +37,8 @@ class ChatSpotClient {
         let ref = Database.database().reference()
         ref.child("chatrooms").child(roomGuid).child("users").child(userGuid).removeValue()
     }
-    
+
+    //MARK:- Activity
     static func createActivtyForChatRoom(roomGuid: String, activity: Activity,
                                          success: @escaping () -> (), failure: @escaping () -> ()) {
         
@@ -45,13 +46,16 @@ class ChatSpotClient {
         
         let newActivityGuid = ref.child("activities").child(roomGuid).childByAutoId().key
         
-        ref.child("activities/\(roomGuid)/\(newActivityGuid)").setValue(activity.toValue(), withCompletionBlock: { (error, ref) in
-            if (error != nil) {
-                failure()
-            } else {
-                success()
-            }
-        })
+        ref.child("activities")
+            .child(roomGuid)
+            .child(newActivityGuid)
+            .setValue(activity.toValue()) { (error, ref) in
+                if (error != nil) {
+                    failure()
+                } else {
+                    success()
+                }
+        }
     }
     
     static func joinActivity(roomGuid: String, activityGuid: String, userGuid: String,
@@ -59,15 +63,62 @@ class ChatSpotClient {
         
         let ref = Database.database().reference()
         
-        ref.child("activities/\(roomGuid)/\(activityGuid)/\(KEY_USERS_JOINED)/\(userGuid)").setValue(true) { (error, ref) in
-            if (error != nil) {
-                failure()
-            } else {
-                success()
-            }
+        ref.child("activities")
+            .child(roomGuid)
+            .child(activityGuid)
+            .child(KEY_USERS_JOINED)
+            .child(userGuid)
+            .setValue(true) { (error, ref) in
+                if (error != nil) {
+                    failure()
+                } else {
+                    success()
+                }
         }
     }
     
+    static func leaveActivity(roomGuid: String, activityGuid: String, userGuid: String,
+                              success: @escaping () -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .child(activityGuid)
+            .child(KEY_USERS_JOINED)
+            .child(userGuid)
+            .removeValue() {(error, ref) in
+                if (error != nil) {
+                    failure()
+                } else {
+                    success()
+                }
+        }
+    }
+    
+    static func getOngoingActivities(roomGuid: String, success: @escaping ([Activity]) -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .queryOrdered(byChild: KEY_ONGOING)
+            .queryEqual(toValue: true)
+            .observe(.value, with: { (snapshot) in
+                
+                let activityDicts = snapshot.value as? [String : AnyObject] ?? [:]
+                
+                var activities = [Activity]()
+                
+                for dict in activityDicts {
+                    let activity =  Activity(guid: dict.key, obj: dict.value as! NSDictionary)
+                    activities.append(activity)
+                }
+                
+                success(activities)
+            })
+    }
+
     static func removeObserver(handle: UInt){
         print("Removing observers \(handle)")
         let ref = Database.database().reference()
