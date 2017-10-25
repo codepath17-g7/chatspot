@@ -356,11 +356,18 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let message = messages[indexPath.row]
+        if message.system {
+            let cell = UITableViewCell()
+            cell.textLabel?.text = message.message!
+            return cell
+        }
+        
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatMessageCell") as! ChatMessageCell
         
         cell.transform = CGAffineTransform(scaleX: 1, y: -1)
 		//set properties of cell
-		cell.message = messages[indexPath.row]
+		cell.message = message
 		cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.delegate = self
 
