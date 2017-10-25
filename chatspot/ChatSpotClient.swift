@@ -38,6 +38,36 @@ class ChatSpotClient {
         ref.child("chatrooms").child(roomGuid).child("users").child(userGuid).removeValue()
     }
     
+    static func createActivtyForChatRoom(roomGuid: String, activity: Activity,
+                                         success: @escaping () -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        let newActivityGuid = ref.child("activities").child(roomGuid).childByAutoId().key
+        
+        ref.child("activities/\(roomGuid)/\(newActivityGuid)").setValue(activity.toValue(), withCompletionBlock: { (error, ref) in
+            if (error != nil) {
+                failure()
+            } else {
+                success()
+            }
+        })
+    }
+    
+    static func joinActivity(roomGuid: String, activityGuid: String, userGuid: String,
+                             success: @escaping () -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities/\(roomGuid)/\(activityGuid)/\(KEY_USERS_JOINED)/\(userGuid)").setValue(true) { (error, ref) in
+            if (error != nil) {
+                failure()
+            } else {
+                success()
+            }
+        }
+    }
+    
     static func removeObserver(handle: UInt){
         print("Removing observers \(handle)")
         let ref = Database.database().reference()
