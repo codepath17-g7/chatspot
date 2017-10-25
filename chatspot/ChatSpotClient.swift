@@ -231,14 +231,8 @@ class ChatSpotClient {
     
     //MARK:- User profile
     static func updateUserProfile(user: User1) {
-        let userData: [String: String] = [
-            User1.KEY_DISPLAY_NAME: user.name ?? "",
-            User1.KEY_PROFILE_IMAGE: user.profileImage ?? "",
-            User1.KEY_BANNER_IMAGE: user.bannerImage ?? "",
-            User1.KEY_TAG_LINE: user.tagline ?? "",
-        ]
         let ref = Database.database().reference()
-        ref.child("users").child(user.guid!).updateChildValues(userData)
+        ref.child("users").child(user.guid!).updateChildValues(user.toValue())
     }
     
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User, success: @escaping () -> (), failure: @escaping () -> ()) {
