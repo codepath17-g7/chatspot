@@ -274,41 +274,6 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="664"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <view key="tableFooterView" contentMode="scaleToFill" id="fEh-a4-kS5" userLabel="FooterView">
-                                            <rect key="frame" x="0.0" y="273" width="375" height="104"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wolf" translatesAutoresizingMaskIntoConstraints="NO" id="wCp-j5-Aia">
-                                                    <rect key="frame" x="8" y="27" width="60" height="60"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="dEi-jF-SgL"/>
-                                                        <constraint firstAttribute="height" constant="60" id="xww-WD-8Cy"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ZD-sP-42s">
-                                                    <rect key="frame" x="76" y="44" width="291" height="26.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJR-hb-n0V">
-                                                    <rect key="frame" x="0.0" y="95" width="375" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="3ZD-sP-42s" firstAttribute="leading" secondItem="wCp-j5-Aia" secondAttribute="trailing" constant="8" id="2v4-xt-de9"/>
-                                                <constraint firstItem="wCp-j5-Aia" firstAttribute="leading" secondItem="fEh-a4-kS5" secondAttribute="leading" constant="8" id="TPi-Hx-fHp"/>
-                                                <constraint firstItem="3ZD-sP-42s" firstAttribute="centerY" secondItem="wCp-j5-Aia" secondAttribute="centerY" id="cVC-61-cTy"/>
-                                                <constraint firstAttribute="trailing" secondItem="3ZD-sP-42s" secondAttribute="trailing" constant="8" id="dQg-o2-w9x"/>
-                                                <constraint firstAttribute="trailing" secondItem="YJR-hb-n0V" secondAttribute="trailing" id="dng-rb-yTh"/>
-                                                <constraint firstItem="YJR-hb-n0V" firstAttribute="top" secondItem="wCp-j5-Aia" secondAttribute="bottom" constant="8" id="mIP-la-Lo3"/>
-                                                <constraint firstAttribute="bottom" secondItem="YJR-hb-n0V" secondAttribute="bottom" constant="8" id="qu2-Co-NOU"/>
-                                                <constraint firstItem="YJR-hb-n0V" firstAttribute="leading" secondItem="fEh-a4-kS5" secondAttribute="leading" id="tAz-fe-BGQ"/>
-                                                <constraint firstItem="wCp-j5-Aia" firstAttribute="top" secondItem="fEh-a4-kS5" secondAttribute="top" constant="27" id="uj7-qe-83R"/>
-                                            </constraints>
-                                        </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="245" id="9WS-4L-9Pn" customClass="ChatMessageCell" customModule="chatspot" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="245"/>
@@ -492,10 +457,7 @@
                         <outlet property="chatRoomNameLabel" destination="qBJ-4M-Aju" id="KEb-tM-tjo"/>
                         <outlet property="containerTopMarginConstraint" destination="rh7-GA-CGy" id="1Nn-yV-oKb"/>
                         <outlet property="containerView" destination="ATW-MG-nIq" id="NKv-SE-GWe"/>
-                        <outlet property="footerView" destination="fEh-a4-kS5" id="AQC-Ce-VG0"/>
-                        <outlet property="footerViewLabel" destination="3ZD-sP-42s" id="Yim-wf-kmE"/>
                         <outlet property="messageTextView" destination="OGB-g9-AKX" id="W8i-88-GrS"/>
-                        <outlet property="roomImage" destination="wCp-j5-Aia" id="K4u-m7-FJ6"/>
                         <outlet property="sendMessageButton" destination="AWo-Wy-oBi" id="KtR-2k-HZG"/>
                         <outlet property="tableView" destination="Tbb-1z-WBL" id="94i-xs-V4o"/>
                         <outlet property="toolbarBottomConstraint" destination="p9C-by-nSs" id="Ch1-f5-17B"/>
@@ -610,7 +572,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My ChatSpots" image="messages" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -629,7 +591,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="around me" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -648,7 +610,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="account" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -666,7 +628,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yyh-KS-hMb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhN-pp-VEH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WhN-pp-VEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -684,7 +646,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -707,7 +669,6 @@
         <image name="photo" width="35" height="30"/>
         <image name="red-pin" width="26" height="37"/>
         <image name="smiley" width="35" height="30"/>
-        <image name="wolf" width="2238" height="1258"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Gn9-yJ-qcY"/>

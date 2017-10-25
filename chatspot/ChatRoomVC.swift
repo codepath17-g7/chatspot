@@ -27,12 +27,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	@IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var chatRoomNameLabel: UILabel!
     @IBOutlet weak var chatRoomMemberCountLabel: UILabel!
-    @IBOutlet weak var toolbarView: UIView!
-    @IBOutlet weak var roomImage: UIImageView!
-    //Note: Footer will actually be the header once it has been transformed in viewDidLoad()
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var footerViewLabel: UILabel!
-    
+    @IBOutlet weak var toolbarView: UIView!  
     @IBOutlet weak var containerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
     
@@ -52,13 +47,9 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		tableView.dataSource = self
 		tableView.estimatedRowHeight = 50
 		tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
-        
 		tableView.separatorStyle = .none
-        
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        footerView.transform = tableView.transform
         
         // Set up the keyboard to move appropriately
 		setUpKeyboardNotifications()
@@ -160,35 +151,22 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         }
     }
 
-    func setUpInfiniteScrolling(){
-        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        loadingMoreView.center = tableFooterView.center
-        tableFooterView.insertSubview(loadingMoreView, at: 0)
-        self.tableView.tableFooterView = tableFooterView
-    }
+//    func setUpInfiniteScrolling(){
+//        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+//        loadingMoreView.center = tableFooterView.center
+//        tableFooterView.insertSubview(loadingMoreView, at: 0)
+//        self.tableView.tableFooterView = tableFooterView
+//    }
     
 	
     func setRoomName (_ roomName: String) {
         chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 17)!])
-        footerViewLabel.text = roomName
         messageTextView.placeHolder = "Message \(roomName)"
 
     }
     
 	func setUpUI(){
         setRoomName(chatRoom.name)
-
-        
-        if let urlString = chatRoom.baner {
-            if let url = URL(string: urlString) {
-                roomImage.setImageWith(url)
-            }
-        } else {
-            roomImage.image = UIImage(named: "people")
-        }
-        roomImage.clipsToBounds = true
-        roomImage.layer.cornerRadius = 7
-        
         
         if let memberCount = chatRoom.users?.count {
             let attributes = [NSForegroundColorAttributeName: UIColor.ChatSpotColors.LightestGray, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!]
@@ -221,11 +199,40 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 , for: .normal)
         sendMessageButton.isEnabled = false
         
-        // crate and add an info button in the navigation bar that links to chatroom details
+        // create and add an info button in the navigation bar that links to chatroom details
         let infoButton = UIButton(type: .infoLight)
         infoButton.addTarget(self, action: #selector(openChatroomDetailScreen), for: .touchUpInside)
         let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
         navigationItem.rightBarButtonItem = infoBarButtonItem
+        
+        
+        
+        // Many terrible things hardcoded below. will fix tomorrow
+        
+        
+        // TODO: change to default image
+        var roomBanner = #imageLiteral(resourceName: "goldengate")
+        if let urlString = chatRoom.banner {
+            if let url = URL(string: urlString) {
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        roomBanner = image
+                    }
+                }
+            }
+        }
+        
+        tableView.tableFooterView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: roomBanner)
+        tableView.tableFooterView!.transform = tableView.transform
+        
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = tableView.tableFooterView!.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.2, 1]
+        tableView.tableFooterView!.layer.insertSublayer(gradient, at: 0)
+        
+        tableView.layoutIfNeeded()
+
     }
     
     @objc private func openChatroomDetailScreen() {
@@ -394,60 +401,6 @@ extension ChatRoomVC: GrowingTextViewDelegate {
 //MARK: ============ ImagePicker Methods ============
 
 extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerSheetControllerDelegate {
-    
-//    func openCamera(){
-//        let picker = UIImagePickerController()
-//        if (UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-//            picker.sourceType = UIImagePickerControllerSourceType.camera
-//            picker.delegate = self
-//            picker.allowsEditing = true
-//            present(picker, animated: true, completion: nil)
-//        } else {
-//            let alert  = UIAlertController(title: "Warning", message: "No camera found.", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//            present(alert, animated: true, completion: nil)
-//        }
-//    }
-    
-    //        let picker = UIImagePickerController()
-    //        picker.delegate = self
-    //        picker.allowsEditing = true
-    //        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-    
-    //        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    //        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-    //            self.openCamera()
-    //        }))
-    //
-    //        alert.addAction(UIAlertAction(title: "Photos", style: .default, handler: { _ in
-    //            self.openPhotos()
-    //        }))
-    //
-    //        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: {_ in
-    //            self.addPhotoButton.isSelected = false
-    //        }))
-    //
-    //        self.present(alert, animated: true, completion: nil)
-    
-    
-    //        controller.addAction(ImagePickerAction(title: NSLocalizedString("Cancel", comment: "Action Title"), secondaryTitle: nil, style: .cancel, handler: { _ in
-    //             self.addPhotoButton.isSelected = false
-    //        }, secondaryHandler: nil))
-    
-    //    func addImageToTextView(_ image: UIImage){
-    //        let textAttachment = NSTextAttachment()
-    //        let oldWidth = image.size.width
-    //        let scaleFactor = oldWidth / (self.messageTextView.frame.size.width - 10)
-    //        textAttachment.image = UIImage(cgImage: image.cgImage!, scale: scaleFactor, orientation: .up).roundedCorners
-    //        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
-    ////        self.messageTextView.textStorage.insert(attrStringWithImage, at: self.messageTextView.selectedRange.location)
-    //        self.messageTextView.textStorage.append(attrStringWithImage)
-    ////        self.messageTextView.becomeFirstResponder()
-    ////        self.messageTextView.isEditable = false
-    //        self.sendMessageButton.isEnabled = true
-    //    }
-    
-    
     
     func openImagePickerActionSheet() {
         

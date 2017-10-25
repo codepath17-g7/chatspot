@@ -102,7 +102,7 @@ class UserView: UIView {
             self.pickImage()
         }
         bannerImage.onEditTapped = {
-            print("Picking baner image")
+            print("Picking banner image")
             self.imageToPick = .banner
             self.pickImage()
         }

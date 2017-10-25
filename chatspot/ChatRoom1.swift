@@ -23,7 +23,7 @@ class ChatRoom1 {
     var name: String!
     var title: String!
     var createdAt: Double = 0
-    var baner: String?
+    var banner: String?
     var longitude: Double!
     var latitude: Double!
     var users: [String:Bool]? // these users joined the room manually
@@ -38,7 +38,7 @@ class ChatRoom1 {
         self.init()
         self.guid = guid
         if let banner = obj[ChatRoom1.KEY_BANNER] as? String {
-            self.baner = banner
+            self.banner = banner
         }
         
         if let name = obj[ChatRoom1.KEY_NAME] as? String {
