@@ -101,8 +101,7 @@ class ChatListVC: UIViewController {
             
             self.chatrooms.append(room)
             self.tableView.reloadData()
-<<<<<<< HEAD
-            KRProgressHUD.showSuccess()
+            KRProgressHUD.dismiss()
             
         }, onRemove: { (room: ChatRoom1) in
             
@@ -125,12 +124,7 @@ class ChatListVC: UIViewController {
             
         }, removeFailure:  { (error: Error!) in
             
-=======
-//            KRProgressHUD.showSuccess()
             KRProgressHUD.dismiss()
-        }, failure: { (error: Error!) in
->>>>>>> imagechatupdate
-            print("Error in startObservingChatRoomList: \(error.localizedDescription)")
         })
         
         observers.append(contentsOf: chatRoomObsevers)
