@@ -65,7 +65,8 @@ class ChatListCell: UITableViewCell {
             
             memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
 			
-            lastMessageLabel.text = chatRoom.lastMessage ?? "Say hi to the folks around you!"
+            lastMessageLabel.text = chatRoom.lastMessage //?? "Say hi to the folks around you!"
+            self.updateConstraints()
             
 		}
 	}

@@ -344,8 +344,8 @@
                                                                 <constraint firstAttribute="width" constant="200" id="fS0-Db-GMg"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="60" y="37" width="307" height="195.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" misplaced="YES" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
+                                                            <rect key="frame" x="60" y="37" width="307" height="64"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -357,7 +357,7 @@
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" id="Dns-u4-o4i"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="JBR-gA-eSH"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
+                                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="topMargin" id="Tq6-Wa-5kh"/>
                                                         <constraint firstItem="zGT-Cy-ZXC" firstAttribute="bottom" secondItem="uvT-7R-xVL" secondAttribute="bottomMargin" id="VXW-cb-zh2"/>
                                                         <constraint firstItem="yME-fo-Zy6" firstAttribute="leading" secondItem="uvT-7R-xVL" secondAttribute="leading" constant="8" id="W9t-Qp-ba9"/>
@@ -371,6 +371,7 @@
                                                     <outlet property="authorLabel" destination="Whv-6R-gEz" id="NCL-dR-XVp"/>
                                                     <outlet property="authorProfileImage" destination="yME-fo-Zy6" id="SnC-hJ-ldE"/>
                                                     <outlet property="createdAtLabel" destination="MLi-4i-V4R" id="3Cc-iU-fkZ"/>
+                                                    <outlet property="messageImageBottomConstraint" destination="VXW-cb-zh2" id="uco-Ca-0l1"/>
                                                     <outlet property="messageImageHeightConstraint" destination="1hj-oe-rbJ" id="7wp-L3-zVg"/>
                                                     <outlet property="messageImageView" destination="zGT-Cy-ZXC" id="9VG-Id-IJn"/>
                                                     <outlet property="messageTextLabel" destination="csA-tj-VwX" id="QLf-Md-6NF"/>
@@ -709,6 +710,6 @@
         <image name="wolf" width="2238" height="1258"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nVZ-qM-vWL"/>
+        <segue reference="Gn9-yJ-qcY"/>
     </inferredMetricsTieBreakers>
 </document>

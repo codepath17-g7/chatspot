@@ -25,6 +25,7 @@ class ChatMessageCell: UITableViewCell {
     
     @IBOutlet var messageImageHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet var messageImageBottomConstraint: NSLayoutConstraint!
     
     
     weak var delegate: ChatMessageCellDelegate?
@@ -49,26 +50,24 @@ class ChatMessageCell: UITableViewCell {
             }
             if let urlString = message.attachment {
                 print("Has attachment")
-                if let url = URL(string: urlString) {
-                    print("urlString: \(urlString)")
-                    print("url: \(url)")
-                    
-                    messageImageView.setImageWith(url)
-                    messageTextLabel.isHidden = true
-                    messageImageView.isHidden = false
-                    messageImageHeightConstraint.isActive = true
-                    messageImageHeightConstraint.constant = 200
-                    messageImageView.contentMode = .scaleAspectFill
-                    messageImageView.layer.cornerRadius = 7
-                    messageImageView.clipsToBounds = true
-                    self.updateConstraints()
-                }
+                guard let url = URL(string: urlString) else { return }
+                print("urlString: \(urlString)")
+                print("url: \(url)")
+                messageImageView.setImageWith(url)
+                messageTextLabel.isHidden = true
+                messageImageView.isHidden = false
+                messageImageHeightConstraint.constant = 200
+                messageImageBottomConstraint.isActive = true
+                messageImageView.contentMode = .scaleAspectFill
+                messageImageView.layer.cornerRadius = 7
+                messageImageView.clipsToBounds = true
+                self.updateConstraints()
             } else {
                 messageTextLabel.isHidden = false
                 messageImageView.isHidden = true
-                messageImageHeightConstraint.isActive = false
+                messageImageHeightConstraint.constant = 0
+                messageImageBottomConstraint.isActive = false
                 self.updateConstraints()
-//                self.layoutIfNeeded()
             }
 		}
 	}
@@ -138,14 +137,7 @@ class ChatMessageCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-//        self.frame.height = 50
-//        messageTextLabel.isHidden = false
-    }
 
 }
