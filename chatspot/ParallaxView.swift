@@ -6,6 +6,11 @@
 //  Copyright © 2017 g7. All rights reserved.
 //
 
+
+//Credit to http://runmad.com/blog/2015/08/parallax-uitableview-header-with-auto-layout/
+//https://github.com/runmad/ParallaxAutoLayoutDemo
+
+
 import UIKit
 
 class ParallaxView: UIView {
@@ -45,6 +50,14 @@ class ParallaxView: UIView {
         containerView.addConstraint(bottomLayoutConstraint)
         heightLayoutConstraint = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: containerView, attribute: .height, multiplier: 1.0, constant: 0.0)
         containerView.addConstraint(heightLayoutConstraint)
+        
+        // TODO: Fix this so it adds a gradient
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = containerView.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.2, 1]
+        containerView.layer.insertSublayer(gradient, at: 0)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

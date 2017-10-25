@@ -50,10 +50,9 @@ class ChatMessageCell: UITableViewCell {
 
             }
             if let urlString = message.attachment {
-                print("Has attachment")
                 guard let url = URL(string: urlString) else { return }
-                print("urlString: \(urlString)")
-                print("url: \(url)")
+//                print("urlString: \(urlString)")
+//                print("url: \(url)")
                 messageImageView.setImageWith(url)
                 messageTextLabel.isHidden = true
                 messageImageView.isHidden = false

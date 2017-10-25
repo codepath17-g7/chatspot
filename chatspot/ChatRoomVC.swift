@@ -118,7 +118,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             self.isLoading = true
             MBProgressHUD.showAdded(to: self.view, animated: true)
             observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
-                let newRoom = ChatSpotClient.chatrooms[roomGuid]
+//                let newRoom = ChatSpotClient.chatrooms[roomGuid]
                 print("Chat room -> \(roomGuid)")
 
                 self.chatRoom.guid = roomGuid
@@ -224,14 +224,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         tableView.tableFooterView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: roomBanner)
         tableView.tableFooterView!.transform = tableView.transform
-        
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = tableView.tableFooterView!.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0.2, 1]
-        tableView.tableFooterView!.layer.insertSublayer(gradient, at: 0)
-        
-        tableView.layoutIfNeeded()
 
     }
     
