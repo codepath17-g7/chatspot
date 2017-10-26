@@ -57,7 +57,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         setUpUI()
         
         // Infinite scrolling
-        //setUpInfiniteScrolling()
+        setUpInfiniteScrolling()
         
         self.startObservingMessages()
     }
@@ -159,16 +159,26 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
                         MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
+                
+                /*ChatSpotClient.getMessagesForRoom(roomId: self.chatRoom.guid, limit: ChatRoomVC.MAX_MESSAGES_LIMIT, lastMsgId: "", success: { (messages: [Message1]) in
+                    self.messages = messages
+                    self.tableView.reloadData()
+                    self.isLoading = false
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }, failure: { (error: Error?) in
+                    self.isLoading = false
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                })*/
             }
         }
     }
 
-//    func setUpInfiniteScrolling(){
-//        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-//        loadingMoreView.center = tableFooterView.center
-//        tableFooterView.insertSubview(loadingMoreView, at: 0)
-//        self.tableView.tableFooterView = tableFooterView
-//    }
+    func setUpInfiniteScrolling(){
+        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        loadingMoreView.center = tableFooterView.center
+        tableFooterView.insertSubview(loadingMoreView, at: 0)
+        self.tableView.tableFooterView = tableFooterView
+    }
     
 	
     func setRoomName (_ roomName: String) {
@@ -612,7 +622,7 @@ extension ChatRoomVC: UIScrollViewDelegate {
             
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-                //loadMoreMessages()
+                loadMoreMessages()
             }
         }
     }
@@ -624,6 +634,7 @@ extension ChatRoomVC: UIScrollViewDelegate {
             return
         }
         
+        print("SCROLLING - load more")
         if chatRoom.isAroundMe {
             self.isLoading = true;
             self.loadingMoreView.startAnimating()
@@ -649,7 +660,8 @@ extension ChatRoomVC: UIScrollViewDelegate {
                                               success: { (messages: [Message1]) in
                 //var newMsgs: [Message1] = messages
                 //newMsgs += self.messages
-                self.messages = messages
+                self.messages += messages
+            
                 self.tableView.reloadData()
                 self.isLoading = false;
                 self.loadingMoreView.stopAnimating()

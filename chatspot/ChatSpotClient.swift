@@ -237,7 +237,7 @@ class ChatSpotClient {
     static func observeNewMessages(roomId: String, limit: UInt, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatRef = ref.child("messages").child(roomId)
-        let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
+        let refHandle = chatRef.queryLimited(toLast: limit).observe(DataEventType.childAdded, with: { (snapshot) in
             let postDict = snapshot.value as? NSDictionary ?? [:]
             let message = Message1(guid: snapshot.key, obj: postDict)
             success(message) 
@@ -281,7 +281,11 @@ class ChatSpotClient {
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
             print(postDict)
             let messages = Message1.messagesWithArray(dicts: postDict)
-            success(messages)
+            var sortedMessages = messages.sorted(by: { (msg1: Message1, msg2: Message1) -> Bool in
+                return msg1.rawTimestamp > msg2.rawTimestamp
+            })
+            sortedMessages.removeFirst()
+            success(sortedMessages)
         }) { (error: Error) in
             failure(error)
         }
