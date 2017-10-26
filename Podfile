@@ -19,8 +19,8 @@ target 'chatspot' do
   pod 'FLEX'
   pod 'ISEmojiView'
   pod 'GrowingTextView', '~> 0.4.0'
+  pod 'HanekeSwift', :git => 'https://github.com/EdenShapiro/HanekeSwift.git', :branch => 'feature/swift-3'
   pod 'ImagePickerSheetController', :git => 'https://github.com/EdenShapiro/ImagePickerSheetController.git', :branch => 'swift3'
-  pod 'HanekeSwift'
   # Pods for chatspot
 
 end

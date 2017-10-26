@@ -8,7 +8,7 @@
 
 import UIKit
 import NSDateMinimalTimeAgo
-import HanekeSwift
+import Haneke
 
 @objc protocol ChatMessageCellDelegate {
     func presentAlertViewController(alertController: UIAlertController)
@@ -29,7 +29,7 @@ class ChatMessageCell: UITableViewCell {
     
     @IBOutlet var messageImageBottomConstraint: NSLayoutConstraint!
     
-    
+    let imageCache = Shared.imageCache
     weak var delegate: ChatMessageCellDelegate?
     
 	var message: Message1! {
@@ -56,11 +56,28 @@ class ChatMessageCell: UITableViewCell {
             messageImageHeightConstraint.constant = 0
             messageImageBottomConstraint.isActive = false
             if let urlString = message.attachment {
-                guard let url = URL(string: urlString) else { return }
-//                print("urlString: \(urlString)")
-//                print("url: \(url)")
-                messageImageView.hnk_setImageFromURL(url)
-//                messageImageView.setImageWith(url)
+                print("urlString:")
+                print(urlString)
+//                imageCache.fetch(key: <#T##String#>, formatName: Format(name: "original"), failure: <#T##Fetch.Failer?##Fetch.Failer?##(Error?) -> ()#>, success: <#T##((UIImage) -> ())?##((UIImage) -> ())?##(UIImage) -> ()#>)
+                imageCache.fetch(key: urlString).onSuccess { (image) in
+                    print("was able to set image from cache using key string")
+
+                    //set your image here
+                    self.messageImageView.image = image
+                    
+                    }.onFailure { (error) in
+                        "could not fetch image for key \(urlString). error: \(String(describing: error?.localizedDescription))"
+                        guard let url = URL(string: urlString) else { return }
+                        print("url:")
+                        print(url)
+                        self.messageImageView.hnk_setImageFromURL(url, placeholder: #imageLiteral(resourceName: "default-placeholder-300x300"), format: Format(name: "original"), failure: { (e: Error?) in
+                            print("there was an error setting the imageview with the url: \(String(describing: e?.localizedDescription))")
+                        }, success: { (image: UIImage) in
+                            self.messageImageView.image = image
+                            print("had to set image from url cause couldn't find it from key")
+                        })
+                        
+                }
                 messageTextLabel.isHidden = true
                 messageImageView.isHidden = false
                 messageImageHeightConstraint.constant = 200
@@ -68,6 +85,13 @@ class ChatMessageCell: UITableViewCell {
                 messageImageView.contentMode = .scaleAspectFill
                 messageImageView.layer.cornerRadius = 7
                 messageImageView.clipsToBounds = true
+
+                
+//                guard let url = URL(string: urlString) else { return }
+//                print("urlString: \(urlString)")
+//                print("url: \(url)")
+//                messageImageView.hnk_setImageFromURL(url)
+//                messageImageView.setImageWith(url)
             }
             self.updateConstraints()
 		}

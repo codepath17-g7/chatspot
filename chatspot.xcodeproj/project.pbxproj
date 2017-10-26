@@ -68,6 +68,18 @@
 		F2FEEFA71F9C719D008923D3 /* Libertad.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2FEEF991F9C7119008923D3 /* Libertad.otf */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F2A915D91FA1B9C700C08129 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.release.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.release.xcconfig"; sourceTree = "<group>"; };
 		2D93B1031F9D2B6800D6B80C /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -112,6 +124,7 @@
 		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		8BD2DB701F92FBC20073ABBC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
+		F230195A1FA1D46700006D7C /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "../../Library/Developer/Xcode/DerivedData/chatspot-fgkshavcpzelupglajjguiigxwnn/Build/Products/Debug-iphonesimulator/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
 		F2719EFD1F8D54E700417517 /* chatspot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = chatspot.entitlements; sourceTree = "<group>"; };
 		F2719EFE1F8DF50300417517 /* ChatListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListVC.swift; sourceTree = "<group>"; };
 		F2719F001F8DF51600417517 /* ChatRoomVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomVC.swift; sourceTree = "<group>"; };
@@ -263,6 +276,7 @@
 		7E8120D353190548F2D84F64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F230195A1FA1D46700006D7C /* Haneke.framework */,
 				F28898911F9F0C87000C64DF /* Photos.framework */,
 				3E13157FD38ACE240FB695E5 /* Pods_chatspot.framework */,
 			);
@@ -346,6 +360,7 @@
 				32963D5D1F8B1BAD00E05CF3 /* Resources */,
 				821B4D5033CEC2F9D2F16857 /* [CP] Embed Pods Frameworks */,
 				6A80A705E2A125BBE3AC7485 /* [CP] Copy Pods Resources */,
+				F2A915D91FA1B9C700C08129 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -442,9 +457,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";

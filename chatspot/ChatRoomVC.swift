@@ -15,6 +15,7 @@ import ISEmojiView
 import GrowingTextView
 import ImagePickerSheetController
 import Photos
+import Haneke
 
 class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     static var MAX_MESSAGES_LIMIT: UInt = 10
@@ -39,6 +40,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	var initialY: CGFloat!
     var toolbarInitialY: CGFloat!
     var observers = [UInt]()
+    let imageCache = Shared.imageCache
 
     
     override func viewDidLoad() {
@@ -479,25 +481,29 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         present(controller, animated: true, completion: nil)
     }
     
-    
+
+
     
     // Send the pictures, videos, etc.
     func sendAssets(selectedAssets: [PHAsset]){
-        
         //for every asset in the asset array
         for asset in selectedAssets {
             
-            //retrieve small image for that asset
             if asset.mediaType == .image {
-                getSmallImage(asset: asset, completion: {(image: UIImage?) -> Void in
+            //retrieve full size image for that asset
+                getFullImage(asset: asset, completion: { (image: UIImage?) in
                     if let img = image {
                         self.storeAndSendImage(image: img, asset: asset)
                     }
-                })
-//            //retrieve full size image for that asset
-//            if let image = getFullImage(asset: asset){
-//
-//            }
+            })
+                
+//                getSmallImage(asset: asset, completion: {(image: UIImage?) -> Void in
+//                    if let img = image {
+//                        
+//                        self.storeAndSendImage(image: img, asset: asset)
+//                    }
+//                })
+
             } else if asset.mediaType == .video {
                 //    //retrieve video
                 //    if let video = getVideoForAsset(asset: asset){
@@ -507,15 +513,28 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         }
     }
     
+    //    use asset to get full size image
+    //    store full size image on db
+    
+    //    cache full size image (using url?)
+    //    send message with url
+    //    in cell, retrieve image from cache and display it
+    
     func storeAndSendImage(image: UIImage, asset: PHAsset?){
+        
         //store asset in firebase by calling storeChatImage on UIImage
 //        StorageClient.instance.storeChatImage(chatImage: image, width: 200, height: 200, success: { (url: URL?) in
         StorageClient.instance.storeChatImage(chatImage: image, success: { (urlThumb: URL?, urlFull: URL?) in
-            if let url = url {
-                //send message with string of imageURL in it
-                let attachment = url.absoluteString
+            if let url = urlFull {
                 
-                let tm = Message1(roomId: self.chatRoom.guid, message: "", name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!, attachment: attachment)
+                let attachmentString = url.absoluteString
+                print("attachmentString:")
+                print(attachmentString)
+                //cache image
+                self.imageCache.set(value: image, key: attachmentString)
+                
+                //send message with string of imageURL in it
+                let tm = Message1(roomId: self.chatRoom.guid, message: "", name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!, attachment: attachmentString)
                 
                 
                 ChatSpotClient.sendMessage(message: tm, room: self.chatRoom, success: {
@@ -524,15 +543,15 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                 }, failure: {
                     print("photo sending failed")
                 })
-                if let asset = asset {
-                    DispatchQueue.global(qos: .utility).async {
-                        self.getFullImage(asset: asset, completion: {(image: UIImage?) -> Void in
-                            if let img = image {
-                                self.storeFullSizeMedia(media: img, message: tm)
-                            }
-                        })
-                    }
-                }
+//                if let asset = asset {
+//                    DispatchQueue.global(qos: .utility).async {
+//                        self.getFullImage(asset: asset, completion: {(image: UIImage?) -> Void in
+//                            if let img = image {
+//                                self.storeFullSizeMedia(media: img, message: tm)
+//                            }
+//                        })
+//                    }
+//                }
                 self.addPhotoButton.isSelected = false
                 
             }
@@ -545,15 +564,17 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     func storeFullSizeMedia(media: Any, message: Message1){
         DispatchQueue.global(qos: .utility).async {
             if let image = media as? UIImage {
-                StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
-                    if let url = url {
+                StorageClient.instance.storeChatImage(chatImage: image, success: { (thumbnail: URL?, fullSize: URL?) in
+                    if let url = fullSize {
                         let attachment = url.absoluteString
-                        ChatSpotClient.
+                        //                        ChatSpotClient.
                     }
+                }, failure: {
+                    print("failure")
                 })
-            }
+
 //            if let video = media as? //video file {
-//            }
+            }
         
         }
     }
