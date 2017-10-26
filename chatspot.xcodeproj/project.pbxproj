@@ -38,6 +38,9 @@
 		76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */; };
 		76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */; };
 		8B0811251FA03A18002337F1 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0811241FA03A18002337F1 /* Activity.swift */; };
+		8B0ACFB51FA1A21300722B1D /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B0ACFB41FA1A21300722B1D /* ActivityView.xib */; };
+		8B0ACFB71FA1A21D00722B1D /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACFB61FA1A21D00722B1D /* ActivityView.swift */; };
+		8B0ACFBA1FA1CCDC00722B1D /* ActivityDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACFB81FA1CCDC00722B1D /* ActivityDetailVC.swift */; };
 		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
 		8B92720C1F9082590041FC35 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92720B1F9082590041FC35 /* Storage.swift */; };
 		8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2DB701F92FBC20073ABBC /* LocationManager.swift */; };
@@ -120,6 +123,9 @@
 		76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIImageWithEditView.xib; sourceTree = "<group>"; };
 		76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageWithEditView.swift; sourceTree = "<group>"; };
 		8B0811241FA03A18002337F1 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		8B0ACFB41FA1A21300722B1D /* ActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityView.xib; sourceTree = "<group>"; };
+		8B0ACFB61FA1A21D00722B1D /* ActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		8B0ACFB81FA1CCDC00722B1D /* ActivityDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailVC.swift; sourceTree = "<group>"; };
 		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
 		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		8BD2DB701F92FBC20073ABBC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -257,6 +263,8 @@
 				76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */,
 				2D93B1071F9D7CD400D6B80C /* MapBannerView.swift */,
 				2D93B1091F9D7D1A00D6B80C /* MapBannerView.xib */,
+				8B0ACFB61FA1A21D00722B1D /* ActivityView.swift */,
+				8B0ACFB41FA1A21300722B1D /* ActivityView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -309,6 +317,7 @@
 				F2719F041F8DF56300417517 /* ProfileVC.swift */,
 				325F47981F91F71E00DE5C34 /* AuthViewController.swift */,
 				2DCF58E01F9CB8050014BBD0 /* ChatRoomDetailVC.swift */,
+				8B0ACFB81FA1CCDC00722B1D /* ActivityDetailVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -432,6 +441,7 @@
 				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
 				2D93B1061F9D2B6800D6B80C /* UserCell.xib in Resources */,
 				F2FEEF9F1F9C719D008923D3 /* Libertad-ExtraBoldItalic.otf in Resources */,
+				8B0ACFB51FA1A21300722B1D /* ActivityView.xib in Resources */,
 				76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */,
 				F2FEEFA61F9C719D008923D3 /* Libertad-ThinItalic.otf in Resources */,
 				7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */,
@@ -491,6 +501,7 @@
 				"${BUILT_PRODUCTS_DIR}/KRProgressHUD/KRProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/NSDateMinimalTimeAgo/NSDateMinimalTimeAgo.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -511,6 +522,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KRProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDateMinimalTimeAgo.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -555,6 +567,7 @@
 				2D93B1081F9D7CD400D6B80C /* MapBannerView.swift in Sources */,
 				2DCF58E11F9CB8050014BBD0 /* ChatRoomDetailVC.swift in Sources */,
 				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
+				8B0ACFB71FA1A21D00722B1D /* ActivityView.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
 				76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */,
 				8B92720C1F9082590041FC35 /* Storage.swift in Sources */,
@@ -570,6 +583,7 @@
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,
+				8B0ACFBA1FA1CCDC00722B1D /* ActivityDetailVC.swift in Sources */,
 				2D93B1051F9D2B6800D6B80C /* UserCell.swift in Sources */,
 				76E2296A1F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift in Sources */,
 				F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */,

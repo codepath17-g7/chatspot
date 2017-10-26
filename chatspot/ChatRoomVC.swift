@@ -16,6 +16,7 @@ import GrowingTextView
 import ImagePickerSheetController
 import Photos
 import Haneke
+import PureLayout
 
 class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     static var MAX_MESSAGES_LIMIT: UInt = 10
@@ -32,6 +33,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     @IBOutlet weak var containerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
     
+    var activityView: ActivityView!
+    var currentActivity: Activity?
     
 	var loadingMoreView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     var isLoading = false
@@ -59,7 +62,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         setUpUI()
         
         // Infinite scrolling
-        //setUpInfiniteScrolling()
+        setUpInfiniteScrolling()
         
         self.startObservingMessages()
     }
@@ -161,16 +164,78 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
                         MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
+                
+                /*ChatSpotClient.getMessagesForRoom(roomId: self.chatRoom.guid, limit: ChatRoomVC.MAX_MESSAGES_LIMIT, lastMsgId: "", success: { (messages: [Message1]) in
+                    self.messages = messages
+                    self.tableView.reloadData()
+                    self.isLoading = false
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }, failure: { (error: Error?) in
+                    self.isLoading = false
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                })*/
             }
+            
+            // MARK: Activity
+//            let user = ChatSpotClient.currentUser
+//            let a = Activity(activityName: "Volleyball", activityStartedByName: user!.name!, activityStartedByGuid: user!.guid!, latitude: self.chatRoom.latitude , longitude: self.chatRoom.longitude)
+//            
+//            ChatSpotClient.createActivtyForChatRoom(roomGuid: self.chatRoom.guid, activity: a, success: {
+//                print("Activity Created")
+//            }, failure: {
+//                print("Error creating activity")
+//            })
+            
+            let activityObsevers = ChatSpotClient.listenForActivities(roomGuid: self.chatRoom.guid, onStartActivity: { (activity) in
+                DispatchQueue.main.async {
+                    if (self.activityView == nil) {
+                        self.activityView = ActivityView()
+                        self.activityView.loadFromXib()
+                    }
+                    
+                    if (self.activityView.superview == nil) {
+                        self.view.addSubview(self.activityView)
+                        let inset = self.navigationController!.navigationBar.frame.height + 20
+                        self.activityView.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: inset)
+                        self.activityView.autoPinEdge(toSuperviewEdge: ALEdge.left)
+                        self.activityView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+                        self.activityView.autoSetDimension(ALDimension.height, toSize: 50.0)
+                        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.onActivityBannerTapped(_:)))
+                        self.activityView.addGestureRecognizer(tapGesture)
+                    }
+                    
+                    self.currentActivity = activity
+                    self.activityView.activityInfoText.text = "\(activity.activityStartedByName!) started \(activity.activityName!)"
+                }
+            }, onUpdateActivity: { (activity) in
+                
+                self.currentActivity = activity
+                
+            }, onEndActivity: { (activity) in
+                DispatchQueue.main.async {
+                    if (self.activityView.superview != nil) {
+                        self.activityView.removeFromSuperview()
+                    }
+                }
+            })
+            self.observers.append(contentsOf: activityObsevers)
         }
     }
+    
+    func onActivityBannerTapped(_ sender: UIView) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let navigationController = storyboard.instantiateViewController(withIdentifier: "activityDetailNavigationController") as! UINavigationController
+        let activityDetailVC = navigationController.topViewController as! ActivityDetailVC
+        activityDetailVC.activity = currentActivity
+        present(navigationController, animated: true)
+    }
 
-//    func setUpInfiniteScrolling(){
-//        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-//        loadingMoreView.center = tableFooterView.center
-//        tableFooterView.insertSubview(loadingMoreView, at: 0)
-//        self.tableView.tableFooterView = tableFooterView
-//    }
+    func setUpInfiniteScrolling(){
+        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+        loadingMoreView.center = tableFooterView.center
+        tableFooterView.insertSubview(loadingMoreView, at: 0)
+        self.tableView.tableFooterView = tableFooterView
+    }
     
 	
     func setRoomName (_ roomName: String) {
@@ -656,7 +721,7 @@ extension ChatRoomVC: UIScrollViewDelegate {
             
             // When the user has scrolled past the threshold, start requesting
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
-                //loadMoreMessages()
+                loadMoreMessages()
             }
         }
     }
@@ -668,6 +733,7 @@ extension ChatRoomVC: UIScrollViewDelegate {
             return
         }
         
+        print("SCROLLING - load more")
         if chatRoom.isAroundMe {
             self.isLoading = true;
             self.loadingMoreView.startAnimating()
@@ -693,7 +759,8 @@ extension ChatRoomVC: UIScrollViewDelegate {
                                               success: { (messages: [Message1]) in
                 //var newMsgs: [Message1] = messages
                 //newMsgs += self.messages
-                self.messages = messages
+                self.messages += messages
+            
                 self.tableView.reloadData()
                 self.isLoading = false;
                 self.loadingMoreView.stopAnimating()
