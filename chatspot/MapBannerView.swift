@@ -16,10 +16,12 @@ class MapBannerView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        loadFromXib()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        loadFromXib()
     }
     
     func loadFromXib() {

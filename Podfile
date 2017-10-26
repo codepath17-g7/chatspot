@@ -20,6 +20,7 @@ target 'chatspot' do
   pod 'ISEmojiView'
   pod 'GrowingTextView', '~> 0.4.0'
   pod 'ImagePickerSheetController', :git => 'https://github.com/EdenShapiro/ImagePickerSheetController.git', :branch => 'swift3'
+  pod 'PureLayout'
   # Pods for chatspot
 
 end
