@@ -66,13 +66,7 @@ class ChatMessageCell: UITableViewCell {
                 messageImageView.contentMode = .scaleAspectFill
                 messageImageView.layer.cornerRadius = 7
                 messageImageView.clipsToBounds = true
-            } //else {
-//                messageTextLabel.isHidden = false
-//                messageImageView.isHidden = true
-//                messageImageHeightConstraint.constant = 0
-//                messageImageBottomConstraint.isActive = false
-//                self.updateConstraints()
-//            }
+            }
             self.updateConstraints()
 		}
 	}
