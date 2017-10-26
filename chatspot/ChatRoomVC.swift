@@ -509,8 +509,9 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     
     func storeAndSendImage(image: UIImage, asset: PHAsset?){
         //store asset in firebase by calling storeChatImage on UIImage
+//        StorageClient.instance.storeChatImage(chatImage: image, width: 200, height: 200, success: { (url: URL?) in
         StorageClient.instance.storeChatImage(chatImage: image, success: { (urlThumb: URL?, urlFull: URL?) in
-            if let url = urlFull {
+            if let url = url {
                 //send message with string of imageURL in it
                 let attachment = url.absoluteString
                 
@@ -543,14 +544,14 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     
     func storeFullSizeMedia(media: Any, message: Message1){
         DispatchQueue.global(qos: .utility).async {
-//            if let image = media as? UIImage {
-//                StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
-//                    if let url = url {
-//                        let attachment = url.absoluteString
-//                        message.
-//                    }
-//                })
-//            }
+            if let image = media as? UIImage {
+                StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
+                    if let url = url {
+                        let attachment = url.absoluteString
+                        ChatSpotClient.
+                    }
+                })
+            }
 //            if let video = media as? //video file {
 //            }
         
