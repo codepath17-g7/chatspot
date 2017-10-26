@@ -42,6 +42,7 @@ class ChatSpotClient {
     static func createActivtyForChatRoom(roomGuid: String, activity: Activity,
                                          success: @escaping () -> (), failure: @escaping () -> ()) {
         
+        activity.isOngoing = true
         let ref = Database.database().reference()
         
         let newActivityGuid = ref.child("activities").child(roomGuid).childByAutoId().key
@@ -96,27 +97,47 @@ class ChatSpotClient {
         }
     }
     
-    static func getOngoingActivities(roomGuid: String, success: @escaping ([Activity]) -> ()) {
+    static func listenForActivities(roomGuid: String,
+                                    onStartActivity: @escaping (Activity) -> (),
+                                    onUpdateActivity: @escaping (Activity) -> (),
+                                    onEndActivity: @escaping (Activity) -> ()) -> [UInt] {
         
         let ref = Database.database().reference()
         
-        ref.child("activities")
+        let observer = ref.child("activities")
             .child(roomGuid)
             .queryOrdered(byChild: KEY_ONGOING)
             .queryEqual(toValue: true)
-            .observe(.value, with: { (snapshot) in
+            .observe(.childAdded, with: { (snapshot) in
                 
-                let activityDicts = snapshot.value as? [String : AnyObject] ?? [:]
+                let activityDict = snapshot.value as? NSDictionary ?? [:]
+            
+                let activity =  Activity(guid: snapshot.key, obj: activityDict)
                 
-                var activities = [Activity]()
+                onStartActivity(activity)
+            })
+        
+        let observer1 = ref.child("activities")
+            .child(roomGuid)
+            .queryOrdered(byChild: KEY_ONGOING)
+            .observe(.childChanged, with: { (snapshot) in
                 
-                for dict in activityDicts {
-                    let activity =  Activity(guid: dict.key, obj: dict.value as! NSDictionary)
-                    activities.append(activity)
+                let dict = snapshot.value as? NSDictionary ?? [:]
+                
+                if dict.count > 0 {
+                    
+                    let activity = Activity(guid: snapshot.key, obj: dict)
+                    
+                    if activity.isOngoing == false {
+                        onEndActivity(activity)
+                    } else {
+                        onUpdateActivity(activity)
+                    }
                 }
                 
-                success(activities)
             })
+        
+        return [observer, observer1]
     }
 
     static func removeObserver(handle: UInt){

@@ -620,13 +620,50 @@
             </objects>
             <point key="canvasLocation" x="-754" y="1411"/>
         </scene>
+        <!--Activity DetailVC-->
+        <scene sceneID="Y58-J9-73b">
+            <objects>
+                <viewController storyboardIdentifier="activityDetailController" id="8d5-hm-bXl" customClass="ActivityDetailVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xtP-7w-bTr"/>
+                        <viewControllerLayoutGuide type="bottom" id="MmS-T2-lXU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cly-mX-V8U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ahl-Oz-yqE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ahl-Oz-yqE" firstAttribute="leading" secondItem="cly-mX-V8U" secondAttribute="leading" id="Cns-Qu-iUD"/>
+                            <constraint firstItem="MmS-T2-lXU" firstAttribute="top" secondItem="ahl-Oz-yqE" secondAttribute="bottom" id="hIJ-W6-H4M"/>
+                            <constraint firstItem="ahl-Oz-yqE" firstAttribute="top" secondItem="cly-mX-V8U" secondAttribute="top" id="ptR-Zn-9Gp"/>
+                            <constraint firstAttribute="trailing" secondItem="ahl-Oz-yqE" secondAttribute="trailing" id="u2W-PC-xwe"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vZM-Dx-nOo">
+                        <barButtonItem key="rightBarButtonItem" title="CLOSE" id="SdL-tM-XtN"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="closeButton" destination="SdL-tM-XtN" id="Fvf-7e-mDE"/>
+                        <outlet property="tableView" destination="ahl-Oz-yqE" id="GHU-ht-LG1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W3m-5d-1Oz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3298.4000000000001" y="732.68365817091455"/>
+        </scene>
         <!--My ChatSpots-->
         <scene sceneID="VTP-QY-fNF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My ChatSpots" image="messages" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -712,6 +749,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fje-JW-vcS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1552.8" y="-1073.6131934032985"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q3m-Rr-FxP">
+            <objects>
+                <navigationController storyboardIdentifier="activityDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="g0T-YJ-1nU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nlM-sp-vNF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8d5-hm-bXl" kind="relationship" relationship="rootViewController" id="uwc-EX-6sS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kOQ-p5-Wyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4031.1999999999998" y="734.48275862068976"/>
         </scene>
     </scenes>
     <resources>
