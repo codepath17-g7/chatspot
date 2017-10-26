@@ -43,8 +43,8 @@ class StorageClient: NSObject {
     
     func resizeImage(image: UIImage, width: Int, height: Int) -> UIImage? {
         let resizeRenderImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-        resizeRenderImageView.layer.borderColor = UIColor.white.cgColor
-        resizeRenderImageView.layer.borderWidth = 3.0
+//        resizeRenderImageView.layer.borderColor = UIColor.white.cgColor
+//        resizeRenderImageView.layer.borderWidth = 3.0
         resizeRenderImageView.contentMode = .scaleAspectFill
         resizeRenderImageView.image = image
         
@@ -70,13 +70,51 @@ class StorageClient: NSObject {
         storeImage(ref: imagesRef, image: resizedImage!, success: success, failure: failure)
     }
     
-    func storeChatImage(userGuid: String, chatImage: UIImage, success: @escaping (URL?) -> (), failure: @escaping () -> ()) {
-        let imagesRef = storageRef.child("chatImage").child(userGuid+".png")
+    func storeChatImage(chatImage: UIImage, success: @escaping (URL?, URL?) -> (), failure: @escaping () -> ()) {
+        
+        let imageUUID = NSUUID().uuidString
+        let thumbNailRef = storageRef.child("chatImage").child(imageUUID+"_thumb.png")
+        let imagesRef = storageRef.child("chatImage").child(imageUUID+".png")
         
         // what size should this be?
+        let thumbNailImage = resizeImage(image: chatImage, width: 200, height: 200)
         let resizedImage = resizeImage(image: chatImage, width: 375, height: 600)
-        storeImage(ref: imagesRef, image: resizedImage!, success: success, failure: failure)
+
+        var thumbNailUrl: URL?
+        var fullSizeUrl: URL?
+
+        let taskGroup = DispatchGroup()
+        
+        taskGroup.enter()
+        storeImage(ref: thumbNailRef, image: thumbNailImage!, success: { (returnUrl: URL?) in
+            thumbNailUrl = returnUrl
+            taskGroup.leave()
+        }) { 
+            taskGroup.leave()
+        }
+        
+        taskGroup.enter()
+        storeImage(ref: imagesRef, image: resizedImage!, success: { (returnUrl: URL?) in
+            fullSizeUrl = returnUrl
+            taskGroup.leave()
+        }) {
+            taskGroup.leave()
+        }
+        
+        taskGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+            success(thumbNailUrl, fullSizeUrl)
+        }))
     }
     
-    
+    func storeChatVideo(videoUrl: URL, success: @escaping (URL?) -> (), failure: @escaping () -> ()) {
+        let videoRef = storageRef.child("chatVideo").child(NSUUID().uuidString+".mov")
+        
+        videoRef.putFile(from: videoUrl, metadata: nil) { (metadata: StorageMetadata?, error: Error?) in
+            if error == nil {
+                success(metadata?.downloadURL())
+            } else {
+                failure()
+            }
+        }
+    }
 }

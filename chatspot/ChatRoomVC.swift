@@ -509,8 +509,8 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
     
     func storeAndSendImage(image: UIImage, asset: PHAsset?){
         //store asset in firebase by calling storeChatImage on UIImage
-        StorageClient.instance.storeChatImage(userGuid: ChatSpotClient.currentUser.guid!, chatImage: image, success: { (url: URL?) in
-            if let url = url {
+        StorageClient.instance.storeChatImage(chatImage: image, success: { (urlThumb: URL?, urlFull: URL?) in
+            if let url = urlFull {
                 //send message with string of imageURL in it
                 let attachment = url.absoluteString
                 
