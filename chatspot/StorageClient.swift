@@ -106,6 +106,13 @@ class StorageClient: NSObject {
         }))
     }
     
+    func storeChatImage(chatImage: UIImage, width: Int, height: Int, success: @escaping (URL?) -> (), failure: @escaping () -> ()) {
+        let imageUUID = NSUUID().uuidString
+        let imagesRef = storageRef.child("chatImage").child(imageUUID+".png")
+        let resizedImage = resizeImage(image: chatImage, width: width, height: height)
+        storeImage(ref: imagesRef, image: resizedImage!, success: success, failure: failure)
+    }   
+        
     func storeChatVideo(videoUrl: URL, success: @escaping (URL?) -> (), failure: @escaping () -> ()) {
         let videoRef = storageRef.child("chatVideo").child(NSUUID().uuidString+".mov")
         
