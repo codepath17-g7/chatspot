@@ -8,6 +8,7 @@
 
 import UIKit
 import NSDateMinimalTimeAgo
+import HanekeSwift
 
 @objc protocol ChatMessageCellDelegate {
     func presentAlertViewController(alertController: UIAlertController)
@@ -58,7 +59,8 @@ class ChatMessageCell: UITableViewCell {
                 guard let url = URL(string: urlString) else { return }
 //                print("urlString: \(urlString)")
 //                print("url: \(url)")
-                messageImageView.setImageWith(url)
+                messageImageView.hnk_setImageFromURL(url)
+//                messageImageView.setImageWith(url)
                 messageTextLabel.isHidden = true
                 messageImageView.isHidden = false
                 messageImageHeightConstraint.constant = 200

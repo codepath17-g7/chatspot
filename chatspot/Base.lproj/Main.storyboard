@@ -271,7 +271,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATW-MG-nIq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="664"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -397,17 +397,17 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
                                         <rect key="frame" x="0.0" y="620" width="375" height="47"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaC-Rt-UDV">
-                                                <rect key="frame" x="8" y="10" width="35" height="30"/>
+                                                <rect key="frame" x="8" y="674" width="35" height="30"/>
                                                 <state key="normal" image="photo"/>
                                                 <connections>
                                                     <action selector="addPhotoButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="9Zh-qc-Muv"/>
                                                 </connections>
                                             </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
                                                 <rect key="frame" x="94" y="7" width="229" height="33"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -417,14 +417,14 @@
                                                 </connections>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-Wy-oBi">
-                                                <rect key="frame" x="331" y="10" width="36" height="30"/>
+                                                <rect key="frame" x="331" y="674" width="36" height="30"/>
                                                 <state key="normal" title="Send"/>
                                                 <connections>
                                                     <action selector="sendMessageButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="eR9-pl-1er"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQJ-9i-BAx">
-                                                <rect key="frame" x="51" y="10" width="35" height="30"/>
+                                                <rect key="frame" x="51" y="674" width="35" height="30"/>
                                                 <state key="normal" image="smiley"/>
                                                 <connections>
                                                     <action selector="addEmojiButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="bNa-0O-bWa"/>
