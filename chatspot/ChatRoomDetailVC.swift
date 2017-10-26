@@ -14,6 +14,7 @@ class ChatRoomDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var footerView: UIView!
+    @IBOutlet weak var leaveButton: UIButton!
     
     var chatroom: ChatRoom1!
     
@@ -38,6 +39,9 @@ class ChatRoomDetailVC: UIViewController {
     }
     
     private func setupUI() {
+        
+        leaveButton.layer.cornerRadius = 4
+        
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none

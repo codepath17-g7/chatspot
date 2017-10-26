@@ -103,6 +103,7 @@
                     </view>
                     <connections>
                         <outlet property="footerView" destination="SuB-21-Seu" id="Eyn-gb-bsW"/>
+                        <outlet property="leaveButton" destination="cTg-ys-ecs" id="Jj4-nB-9Od"/>
                         <outlet property="tableView" destination="RqF-un-Kmi" id="8ja-2q-78l"/>
                     </connections>
                 </viewController>
