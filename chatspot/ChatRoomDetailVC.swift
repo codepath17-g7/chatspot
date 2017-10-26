@@ -110,6 +110,10 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated:true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let user = userList[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserCell
