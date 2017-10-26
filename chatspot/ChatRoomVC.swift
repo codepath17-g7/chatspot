@@ -15,6 +15,7 @@ import ISEmojiView
 import GrowingTextView
 import ImagePickerSheetController
 import Photos
+import PureLayout
 
 class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     static var MAX_MESSAGES_LIMIT: UInt = 10
@@ -30,6 +31,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     @IBOutlet weak var toolbarView: UIView!  
     @IBOutlet weak var containerTopMarginConstraint: NSLayoutConstraint!
     @IBOutlet weak var toolbarBottomConstraint: NSLayoutConstraint!
+    
+    var activityView: ActivityView!
     
     
 	var loadingMoreView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -170,6 +173,26 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
                     MBProgressHUD.hide(for: self.view, animated: true)
                 })*/
             }
+            
+            ChatSpotClient.getOngoingActivities(roomGuid: self.chatRoom.guid, success: { (activities) in
+                guard let activity = activities.first else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    if (self.activityView == nil) {
+                        self.activityView = ActivityView()
+                        self.activityView.loadFromXib()
+                        self.view.addSubview(self.activityView)
+                        let inset = self.navigationController!.navigationBar.frame.height + 20
+                        self.activityView.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: inset)
+                        self.activityView.autoPinEdge(toSuperviewEdge: ALEdge.left)
+                        self.activityView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+                        self.activityView.autoSetDimension(ALDimension.height, toSize: 50.0)
+                    }
+                    
+                    self.activityView.activityInfoText.text = "\(activity.activityStartedByName!) started \(activity.activityName!)"
+                }
+            })
         }
     }
 

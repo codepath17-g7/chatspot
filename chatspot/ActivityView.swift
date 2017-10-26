@@ -16,38 +16,36 @@ class ActivityView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initSubviews()
+        loadFromXib()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initSubviews()
+        loadFromXib()
     }
     
-    convenience init() {
-        self.init()
-        initSubviews()
-    }
-    
-    private func initSubviews() {
+    func loadFromXib() {
         // standard initialization logic
         Bundle.main.loadNibNamed("ActivityView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
+        blurBackground()
     }
     
     private func blurBackground() {
+        
         if !UIAccessibilityIsReduceTransparencyEnabled() {
-            self.contentView.backgroundColor = UIColor.clear
             
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            self.contentView.backgroundColor = .clear
+            let blurEffect = UIBlurEffect(style: .light)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
             //always fill the view
             blurEffectView.frame = self.contentView.bounds
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            self.contentView.insertSubview(blurEffectView, at: 0) // insert blur view under all the views
             
-            self.contentView.insertSubview(blurEffectView, at: 0) //if you have more UIViews, use an insertSubview API to place it where needed
         } else {
+            
             self.contentView.backgroundColor = UIColor.ChatSpotColors.LightBlue
         }
     }
