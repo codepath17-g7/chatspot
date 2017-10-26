@@ -165,7 +165,7 @@ class ChatListVC: UIViewController {
             let secondHasUnread = (self.unreadCount[second.guid] ?? 0) > 0
             
             if firstHasUnread == secondHasUnread {
-                return first.lastMessageTimestamp ?? 0 > second.lastMessageTimestamp ?? 0
+                return first.lastMessageTimestamp > second.lastMessageTimestamp
             }
             return firstHasUnread && !secondHasUnread
         })
