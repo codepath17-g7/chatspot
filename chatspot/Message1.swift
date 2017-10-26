@@ -30,6 +30,7 @@ class Message1 {
     var attachment: String?
     var mediaFileUrl: String?
     var thumbnailImageUrl: String?
+    var rawTimestamp: Double = NSDate().timeIntervalSince1970
     var system = false // indicate a system message (no user node)
 
 
@@ -40,10 +41,12 @@ class Message1 {
         self.name = name
         self.userGuid = userGuid
         self.attachment = attachment
+        self.rawTimestamp = NSDate().timeIntervalSince1970
     }
 
     convenience init(roomId: String, message: String, name: String, userGuid: String) {
         self.init(roomId: roomId, message: message, name: name, userGuid: userGuid, attachment: nil)
+        self.rawTimestamp = NSDate().timeIntervalSince1970
     }
     
     convenience init(guid: String, obj: NSDictionary) {
@@ -65,6 +68,7 @@ class Message1 {
     
         if let timestamp = obj[Message1.KEY_TIMESTAMP] as? Double {
             let epochTime = TimeInterval(timestamp)/1000
+            self.rawTimestamp = epochTime
             self.timestamp = NSDate(timeIntervalSince1970: epochTime)
         }
         
