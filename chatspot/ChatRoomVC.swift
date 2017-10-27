@@ -106,63 +106,43 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             print("Not attached to a room")
             return
         }
-        self.isLoading = true
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+
         DispatchQueue.global(qos: .userInitiated).async {
             if self.chatRoom.isAroundMe {
-    //            self.isLoading = true
-    //            MBProgressHUD.showAdded(to: self.view, animated: true)
                 self.observers.append(ChatSpotClient.observeNewMessagesAroundMe(limit: ChatRoomVC.MAX_MESSAGES_LIMIT, success: { (message: Message1) in
                     DispatchQueue.main.async {
                         self.onNewMessage(message)
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }, failure: {
                     DispatchQueue.main.async {
                         print("Error in observeNewMessages")
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
                 
-    //            self.isLoading = true
-    //            MBProgressHUD.showAdded(to: self.view, animated: true)
-                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
 
-                    
+                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
                     print("Chat room -> \(roomGuid)")
                     self.chatRoom.guid = roomGuid
-                    self.chatRoom.name = "Around Me"
-                    DispatchQueue.main.async {
-                        self.setRoomName(self.chatRoom.name)
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                    }
+//                    self.chatRoom.name = "Around Me"
+//                    DispatchQueue.main.async {
+//                        self.setRoomName(self.chatRoom.name)
+//                    }
                 }, failure: { (error: Error?) in
                     DispatchQueue.main.async {
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
 
             } else {
-    //            self.isLoading = true
-    //            MBProgressHUD.showAdded(to: self.view, animated: true)
                 self.observers.append(ChatSpotClient.observeNewMessages(
                     roomId: self.chatRoom.guid,
                     limit: ChatRoomVC.MAX_MESSAGES_LIMIT,
                     success: { (message: Message1) in
                         DispatchQueue.main.async {
                             self.onNewMessage(message)
-                            self.isLoading = false
-                            MBProgressHUD.hide(for: self.view, animated: true)
                         }
                 }, failure: {
                     DispatchQueue.main.async {
                         print("Error in observeNewMessages")
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
                 
