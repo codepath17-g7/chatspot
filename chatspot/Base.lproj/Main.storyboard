@@ -423,9 +423,21 @@
                                                     <action selector="addEmojiButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="bNa-0O-bWa"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijM-uE-cvC">
+                                                <rect key="frame" x="51" y="13" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="oW8-3n-l64"/>
+                                                    <constraint firstAttribute="height" constant="25" id="xOx-vK-Rgx"/>
+                                                </constraints>
+                                                <state key="normal" image="activity"/>
+                                                <connections>
+                                                    <action selector="onAddActivity:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="15D-yX-v2m"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="ijM-uE-cvC" firstAttribute="centerY" secondItem="M6h-xv-TnC" secondAttribute="centerY" constant="2" id="1N8-id-QbN"/>
                                             <constraint firstItem="OGB-g9-AKX" firstAttribute="top" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="1UR-qa-aET"/>
                                             <constraint firstItem="vaC-Rt-UDV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="3St-gV-ZHC"/>
                                             <constraint firstItem="nQJ-9i-BAx" firstAttribute="top" secondItem="vaC-Rt-UDV" secondAttribute="top" id="63K-kK-fGv"/>
@@ -434,11 +446,12 @@
                                             <constraint firstAttribute="trailing" secondItem="AWo-Wy-oBi" secondAttribute="trailing" constant="8" id="FaZ-Ad-rSB"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="Nsa-Ww-Rck"/>
                                             <constraint firstItem="vaC-Rt-UDV" firstAttribute="leading" secondItem="M6h-xv-TnC" secondAttribute="leading" constant="8" id="XJI-15-Ozl"/>
+                                            <constraint firstItem="ijM-uE-cvC" firstAttribute="leading" secondItem="vaC-Rt-UDV" secondAttribute="trailing" constant="8" id="YZT-Or-Pzh"/>
                                             <constraint firstAttribute="bottom" secondItem="vaC-Rt-UDV" secondAttribute="bottom" constant="7" id="bqf-9K-Vsn"/>
-                                            <constraint firstItem="nQJ-9i-BAx" firstAttribute="leading" secondItem="vaC-Rt-UDV" secondAttribute="trailing" constant="8" id="gl6-I7-m41"/>
                                             <constraint firstAttribute="bottom" secondItem="OGB-g9-AKX" secondAttribute="bottom" constant="7" id="jM6-EB-cw3"/>
                                             <constraint firstItem="AWo-Wy-oBi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="M6h-xv-TnC" secondAttribute="top" constant="7" id="mgh-eL-lJH"/>
                                             <constraint firstItem="AWo-Wy-oBi" firstAttribute="leading" secondItem="OGB-g9-AKX" secondAttribute="trailing" constant="8" id="rM8-PZ-NFF"/>
+                                            <constraint firstItem="nQJ-9i-BAx" firstAttribute="leading" secondItem="ijM-uE-cvC" secondAttribute="trailing" constant="8" id="z7Q-mN-Axc"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -497,6 +510,7 @@
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addActivityButton" destination="ijM-uE-cvC" id="hfS-6Z-6eE"/>
                         <outlet property="addEmojiButton" destination="nQJ-9i-BAx" id="0WO-el-YM7"/>
                         <outlet property="addPhotoButton" destination="vaC-Rt-UDV" id="A2o-LY-wbs"/>
                         <outlet property="chatRoomMemberCountLabel" destination="oiR-MF-mHb" id="lh4-sq-QoN"/>
@@ -790,6 +804,7 @@
     <resources>
         <image name="24hourfitlong" width="375" height="76"/>
         <image name="account" width="30" height="30"/>
+        <image name="activity" width="30" height="30"/>
         <image name="around me" width="30" height="30"/>
         <image name="crown" width="50" height="39"/>
         <image name="ic_person" width="468" height="475"/>

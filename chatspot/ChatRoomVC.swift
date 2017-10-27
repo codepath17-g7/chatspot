@@ -25,6 +25,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var addPhotoButton: UIButton!
 	@IBOutlet weak var addEmojiButton: UIButton!
+    @IBOutlet weak var addActivityButton: UIButton!
 	@IBOutlet weak var messageTextView: GrowingTextView!
 	@IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var chatRoomNameLabel: UILabel!
@@ -227,6 +228,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         let navigationController = storyboard.instantiateViewController(withIdentifier: "activityDetailNavigationController") as! UINavigationController
         let activityDetailVC = navigationController.topViewController as! ActivityDetailVC
         activityDetailVC.activity = currentActivity
+        activityDetailVC.roomGuid = chatRoom.guid
         present(navigationController, animated: true)
     }
 
@@ -262,6 +264,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
+        addActivityButton.changeImageViewTo(color: .lightGray)
         
 		messageTextView.autoresizingMask = .flexibleWidth
         messageTextView.maxLength = 300
@@ -372,6 +375,46 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		view.endEditing(true)
 	}
     
+    @IBAction func onAddActivity(_ sender: UIButton) {
+        print("Add activity tapped.")
+        
+        var observer: Any?
+        
+        let alertController = UIAlertController(title: "Start an Activity!", message: "Enter an activity name to get started.", preferredStyle: .alert)
+        
+        let goAction = UIAlertAction(title: "Go!", style: .default) { (_) in
+            if let field = alertController.textFields?[0] {
+                // store your data
+                print("creatig activity \(field.text!)")
+                let user = ChatSpotClient.currentUser!
+                let activity = Activity.init(activityName: field.text!, activityStartedByName: user.name!, activityStartedByGuid: user.guid!, latitude: self.chatRoom.latitude, longitude: self.chatRoom.longitude)
+                
+                ChatSpotClient.createActivtyForChatRoom(roomGuid: self.chatRoom.guid, activity: activity, success: {
+                    print("Activity created")
+                }){}
+            }
+            
+            NotificationCenter.default.removeObserver(observer!)
+        }
+        goAction.isEnabled = false
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            NotificationCenter.default.removeObserver(observer!)
+        }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "ex: Volleyball"
+            observer = NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+                goAction.isEnabled = textField.text!.characters.count > 0
+            }
+        }
+        
+        alertController.addAction(goAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
     
     @IBAction func addEmojiButtonClicked(_ sender: Any) {
         if addEmojiButton.isSelected {
