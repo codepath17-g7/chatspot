@@ -762,8 +762,10 @@ extension ChatRoomVC: UIScrollViewDelegate {
             ChatSpotClient.getMessagesAroundMe(limit: UInt(ChatRoomVC.MAX_MESSAGES_LIMIT), lastMsgId: (messages.last?.guid)!, success: { (messages: [Message1]) in
                 //var newMsgs: [Message1] = messages
                 //newMsgs += self.messages
-                self.messages = messages
-                self.tableView.reloadData()
+                if messages.count > 0 {
+                    self.messages += messages
+                    self.tableView.reloadData()
+                }
                 self.isLoading = false;
                 self.loadingMoreView.stopAnimating()
             }, failure: { (e: Error?) in
@@ -781,9 +783,12 @@ extension ChatRoomVC: UIScrollViewDelegate {
                                               success: { (messages: [Message1]) in
                 //var newMsgs: [Message1] = messages
                 //newMsgs += self.messages
-                self.messages += messages
+                if messages.count > 0 {
+
+                    self.messages += messages
+                    self.tableView.reloadData()
+                }
             
-                self.tableView.reloadData()
                 self.isLoading = false;
                 self.loadingMoreView.stopAnimating()
             }) { (e: Error?) in
