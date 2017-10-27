@@ -15,13 +15,14 @@ class ChatListCell: UITableViewCell {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var memberCountLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
-    @IBOutlet weak var viewOnMapButton: UIButton!
     @IBOutlet weak var unreadCountLabel: UILabel!
     
     @IBOutlet weak var cardView: UIView!
     
-    @IBOutlet weak var locationLabelHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var accountImageToAroundMeConstraint: NSLayoutConstraint!
     
+    @IBOutlet var acountImageToLocationConstraint: NSLayoutConstraint!
     
     var unreadCount: Int = 0 {
         didSet {
@@ -37,36 +38,33 @@ class ChatListCell: UITableViewCell {
 //            locationLabel.isHidden = true
             if chatRoom.isAroundMe {
                 if let currentLocationName = ChatSpotClient.chatrooms[chatRoom.guid]?.name {
-                    locationLabel.text = "I'm at \(currentLocationName)"
-                    locationLabelHeightConstraint.constant = 19
-//                    locationLabel.isHidden = false
+                    locationLabel.text = "at \(currentLocationName)"
+                    accountImageToAroundMeConstraint.constant = 16 + locationLabel.frame.width
+                    acountImageToLocationConstraint.isActive = true
+                    locationLabel.isHidden = false
                 }
             } else {
-                locationLabelHeightConstraint.constant = 0
+                accountImageToAroundMeConstraint.constant = 8
+                acountImageToLocationConstraint.isActive = false
+                locationLabel.isHidden = true
             }
-            
-            
-            ////////// Hardcoded Data //////////
-            switch chatRoom.name {
-            case "Golden Gate Bridge":
-                chatRoomImageView.image = #imageLiteral(resourceName: "goldengate")
-//            case "Rengstorff Park":
-            
-            case "Around Me":
-                chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
-            default:
-                chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
-            }
-            
-            //////////////////////////////////////////////
-
-            // if cell above you is from same author as you, hide your profile pic and author label. edit constraints of author label
             
             
             memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
 			
             lastMessageLabel.text = chatRoom.lastMessage //?? "Say hi to the folks around you!"
+            
             self.updateConstraints()
+            
+            if let bannerString = chatRoom.banner {
+                guard let url = URL(string: bannerString) else { return }
+                chatRoomImageView.hnk_setImageFromURL(url)
+            } else {
+                chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
+            }
+            
+            
+            // if cell above you is from same author as you, hide your profile pic and author label. edit constraints of author label
             
 		}
 	}

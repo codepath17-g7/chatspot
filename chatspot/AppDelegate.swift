@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().tintColor = UIColor.ChatSpotColors.Red
-//        UITabBar.appearance().backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
+        UITabBar.appearance().barTintColor = UIColor.white
         return true
     }
     
