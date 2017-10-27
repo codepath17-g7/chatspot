@@ -635,6 +635,28 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ahl-Oz-yqE">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="AfH-6V-GcD">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9A-h9-nQM">
+                                            <rect key="frame" x="107.5" y="8" width="160" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="160" id="Pg0-bK-6b8"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="onTapActionButton:" destination="8d5-hm-bXl" eventType="touchUpInside" id="By7-dK-8Qj"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="m9A-h9-nQM" firstAttribute="top" secondItem="AfH-6V-GcD" secondAttribute="top" constant="8" id="lYw-7R-z3T"/>
+                                        <constraint firstItem="m9A-h9-nQM" firstAttribute="centerX" secondItem="AfH-6V-GcD" secondAttribute="centerX" id="thK-NY-XU2"/>
+                                        <constraint firstAttribute="bottom" secondItem="m9A-h9-nQM" secondAttribute="bottom" constant="8" id="vSU-ne-ngI"/>
+                                    </constraints>
+                                </view>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -649,6 +671,7 @@
                         <barButtonItem key="rightBarButtonItem" title="CLOSE" id="SdL-tM-XtN"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="m9A-h9-nQM" id="KhO-Qa-bkK"/>
                         <outlet property="closeButton" destination="SdL-tM-XtN" id="Fvf-7e-mDE"/>
                         <outlet property="tableView" destination="ahl-Oz-yqE" id="GHU-ht-LG1"/>
                     </connections>
