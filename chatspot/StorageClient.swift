@@ -106,6 +106,16 @@ class StorageClient: NSObject {
         }))
     }
     
+    func storeRegularImage(chatImage: UIImage, success: @escaping (URL?) -> (), failure: @escaping () -> ()){
+        let imageUUID = NSUUID().uuidString
+        let imagesRef = storageRef.child("chatImage").child(imageUUID+".png")
+        storeImage(ref: imagesRef, image: chatImage, success: { (returnUrl: URL?) in
+            success(returnUrl)
+        }, failure: {() in
+            failure()
+        })
+    }
+    
     
     func storeChatImage(chatImage: UIImage, width: Int, height: Int, success: @escaping (URL?) -> (), failure: @escaping () -> ()) {
         let imageUUID = NSUUID().uuidString

@@ -524,7 +524,8 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
             
         }, secondaryHandler: { _, numberOfPhotos in
             
-            self.sendAssets(selectedAssets: controller.selectedAssets)
+            // gets the images/videos for the assets selected from the imagepickeractionsheet
+            self.getMediaForAssets(selectedAssets: controller.selectedAssets)
             
         }))
 
@@ -546,51 +547,49 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         present(controller, animated: true, completion: nil)
     }
     
-
-
     
-    // Send the pictures, videos, etc.
-    func sendAssets(selectedAssets: [PHAsset]){
+//    here's what i'm doing so far in the below methods:
+//
+//    once user has selected however many photos they want to send, and they click send, getMediaForAssets gets called on those assets
+//    method getFullImageForAsset retrieves the full-size image for that asset. (there's also getSmallImageForAsset and getVideoForAsset)
+//    call storeage client method to store the file, which returns a url
+//    cache the file locally in the Haneke shared cache
+//    send message with the urlstring as the attachment
+//    in the custom message cell class, retrieve image from cache and display it
+    
+
+
+    // Gets the images/videos for the selected assets (imagepickeractionsheet)
+    func getMediaForAssets(selectedAssets: [PHAsset]){
         //for every asset in the asset array
         for asset in selectedAssets {
             
             if asset.mediaType == .image {
-            //retrieve full size image for that asset
-                getFullImage(asset: asset, completion: { (image: UIImage?) in
+                //retrieve full size image for that asset
+                getFullImageForAsset(asset: asset, completion: { (image: UIImage?) in
                     if let img = image {
                         self.storeAndSendImage(image: img, asset: asset)
                     }
-            })
+                })
                 
-//                getSmallImage(asset: asset, completion: {(image: UIImage?) -> Void in
-//                    if let img = image {
-//                        
-//                        self.storeAndSendImage(image: img, asset: asset)
-//                    }
-//                })
-
             } else if asset.mediaType == .video {
-                //    //retrieve video
-                //    if let video = getVideoForAsset(asset: asset){
-                //
-                //    }
+                //retrieve video
+                getVideoForAsset(asset: asset, completion: { (video: AVPlayerItem?) in
+                    if let vid = video {
+                        // make method to store and send video
+                    }
+                })
+
             }
         }
     }
     
-    //    use asset to get full size image
-    //    store full size image on db
-    
-    //    cache full size image (using url?)
-    //    send message with url
-    //    in cell, retrieve image from cache and display it
     
     func storeAndSendImage(image: UIImage, asset: PHAsset?){
         
         //store asset in firebase by calling storeChatImage on UIImage
-//        StorageClient.instance.storeChatImage(chatImage: image, width: 200, height: 200, success: { (url: URL?) in
-        StorageClient.instance.storeChatImage(chatImage: image, success: { (urlThumb: URL?, urlFull: URL?) in
-            if let url = urlFull {
+        StorageClient.instance.storeRegularImage(chatImage: image, success: { (returnURL: URL?) in
+            if let url = returnURL {
                 
                 let attachmentString = url.absoluteString
                 print("attachmentString:")
@@ -608,17 +607,11 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                 }, failure: {
                     print("photo sending failed")
                 })
-//                if let asset = asset {
-//                    DispatchQueue.global(qos: .utility).async {
-//                        self.getFullImage(asset: asset, completion: {(image: UIImage?) -> Void in
-//                            if let img = image {
-//                                self.storeFullSizeMedia(media: img, message: tm)
-//                            }
-//                        })
-//                    }
-//                }
+
                 self.addPhotoButton.isSelected = false
                 
+            } else {
+                "there was an issue with the returnURL"
             }
         }, failure: {
             print("Failure trying to store images")
@@ -626,25 +619,7 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
 
     }
     
-    func storeFullSizeMedia(media: Any, message: Message1){
-        DispatchQueue.global(qos: .utility).async {
-            if let image = media as? UIImage {
-                StorageClient.instance.storeChatImage(chatImage: image, success: { (thumbnail: URL?, fullSize: URL?) in
-                    if let url = fullSize {
-                        let attachment = url.absoluteString
-                        //                        ChatSpotClient.
-                    }
-                }, failure: {
-                    print("failure")
-                })
-
-//            if let video = media as? //video file {
-            }
-        
-        }
-    }
-    
-    func getSmallImage(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+    func getSmallImageForAsset(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         options.isSynchronous = true
@@ -657,11 +632,12 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         })
     }
     
-    // FOR LATER USE:
-    func getFullImage(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+    func getFullImageForAsset(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         options.version = .current
+        options.isSynchronous = true // should this be true? maybe send it then update it later?
+        
         //retrieve real image for that asset
         manager.requestImageData(for: asset, options: options) { (data: Data?, _, _, _) in
             if let imageData = data {
@@ -672,23 +648,26 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         }
     }
     
-    // FOR LATER USE:
-    func getVideoForAsset(asset: PHAsset) -> AVPlayerItem? {
+    func getVideoForAsset(asset: PHAsset, completion: @escaping (AVPlayerItem?) -> Void ) {
         let manager = PHImageManager.default()
         let options = PHVideoRequestOptions()
 //        options.progressHandler
         options.deliveryMode = .fastFormat
         options.version = .current
-        var video: AVPlayerItem?
-
         manager.requestPlayerItem(forVideo: asset, options: options) { (playerItem: AVPlayerItem?, _) in
             if let vid = playerItem {
-                video = vid
+                completion(vid)
+            } else {
+                completion(nil)
             }
         }
-        return video
     }
-            
+    
+    
+    
+    
+    
+    // Regular ImagePickerController methods (in case user chooses to look through all their photos):
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
