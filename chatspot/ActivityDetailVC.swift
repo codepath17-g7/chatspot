@@ -19,6 +19,7 @@ class ActivityDetailVC: UIViewController {
     var section0 = [User1]()
     var participatingUsers = [User1]()
     var numOfSections = 1;
+    var roomGuid: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,26 +52,64 @@ class ActivityDetailVC: UIViewController {
     }
     
     @IBAction func onTapActionButton(_ sender: Any) {
-        print("tap")
+        
+        let userGuid = ChatSpotClient.currentUser.guid!
+        
+        if (isCurrentUserJoined()) {
+            
+            print("Leaving activity")
+            
+            ChatSpotClient.leaveActivity(roomGuid: roomGuid!, activityGuid: activity.guid!, userGuid: userGuid, success: {
+                
+                self.activity.usersJoined.removeValue(forKey: userGuid)
+                
+                let index = self.participatingUsers.index { return $0.guid == userGuid} ?? -1
+                
+                if (index != -1) {
+                    self.participatingUsers.remove(at: index)
+                    self.tableView.reloadData()
+                    self.showActionButton()
+                }
+                
+            }, failure: {})
+        } else {
+            
+            print("Joining activity")
+            
+            ChatSpotClient.joinActivity(roomGuid: roomGuid!, activityGuid: activity.guid!, userGuid: userGuid, success: {
+                
+                self.activity.usersJoined[userGuid] = true
+                
+                self.participatingUsers.append(ChatSpotClient.currentUser)
+                
+                self.tableView.reloadData()
+                
+                self.showActionButton()
+                //
+            }, failure: {})
+        }
+        
     }
     
     private func showActionButton() {
         
-        let isCurrentUserJoined = activity.usersJoined.contains { (key, value) -> Bool in
-            
-            return key == ChatSpotClient.currentUser.guid
-        }
-        
         actionButton.layer.cornerRadius = 4
         
-        if (isCurrentUserJoined) {
+        if (isCurrentUserJoined()) {
             
-            actionButton.setTitle("Leave Activity", for: .normal)
+            actionButton.setTitle("LEAVE ACTIVITY", for: .normal)
             actionButton.backgroundColor = UIColor.red
         } else {
             
-            actionButton.setTitle("Join Activity", for: .normal)
-            actionButton.backgroundColor = UIColor.green
+            actionButton.setTitle("JOIN ACTIVITY", for: .normal)
+            actionButton.backgroundColor = UIColor.ChatSpotColors.LightBlue
+        }
+    }
+    
+    private func isCurrentUserJoined() -> Bool {
+        
+        return activity.usersJoined.contains { (key, value) -> Bool in
+            return key == ChatSpotClient.currentUser.guid
         }
     }
     

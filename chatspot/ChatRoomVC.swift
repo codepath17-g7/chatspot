@@ -227,6 +227,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         let navigationController = storyboard.instantiateViewController(withIdentifier: "activityDetailNavigationController") as! UINavigationController
         let activityDetailVC = navigationController.topViewController as! ActivityDetailVC
         activityDetailVC.activity = currentActivity
+        activityDetailVC.roomGuid = chatRoom.guid
         present(navigationController, animated: true)
     }
 
