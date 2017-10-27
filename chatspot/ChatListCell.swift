@@ -35,7 +35,6 @@ class ChatListCell: UITableViewCell {
 		didSet {
             
             chatRoomNameLabel.text = chatRoom.name
-//            locationLabel.isHidden = true
             if chatRoom.isAroundMe {
                 if let currentLocationName = ChatSpotClient.chatrooms[chatRoom.guid]?.name {
                     locationLabel.text = "at \(currentLocationName)"
@@ -59,6 +58,11 @@ class ChatListCell: UITableViewCell {
             if let bannerString = chatRoom.banner {
                 guard let url = URL(string: bannerString) else { return }
                 chatRoomImageView.hnk_setImageFromURL(url)
+            } else if chatRoom.isAroundMe {
+                if let bannerString = ChatSpotClient.chatrooms[chatRoom.guid]?.banner {
+                    guard let url = URL(string: bannerString) else { return }
+                    chatRoomImageView.hnk_setImageFromURL(url)
+                }
             } else {
                 chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
             }

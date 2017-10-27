@@ -290,7 +290,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         DispatchQueue.global(qos: .utility).async {
             
             // TODO: change to default image
-            var roomBanner = #imageLiteral(resourceName: "goldengate")
+            var roomBanner = UIImage()
             if let urlString = self.chatRoom.banner {
                 if let url = URL(string: urlString) {
                     if let data = try? Data(contentsOf: url) {
