@@ -377,6 +377,43 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     @IBAction func onAddActivity(_ sender: UIButton) {
         print("Add activity tapped.")
+        
+        var observer: Any?
+        
+        let alertController = UIAlertController(title: "Start an Activity!", message: "Enter an activity name to get started.", preferredStyle: .alert)
+        
+        let goAction = UIAlertAction(title: "Go!", style: .default) { (_) in
+            if let field = alertController.textFields?[0] {
+                // store your data
+                print("creatig activity \(field.text!)")
+                let user = ChatSpotClient.currentUser!
+                let activity = Activity.init(activityName: field.text!, activityStartedByName: user.name!, activityStartedByGuid: user.guid!, latitude: self.chatRoom.latitude, longitude: self.chatRoom.longitude)
+                
+                ChatSpotClient.createActivtyForChatRoom(roomGuid: self.chatRoom.guid, activity: activity, success: {
+                    print("Activity created")
+                }){}
+            }
+            
+            NotificationCenter.default.removeObserver(observer!)
+        }
+        goAction.isEnabled = false
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            NotificationCenter.default.removeObserver(observer!)
+        }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "ex: Volleyball"
+            observer = NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
+                goAction.isEnabled = textField.text!.characters.count > 0
+            }
+        }
+        
+        alertController.addAction(goAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     
     @IBAction func addEmojiButtonClicked(_ sender: Any) {
