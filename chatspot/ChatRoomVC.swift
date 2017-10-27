@@ -25,6 +25,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var addPhotoButton: UIButton!
 	@IBOutlet weak var addEmojiButton: UIButton!
+    @IBOutlet weak var addActivityButton: UIButton!
 	@IBOutlet weak var messageTextView: GrowingTextView!
 	@IBOutlet weak var sendMessageButton: UIButton!
     @IBOutlet weak var chatRoomNameLabel: UILabel!
@@ -263,6 +264,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
+        addActivityButton.changeImageViewTo(color: .lightGray)
         
 		messageTextView.autoresizingMask = .flexibleWidth
         messageTextView.maxLength = 300
@@ -373,6 +375,9 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		view.endEditing(true)
 	}
     
+    @IBAction func onAddActivity(_ sender: UIButton) {
+        print("Add activity tapped.")
+    }
     
     @IBAction func addEmojiButtonClicked(_ sender: Any) {
         if addEmojiButton.isSelected {
