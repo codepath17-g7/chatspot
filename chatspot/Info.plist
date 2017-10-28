@@ -4,10 +4,14 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Libertad-Book.otf</string>
-		<string>Libertad-Medium.otf</string>
-		<string>Libertad.otf</string>
-		<string>Libertad-Bold.otf</string>
+		<string>SF-Pro-Display-Semibold.otf</string>
+		<string>SF-Pro-Display-Bold.otf</string>
+		<string>SF-Pro-Display-Regular.otf</string>
+		<string>SF-Pro-Display-Medium.otf</string>
+		<string>SF-Pro-Text-Semibold.otf</string>
+		<string>SF-Pro-Text-Bold.otf</string>
+		<string>SF-Pro-Text-Medium.otf</string>
+		<string>SF-Pro-Text-Regular.otf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

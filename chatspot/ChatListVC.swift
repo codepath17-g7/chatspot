@@ -28,14 +28,10 @@ class ChatListVC: UIViewController {
         // Heads Up Display
         setupAndTriggerHUD()
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.setUpTitle(title: "Chatspots")
+        tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
         
-        // Uncomment to add rooms for testing statically
-        // ChatSpotClient.createChatRoom(name: "Oracle Arena", description: "Warriors!", banner: nil, longitude: -122.203056, latitude: 37.750278)
-        // ChatSpotClient.createChatRoom(name: "Golden Gate Bridge", description: "San Francisco, California", banner: nil, longitude: -122.478611, latitude: 37.819722)
-        // ChatSpotClient.createChatRoom(name: "SAP Center", description: "Sharks", banner: nil, longitude: -121.901111, latitude: 37.332778)
-        
-        // add in our static room
 
         if let aroundMeRoomGuid = ChatSpotClient.currentUser.aroundMe {
             updateAroundMeRoom(aroundMeRoomGuid)
@@ -44,7 +40,6 @@ class ChatListVC: UIViewController {
 
         self.tableView.reloadData()
         KRProgressHUD.dismiss()
-//        KRProgressHUD.showSuccess()
         
         startObservingAroundMeRoomGuid()
         
@@ -71,7 +66,6 @@ class ChatListVC: UIViewController {
             return;
         }
         
-//        aroundMeRoom.name = "Around Me - " + userLocalRoom!.name
         aroundMeRoom.name = "Around Me"
         aroundMeRoom.guid = roomGuid
         aroundMeRoom.isAroundMe = true
@@ -211,7 +205,7 @@ class ChatListVC: UIViewController {
         KRProgressHUD.set(style: .white)
         KRProgressHUD.set(font: .systemFont(ofSize: 17))
         KRProgressHUD.set(activityIndicatorViewStyle: .gradationColor(head: UIColor.ChatSpotColors.Blue, tail: UIColor.ChatSpotColors.DarkBlue))
-        KRProgressHUD.show(withMessage: "Loading ChatSpots...")
+        KRProgressHUD.show(withMessage: "Loading Chatspots...")
     }
 
     deinit {
@@ -228,6 +222,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell") as! ChatListCell
 		//set properties of cell
         let chatroom = chatrooms[indexPath.row]
+        cell.contentView.backgroundColor = tableView.backgroundColor
 		cell.chatRoom = chatroom
         cell.unreadCount = unreadCount[chatroom.guid!] ?? 0
         cell.selectionStyle = .none
@@ -248,6 +243,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 }
+
 
 
 extension UIColor {
@@ -276,3 +272,60 @@ extension UIColor {
     }
 }
 
+extension UINavigationItem {
+    
+    func setUpTitle(title: String){
+        let titleLabel = UILabel()
+        let titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.extraLarge]
+        titleLabel.attributedText = NSAttributedString(string: title, attributes: titleTextAttributes)
+        titleLabel.sizeToFit()
+        let leftItem = UIBarButtonItem(customView: titleLabel)
+        self.leftBarButtonItem = leftItem
+    }
+}
+
+extension UIImage {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}
+
+extension UIFont {
+    
+    struct AppSizes {
+        static let extraLarge: CGFloat = 28.0
+        static let large: CGFloat = 18.0
+        static let regular: CGFloat = 17.0
+        static let small: CGFloat = 14.0
+    }
+    
+    struct AppFonts {
+        static let regular = "SFProText-Regular"
+        static let bold = "SFProText-Bold"
+        static let medium = "SFProText-Medium"
+        static let semibold = "SFProText-Semibold"
+        
+        static let bigRegular = "SFProDisplay-Regular"
+        static let bigBold = "SFProDisplay-Bold"
+        static let bigMedium = "SFProDisplay-Medium"
+        static let bigSemibold = "SFProDisplay-Semibold"
+        
+    }
+    
+    struct Chatspot {
+        static let extraLarge = UIFont(name: AppFonts.bigBold, size: AppSizes.extraLarge)!
+        static let large = UIFont(name: AppFonts.bold, size: AppSizes.large)!
+        static let regular = UIFont(name: AppFonts.regular, size: AppSizes.regular)!
+        static let small = UIFont(name: AppFonts.regular, size: AppSizes.small)!
+        
+        static let regularNavigationTitle = UIFont(name: AppFonts.semibold, size: AppSizes.regular)!
+    }
+}

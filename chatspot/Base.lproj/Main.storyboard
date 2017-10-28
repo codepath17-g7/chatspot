@@ -10,11 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Libertad-Bold.otf">
-            <string>Libertad-Bold</string>
+        <array key="SF-Pro-Text-Bold.otf">
+            <string>SFProText-Bold</string>
         </array>
-        <array key="Libertad.otf">
-            <string>Libertad</string>
+        <array key="SF-Pro-Text-Regular.otf">
+            <string>SFProText-Regular</string>
+        </array>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
         </array>
     </customFonts>
     <scenes>
@@ -27,7 +30,7 @@
                         <viewControllerLayoutGuide type="bottom" id="cmV-2v-Rcc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7ew-ZM-xDQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkf-AU-1So" customClass="AroundMeView" customModule="chatspot" customModuleProvider="target">
@@ -43,7 +46,7 @@
                             <constraint firstItem="mkf-AU-1So" firstAttribute="top" secondItem="n00-Nj-AMc" secondAttribute="bottom" id="zUa-vn-ElW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Around Me" id="wC0-e1-ltr"/>
+                    <navigationItem key="navigationItem" id="wC0-e1-ltr"/>
                     <connections>
                         <outlet property="aroundMeView" destination="mkf-AU-1So" id="n5H-ax-LRa"/>
                     </connections>
@@ -120,22 +123,22 @@
                         <viewControllerLayoutGuide type="bottom" id="ABX-XH-Ysd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0u5-Ty-Y0O">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="183" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Zh-NQ-aAU">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatListCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatListCell" rowHeight="171" id="TlF-l3-fx9" customClass="ChatListCell" customModule="chatspot" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="171"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatListCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatListCell" rowHeight="167" id="TlF-l3-fx9" customClass="ChatListCell" customModule="chatspot" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TlF-l3-fx9" id="yvz-QH-fyY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="170.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icL-dG-MFg">
-                                                    <rect key="frame" x="10" y="10" width="355" height="150.5"/>
+                                                    <rect key="frame" x="10" y="10" width="355" height="146.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="24hourfitlong" translatesAutoresizingMaskIntoConstraints="NO" id="ps2-tl-bcJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="355" height="76"/>
@@ -144,31 +147,31 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="at Facebook HQ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ult-E9-YBu">
-                                                            <rect key="frame" x="125.5" y="82" width="94" height="19"/>
-                                                            <fontDescription key="fontDescription" name="Libertad" family="Libertad" pointSize="14"/>
+                                                            <rect key="frame" x="133" y="82.5" width="106" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hi-Xi-W1Y">
-                                                            <rect key="frame" x="8" y="76" width="109.5" height="27"/>
-                                                            <fontDescription key="fontDescription" name="Libertad-Bold" family="Libertad" pointSize="20"/>
+                                                            <rect key="frame" x="8" y="80" width="117.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="oh cool, i can see you. blue shirt right?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qw4-LH-Wbe">
-                                                            <rect key="frame" x="8" y="111" width="272.5" height="23"/>
-                                                            <fontDescription key="fontDescription" name="Libertad" family="Libertad" pointSize="17"/>
+                                                            <rect key="frame" x="8" y="109.5" width="309.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4Y-JC-7KX">
-                                                            <rect key="frame" x="251" y="80.5" width="15" height="19"/>
-                                                            <fontDescription key="fontDescription" name="Libertad" family="Libertad" pointSize="14"/>
+                                                            <rect key="frame" x="270.5" y="82.5" width="17.5" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account" translatesAutoresizingMaskIntoConstraints="NO" id="NiM-bB-EmD">
-                                                            <rect key="frame" x="227" y="79.5" width="20" height="20"/>
+                                                            <rect key="frame" x="246.5" y="81" width="20" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="CvF-8w-SIU"/>
                                                                 <constraint firstAttribute="height" constant="20" id="rv5-dA-PG3"/>
@@ -178,20 +181,20 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="qw4-LH-Wbe" firstAttribute="leading" secondItem="3hi-Xi-W1Y" secondAttribute="leading" id="0ZT-8n-VN9"/>
+                                                        <constraint firstItem="Ult-E9-YBu" firstAttribute="centerY" secondItem="3hi-Xi-W1Y" secondAttribute="centerY" id="7cv-7Z-XNT"/>
                                                         <constraint firstItem="ps2-tl-bcJ" firstAttribute="top" secondItem="icL-dG-MFg" secondAttribute="top" id="FTg-9G-txe"/>
                                                         <constraint firstItem="ps2-tl-bcJ" firstAttribute="leading" secondItem="icL-dG-MFg" secondAttribute="leading" id="Kfm-3H-P56"/>
                                                         <constraint firstItem="e4Y-JC-7KX" firstAttribute="centerY" secondItem="3hi-Xi-W1Y" secondAttribute="centerY" id="Kob-9N-DIL"/>
                                                         <constraint firstItem="NiM-bB-EmD" firstAttribute="leading" secondItem="Ult-E9-YBu" secondAttribute="trailing" constant="8" id="TxV-LL-0ig"/>
                                                         <constraint firstItem="NiM-bB-EmD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3hi-Xi-W1Y" secondAttribute="trailing" constant="8" id="Zqc-J9-8TR"/>
-                                                        <constraint firstItem="3hi-Xi-W1Y" firstAttribute="top" secondItem="ps2-tl-bcJ" secondAttribute="bottom" id="caR-qD-HwV"/>
-                                                        <constraint firstItem="Ult-E9-YBu" firstAttribute="baseline" secondItem="3hi-Xi-W1Y" secondAttribute="baseline" id="e5I-Aa-RUK"/>
+                                                        <constraint firstItem="3hi-Xi-W1Y" firstAttribute="top" secondItem="ps2-tl-bcJ" secondAttribute="bottom" constant="4" id="caR-qD-HwV"/>
                                                         <constraint firstItem="3hi-Xi-W1Y" firstAttribute="leading" secondItem="icL-dG-MFg" secondAttribute="leading" constant="8" id="hcL-sZ-gW4"/>
                                                         <constraint firstItem="Ult-E9-YBu" firstAttribute="leading" secondItem="3hi-Xi-W1Y" secondAttribute="trailing" constant="8" id="il6-kK-5HN"/>
                                                         <constraint firstItem="e4Y-JC-7KX" firstAttribute="leading" secondItem="NiM-bB-EmD" secondAttribute="trailing" constant="4" id="jd1-fc-CJW"/>
                                                         <constraint firstItem="qw4-LH-Wbe" firstAttribute="top" secondItem="3hi-Xi-W1Y" secondAttribute="bottom" constant="8" id="njC-rh-i4E"/>
                                                         <constraint firstItem="NiM-bB-EmD" firstAttribute="centerY" secondItem="3hi-Xi-W1Y" secondAttribute="centerY" id="pf5-h2-Dz0"/>
                                                         <constraint firstAttribute="trailing" secondItem="ps2-tl-bcJ" secondAttribute="trailing" id="r5m-Nl-Td9"/>
-                                                        <constraint firstAttribute="bottom" secondItem="qw4-LH-Wbe" secondAttribute="bottom" constant="16.5" id="wGc-rj-fMz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="qw4-LH-Wbe" secondAttribute="bottom" constant="16.5" id="xG3-wz-w8O"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Dh-Cc-3Bl">
@@ -201,7 +204,7 @@
                                                         <constraint firstAttribute="width" constant="24" id="EOo-aK-MV1"/>
                                                         <constraint firstAttribute="height" constant="24" id="MQQ-4B-bU3"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Libertad" family="Libertad" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -240,7 +243,7 @@
                             <constraint firstAttribute="trailing" secondItem="5Zh-NQ-aAU" secondAttribute="trailing" id="ogR-ve-tox"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ChatSpots" id="vtH-vc-ZKi"/>
+                    <navigationItem key="navigationItem" id="vtH-vc-ZKi"/>
                     <connections>
                         <outlet property="tableView" destination="5Zh-NQ-aAU" id="tsk-4n-yTa"/>
                     </connections>
@@ -252,7 +255,7 @@
         <!--Chat RoomVC-->
         <scene sceneID="emq-Nk-9jw">
             <objects>
-                <viewController id="tlQ-pR-ueF" customClass="ChatRoomVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="tlQ-pR-ueF" customClass="ChatRoomVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="88z-xf-ZQ1"/>
                         <viewControllerLayoutGuide type="bottom" id="sLh-bN-nsu"/>
@@ -265,7 +268,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="660.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="ChatMessageCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMessageCell" rowHeight="245" id="9WS-4L-9Pn" customClass="ChatMessageCell" customModule="chatspot" customModuleProvider="target">
@@ -290,15 +293,15 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
-                                                            <rect key="frame" x="60" y="8" width="41" height="21"/>
+                                                            <rect key="frame" x="60" y="8" width="42" height="21"/>
                                                             <gestureRecognizers/>
-                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:52 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLi-4i-V4R">
-                                                            <rect key="frame" x="109" y="10" width="65" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <rect key="frame" x="110" y="11" width="62" height="17"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -311,7 +314,7 @@
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
                                                             <rect key="frame" x="60" y="37" width="307" height="61"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -353,20 +356,20 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-r6-lax" userLabel="Right Line">
-                                                            <rect key="frame" x="215" y="21" width="136" height="1"/>
+                                                            <rect key="frame" x="218" y="21" width="133" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="gv2-Dz-EFP"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpD-1l-L1a">
-                                                            <rect key="frame" x="169" y="13" width="38" height="18"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <rect key="frame" x="166.5" y="12" width="43.5" height="20"/>
+                                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5dW-oP-zN9" userLabel="Left Line">
-                                                            <rect key="frame" x="24" y="21" width="137" height="1"/>
+                                                            <rect key="frame" x="24" y="21" width="134.5" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="0JG-oE-N4e"/>
@@ -391,40 +394,41 @@
                                         </prototypes>
                                     </tableView>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
-                                        <rect key="frame" x="0.0" y="620" width="375" height="47"/>
+                                        <rect key="frame" x="0.0" y="616.5" width="375" height="50.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaC-Rt-UDV">
-                                                <rect key="frame" x="8" y="10" width="35" height="30"/>
+                                                <rect key="frame" x="8" y="13.5" width="35" height="30"/>
                                                 <state key="normal" image="photo"/>
                                                 <connections>
                                                     <action selector="addPhotoButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="9Zh-qc-Muv"/>
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
-                                                <rect key="frame" x="94" y="7" width="229" height="33"/>
+                                                <rect key="frame" x="127" y="7" width="191" height="36.5"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="tlQ-pR-ueF" id="zmZ-gx-xB1"/>
                                                 </connections>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-Wy-oBi">
-                                                <rect key="frame" x="331" y="10" width="36" height="30"/>
+                                                <rect key="frame" x="326" y="10.5" width="41" height="33"/>
+                                                <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                 <state key="normal" title="Send"/>
                                                 <connections>
                                                     <action selector="sendMessageButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="eR9-pl-1er"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQJ-9i-BAx">
-                                                <rect key="frame" x="51" y="10" width="35" height="30"/>
+                                                <rect key="frame" x="84" y="13.5" width="35" height="30"/>
                                                 <state key="normal" image="smiley"/>
                                                 <connections>
                                                     <action selector="addEmojiButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="bNa-0O-bWa"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijM-uE-cvC">
-                                                <rect key="frame" x="51" y="13" width="25" height="25"/>
+                                                <rect key="frame" x="51" y="15" width="25" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="oW8-3n-l64"/>
                                                     <constraint firstAttribute="height" constant="25" id="xOx-vK-Rgx"/>
@@ -486,15 +490,14 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-4M-Aju">
-                                    <rect key="frame" x="25" y="-4" width="100" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="23" y="-4" width="104" height="20"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiR-MF-mHb">
-                                    <rect key="frame" x="32" y="10" width="85" height="32"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <rect key="frame" x="34.5" y="10" width="81" height="32"/>
+                                    <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -570,10 +573,11 @@
         <scene sceneID="HL3-wo-mGY">
             <objects>
                 <tabBarController storyboardIdentifier="tabBarController" id="qGN-Ra-ftD" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="p7V-RR-Dga">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="p7V-RR-Dga">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="Ol1-do-0Fj" kind="relationship" relationship="viewControllers" id="VOZ-25-LDC"/>
@@ -594,7 +598,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jOb-ao-gz6" customClass="UserView" customModule="chatspot" customModuleProvider="target">
@@ -610,7 +614,7 @@
                             <constraint firstItem="jOb-ao-gz6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YZn-YD-0Wv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="kph-OR-89o">
+                    <navigationItem key="navigationItem" id="kph-OR-89o">
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="gdI-vC-ti1">
                             <connections>
                                 <action selector="onLogout:" destination="BYZ-38-t0r" id="vt7-wa-N4M"/>
@@ -689,13 +693,13 @@
             </objects>
             <point key="canvasLocation" x="-3298.4000000000001" y="732.68365817091455"/>
         </scene>
-        <!--My ChatSpots-->
+        <!--My Chatspots-->
         <scene sceneID="VTP-QY-fNF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My ChatSpots" image="messages" id="Ab7-RO-esu"/>
+                    <tabBarItem key="tabBarItem" title="My Chatspots" image="messages" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -714,7 +718,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="around me" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -733,7 +737,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="account" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -751,7 +755,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yyh-KS-hMb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhN-pp-VEH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WhN-pp-VEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -769,7 +773,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -787,7 +791,7 @@
             <objects>
                 <navigationController storyboardIdentifier="activityDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="g0T-YJ-1nU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nlM-sp-vNF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nlM-sp-vNF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

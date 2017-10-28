@@ -19,6 +19,8 @@ class ProfileVC: UIViewController {
     var userProfile: User1!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setUpTitle(title: "Profile")
+
 
         // Backedn is conencted, we can get current user info like this
         

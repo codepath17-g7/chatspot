@@ -14,6 +14,7 @@ class AroundMeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.setUpTitle(title: "Around Me")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

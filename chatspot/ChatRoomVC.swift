@@ -56,6 +56,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 		tableView.separatorStyle = .none
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
+        extendedLayoutIncludesOpaqueBars = true
+        
         // Set up the keyboard to move appropriately
 		setUpKeyboardNotifications()
 		
@@ -70,11 +72,13 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.isTranslucent = false
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
+        navigationController?.navigationBar.isTranslucent = true
+
         if chatRoom.guid == nil {
             print("Not attached to a room")
             return
@@ -241,18 +245,20 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
 	
     func setRoomName (_ roomName: String) {
-        chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Libertad-Bold", size: 17)!])
+        chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
         messageTextView.placeHolder = "Message \(roomName)"
 
     }
     
 	func setUpUI(){
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         setRoomName(chatRoom.name)
         
         if let memberCount = chatRoom.users?.count {
-            let attributes = [NSForegroundColorAttributeName: UIColor.ChatSpotColors.LightestGray, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!]
+            let attributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.small]
             
-            if memberCount == 0 {
+            if memberCount == 1 {
                 chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "You're the first one here!", attributes: attributes)
             } else {
                 chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "\(memberCount) members", attributes: attributes)
@@ -262,6 +268,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .selected)
         addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
+        addActivityButton.setImage(addActivityButton.imageView?.image, for: .selected)
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
         addActivityButton.changeImageViewTo(color: .lightGray)
@@ -276,8 +283,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         toolbarView.layer.borderWidth = 0.3
         toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
-        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!]), for: .disabled)
-        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!])
+        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle]), for: .disabled)
+        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
 , for: .normal)
         sendMessageButton.isEnabled = false
         
