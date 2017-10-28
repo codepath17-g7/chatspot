@@ -48,8 +48,11 @@ class ChatListCell: UITableViewCell {
                 locationLabel.isHidden = true
             }
             
-            
-            memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
+            if (chatRoom.isAroundMe) {
+                memberCountLabel.text = String(describing: chatRoom.localUsers?.count ?? 0)
+            } else {
+                memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
+            }
 			
             lastMessageLabel.text = chatRoom.lastMessage //?? "Say hi to the folks around you!"
             

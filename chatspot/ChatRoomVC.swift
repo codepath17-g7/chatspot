@@ -229,13 +229,16 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	func setUpUI(){
         setRoomName(chatRoom.name)
         
-        if let memberCount = chatRoom.users?.count {
+        let userCount = chatRoom.isAroundMe ? chatRoom.localUsers?.count : chatRoom.users?.count
+        
+        if let memberCount = userCount {
             let attributes = [NSForegroundColorAttributeName: UIColor.ChatSpotColors.LightestGray, NSFontAttributeName: UIFont(name: "Libertad", size: 15)!]
             
             if memberCount == 0 {
                 chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "You're the first one here!", attributes: attributes)
             } else {
-                chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "\(memberCount) members", attributes: attributes)
+                let pluralAdjustment = memberCount == 1 ? "member" : "members"
+                chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "\(memberCount) \(pluralAdjustment)", attributes: attributes)
             }
             
         }
