@@ -43,6 +43,7 @@
 		8B0ACFBA1FA1CCDC00722B1D /* ActivityDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ACFB81FA1CCDC00722B1D /* ActivityDetailVC.swift */; };
 		8B275A191F908D36004BBA00 /* Storage+Implementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B275A181F908D36004BBA00 /* Storage+Implementation.swift */; };
 		8B92720C1F9082590041FC35 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B92720B1F9082590041FC35 /* Storage.swift */; };
+		8BCDD9B11FA44368004DD84D /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDD9B01FA44368004DD84D /* String+Util.swift */; };
 		8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2DB701F92FBC20073ABBC /* LocationManager.swift */; };
 		F254FCA21FA3E52500CBD616 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */; };
 		F254FCA31FA3E52500CBD616 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */; };
@@ -147,6 +148,7 @@
 		8B0ACFB81FA1CCDC00722B1D /* ActivityDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailVC.swift; sourceTree = "<group>"; };
 		8B275A181F908D36004BBA00 /* Storage+Implementation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Storage+Implementation.swift"; sourceTree = "<group>"; };
 		8B92720B1F9082590041FC35 /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		8BCDD9B01FA44368004DD84D /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		8BD2DB701F92FBC20073ABBC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
 		F230195A1FA1D46700006D7C /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "../../Library/Developer/Xcode/DerivedData/chatspot-fgkshavcpzelupglajjguiigxwnn/Build/Products/Debug-iphonesimulator/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				8BD2DB6F1F92FB980073ABBC /* Location */,
 				7679EA791F8DF1CA00DE16FA /* Model */,
 				8B4294991F8F0019003163D7 /* Data Store */,
+				8BCDD9AF1FA44329004DD84D /* Extensions */,
 				32963D661F8B1BAD00E05CF3 /* Main.storyboard */,
 				32963D691F8B1BAD00E05CF3 /* Assets.xcassets */,
 				32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */,
@@ -336,6 +339,14 @@
 				8B275A181F908D36004BBA00 /* Storage+Implementation.swift */,
 			);
 			path = "Data Store";
+			sourceTree = "<group>";
+		};
+		8BCDD9AF1FA44329004DD84D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8BCDD9B01FA44368004DD84D /* String+Util.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		8BD2DB6F1F92FB980073ABBC /* Location */ = {
@@ -644,6 +655,7 @@
 				3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */,
 				F2719F031F8DF55200417517 /* AroundMeVC.swift in Sources */,
 				F2719F011F8DF51600417517 /* ChatRoomVC.swift in Sources */,
+				8BCDD9B11FA44368004DD84D /* String+Util.swift in Sources */,
 				F2A666531FA11EB700EE8A4A /* SpecialAroundMeCell.swift in Sources */,
 				762620261F93D51D008404F6 /* ChatRoomAnnotation.swift in Sources */,
 				762620201F9338BB008404F6 /* AroundMeView.swift in Sources */,

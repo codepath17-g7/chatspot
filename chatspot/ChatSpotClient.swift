@@ -203,6 +203,11 @@ class ChatSpotClient {
         let addRefHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(.childAdded, with: { (snapshot: DataSnapshot) in
             let dict = snapshot.value as? NSDictionary ?? [:]
             let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            
+            if room.lastMessage.isEmpty {
+                room.lastMessage = "You’re the first one here!"
+            }
+            
             onAdd(room)
         }) { (error: Error?) in
             addFailure(error)
@@ -269,7 +274,7 @@ class ChatSpotClient {
     static func observeNewMessagesAroundMe(limit: UInt, success: @escaping (Message1) -> (), failure: () -> ()) -> UInt{
         let ref = Database.database().reference()
         let chatRef = ref.child("aroundme").child(userGuid)
-        let refHandle = chatRef.observe(DataEventType.childAdded, with: { (snapshot) in
+        let refHandle = chatRef.queryLimited(toLast: limit).observe(DataEventType.childAdded, with: { (snapshot) in
             let postDict = snapshot.value as? NSDictionary ?? [:]
             let message = Message1(guid: snapshot.key, obj: postDict)
             success(message)
@@ -280,13 +285,20 @@ class ChatSpotClient {
     
     static func getMessagesAroundMe(limit: UInt, lastMsgId: String,
                                     success: @escaping ([Message1]) -> (), failure: @escaping (Error?) -> ()) {
+        
+        print("getMessagesAroundMe:  \(lastMsgId)")
         let ref = Database.database().reference()
         let chatRef = ref.child("aroundme").child(userGuid)
         chatRef.queryOrderedByKey().queryLimited(toLast: limit).queryEnding(atValue: lastMsgId).observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
             let postDict = snapshot.value as? [String : AnyObject] ?? [:]
+            print("getMessagesAroundMe:  \(postDict.count)")
             print(postDict)
             let messages = Message1.messagesWithArray(dicts: postDict)
-            success(messages)
+            var sortedMessages = messages.sorted(by: { (msg1: Message1, msg2: Message1) -> Bool in
+                return msg1.rawTimestamp > msg2.rawTimestamp
+            })
+            sortedMessages.removeFirst()
+            success(sortedMessages)
         }) { (error: Error) in
             failure(error)
         }

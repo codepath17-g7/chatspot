@@ -110,63 +110,43 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             print("Not attached to a room")
             return
         }
-        self.isLoading = true
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+
         DispatchQueue.global(qos: .userInitiated).async {
             if self.chatRoom.isAroundMe {
-    //            self.isLoading = true
-    //            MBProgressHUD.showAdded(to: self.view, animated: true)
                 self.observers.append(ChatSpotClient.observeNewMessagesAroundMe(limit: ChatRoomVC.MAX_MESSAGES_LIMIT, success: { (message: Message1) in
                     DispatchQueue.main.async {
                         self.onNewMessage(message)
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }, failure: {
                     DispatchQueue.main.async {
                         print("Error in observeNewMessages")
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
                 
-    //            self.isLoading = true
-    //            MBProgressHUD.showAdded(to: self.view, animated: true)
-                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
 
-                    
+                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
                     print("Chat room -> \(roomGuid)")
                     self.chatRoom.guid = roomGuid
-                    self.chatRoom.name = "Around Me"
-                    DispatchQueue.main.async {
-                        self.setRoomName(self.chatRoom.name)
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                    }
+//                    self.chatRoom.name = "Around Me"
+//                    DispatchQueue.main.async {
+//                        self.setRoomName(self.chatRoom.name)
+//                    }
                 }, failure: { (error: Error?) in
                     DispatchQueue.main.async {
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
 
             } else {
-    //            self.isLoading = true
-    //            MBProgressHUD.showAdded(to: self.view, animated: true)
                 self.observers.append(ChatSpotClient.observeNewMessages(
                     roomId: self.chatRoom.guid,
                     limit: ChatRoomVC.MAX_MESSAGES_LIMIT,
                     success: { (message: Message1) in
                         DispatchQueue.main.async {
                             self.onNewMessage(message)
-                            self.isLoading = false
-                            MBProgressHUD.hide(for: self.view, animated: true)
                         }
                 }, failure: {
                     DispatchQueue.main.async {
                         print("Error in observeNewMessages")
-                        self.isLoading = false
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
                 }))
                 
@@ -255,13 +235,16 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 
         setRoomName(chatRoom.name)
         
-        if let memberCount = chatRoom.users?.count {
+        let userCount = chatRoom.isAroundMe ? chatRoom.localUsers?.count : chatRoom.users?.count
+        
+        if let memberCount = userCount {
             let attributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.small]
             
             if memberCount == 1 {
                 chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "You're the first one here!", attributes: attributes)
             } else {
-                chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "\(memberCount) members", attributes: attributes)
+                let pluralAdjustment = memberCount == 1 ? "member" : "members"
+                chatRoomMemberCountLabel.attributedText = NSAttributedString(string: "\(memberCount) \(pluralAdjustment)", attributes: attributes)
             }
             
         }
@@ -769,8 +752,10 @@ extension ChatRoomVC: UIScrollViewDelegate {
             ChatSpotClient.getMessagesAroundMe(limit: UInt(ChatRoomVC.MAX_MESSAGES_LIMIT), lastMsgId: (messages.last?.guid)!, success: { (messages: [Message1]) in
                 //var newMsgs: [Message1] = messages
                 //newMsgs += self.messages
-                self.messages = messages
-                self.tableView.reloadData()
+                if messages.count > 0 {
+                    self.messages += messages
+                    self.tableView.reloadData()
+                }
                 self.isLoading = false;
                 self.loadingMoreView.stopAnimating()
             }, failure: { (e: Error?) in
@@ -788,9 +773,12 @@ extension ChatRoomVC: UIScrollViewDelegate {
                                               success: { (messages: [Message1]) in
                 //var newMsgs: [Message1] = messages
                 //newMsgs += self.messages
-                self.messages += messages
+                if messages.count > 0 {
+
+                    self.messages += messages
+                    self.tableView.reloadData()
+                }
             
-                self.tableView.reloadData()
                 self.isLoading = false;
                 self.loadingMoreView.stopAnimating()
             }) { (e: Error?) in
