@@ -203,6 +203,11 @@ class ChatSpotClient {
         let addRefHandle = chatroomsRef.queryOrdered(byChild: "/users/\(userGuid)").queryEqual(toValue: true).observe(.childAdded, with: { (snapshot: DataSnapshot) in
             let dict = snapshot.value as? NSDictionary ?? [:]
             let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            
+            if room.lastMessage.isEmpty {
+                room.lastMessage = "You’re the first one here!"
+            }
+            
             onAdd(room)
         }) { (error: Error?) in
             addFailure(error)
