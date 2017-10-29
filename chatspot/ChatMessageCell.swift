@@ -12,7 +12,7 @@ import Haneke
 import Photos
 import AVFoundation
 import AVKit
-
+import Lightbox
 
 @objc protocol ChatMessageCellDelegate {
     func presentAlertViewController(alertController: UIAlertController)
@@ -64,15 +64,16 @@ class ChatMessageCell: UITableViewCell {
             }
             if let thumbString = message.thumbnailImageUrl {
                 loadImage(urlString: thumbString)
-                if message.mediaType == PHAssetMediaType.video.rawValue {
-                    let onTap = UITapGestureRecognizer(target: self, action: #selector(onTapImage))
-                    onTap.numberOfTouchesRequired = 1
-                    onTap.numberOfTapsRequired = 1
-                    messageImageView.addGestureRecognizer(onTap)
-                    messageImageView.isUserInteractionEnabled = true
-                }
-            }
 
+            }
+            
+            
+            let onTap = UITapGestureRecognizer(target: self, action: #selector(onTapImage))
+            onTap.numberOfTouchesRequired = 1
+            onTap.numberOfTapsRequired = 1
+            messageImageView.addGestureRecognizer(onTap)
+            messageImageView.isUserInteractionEnabled = true
+            
             self.updateConstraints()
 		}
 	}
@@ -81,33 +82,35 @@ class ChatMessageCell: UITableViewCell {
     func onTapImage(_ sender: UITapGestureRecognizer) {
         
         if message.mediaType == PHAssetMediaType.video.rawValue && message.mediaFileUrl != nil {
-            
             print("Playing video")
-            
             let movieURL = URL(string: message.mediaFileUrl!)
-            
-            let player = AVPlayer(url: movieURL! as URL)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-//            let appdelegate = UIApplication.shared.delegate as! AppDelegate
-//            let topVC = appdelegate.window?.rootViewController?.topViewController()
-            
+            let images = [
+                
+                LightboxImage(
+                    imageURL: URL(string: message.thumbnailImageUrl!)!,
+                    text: "",
+                    videoURL: movieURL
+                )
+            ]
+            let controller = LightboxController(images: images)
+
+            // Use dynamic background.
+            controller.dynamicBackground = true
             let appdelegate = UIApplication.shared.delegate as! AppDelegate
             let topVc = UIViewController.topViewController(from: appdelegate.window?.rootViewController)
-//            topVc?.present(playerViewController, animated: true, completion: nil)
+            topVc?.present(controller, animated: true, completion: nil)
 
-            topVc?.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
-            }
-//
-//            
-//            let moviePlayer = MPMoviePlayerController(contentURL: movieURL!)!
-//            moviePlayer.view.frame = messageImageView.frame
-//            
-//            messageImageView.addSubview(moviePlayer.view)
-//            moviePlayer.isFullscreen = true
-//            
-//            moviePlayer.controlStyle = MPMovieControlStyle.embedded
+        } else if message.attachment != nil && (message.attachment?.characters.count)! > 0 {
+            let images = [
+                LightboxImage(imageURL: URL(string: message.attachment!)!)
+            ]
+            let controller = LightboxController(images: images)
+            
+            // Use dynamic background.
+            controller.dynamicBackground = true
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            let topVc = UIViewController.topViewController(from: appdelegate.window?.rootViewController)
+            topVc?.present(controller, animated: true, completion: nil)
         }
         
     }

@@ -22,6 +22,8 @@ target 'chatspot' do
   pod 'HanekeSwift', :git => 'https://github.com/EdenShapiro/HanekeSwift.git', :branch => 'feature/swift-3'
   pod 'ImagePickerSheetController', :git => 'https://github.com/EdenShapiro/ImagePickerSheetController.git', :branch => 'swift3'
   pod 'PureLayout'
+#  pod 'Lightbox'
+  pod 'Lightbox', '~> 1.0'
   # Pods for chatspot
 
 end
