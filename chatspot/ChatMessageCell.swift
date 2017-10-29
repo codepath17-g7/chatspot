@@ -9,6 +9,10 @@
 import UIKit
 import NSDateMinimalTimeAgo
 import Haneke
+import Photos
+import AVFoundation
+import AVKit
+
 
 @objc protocol ChatMessageCellDelegate {
     func presentAlertViewController(alertController: UIAlertController)
@@ -60,11 +64,53 @@ class ChatMessageCell: UITableViewCell {
             }
             if let thumbString = message.thumbnailImageUrl {
                 loadImage(urlString: thumbString)
+                if message.mediaType == PHAssetMediaType.video.rawValue {
+                    let onTap = UITapGestureRecognizer(target: self, action: #selector(onTapImage))
+                    onTap.numberOfTouchesRequired = 1
+                    onTap.numberOfTapsRequired = 1
+                    messageImageView.addGestureRecognizer(onTap)
+                    messageImageView.isUserInteractionEnabled = true
+                }
             }
+
             self.updateConstraints()
 		}
 	}
+
     
+    func onTapImage(_ sender: UITapGestureRecognizer) {
+        
+        if message.mediaType == PHAssetMediaType.video.rawValue && message.mediaFileUrl != nil {
+            
+            print("Playing video")
+            
+            let movieURL = URL(string: message.mediaFileUrl!)
+            
+            let player = AVPlayer(url: movieURL! as URL)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+//            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+//            let topVC = appdelegate.window?.rootViewController?.topViewController()
+            
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            let topVc = UIViewController.topViewController(from: appdelegate.window?.rootViewController)
+//            topVc?.present(playerViewController, animated: true, completion: nil)
+
+            topVc?.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+//
+//            
+//            let moviePlayer = MPMoviePlayerController(contentURL: movieURL!)!
+//            moviePlayer.view.frame = messageImageView.frame
+//            
+//            messageImageView.addSubview(moviePlayer.view)
+//            moviePlayer.isFullscreen = true
+//            
+//            moviePlayer.controlStyle = MPMovieControlStyle.embedded
+        }
+        
+    }
     
     func loadImage(urlString: String) {
         if urlString.characters.count == 0 {
