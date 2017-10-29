@@ -32,6 +32,7 @@
 		7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */; };
 		7679EA821F8E054600DE16FA /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7679EA811F8E054600DE16FA /* UserView.xib */; };
 		7679EA841F8E071A00DE16FA /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA831F8E071A00DE16FA /* UserView.swift */; };
+		76D949421FA59C59005A6E8A /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D949411FA59C59005A6E8A /* PHAsset.swift */; };
 		76E229681F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */; };
 		76E2296A1F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */; };
 		76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2296B1F9B245B007049B0 /* StorageClient.swift */; };
@@ -132,6 +133,7 @@
 		76CDDEAA1FA317F20028DC19 /* Mountain View.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Mountain View.gpx"; path = "locations/Mountain View.gpx"; sourceTree = "<group>"; };
 		76CDDEAB1FA318A70028DC19 /* Rengstorff Park.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Rengstorff Park.gpx"; path = "locations/Rengstorff Park.gpx"; sourceTree = "<group>"; };
 		76CDDEAC1FA31A040028DC19 /* Dodger Stadium.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Dodger Stadium.gpx"; path = "locations/Dodger Stadium.gpx"; sourceTree = "<group>"; };
+		76D949411FA59C59005A6E8A /* PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAsset.swift; sourceTree = "<group>"; };
 		76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationDetailView.xib; sourceTree = "<group>"; };
 		76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationDetailView.swift; sourceTree = "<group>"; };
 		76E2296B1F9B245B007049B0 /* StorageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageClient.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		32963D611F8B1BAD00E05CF3 /* chatspot */ = {
 			isa = PBXGroup;
 			children = (
+				76D949401FA59C36005A6E8A /* Extensions */,
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
 				3298CF5F1F92E65A00F9BBEE /* Constants.swift */,
 				3298CF5C1F92A6B700F9BBEE /* Service */,
@@ -305,6 +308,14 @@
 				8B0ACFB41FA1A21300722B1D /* ActivityView.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		76D949401FA59C36005A6E8A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				76D949411FA59C59005A6E8A /* PHAsset.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		76E2296D1F9BFE39007049B0 /* Locations */ = {
@@ -661,6 +672,7 @@
 				762620201F9338BB008404F6 /* AroundMeView.swift in Sources */,
 				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,
 				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
+				76D949421FA59C59005A6E8A /* PHAsset.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,

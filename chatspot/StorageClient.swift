@@ -129,7 +129,48 @@ class StorageClient: NSObject {
         let resizedImage = resizeImage(image: chatImage, width: width, height: height)
         storeImage(ref: imagesRef, image: resizedImage!, success: success, failure: failure)
     }   
+    
+    
+    //MARK:- Chat Video
+    
+    
+    func storeChatVideo(videoThumb: UIImage, inputVideoUrl: URL, success: @escaping (URL?, URL?) -> (), failure: @escaping () -> ()) {
         
+        let videoUUID = NSUUID().uuidString
+        let thumbNailRef = storageRef.child("chatVideo").child(videoUUID+"_thumb.png")
+        let videoRef = storageRef.child("chatVideo").child(videoUUID+".mov")
+        
+        
+        var thumbNailUrl: URL?
+        var videoUrl: URL?
+        
+        let taskGroup = DispatchGroup()
+        
+        // store thumb nail
+        taskGroup.enter()
+        storeImage(ref: thumbNailRef, image: videoThumb, success: { (returnUrl: URL?) in
+            thumbNailUrl = returnUrl
+            taskGroup.leave()
+        }) {
+            failure()
+            taskGroup.leave()
+        }
+        
+        taskGroup.enter()
+        videoRef.putFile(from: inputVideoUrl, metadata: nil) { (metadata: StorageMetadata?, error: Error?) in
+            if error == nil {
+                videoUrl = metadata?.downloadURL()
+            } else {
+                failure()
+            }
+            taskGroup.leave()
+        }
+
+        taskGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+            success(thumbNailUrl, videoUrl)
+        }))
+    }
+    
     func storeChatVideo(videoUrl: URL, success: @escaping (URL?) -> (), failure: @escaping () -> ()) {
         let videoRef = storageRef.child("chatVideo").child(NSUUID().uuidString+".mov")
         

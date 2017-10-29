@@ -58,6 +58,9 @@ class ChatMessageCell: UITableViewCell {
             if let urlString = message.attachment {
                 loadImage(urlString: urlString)
             }
+            if let thumbString = message.thumbnailImageUrl {
+                loadImage(urlString: thumbString)
+            }
             self.updateConstraints()
 		}
 	}
@@ -177,5 +180,5 @@ class ChatMessageCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-
 }
+

@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import Photos
 
 class Message1 {
     
@@ -19,6 +20,7 @@ class Message1 {
     static let KEY_ATTACHMENT = "attachment"
     static let KEY_SYSTEM = "system"
     static let KEY_MEDIA_URL = "mediaFileUrl"
+    static let KEY_MEDIA_TYPE = "mediaType"
     static let KEY_THUMB_URL = "thumbnailImageUrl"
 
     var guid: String?
@@ -29,6 +31,7 @@ class Message1 {
     var userGuid: String!
     var attachment: String?
     var mediaFileUrl: String?
+    var mediaType: Int?
     var thumbnailImageUrl: String?
     var rawTimestamp: Double = NSDate().timeIntervalSince1970
     var system = false // indicate a system message (no user node)
@@ -80,10 +83,18 @@ class Message1 {
             self.attachment = attachment
         }
         
-        if let mediaFileUrl = obj[Message1.KEY_MEDIA_URL] as? String {
-            self.mediaFileUrl = mediaFileUrl
+        if let mediaType = obj[Message1.KEY_MEDIA_TYPE] as? Int {
+            self.mediaType = mediaType
         }
         
+        if let mediaFileUrl = obj[Message1.KEY_MEDIA_URL] as? String {
+            self.mediaFileUrl = mediaFileUrl
+            // if no media type defined, default to image
+            if self.mediaType == nil {
+                self.mediaType = PHAssetMediaType.image.rawValue
+            }
+        }
+
         if let thumbnailImageUrl = obj[Message1.KEY_THUMB_URL] as? String {
             self.thumbnailImageUrl = thumbnailImageUrl
         }
@@ -104,6 +115,7 @@ class Message1 {
             Message1.KEY_ATTACHMENT: self.attachment ?? "",
             Message1.KEY_MEDIA_URL: self.mediaFileUrl ?? "",
             Message1.KEY_THUMB_URL: self.thumbnailImageUrl ?? "",
+            Message1.KEY_MEDIA_TYPE: self.mediaType,
             Message1.KEY_SYSTEM: self.system
         ]
         
