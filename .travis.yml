@@ -2,3 +2,6 @@ language: objective-c
 xcode_workspace: chatspot.xcworkspace
 xcode_scheme: chatspot
 osx_image: xcode8.3
+before_install:
+ - gem install cocoapods
+ - pod repo update
