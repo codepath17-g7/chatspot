@@ -226,7 +226,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 	
     func setRoomName (_ roomName: String) {
         chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
-        messageTextView.placeHolder = "Message \(roomName)"
+        messageTextView.attributedPlaceHolder = NSAttributedString(string: "Message \(roomName)", attributes: [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regular])
 
     }
     
@@ -264,8 +264,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         messageTextView.layer.borderWidth = 1
         messageTextView.layer.borderColor = UIColor.ChatSpotColors.LighterGray.cgColor
         
-        toolbarView.layer.borderWidth = 0.3
-        toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
+//        toolbarView.layer.borderWidth = 0.3
+//        toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle]), for: .disabled)
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
 , for: .normal)
