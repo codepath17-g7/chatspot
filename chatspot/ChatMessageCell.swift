@@ -9,6 +9,10 @@
 import UIKit
 import NSDateMinimalTimeAgo
 import Haneke
+import Photos
+import AVFoundation
+import AVKit
+import Lightbox
 
 @objc protocol ChatMessageCellDelegate {
     func presentAlertViewController(alertController: UIAlertController)
@@ -58,10 +62,58 @@ class ChatMessageCell: UITableViewCell {
             if let urlString = message.attachment {
                 loadImage(urlString: urlString)
             }
+            if let thumbString = message.thumbnailImageUrl {
+                loadImage(urlString: thumbString)
+
+            }
+            
+            
+            let onTap = UITapGestureRecognizer(target: self, action: #selector(onTapImage))
+            onTap.numberOfTouchesRequired = 1
+            onTap.numberOfTapsRequired = 1
+            messageImageView.addGestureRecognizer(onTap)
+            messageImageView.isUserInteractionEnabled = true
+            
             self.updateConstraints()
 		}
 	}
+
     
+    func onTapImage(_ sender: UITapGestureRecognizer) {
+        
+        if message.mediaType == PHAssetMediaType.video.rawValue && message.mediaFileUrl != nil {
+            print("Playing video")
+            let movieURL = URL(string: message.mediaFileUrl!)
+            let images = [
+                
+                LightboxImage(
+                    imageURL: URL(string: message.thumbnailImageUrl!)!,
+                    text: "",
+                    videoURL: movieURL
+                )
+            ]
+            let controller = LightboxController(images: images)
+
+            // Use dynamic background.
+            controller.dynamicBackground = true
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            let topVc = UIViewController.topViewController(from: appdelegate.window?.rootViewController)
+            topVc?.present(controller, animated: true, completion: nil)
+
+        } else if message.attachment != nil && (message.attachment?.characters.count)! > 0 {
+            let images = [
+                LightboxImage(imageURL: URL(string: message.attachment!)!)
+            ]
+            let controller = LightboxController(images: images)
+            
+            // Use dynamic background.
+            controller.dynamicBackground = true
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            let topVc = UIViewController.topViewController(from: appdelegate.window?.rootViewController)
+            topVc?.present(controller, animated: true, completion: nil)
+        }
+        
+    }
     
     func loadImage(urlString: String) {
         if urlString.characters.count == 0 {
@@ -177,5 +229,5 @@ class ChatMessageCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-
 }
+

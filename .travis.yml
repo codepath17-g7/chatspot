@@ -1,0 +1,11 @@
+language: objective-c
+xcode_workspace: chatspot.xcworkspace
+xcode_scheme: chatspot
+osx_image: xcode8.3
+before_install:
+ - gem install cocoapods
+ - pod repo update
+script:
+    - xcodebuild clean build -sdk iphonesimulator -workspace chatspot.xcworkspace -scheme chatspot CODE_SIGNING_REQUIRED=NO
+ notifications:
+    slack: codepath:NKi7pUrsFTUR4mRxA6yrBEdE

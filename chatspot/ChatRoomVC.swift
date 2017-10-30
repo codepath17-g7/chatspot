@@ -599,24 +599,64 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
             
             if asset.mediaType == .image {
                 //retrieve full size image for that asset
-                getFullImageForAsset(asset: asset, completion: { (image: UIImage?) in
+                asset.getFullImage(completion: { (image: UIImage?) in
                     if let img = image {
                         self.storeAndSendImage(image: img, asset: asset)
                     }
                 })
                 
             } else if asset.mediaType == .video {
-                //retrieve video
-                getVideoForAsset(asset: asset, completion: { (video: AVPlayerItem?) in
-                    if let vid = video {
-                        // make method to store and send video
-                    }
+                
+                let taskGroup = DispatchGroup()
+                var thumbImage: UIImage?
+                var videoUrl: URL?
+                
+                taskGroup.enter()
+                asset.getSmallImage(completion: { (newThumbImage: UIImage?) in
+                    thumbImage = newThumbImage
+                    taskGroup.leave()
                 })
+                
+                taskGroup.enter()
+                asset.getURL(completionHandler: { (newURL: URL?) in
+                    videoUrl = newURL
+                    taskGroup.leave()
+                })
+                
+                taskGroup.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: {
+                    if thumbImage != nil && videoUrl != nil {
+                        StorageClient.instance.storeChatVideo(videoThumb: thumbImage!, inputVideoUrl: videoUrl!, success: { (storedThumbUrl: URL?, storedVideoURL: URL?) in
+                            print("Stored thumb \(storedThumbUrl!.absoluteString) video \(storedVideoURL!.absoluteString)")
+                            
+                            self.imageCache.set(value: thumbImage!, key: storedThumbUrl!.absoluteString)
+
+                            let videoMessage = Message1(roomId: self.chatRoom.guid, message: "", name: ChatSpotClient.currentUser.name!, userGuid: ChatSpotClient.currentUser.guid!, attachment: nil)
+                            videoMessage.mediaFileUrl = storedVideoURL!.absoluteString
+                            videoMessage.thumbnailImageUrl = storedThumbUrl!.absoluteString
+                            videoMessage.mediaType = PHAssetMediaType.video.rawValue
+                            
+                            ChatSpotClient.sendMessage(message: videoMessage, room: self.chatRoom, success: {
+                                print("video sent!")
+                            }, failure: {
+                                print("video sending failed")
+                            })
+                            
+                        }, failure: {
+                            print("Failed to store videos and thumbs")
+                        })
+                    }
+                }))
+//                //retrieve video
+//                getVideoForAsset(asset: asset, completion: { (video: AVPlayerItem?) in
+//                    if let vid = video {
+//                    
+//                        // make method to store and send video
+//                    }
+//                })
 
             }
         }
     }
-    
     
     func storeAndSendImage(image: UIImage, asset: PHAsset?){
         
@@ -650,35 +690,6 @@ extension ChatRoomVC: UIImagePickerControllerDelegate, UINavigationControllerDel
             print("Failure trying to store images")
         })
 
-    }
-    
-    func getSmallImageForAsset(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
-        let manager = PHImageManager.default()
-        let options = PHImageRequestOptions()
-        options.isSynchronous = true
-        manager.requestImage(for: asset, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: options, resultHandler: { (result: UIImage?, _) -> Void in
-            if let image = result {
-                completion(image)
-            } else {
-                completion(nil)
-            }
-        })
-    }
-    
-    func getFullImageForAsset(asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
-        let manager = PHImageManager.default()
-        let options = PHImageRequestOptions()
-        options.version = .current
-        options.isSynchronous = true // should this be true? maybe send it then update it later?
-        
-        //retrieve real image for that asset
-        manager.requestImageData(for: asset, options: options) { (data: Data?, _, _, _) in
-            if let imageData = data {
-                completion(UIImage(data: imageData))
-            } else {
-                completion(nil)
-            }
-        }
     }
     
     func getVideoForAsset(asset: PHAsset, completion: @escaping (AVPlayerItem?) -> Void ) {
