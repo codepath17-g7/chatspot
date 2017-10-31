@@ -104,6 +104,7 @@
                             <constraint firstItem="Hws-Py-X5b" firstAttribute="top" secondItem="RqF-un-Kmi" secondAttribute="bottom" id="wHe-Rr-bC1"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="3GA-Qf-tb7"/>
                     <connections>
                         <outlet property="footerView" destination="SuB-21-Seu" id="Eyn-gb-bsW"/>
                         <outlet property="leaveButton" destination="cTg-ys-ecs" id="Jj4-nB-9Od"/>
@@ -532,7 +533,7 @@
                         <outlet property="tableView" destination="Tbb-1z-WBL" id="94i-xs-V4o"/>
                         <outlet property="toolbarBottomConstraint" destination="p9C-by-nSs" id="Ch1-f5-17B"/>
                         <outlet property="toolbarView" destination="M6h-xv-TnC" id="l5c-aw-pAG"/>
-                        <segue destination="kER-1Q-3Mh" kind="show" identifier="chatroomDetailSegue" id="OzT-Ab-FVH"/>
+                        <segue destination="D8l-N6-nQd" kind="presentation" identifier="chatroomDetailSegue" id="OzT-Ab-FVH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CF-ys-sA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -810,6 +811,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kOQ-p5-Wyw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4031.1999999999998" y="734.48275862068976"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SZc-D7-WGM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D8l-N6-nQd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aih-mQ-QlG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kER-1Q-3Mh" kind="relationship" relationship="rootViewController" id="ZeB-eH-Huj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ti-VI-cy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3442.4000000000001" y="2265.5172413793107"/>
         </scene>
     </scenes>
     <resources>

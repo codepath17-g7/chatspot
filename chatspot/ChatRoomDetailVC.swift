@@ -19,11 +19,18 @@ class ChatRoomDetailVC: UIViewController {
     var chatroom: ChatRoom1!
     
     var userList = [User1]()
+    let sections = ["Members"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = chatroom.name
+        navigationItem.setUpTitle(title: chatroom.name)
+        
+        navigationItem.rightBarButtonItem =
+            UIBarButtonItem(image: UIImage.init(named: "x-button"),
+                            style: UIBarButtonItemStyle.plain,
+                            target: self,
+                            action: #selector(close))
         
         setupUI()
         
@@ -38,6 +45,10 @@ class ChatRoomDetailVC: UIViewController {
         })
     }
     
+    @objc private func close() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     private func setupUI() {
         
         leaveButton.layer.cornerRadius = 4
@@ -47,6 +58,29 @@ class ChatRoomDetailVC: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        
+        DispatchQueue.global(qos: .utility).async {
+            
+            var roomBanner: UIImage?
+            if let urlString = self.chatroom.banner,
+                let url = URL(string: urlString),
+                let data = try? Data(contentsOf: url),
+                let image = UIImage(data: data) {
+                print("Banner height - \(image.size.height)")
+                roomBanner = image
+            }
+            
+            guard let bannerImage = roomBanner else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let headerView = ParallaxView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 150), image: bannerImage)
+                self.tableView.tableHeaderView = headerView
+                self.tableView.tableHeaderView!.transform = self.tableView.transform
+            }
+        }
+        
         
         footerView.isHidden = chatroom.isAroundMe
         
@@ -58,7 +92,7 @@ class ChatRoomDetailVC: UIViewController {
             
             let headerView = MapBannerView()
             headerView.loadFromXib()
-            tableView.tableHeaderView = headerView
+            //tableView.tableHeaderView = headerView
             
             headerView.setLocation(latitude, longitude)
         }
@@ -106,12 +140,21 @@ class ChatRoomDetailVC: UIViewController {
 
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let headerView = self.tableView.tableHeaderView as! ParallaxView
+        headerView.scrollViewDidScroll(scrollView: scrollView)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userList.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
