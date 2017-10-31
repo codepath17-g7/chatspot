@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,30 +70,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RqF-un-Kmi">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="SuB-21-Seu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTg-ys-ecs">
-                                            <rect key="frame" x="128" y="8" width="120" height="40"/>
-                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="120" id="Vpp-l9-jQE"/>
-                                            </constraints>
-                                            <state key="normal" title="LEAVE">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="leaveRoom:" destination="kER-1Q-3Mh" eventType="touchUpInside" id="fci-Oc-L94"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="cTg-ys-ecs" firstAttribute="top" secondItem="SuB-21-Seu" secondAttribute="top" constant="8" id="EMG-1u-fpl"/>
-                                        <constraint firstAttribute="bottom" secondItem="cTg-ys-ecs" secondAttribute="bottom" constant="8" id="dFY-6E-uzW"/>
-                                        <constraint firstItem="cTg-ys-ecs" firstAttribute="centerX" secondItem="SuB-21-Seu" secondAttribute="centerX" id="vZc-5e-cGP"/>
-                                    </constraints>
-                                </view>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,8 +82,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="3GA-Qf-tb7"/>
                     <connections>
-                        <outlet property="footerView" destination="SuB-21-Seu" id="Eyn-gb-bsW"/>
-                        <outlet property="leaveButton" destination="cTg-ys-ecs" id="Jj4-nB-9Od"/>
                         <outlet property="tableView" destination="RqF-un-Kmi" id="8ja-2q-78l"/>
                     </connections>
                 </viewController>
@@ -295,14 +269,14 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
-                                                            <rect key="frame" x="60" y="8" width="42" height="21"/>
+                                                            <rect key="frame" x="60" y="8" width="39.5" height="21"/>
                                                             <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:52 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLi-4i-V4R">
-                                                            <rect key="frame" x="110" y="11" width="62" height="17"/>
+                                                            <rect key="frame" x="107.5" y="11" width="60.5" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -315,7 +289,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="60" y="37" width="307" height="61"/>
+                                                            <rect key="frame" x="60" y="37" width="307" height="59.5"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -368,20 +342,20 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-r6-lax" userLabel="Right Line">
-                                                            <rect key="frame" x="218" y="21" width="133" height="1"/>
+                                                            <rect key="frame" x="217.5" y="21" width="133.5" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="gv2-Dz-EFP"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpD-1l-L1a">
-                                                            <rect key="frame" x="166.5" y="12" width="43.5" height="20"/>
+                                                            <rect key="frame" x="167.5" y="12" width="42" height="20"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5dW-oP-zN9" userLabel="Left Line">
-                                                            <rect key="frame" x="24" y="21" width="134.5" height="1"/>
+                                                            <rect key="frame" x="24" y="21" width="135.5" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="0JG-oE-N4e"/>
@@ -498,13 +472,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-4M-Aju">
-                                    <rect key="frame" x="23" y="-4" width="104" height="20"/>
+                                    <rect key="frame" x="25.5" y="-4" width="99" height="20"/>
                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiR-MF-mHb">
-                                    <rect key="frame" x="34.5" y="10" width="81" height="32"/>
+                                    <rect key="frame" x="36" y="10" width="78.5" height="32"/>
                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -707,7 +681,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Chatspots" image="final pin" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -726,7 +700,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="around me button" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -745,7 +719,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -763,7 +737,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yyh-KS-hMb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WhN-pp-VEH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhN-pp-VEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -781,7 +755,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -799,7 +773,7 @@
             <objects>
                 <navigationController storyboardIdentifier="activityDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="g0T-YJ-1nU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nlM-sp-vNF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nlM-sp-vNF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -837,12 +811,12 @@
         <image name="crown" width="50" height="39"/>
         <image name="final pin" width="27" height="30"/>
         <image name="ic_person" width="468" height="475"/>
+        <image name="ic_play" width="200" height="159"/>
         <image name="lightning" width="22" height="31"/>
         <image name="people" width="35" height="26"/>
         <image name="photo" width="33" height="27"/>
         <image name="profile" width="19" height="28"/>
         <image name="smiley" width="30" height="31"/>
-        <image name="ic_play" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nVZ-qM-vWL"/>

@@ -13,8 +13,6 @@ import MapKit
 class ChatRoomDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var leaveButton: UIButton!
     
     var chatroom: ChatRoom1!
     
@@ -68,8 +66,6 @@ class ChatRoomDetailVC: UIViewController {
     
     private func setupUI() {
         
-        leaveButton.layer.cornerRadius = 4
-        
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
@@ -98,23 +94,21 @@ class ChatRoomDetailVC: UIViewController {
             }
         }
         
-        
-        footerView.isHidden = chatroom.isAroundMe
-        
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
         
         let mapCellNib = UINib.init(nibName: "MapCell", bundle: nil)
         tableView.register(mapCellNib, forCellReuseIdentifier: "mapCell")
         
-        if let latitude = chatroom.latitude,
+        if !chatroom.isAroundMe,
+            let latitude = chatroom.latitude,
             let longitude = chatroom.longitude {
             
             tableViewData.insert(SectionWithItems("Location", [CLLocationCoordinate2D(latitude: latitude, longitude: longitude)]), at: 0)
         }
     }
     
-    @IBAction func leaveRoom(_ sender: UIButton) {
+    func leaveRoom() {
         ChatSpotClient.leaveChatRoom(userGuid: Auth.auth().currentUser!.uid, roomGuid: chatroom.guid)
         // ignoring the return value. `_ =` is a swift convention it appears!
         self.close()
@@ -157,8 +151,9 @@ class ChatRoomDetailVC: UIViewController {
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let headerView = self.tableView.tableHeaderView as! ParallaxView
-        headerView.scrollViewDidScroll(scrollView: scrollView)
+        if let headerView = self.tableView.tableHeaderView as? ParallaxView {
+            headerView.scrollViewDidScroll(scrollView: scrollView)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -174,6 +169,11 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dataItem = tableViewData[indexPath.section]
+        if let rows = dataItem.sectionItems as? [String],
+             rows.first == "Leave \(chatroom.name!)" {
+            self.dismiss(animated: true, completion: nil)
+        }
         tableView.deselectRow(at: indexPath, animated:true)
     }
     
