@@ -13,13 +13,14 @@ import MapKit
 class ChatRoomDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var footerView: UIView!
-    @IBOutlet weak var leaveButton: UIButton!
     
     var chatroom: ChatRoom1!
     
-    var userList = [User1]()
-    let sections = ["Members"]
+    private var userList = [User1]()
+    private var activityList = [Activity]()
+    
+    fileprivate var tableViewData = [SectionWithItems]()
+    private var userSection: SectionWithItems!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +35,29 @@ class ChatRoomDetailVC: UIViewController {
         
         setupUI()
         
+        tableViewData.append(SectionWithItems(" ", ["Leave \(chatroom.name!)"]))
+        
         let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
         
         users?.keys.forEach({ (userGuid) in
             //
             ChatSpotClient.getUserProfile(userGuid: userGuid, success: { (user) in
-                self.userList.append(user)
-                self.tableView.reloadData()
+                if (self.userSection == nil) {
+                    let seeAll = User1()
+                    seeAll.name = "See All Members"
+                    self.userList.append(seeAll)
+                    self.userSection = SectionWithItems("Members", self.userList)
+                    self.tableViewData.insert(self.userSection, at: self.tableViewData.count - 1)
+                }
+                self.userList.insert(user, at: self.userList.count - 1)
+                if (self.userList.count <= 3) {
+                    self.userSection.sectionItems = self.userList
+                    self.tableView.reloadData()
+                }
             }, failure: {})
         })
+        
+        
     }
     
     @objc private func close() {
@@ -50,8 +65,6 @@ class ChatRoomDetailVC: UIViewController {
     }
     
     private func setupUI() {
-        
-        leaveButton.layer.cornerRadius = 4
         
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -81,27 +94,23 @@ class ChatRoomDetailVC: UIViewController {
             }
         }
         
-        
-        footerView.isHidden = chatroom.isAroundMe
-        
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
         
-        if let latitude = chatroom.latitude,
+        let mapCellNib = UINib.init(nibName: "MapCell", bundle: nil)
+        tableView.register(mapCellNib, forCellReuseIdentifier: "mapCell")
+        
+        if !chatroom.isAroundMe,
+            let latitude = chatroom.latitude,
             let longitude = chatroom.longitude {
             
-            let headerView = MapBannerView()
-            headerView.loadFromXib()
-            //tableView.tableHeaderView = headerView
-            
-            headerView.setLocation(latitude, longitude)
+            tableViewData.insert(SectionWithItems("Location", [CLLocationCoordinate2D(latitude: latitude, longitude: longitude)]), at: 0)
         }
     }
     
-    @IBAction func leaveRoom(_ sender: UIButton) {
+    func leaveRoom() {
         ChatSpotClient.leaveChatRoom(userGuid: Auth.auth().currentUser!.uid, roomGuid: chatroom.guid)
-        // ignoring the return value. `_ =` is a swift convention it appears!
-        _ = navigationController?.popToRootViewController(animated: true)
+        performSegue(withIdentifier: "unwindToChatList", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,31 +150,77 @@ class ChatRoomDetailVC: UIViewController {
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let headerView = self.tableView.tableHeaderView as! ParallaxView
-        headerView.scrollViewDidScroll(scrollView: scrollView)
+        if let headerView = self.tableView.tableHeaderView as? ParallaxView {
+            headerView.scrollViewDidScroll(scrollView: scrollView)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userList.count
+        return tableViewData[section].sectionItems.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        return tableViewData.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+        return tableViewData[section].sectionTitle
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dataItem = tableViewData[indexPath.section]
+        if let rows = dataItem.sectionItems as? [String],
+             rows.first == "Leave \(chatroom.name!)" {
+            leaveRoom()
+        }
         tableView.deselectRow(at: indexPath, animated:true)
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let dataItem = tableViewData[indexPath.section]
+        if (dataItem.sectionTitle == "Location") {
+            return 125
+        }
+        return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = UIColor.ChatSpotColors.LightGray
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let user = userList[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserCell
-        cell.user = user
+        let sectionItems = tableViewData[indexPath.section].sectionItems
+        var cell: UITableViewCell!
+        if let userSectionItems = sectionItems as? [User1] {
+            let user = userSectionItems[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
+            (cell as! UserCell).user = user
+        } else if let leaveSectionItems = sectionItems as? [String] {
+            let item = leaveSectionItems[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
+            (cell as! UserCell).name.text = item
+        } else if let mapCellItems = sectionItems as? [CLLocationCoordinate2D] {
+            let item = mapCellItems[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "mapCell")
+            (cell as! MapCell).setLocation(coordinate: item)
+        }
         return cell
     }
 }
 
+class SectionWithItems {
+    
+    var sectionTitle: String!
+    var sectionItems: [Any]!
+    
+    init(_ sectionTitle: String, _ sectionItems: [Any]) {
+        self.sectionTitle = sectionTitle
+        self.sectionItems = sectionItems
+    }
+}

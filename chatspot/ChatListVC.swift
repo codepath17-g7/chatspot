@@ -58,6 +58,9 @@ class ChatListVC: UIViewController {
 
     }
     
+    // This is an unwind segue
+    @IBAction func unwindToChatList(segue: UIStoryboardSegue) {}
+    
     func updateAroundMeRoom(_ roomGuid: String) {
         print("Around me room -> \(roomGuid)")
 
