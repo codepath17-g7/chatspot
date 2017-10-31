@@ -64,9 +64,6 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         // UI setup
         setUpUI()
         
-        // Infinite scrolling
-        setUpInfiniteScrolling()
-        
         self.startObservingMessages()
     }
     
@@ -217,13 +214,12 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         present(navigationController, animated: true)
     }
 
-    func setUpInfiniteScrolling(){
-        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        loadingMoreView.center = tableFooterView.center
-        tableFooterView.insertSubview(loadingMoreView, at: 0)
-        self.tableView.tableFooterView = tableFooterView
-    }
-    
+//    func setUpInfiniteScrolling(){
+////        let tableFooterView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
+//
+////        self.tableView.tableFooterView = tableFooterView
+//    }
+//    
 	
     func setRoomName (_ roomName: String) {
         chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
@@ -265,6 +261,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         messageTextView.layer.borderWidth = 1
         messageTextView.layer.borderColor = UIColor.ChatSpotColors.LighterGray.cgColor
         
+        // maybe add these back
 //        toolbarView.layer.borderWidth = 0.3
 //        toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle]), for: .disabled)
@@ -280,10 +277,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         
         
-        // TODO: Fix hardcoded stuff:
-        DispatchQueue.global(qos: .utility).async {
-            
-            // TODO: change to default image
+        DispatchQueue.global(qos: .userInitiated).async {
+        
             var roomBanner: UIImage?
             if let urlString = self.chatRoom.banner,
                 let url = URL(string: urlString),
@@ -293,11 +288,15 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             }
             
             guard let bannerImage = roomBanner else {
+                print("no banner image")
                 return
             }
-
-            let footerView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: bannerImage)
-            DispatchQueue.main.async { // 2
+            
+            let footerView = ParallaxView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 120), image: bannerImage)
+            self.loadingMoreView.center = footerView.center
+            footerView.insertSubview(self.loadingMoreView, at: 0)
+            
+            DispatchQueue.main.async {
                 self.tableView.tableFooterView = footerView
                 self.tableView.tableFooterView!.transform = self.tableView.transform
             }
@@ -750,6 +749,14 @@ extension ChatRoomVC: UIScrollViewDelegate {
                 loadMoreMessages()
             }
         }
+        
+//        if let footerView = self.tableView.tableFooterView as? ParallaxView {
+//            print("tfv is a parallax view")
+//            footerView.scrollViewDidScroll(scrollView: scrollView)
+//        } else {
+//            print("no parallax")
+//
+//        }
     }
     
     // TODO - fix me

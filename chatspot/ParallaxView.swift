@@ -64,6 +64,8 @@ class ParallaxView: UIView {
         super.init(coder: aDecoder)
     }
     
+    
+    // Maybe play with these values and see if you can get it to work for inverted tableview
     func scrollViewDidScroll(scrollView: UIScrollView) {
         containerLayoutConstraint.constant = scrollView.contentInset.top
         let offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top)
@@ -71,4 +73,5 @@ class ParallaxView: UIView {
         bottomLayoutConstraint.constant = offsetY >= 0 ? 0 : -offsetY / 2
         heightLayoutConstraint.constant = max(offsetY + scrollView.contentInset.top, scrollView.contentInset.top)
     }
+    
 }
