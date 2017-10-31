@@ -224,11 +224,11 @@ class ChatSpotClient {
         return [addRefHandle, removeRefHadle]
     }
     
-    static func observeChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+    static func observeChatRooms(success: @escaping (ChatRoom1) -> (), failure: @escaping (Error?) -> ()) -> [UInt]{
         let ref = Database.database().reference()
         let chatroomsRef = ref.child("chatrooms")
         
-        let refHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childChanged, with: { (snapshot: DataSnapshot) in
+        let changedRefHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childChanged, with: { (snapshot: DataSnapshot) in
             let dict = snapshot.value as? NSDictionary ?? [:]
             let room = ChatRoom1(guid: snapshot.key, obj: dict)
             // cache
@@ -238,7 +238,17 @@ class ChatSpotClient {
             failure(error)
         }
         
-        return refHandle
+        let addRefHandle = chatroomsRef.queryOrderedByKey().observe(DataEventType.childAdded, with: { (snapshot: DataSnapshot) in
+            let dict = snapshot.value as? NSDictionary ?? [:]
+            let room = ChatRoom1(guid: snapshot.key, obj: dict)
+            // cache
+            chatrooms[room.guid] = room
+            success(room)
+        }) { (error: Error?) in
+            failure(error)
+        }
+
+        return [addRefHandle, changedRefHandle]
     }
     
     static func getRooms(success: @escaping ([ChatRoom1]) -> (), failure: @escaping (Error?) -> ()) {

@@ -85,7 +85,7 @@ class AroundMeView: UIView {
                 print(error ?? "")
             })
             print("Map - Adding observer \(observer2)")
-            observers.append(observer2)            
+            observers.append(contentsOf: observer2)
         } else {
             print("Map - Removing observer \(observers)")
             observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
