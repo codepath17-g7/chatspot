@@ -21,6 +21,7 @@ class ChatRoomDetailVC: UIViewController {
     
     fileprivate var tableViewData = [SectionWithItems]()
     private var userSection: SectionWithItems!
+    private var activitySection: SectionWithItems!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class ChatRoomDetailVC: UIViewController {
         users?.keys.forEach({ (userGuid) in
             //
             ChatSpotClient.getUserProfile(userGuid: userGuid, success: { (user) in
+                
                 if (self.userSection == nil) {
                     let seeAll = User1()
                     seeAll.name = "See All Members"
@@ -50,37 +52,29 @@ class ChatRoomDetailVC: UIViewController {
                     self.tableViewData.insert(self.userSection, at: self.tableViewData.count - 1)
                 }
                 self.userList.insert(user, at: self.userList.count - 1)
+                
                 if (self.userList.count <= 3) {
                     self.userSection.sectionItems = self.userList
                     self.tableView.reloadData()
                 }
+                
             }, failure: {})
         })
         
-        
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
-        view.addGestureRecognizer(gesture)
-        
-        
-    }
-    
-    func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-        // do this only for map pin click
-        UIView.animateWithDuration(0.3) { [weak self] in
-            let frame = self?.view.frame
-            let yComponent = UIScreen.mainScreen().bounds.height - 200
-            self?.view.frame = CGRectMake(0, yComponent, frame!.width, frame!.height)
-        }
-    }
-    
-    func panGesture(recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translationInView(self.view)
-        let y = self.view.frame.minY
-        self.view.frame = CGRectMake(0, y + translation.y, view.frame.width, view.frame.height)
-        recognizer.setTranslation(CGPointZero, inView: self.view)
+        ChatSpotClient.getActivities(roomGuid: chatroom.guid, success: { (activities) in
+            
+            if (activities.count == 0) {
+                return
+            }
+            
+            self.activitySection = SectionWithItems("Activities", Array(activities.prefix(3)))
+            let seeAll = Activity()
+            seeAll.activityName = "See All Activities"
+            self.activitySection.sectionItems.append(seeAll)
+            let position = self.chatroom.isAroundMe ? 0 : 1
+            self.tableViewData.insert(self.activitySection, at: position)
+            self.tableView.reloadData()
+        }) {}
     }
     
     @objc private func close() {
@@ -122,6 +116,9 @@ class ChatRoomDetailVC: UIViewController {
         
         let mapCellNib = UINib.init(nibName: "MapCell", bundle: nil)
         tableView.register(mapCellNib, forCellReuseIdentifier: "mapCell")
+        
+        let activityCellNib = UINib.init(nibName: "ActivityCell", bundle: nil)
+        tableView.register(activityCellNib, forCellReuseIdentifier: "activityCell")
         
         if !chatroom.isAroundMe,
             let latitude = chatroom.latitude,
@@ -232,6 +229,30 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
             let item = mapCellItems[indexPath.row]
             cell = tableView.dequeueReusableCell(withIdentifier: "mapCell")
             (cell as! MapCell).setLocation(coordinate: item)
+        } else if let activityItems = sectionItems as? [Activity] {
+            let item = activityItems[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "activityCell")
+            let activityCell = cell as! ActivityCell
+            activityCell.activity = item
+            activityCell.actionButton.isHidden = (item.activityName == "See All Activities")
+            
+            activityCell.action = { shouldJoin, activityGuid in
+                
+                let activity = activityItems.first(where: { (activity) -> Bool in activity.guid == activityGuid })
+                let userGuid = ChatSpotClient.currentUser.guid!
+                
+                if (shouldJoin) {
+                    print("Join activity \(activity!.activityName!)")
+                    ChatSpotClient.joinActivity(roomGuid: self.chatroom.guid, activityGuid: activityGuid, userGuid: userGuid, success: {
+                        activity?.usersJoined[userGuid] = true
+                    }, failure: {})
+                } else {
+                    print("Leave activity \(activity!.activityName!)")
+                    ChatSpotClient.leaveActivity(roomGuid: self.chatroom.guid, activityGuid: activityGuid, userGuid: userGuid, success: {
+                        activity?.usersJoined.removeValue(forKey: userGuid)
+                    }, failure: {})
+                }
+            }
         }
         return cell
     }
