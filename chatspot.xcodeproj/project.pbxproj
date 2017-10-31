@@ -132,6 +132,7 @@
 		7679EA811F8E054600DE16FA /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
 		7679EA831F8E071A00DE16FA /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		76967D491FA5BC730052B37C /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		76967D4B1FA84AB90052B37C /* Halfmoon Bay.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Halfmoon Bay.gpx"; path = "locations/Halfmoon Bay.gpx"; sourceTree = "<group>"; };
 		76CDDEAA1FA317F20028DC19 /* Mountain View.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Mountain View.gpx"; path = "locations/Mountain View.gpx"; sourceTree = "<group>"; };
 		76CDDEAB1FA318A70028DC19 /* Rengstorff Park.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Rengstorff Park.gpx"; path = "locations/Rengstorff Park.gpx"; sourceTree = "<group>"; };
 		76CDDEAC1FA31A040028DC19 /* Dodger Stadium.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Dodger Stadium.gpx"; path = "locations/Dodger Stadium.gpx"; sourceTree = "<group>"; };
@@ -322,6 +323,7 @@
 				76CDDEAA1FA317F20028DC19 /* Mountain View.gpx */,
 				76CDDEAB1FA318A70028DC19 /* Rengstorff Park.gpx */,
 				76CDDEAC1FA31A040028DC19 /* Dodger Stadium.gpx */,
+				76967D4B1FA84AB90052B37C /* Halfmoon Bay.gpx */,
 			);
 			name = Locations;
 			sourceTree = "<group>";
