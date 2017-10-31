@@ -110,8 +110,7 @@ class ChatRoomDetailVC: UIViewController {
     
     func leaveRoom() {
         ChatSpotClient.leaveChatRoom(userGuid: Auth.auth().currentUser!.uid, roomGuid: chatroom.guid)
-        // ignoring the return value. `_ =` is a swift convention it appears!
-        self.close()
+        performSegue(withIdentifier: "unwindToChatList", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
@@ -172,7 +171,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
         let dataItem = tableViewData[indexPath.section]
         if let rows = dataItem.sectionItems as? [String],
              rows.first == "Leave \(chatroom.name!)" {
-            self.dismiss(animated: true, completion: nil)
+            leaveRoom()
         }
         tableView.deselectRow(at: indexPath, animated:true)
     }
