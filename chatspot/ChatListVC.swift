@@ -125,6 +125,16 @@ class ChatListVC: UIViewController {
         })
         
         observers.append(contentsOf: chatRoomObsevers)
+        
+        let chatRoomsObservers = ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
+            // refresh in case we have stale data
+            self.updateAroundMeRoom(self.chatrooms[0].guid)
+        }) { (error) in
+            
+        }
+        
+        
+        observers.append(contentsOf: chatRoomsObservers)
     }
     
     func startObservingLastMessage() {
