@@ -46,6 +46,9 @@
 		8BCDD9B11FA44368004DD84D /* String+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDD9B01FA44368004DD84D /* String+Util.swift */; };
 		8BCDD9B41FA85FFE004DD84D /* MapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDD9B21FA85FFE004DD84D /* MapCell.swift */; };
 		8BCDD9B51FA85FFE004DD84D /* MapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BCDD9B31FA85FFE004DD84D /* MapCell.xib */; };
+		8BCDD9B81FA87274004DD84D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDD9B61FA87274004DD84D /* ActivityCell.swift */; };
+		8BCDD9B91FA87274004DD84D /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BCDD9B71FA87274004DD84D /* ActivityCell.xib */; };
+		8BCDD9BB1FA876E2004DD84D /* Date+Ago.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDD9BA1FA876E2004DD84D /* Date+Ago.swift */; };
 		8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2DB701F92FBC20073ABBC /* LocationManager.swift */; };
 		F254FCA21FA3E52500CBD616 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */; };
 		F254FCA31FA3E52500CBD616 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */; };
@@ -154,6 +157,9 @@
 		8BCDD9B01FA44368004DD84D /* String+Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Util.swift"; sourceTree = "<group>"; };
 		8BCDD9B21FA85FFE004DD84D /* MapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCell.swift; sourceTree = "<group>"; };
 		8BCDD9B31FA85FFE004DD84D /* MapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapCell.xib; sourceTree = "<group>"; };
+		8BCDD9B61FA87274004DD84D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		8BCDD9B71FA87274004DD84D /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		8BCDD9BA1FA876E2004DD84D /* Date+Ago.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Ago.swift"; sourceTree = "<group>"; };
 		8BD2DB701F92FBC20073ABBC /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-chatspot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-chatspot/Pods-chatspot.debug.xcconfig"; sourceTree = "<group>"; };
 		F230195A1FA1D46700006D7C /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "../../Library/Developer/Xcode/DerivedData/chatspot-fgkshavcpzelupglajjguiigxwnn/Build/Products/Debug-iphonesimulator/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
@@ -351,6 +357,7 @@
 				8BCDD9B01FA44368004DD84D /* String+Util.swift */,
 				76D949411FA59C59005A6E8A /* PHAsset.swift */,
 				76967D491FA5BC730052B37C /* UIViewController.swift */,
+				8BCDD9BA1FA876E2004DD84D /* Date+Ago.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -423,6 +430,8 @@
 				2D93B1041F9D2B6800D6B80C /* UserCell.xib */,
 				8BCDD9B21FA85FFE004DD84D /* MapCell.swift */,
 				8BCDD9B31FA85FFE004DD84D /* MapCell.xib */,
+				8BCDD9B61FA87274004DD84D /* ActivityCell.swift */,
+				8BCDD9B71FA87274004DD84D /* ActivityCell.xib */,
 				F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */,
 			);
 			name = Cells;
@@ -501,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F254FCAE1FA3E52500CBD616 /* SF-Pro-Display-Semibold.otf in Resources */,
+				8BCDD9B91FA87274004DD84D /* ActivityCell.xib in Resources */,
 				F254FCBC1FA3E52500CBD616 /* SF-Pro-Text-Regular.otf in Resources */,
 				F254FCA51FA3E52500CBD616 /* SF-Pro-Display-BoldItalic.otf in Resources */,
 				F254FCB01FA3E52500CBD616 /* SF-Pro-Display-Thin.otf in Resources */,
@@ -660,6 +670,7 @@
 				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
 				8B0ACFB71FA1A21D00722B1D /* ActivityView.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
+				8BCDD9B81FA87274004DD84D /* ActivityCell.swift in Sources */,
 				76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */,
 				8B92720C1F9082590041FC35 /* Storage.swift in Sources */,
 				76967D4A1FA5BC730052B37C /* UIViewController.swift in Sources */,
@@ -675,6 +686,7 @@
 				8BCDD9B41FA85FFE004DD84D /* MapCell.swift in Sources */,
 				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
 				76D949421FA59C59005A6E8A /* PHAsset.swift in Sources */,
+				8BCDD9BB1FA876E2004DD84D /* Date+Ago.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,

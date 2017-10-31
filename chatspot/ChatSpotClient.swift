@@ -139,6 +139,33 @@ class ChatSpotClient {
         
         return [observer, observer1]
     }
+    
+    static func getActivities(roomGuid: String, success: @escaping ([Activity]) -> (), failure: @escaping () -> ()) {
+        
+        let ref = Database.database().reference()
+        
+        ref.child("activities")
+            .child(roomGuid)
+            .queryOrderedByKey()
+            .observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+                
+                let dicts = snapshot.value as? [String : AnyObject] ?? [:]
+                
+                var activities = [Activity]()
+                
+                for dict in dicts {
+                    let data = dict.value as! NSDictionary
+                    let activity = Activity(guid: snapshot.key, obj: data)
+                    activities.append(activity)
+                }
+                
+                success(activities)
+                
+            }) { (error: Error) in
+                
+                failure()
+        }
+    }
 
     static func removeObserver(handle: UInt){
         print("Removing observers \(handle)")
