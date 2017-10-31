@@ -90,7 +90,8 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "chatroomDetailSegue") {
-            let destinationVC = segue.destination as! ChatRoomDetailVC
+            let navigationVC = segue.destination as! UINavigationController
+            let destinationVC = navigationVC.topViewController as! ChatRoomDetailVC
             destinationVC.chatroom = self.chatRoom
         }
     }
@@ -283,17 +284,19 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         DispatchQueue.global(qos: .utility).async {
             
             // TODO: change to default image
-            var roomBanner = UIImage()
-            if let urlString = self.chatRoom.banner {
-                if let url = URL(string: urlString) {
-                    if let data = try? Data(contentsOf: url) {
-                        if let image = UIImage(data: data) {
-                            roomBanner = image
-                        }
-                    }
-                }
+            var roomBanner: UIImage?
+            if let urlString = self.chatRoom.banner,
+                let url = URL(string: urlString),
+                let data = try? Data(contentsOf: url),
+                let image = UIImage(data: data) {
+                roomBanner = image
             }
-            let footerView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: roomBanner)
+            
+            guard let bannerImage = roomBanner else {
+                return
+            }
+
+            let footerView = ParallaxView.init(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 100), image: bannerImage)
             DispatchQueue.main.async { // 2
                 self.tableView.tableFooterView = footerView
                 self.tableView.tableFooterView!.transform = self.tableView.transform

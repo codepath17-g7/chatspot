@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // accompanying valid GoogleService-Info.plist file.
         // handleUserAuthentication()
         GTMSessionFetcher.setLoggingEnabled(true)
-        UIApplication.shared.statusBarStyle = .lightContent
         
         // check if app (terminated by system) was launched in background as a result of location change
         if launchOptions?[UIApplicationLaunchOptionsKey.location] != nil {
