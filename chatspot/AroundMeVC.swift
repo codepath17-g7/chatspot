@@ -21,6 +21,36 @@ class AroundMeVC: UIViewController {
         super.viewDidLoad()
         self.navigationItem.setUpTitle(title: "Around Me")
         
+        addBottomSheetView()
+        setupSearchBar()
+        
+
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+    }
+    
+    
+    func addBottomSheetView() {
+        // 1- Init bottomSheetVC
+        let bottomSheetVC = ChatRoomDetailVC()
+        
+        // 2- Add bottomSheetVC as a child view
+        self.addChildViewController(bottomSheetVC)
+        self.view.addSubview(bottomSheetVC.view)
+        bottomSheetVC.didMove(toParentViewController: self)
+        
+        // 3- Adjust bottomSheet frame and initial position.
+        let height = view.frame.height
+        let width  = view.frame.width
+        bottomSheetVC.view.frame = CGRectMake(0, self.view.frame.maxY, width, height)
+    }
+    
+    
+    
+// FIXME: needs work
+    func setupSearchBar(){
         
         // Background view.
         searchView = UIView()
@@ -57,14 +87,7 @@ class AroundMeVC: UIViewController {
         
         // Search bar starts invisible.
         searchBar.alpha = 0
-        
-
-        
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-    }
-    
     
     func open() {
         

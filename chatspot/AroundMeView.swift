@@ -142,11 +142,11 @@ extension AroundMeView: MKMapViewDelegate {
             annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
             
             if chatRoomAnnotation.isUserNearBy() {
-                annotationView?.image = #imageLiteral(resourceName: "AroundMeRoomPin")
+                annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
             } else if chatRoomAnnotation.isUserJoined() {
-                annotationView?.image = #imageLiteral(resourceName: "blue map pin")
+                annotationView?.image = #imageLiteral(resourceName: "PaddedBlueMapPin")
             } else {
-                annotationView?.image = #imageLiteral(resourceName: "pastel red map pin")
+                annotationView?.image = #imageLiteral(resourceName: "PaddedRedMapPin")
             }
         } else {
             annotationView?.annotation = chatRoomAnnotation

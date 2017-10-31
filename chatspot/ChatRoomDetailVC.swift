@@ -58,6 +58,29 @@ class ChatRoomDetailVC: UIViewController {
         })
         
         
+        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
+        view.addGestureRecognizer(gesture)
+        
+        
+    }
+    
+    func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        // do this only for map pin click
+        UIView.animateWithDuration(0.3) { [weak self] in
+            let frame = self?.view.frame
+            let yComponent = UIScreen.mainScreen().bounds.height - 200
+            self?.view.frame = CGRectMake(0, yComponent, frame!.width, frame!.height)
+        }
+    }
+    
+    func panGesture(recognizer: UIPanGestureRecognizer) {
+        let translation = recognizer.translationInView(self.view)
+        let y = self.view.frame.minY
+        self.view.frame = CGRectMake(0, y + translation.y, view.frame.width, view.frame.height)
+        recognizer.setTranslation(CGPointZero, inView: self.view)
     }
     
     @objc private func close() {
