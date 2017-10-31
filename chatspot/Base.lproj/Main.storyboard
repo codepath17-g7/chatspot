@@ -319,8 +319,16 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play" translatesAutoresizingMaskIntoConstraints="NO" id="fcg-Gm-tFu">
+                                                            <rect key="frame" x="60" y="37" width="200" height="200"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="200" id="Yup-kf-7cf"/>
+                                                                <constraint firstAttribute="width" constant="200" id="s3U-Mq-7KU"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="fcg-Gm-tFu" firstAttribute="leading" secondItem="zGT-Cy-ZXC" secondAttribute="trailing" constant="-200" id="1af-r2-P5h"/>
                                                         <constraint firstItem="yME-fo-Zy6" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="top" constant="8" id="1zX-3T-xkq"/>
                                                         <constraint firstItem="zGT-Cy-ZXC" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="8" id="2pO-1z-XBW"/>
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
@@ -336,6 +344,7 @@
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="baseline" secondItem="Whv-6R-gEz" secondAttribute="baseline" id="j7r-fE-9xa"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="top" secondItem="Whv-6R-gEz" secondAttribute="bottom" constant="8" id="oma-4b-kAm"/>
                                                         <constraint firstItem="zGT-Cy-ZXC" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="qdq-6L-6rj"/>
+                                                        <constraint firstItem="fcg-Gm-tFu" firstAttribute="top" secondItem="zGT-Cy-ZXC" secondAttribute="bottom" constant="-200" id="zx9-us-Kec"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -347,6 +356,7 @@
                                                     <outlet property="messageImageHeightConstraint" destination="1hj-oe-rbJ" id="7wp-L3-zVg"/>
                                                     <outlet property="messageImageView" destination="zGT-Cy-ZXC" id="9VG-Id-IJn"/>
                                                     <outlet property="messageTextLabel" destination="csA-tj-VwX" id="QLf-Md-6NF"/>
+                                                    <outlet property="playIcon" destination="fcg-Gm-tFu" id="Pqi-cR-uOx"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpecialAroundMeCell" rowHeight="44" id="9tQ-hj-jfp" customClass="SpecialAroundMeCell" customModule="chatspot" customModuleProvider="target">
@@ -813,6 +823,7 @@
         <image name="photo" width="33" height="27"/>
         <image name="profile" width="19" height="28"/>
         <image name="smiley" width="30" height="31"/>
+        <image name="ic_play" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nVZ-qM-vWL"/>

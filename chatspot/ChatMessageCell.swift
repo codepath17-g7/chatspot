@@ -28,6 +28,7 @@ class ChatMessageCell: UITableViewCell {
     @IBOutlet weak var authorProfileImage: UIImageView!
     @IBOutlet weak var authorLevelImage: UIImageView!
     @IBOutlet weak var messageImageView: UIImageView!
+    @IBOutlet weak var playIcon: UIImageView!
     
     @IBOutlet var messageImageHeightConstraint: NSLayoutConstraint!
     
@@ -75,6 +76,13 @@ class ChatMessageCell: UITableViewCell {
             messageImageView.isUserInteractionEnabled = true
             
             self.updateConstraints()
+            
+            if message.mediaType == PHAssetMediaType.video.rawValue {
+                self.playIcon.isHidden = false
+                print("Unhiding icon")
+            } else {
+                self.playIcon.isHidden = true
+            }
 		}
 	}
 
