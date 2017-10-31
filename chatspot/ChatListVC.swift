@@ -21,7 +21,7 @@ class ChatListVC: UIViewController {
         super.viewDidLoad()
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.estimatedRowHeight = 182
+		tableView.estimatedRowHeight = 160
 		tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
         
@@ -204,7 +204,7 @@ class ChatListVC: UIViewController {
     func setupAndTriggerHUD(){
         KRProgressHUD.set(style: .white)
         KRProgressHUD.set(font: .systemFont(ofSize: 17))
-        KRProgressHUD.set(activityIndicatorViewStyle: .gradationColor(head: UIColor.ChatSpotColors.Blue, tail: UIColor.ChatSpotColors.DarkBlue))
+        KRProgressHUD.set(activityIndicatorViewStyle: .gradationColor(head: UIColor.ChatSpotColors.PastelRed, tail: UIColor.ChatSpotColors.SelectedBlue))
         KRProgressHUD.show(withMessage: "Loading Chatspots...")
     }
 
@@ -260,11 +260,11 @@ extension UIColor {
     }
     
     struct ChatSpotColors {
-        static let DarkBlue = UIColor(netHex: 0x172969)
-        static let LightBlue = UIColor(netHex: 0x3eacec)
-        static let Blue = UIColor(netHex: 0x0551be)
-        static let Red = UIColor(netHex: 0xb61e23)
-        static let Orange = UIColor(netHex: 0xff5f0d)
+//        static let DarkBlue = UIColor(netHex: 0x172969)
+//        static let LightBlue = UIColor(netHex: 0x3eacec)
+        
+        static let SelectedBlue = UIColor(netHex: 0x2ABAE8)
+        static let PastelRed = UIColor(netHex: 0xFF5858)
         static let LightestGray = UIColor(netHex: 0xFAFAFA)
         static let LighterGray = UIColor(netHex: 0xF1F1F1)
         static let LightGray = UIColor.lightGray

@@ -102,7 +102,7 @@ class ActivityDetailVC: UIViewController {
         } else {
             
             actionButton.setTitle("JOIN ACTIVITY", for: .normal)
-            actionButton.backgroundColor = UIColor.ChatSpotColors.LightBlue
+            actionButton.backgroundColor = UIColor.ChatSpotColors.SelectedBlue
         }
     }
     

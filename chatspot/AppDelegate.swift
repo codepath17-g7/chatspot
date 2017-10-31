@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITabBar.appearance().shadowImage = image
         UITabBar.appearance().backgroundImage = image
-
+        UITabBar.appearance().tintColor = UIColor.ChatSpotColors.SelectedBlue
 
         return true
     }

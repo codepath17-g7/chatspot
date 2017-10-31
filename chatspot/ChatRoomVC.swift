@@ -248,7 +248,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
             }
             
         }
-        
+
         addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .selected)
         addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
         addActivityButton.setImage(addActivityButton.imageView?.image, for: .selected)
@@ -267,7 +267,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
 //        toolbarView.layer.borderWidth = 0.3
 //        toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle]), for: .disabled)
-        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
+        sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.ChatSpotColors.SelectedBlue, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
 , for: .normal)
         sendMessageButton.isEnabled = false
         

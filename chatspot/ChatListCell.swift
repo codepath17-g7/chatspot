@@ -17,6 +17,8 @@ class ChatListCell: UITableViewCell {
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var unreadCountLabel: UILabel!
     
+    @IBOutlet weak var peopleIconImageView: UIImageView!
+    
     @IBOutlet weak var cardView: UIView!
     
 
@@ -34,6 +36,7 @@ class ChatListCell: UITableViewCell {
 	var chatRoom: ChatRoom1! {
 		didSet {
             
+            peopleIconImageView.changeToColor(color: .darkGray)
             chatRoomNameLabel.text = chatRoom.name
             if chatRoom.isAroundMe {
                 if let currentLocationName = ChatSpotClient.chatrooms[chatRoom.guid]?.name {
@@ -54,7 +57,7 @@ class ChatListCell: UITableViewCell {
                 memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
             }
 			
-            lastMessageLabel.text = chatRoom.lastMessage //?? "Say hi to the folks around you!"
+            lastMessageLabel.text = chatRoom.lastMessage
             
             self.updateConstraints()
             

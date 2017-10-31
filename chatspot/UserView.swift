@@ -57,7 +57,7 @@ class UserView: UIView {
         if let bannerUrlStr = user.bannerImage {
             bannerImage.imageView.safeSetImageWith(urlStr: bannerUrlStr)
         } else {
-            bannerImage.imageView.image = #imageLiteral(resourceName: "ic_image")
+            bannerImage.imageView.image = UIImage()
         }
         
         userName.text = user.name

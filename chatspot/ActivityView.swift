@@ -46,7 +46,7 @@ class ActivityView: UIView {
             
         } else {
             
-            self.contentView.backgroundColor = UIColor.ChatSpotColors.LightBlue
+            self.contentView.backgroundColor = UIColor.ChatSpotColors.SelectedBlue
         }
     }
     

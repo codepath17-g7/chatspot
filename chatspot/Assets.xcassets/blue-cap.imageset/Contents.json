@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "noun_27502.png",
+      "filename" : "blue-cap.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "blue-cap@2x.png",
       "scale" : "2x"
     },
     {
