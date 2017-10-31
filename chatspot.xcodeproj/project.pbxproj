@@ -236,7 +236,6 @@
 		32963D611F8B1BAD00E05CF3 /* chatspot */ = {
 			isa = PBXGroup;
 			children = (
-				76D949401FA59C36005A6E8A /* Extensions */,
 				32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */,
 				3298CF5F1F92E65A00F9BBEE /* Constants.swift */,
 				3298CF5C1F92A6B700F9BBEE /* Service */,
@@ -312,15 +311,6 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		76D949401FA59C36005A6E8A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				76D949411FA59C59005A6E8A /* PHAsset.swift */,
-				76967D491FA5BC730052B37C /* UIViewController.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
 		76E2296D1F9BFE39007049B0 /* Locations */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				8BCDD9B01FA44368004DD84D /* String+Util.swift */,
+				76D949411FA59C59005A6E8A /* PHAsset.swift */,
+				76967D491FA5BC730052B37C /* UIViewController.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -561,9 +553,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-chatspot/Pods-chatspot-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle",
-				"$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebaseGoogleAuthUI.bundle,
+				$PODS_CONFIGURATION_BUILD_DIR/FirebaseUI/FirebasePhoneAuthUI.bundle,
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
