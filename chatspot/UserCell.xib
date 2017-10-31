@@ -19,25 +19,25 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ic-iI-mMF">
-                        <rect key="frame" x="8" y="8" width="30" height="30"/>
+                        <rect key="frame" x="12" y="10" width="26" height="26"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="0l8-nU-VK2"/>
-                            <constraint firstAttribute="width" constant="30" id="iZi-A0-NZo"/>
+                            <constraint firstAttribute="height" constant="26" id="0l8-nU-VK2"/>
+                            <constraint firstAttribute="width" constant="26" id="iZi-A0-NZo"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Doe, oops Snow oops Stark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgr-TS-95X">
-                        <rect key="frame" x="46" y="14" width="233" height="18"/>
+                        <rect key="frame" x="48" y="14" width="231" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Pgr-TS-95X" firstAttribute="leading" secondItem="7ic-iI-mMF" secondAttribute="trailing" constant="8" id="0D0-T1-SN5"/>
-                    <constraint firstItem="7ic-iI-mMF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="BPW-q5-Z5F"/>
+                    <constraint firstItem="Pgr-TS-95X" firstAttribute="leading" secondItem="7ic-iI-mMF" secondAttribute="trailing" constant="10" id="0D0-T1-SN5"/>
+                    <constraint firstItem="7ic-iI-mMF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="BPW-q5-Z5F"/>
                     <constraint firstItem="Pgr-TS-95X" firstAttribute="centerY" secondItem="7ic-iI-mMF" secondAttribute="centerY" id="Dhh-6i-RXr"/>
-                    <constraint firstItem="7ic-iI-mMF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Gj6-pS-KNw"/>
-                    <constraint firstAttribute="bottom" secondItem="7ic-iI-mMF" secondAttribute="bottom" constant="8" id="IyR-o3-oqs"/>
+                    <constraint firstItem="7ic-iI-mMF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Gj6-pS-KNw"/>
+                    <constraint firstAttribute="bottom" secondItem="7ic-iI-mMF" secondAttribute="bottom" constant="10" id="IyR-o3-oqs"/>
                     <constraint firstAttribute="trailing" secondItem="Pgr-TS-95X" secondAttribute="trailing" constant="8" id="WDb-Z0-73h"/>
                 </constraints>
             </tableViewCellContentView>
