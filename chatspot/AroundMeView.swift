@@ -54,8 +54,13 @@ class AroundMeView: UIView {
         }) { (error: Error?) in
         }
 
-        reCenter.layer.cornerRadius = 20
         reCenter.layer.masksToBounds = true
+        reCenter.setRadiusWithShadow()
+        
+
+
+
+
         
     }
     
@@ -137,11 +142,11 @@ extension AroundMeView: MKMapViewDelegate {
             annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
             
             if chatRoomAnnotation.isUserNearBy() {
-                annotationView?.image = #imageLiteral(resourceName: "map_pin_nearby")
+                annotationView?.image = #imageLiteral(resourceName: "AroundMeRoomPin")
             } else if chatRoomAnnotation.isUserJoined() {
-                annotationView?.image = #imageLiteral(resourceName: "map_pin_joined")
+                annotationView?.image = #imageLiteral(resourceName: "blue map pin")
             } else {
-                annotationView?.image = #imageLiteral(resourceName: "pin")
+                annotationView?.image = #imageLiteral(resourceName: "pastel red map pin")
             }
         } else {
             annotationView?.annotation = chatRoomAnnotation
@@ -150,4 +155,17 @@ extension AroundMeView: MKMapViewDelegate {
         annotationView?.configureDetailView()
         return annotationView
     }
+}
+
+extension UIView {
+
+    func setRadiusWithShadow(_ radius: CGFloat? = nil) {
+        self.layer.cornerRadius = radius ?? self.frame.width / 2
+        self.layer.shadowColor = UIColor.darkGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowRadius = 4.0
+        self.layer.shadowOpacity = 0.7
+        self.layer.masksToBounds = false
+    }
+    
 }
