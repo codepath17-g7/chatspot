@@ -24,7 +24,7 @@ class AroundMeView: UIView {
     @IBOutlet weak var reCenter: UIImageView!
     var rooms: [ChatRoom1] = []
     var observers = [UInt]()
-    var aroundMeRoomGuid: String?
+//    var aroundMeRoomGuid: String?
     var chats: [String: ChatRoom1] = [:]
     var delegate: AroundMeViewDelegate!
 
@@ -75,8 +75,8 @@ class AroundMeView: UIView {
         if (newWindow != nil) {
             print("Map - Adding observer")
 
-            let observer1 = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
-                self.aroundMeRoomGuid = roomGuid
+            let observer1 = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String?) in
+//                self.aroundMeRoomGuid = roomGuid!
                 self.reloadMap()
             }) { (error: Error?) in
             }
@@ -140,11 +140,9 @@ extension AroundMeView: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        if let chatRoomAnnotationView = view as? ChatRoomAnnotationView {
-            let guid = chatRoomAnnotationView.roomGuid
-            delegate.mapPinButtonClicked(roomGuid: guid)
-        }
+        let annotation = view.annotation as! ChatRoomAnnotation
+        let guid = annotation.room.guid
+        delegate.mapPinButtonClicked(roomGuid: guid!)
     }
     
     
@@ -157,24 +155,26 @@ extension AroundMeView: MKMapViewDelegate {
         }
         
         let chatRoomAnnotation = annotation as! ChatRoomAnnotation
-        var annotationView :ChatRoomAnnotationView?
+        var annotationView :MKAnnotationView?
 //        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: chatRoomAnnotation.room.guid) as? ChatRoomAnnotationView
-        
+        annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: chatRoomAnnotation.room.guid)
         if annotationView == nil {
-            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
+//            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
             
-            if chatRoomAnnotation.isUserNearBy() {
-                annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
-            } else if chatRoomAnnotation.isUserJoined() {
-                annotationView?.image = #imageLiteral(resourceName: "PaddedBlueMapPin")
-            } else {
-                annotationView?.image = #imageLiteral(resourceName: "PaddedRedMapPin")
-            }
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: chatRoomAnnotation.room.guid)
         } else {
             annotationView?.annotation = chatRoomAnnotation
         }
+        
+        if chatRoomAnnotation.isUserNearBy() {
+            annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
+        } else if chatRoomAnnotation.isUserJoined() {
+            annotationView?.image = #imageLiteral(resourceName: "PaddedBlueMapPin")
+        } else {
+            annotationView?.image = #imageLiteral(resourceName: "PaddedRedMapPin")
+        }
         annotationView?.centerOffset = CGPoint(x: 0, y: (annotationView?.image?.size.height)! / -2);
-        annotationView?.configureDetailView()
+//        annotationView?.configureDetailView()
         return annotationView
     }
 }

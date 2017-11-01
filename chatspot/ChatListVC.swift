@@ -61,7 +61,17 @@ class ChatListVC: UIViewController {
     // This is an unwind segue
     @IBAction func unwindToChatList(segue: UIStoryboardSegue) {}
     
-    func updateAroundMeRoom(_ roomGuid: String) {
+    func updateAroundMeRoom(_ roomGuid: String?) {
+        guard let roomGuid = roomGuid  else {
+            if (chatrooms.count > 0 && chatrooms[0].isAroundMe) {
+                print("Removing around me")
+                chatrooms.remove(at: 0)
+                self.tableView.reloadData()
+            }
+            return
+        }
+        
+        
         print("Around me room -> \(roomGuid)")
 
         let aroundMeRoom = ChatRoom1()
@@ -75,17 +85,22 @@ class ChatListVC: UIViewController {
         aroundMeRoom.users = userLocalRoom.users
         aroundMeRoom.localUsers = userLocalRoom.localUsers
         aroundMeRoom.lastMessage = userLocalRoom.lastMessage
+        if aroundMeRoom.lastMessage.isEmpty {
+            aroundMeRoom.lastMessage = "You’re the first one here!"
+        }
         aroundMeRoom.lastMessageTimestamp = userLocalRoom.lastMessageTimestamp
         if (chatrooms.count > 0 && chatrooms[0].isAroundMe) {
+            print("Replacing current around me room")
             chatrooms[0] = aroundMeRoom
         } else {
+            print("Insert around me room")
             chatrooms.append(aroundMeRoom)
         }
         self.tableView.reloadData()
     }
 
     func startObservingAroundMeRoomGuid() {
-        let observer = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
+        let observer = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String?) in
             self.updateAroundMeRoom(roomGuid)
         }) { (error: Error?) in
             
@@ -128,7 +143,9 @@ class ChatListVC: UIViewController {
         
         let chatRoomsObservers = ChatSpotClient.observeChatRooms(success: { (room: ChatRoom1) in
             // refresh in case we have stale data
-            self.updateAroundMeRoom(self.chatrooms[0].guid)
+            if self.chatrooms.count > 0 && self.chatrooms[0].isAroundMe {
+                self.updateAroundMeRoom(self.chatrooms[0].guid)
+            }
         }) { (error) in
             
         }
