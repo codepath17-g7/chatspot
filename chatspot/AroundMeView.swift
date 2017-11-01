@@ -173,7 +173,7 @@ extension AroundMeView: MKMapViewDelegate {
         } else {
             annotationView?.annotation = chatRoomAnnotation
         }
-        
+        annotationView?.centerOffset = CGPoint(x: 0, y: (annotationView?.image?.size.height)! / -2);
         annotationView?.configureDetailView()
         return annotationView
     }
