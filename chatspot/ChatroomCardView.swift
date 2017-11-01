@@ -25,7 +25,7 @@ class ChatroomCardView: UIView {
     
     @IBOutlet weak var cardView: UIView!
     
-    @IBOutlet var joinButton: UIButton!
+//    @IBOutlet var joinButton: UIButton!
     
     @IBOutlet weak var accountImageToAroundMeConstraint: NSLayoutConstraint!
     
@@ -71,12 +71,13 @@ class ChatroomCardView: UIView {
                 chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
             }
             
-            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
-                joinButton.isHidden = true
-            } else {
-                joinButton.isHidden = false
-                self.bringSubview(toFront: joinButton)
-            }
+//            joinButton.isHidden = true
+//            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+//                joinButton.isHidden = true
+//            } else {
+//                joinButton.isHidden = false
+//                self.bringSubview(toFront: joinButton)
+//            }
             self.updateConstraints()
         }
     }
@@ -104,20 +105,20 @@ class ChatroomCardView: UIView {
         cardView.layer.shadowOpacity = 0.6
         cardView.layer.masksToBounds = false
         
-        joinButton.setRadiusWithShadow()
-        joinButton.isEnabled = true
+//        joinButton.setRadiusWithShadow()
+//        joinButton.isEnabled = true
         
     }
     
-    @IBAction func joinButtonClicked(_ sender: Any) {
-        print("joining room \(chatRoom.guid)")
-        let user = Auth.auth().currentUser!
-        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid)
-        joinButton.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
-        UIView.animate(withDuration: 0.3) { [weak self] in
-            self?.joinButton.isSelected = true
-        }
-    }
+//    @IBAction func joinButtonClicked(_ sender: Any) {
+//        print("joining room \(chatRoom.guid)")
+//        let user = Auth.auth().currentUser!
+//        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid)
+//        joinButton.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
+//        UIView.animate(withDuration: 0.3) { [weak self] in
+//            self?.joinButton.isSelected = true
+//        }
+//    }
     
 
     

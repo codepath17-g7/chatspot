@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuthUI
+
 
 class BottomDrawerVC: UIViewController {
     var mainFullVC: ChatRoomDetailVC!
@@ -15,6 +17,7 @@ class BottomDrawerVC: UIViewController {
     let partialViewTopY = UIScreen.main.bounds.height - 139
     let fullViewTopY = UIScreen.main.bounds.minY
     var open = false
+    var joinButt: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +25,49 @@ class BottomDrawerVC: UIViewController {
         
         self.view.addSubview(mainFullVC.view)
         self.view.addSubview(smallDrawerView)
-        self.view.bringSubview(toFront: smallDrawerView)
+//        self.view.bringSubview(toFront: smallDrawerView)
         self.mainFullVC.view.isHidden = true
         self.smallDrawerView.isUserInteractionEnabled = true
-        self.view.bringSubview(toFront: self.smallDrawerView.joinButton)
+//        self.view.bringSubview(toFront: self.smallDrawerView.joinButton)
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
         gesture.delegate = self
         
         view.addGestureRecognizer(gesture)
         
+        joinButt = UIButton(frame: CGRect(x: 329, y: 23, width: 30, height: 30))
+        joinButt.setImage(#imageLiteral(resourceName: "pink plus button"), for: .normal)
+        joinButt.setRadiusWithShadow()
+        joinButt.addTarget(self, action: #selector(joinClicked), for: .touchUpInside)
+        self.view.addSubview(joinButt)
+//        self.smallDrawerView.bringSubview(toFront: joinButt)
+        
+        
+        
+        
+        if self.smallDrawerView.chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+            joinButt.isHidden = true
+        } else {
+            joinButt.isHidden = false
+            self.view.bringSubview(toFront: smallDrawerView)
+
+            self.view.bringSubview(toFront: joinButt)
+            
+        }
+        self.view.layoutIfNeeded()
+//        self.updateConstraints()
+
+        
+        
+    }
+    func joinClicked(){
+        let chatRoom = self.smallDrawerView.chatRoom!
+        print("joining room \(chatRoom.guid)")
+        let user = Auth.auth().currentUser!
+        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid!)
+        joinButt!.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.joinButt.isSelected = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,10 +88,10 @@ class BottomDrawerVC: UIViewController {
             let frame = self.view.frame
             self.view.frame.origin.y = self.partialViewTopY
         }
-        self.view.bringSubview(toFront: smallDrawerView)
+//        self.view.bringSubview(toFront: smallDrawerView)
         self.mainFullVC.view.isHidden = true
         self.smallDrawerView.isUserInteractionEnabled = true
-        self.view.bringSubview(toFront: self.smallDrawerView.joinButton)
+//        self.view.bringSubview(toFront: self.smallDrawerView.joinButton)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -70,6 +107,7 @@ class BottomDrawerVC: UIViewController {
             }, completion: { (finished: Bool) in
                 self.mainFullVC.view.removeFromSuperview()
                 self.smallDrawerView.removeFromSuperview()
+                self.joinButt.removeFromSuperview()
 
             })
     }
@@ -174,6 +212,7 @@ class BottomDrawerVC: UIViewController {
     }
     
     func openDrawer(){
+        joinButt.isHidden = true
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.mainFullVC.view.alpha = 1
             self?.smallDrawerView.alpha = 0
@@ -187,6 +226,7 @@ class BottomDrawerVC: UIViewController {
     }
     
     func closeDrawer(){
+//        joinButt.isHidden = false
         UIView.animate(withDuration: 0.3, animations: { () in
             self.smallDrawerView.alpha = 1
             self.mainFullVC.view.alpha = 0

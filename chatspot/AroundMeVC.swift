@@ -115,6 +115,7 @@ extension AroundMeVC: AroundMeViewDelegate {
             childVC.removeFromParentViewController()
         }
         self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isUserInteractionEnabled = true
 
     }
     
