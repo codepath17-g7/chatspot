@@ -53,6 +53,7 @@
 		F21E501F1FA928FC00F4625F /* ChatroomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E501E1FA928FC00F4625F /* ChatroomCardView.swift */; };
 		F21E50211FA9295000F4625F /* ChatroomCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21E50201FA9295000F4625F /* ChatroomCardView.xib */; };
 		F21E50231FA93DF500F4625F /* BottomDrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */; };
+		F23BF8161FAA508C009918E1 /* BottomDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23BF8151FAA508C009918E1 /* BottomDrawerView.swift */; };
 		F254FCA21FA3E52500CBD616 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */; };
 		F254FCA31FA3E52500CBD616 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */; };
 		F254FCA41FA3E52500CBD616 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC861FA3E50B00CBD616 /* SF-Pro-Display-Bold.otf */; };
@@ -170,6 +171,7 @@
 		F21E50201FA9295000F4625F /* ChatroomCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatroomCardView.xib; sourceTree = "<group>"; };
 		F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDrawerVC.swift; sourceTree = "<group>"; };
 		F230195A1FA1D46700006D7C /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "../../Library/Developer/Xcode/DerivedData/chatspot-fgkshavcpzelupglajjguiigxwnn/Build/Products/Debug-iphonesimulator/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
+		F23BF8151FAA508C009918E1 /* BottomDrawerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDrawerView.swift; sourceTree = "<group>"; };
 		F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BlackItalic.otf"; sourceTree = "<group>"; };
 		F254FC861FA3E50B00CBD616 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				8B0ACFB41FA1A21300722B1D /* ActivityView.xib */,
 				F21E501E1FA928FC00F4625F /* ChatroomCardView.swift */,
 				F21E50201FA9295000F4625F /* ChatroomCardView.xib */,
+				F23BF8151FAA508C009918E1 /* BottomDrawerView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				8BCDD9BB1FA876E2004DD84D /* Date+Ago.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
+				F23BF8161FAA508C009918E1 /* BottomDrawerView.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,
 				8B0ACFBA1FA1CCDC00722B1D /* ActivityDetailVC.swift in Sources */,
 				2D93B1051F9D2B6800D6B80C /* UserCell.swift in Sources */,

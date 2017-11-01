@@ -109,11 +109,13 @@ extension AroundMeVC: AroundMeViewDelegate {
     }
     
     func removeChildVC(){
-        for childVC in self.childViewControllers{
+        for childVC in self.childViewControllers {
             childVC.willMove(toParentViewController: nil)
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()
         }
+        self.tabBarController?.tabBar.isHidden = false
+
     }
     
     
@@ -138,18 +140,22 @@ extension AroundMeVC: AroundMeViewDelegate {
             bottomDrawerVC.mainFullVC = chatroomDetailVC
             bottomDrawerVC.smallDrawerView = chatroomCardView
             
-            
+            // Adjust bottomDrawerVC frame and initial position (below the screen)
+//            let height = view.frame.height
+//            let width  = view.frame.width
+            bottomDrawerVC.view.frame.origin.y = self.view.frame.maxY
+            bottomDrawerVC.view.isUserInteractionEnabled = true
+            self.tabBarController?.tabBar.isHidden = true
             
             // add bottomDrawerVC as a child view
             self.addChildViewController(bottomDrawerVC)
             self.view.addSubview(bottomDrawerVC.view)
-            bottomDrawerVC.didMove(toParentViewController: self)
+            self.view.isUserInteractionEnabled = true
+            self.view.bringSubview(toFront: bottomDrawerVC.view)
+//            bottomDrawerVC.didMove(toParentViewController: self)
             
             
-            // Adjust bottomDrawerVC frame and initial position (below the screen)
-            let height = view.frame.height
-            let width  = view.frame.width
-            bottomDrawerVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+
             
         }
         

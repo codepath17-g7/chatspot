@@ -25,7 +25,7 @@ class ChatroomCardView: UIView {
     
     @IBOutlet weak var cardView: UIView!
     
-    @IBOutlet weak var joinButton: UIButton!
+    @IBOutlet var joinButton: UIButton!
     
     @IBOutlet weak var accountImageToAroundMeConstraint: NSLayoutConstraint!
     
@@ -75,20 +75,10 @@ class ChatroomCardView: UIView {
                 joinButton.isHidden = true
             } else {
                 joinButton.isHidden = false
+                self.bringSubview(toFront: joinButton)
             }
-<<<<<<< HEAD
-            
-            
-=======
->>>>>>> 0da1114b5e923151e0d2e9e90aaf76f9e85c0914
+            self.updateConstraints()
         }
-    }
-    
-    
-
-    @IBAction func onJoinClicked(_ sender: Any) {
-        print("joining room \(chatRoom.guid)")
-        ChatSpotClient.joinChatRoom(userGuid: ChatSpotClient.userGuid, roomGuid: chatRoom.guid)
     }
     
     override init(frame: CGRect) {
@@ -115,6 +105,7 @@ class ChatroomCardView: UIView {
         cardView.layer.masksToBounds = false
         
         joinButton.setRadiusWithShadow()
+        joinButton.isEnabled = true
         
     }
     
