@@ -17,6 +17,7 @@ class BottomDrawerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.isUserInteractionEnabled = true
         
         self.view.addSubview(smallDrawerView)
 
@@ -40,7 +41,7 @@ class BottomDrawerVC: UIViewController {
         // do this only for map pin click
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.tabBarController?.tabBar.layer.zPosition = -1
-            
+            self?.tabBarController?.tabBar.isUserInteractionEnabled = false
             
             let frame = self?.view.frame
 //            let yComponent = UIScreen.main.bounds.height - 139
@@ -64,6 +65,8 @@ class BottomDrawerVC: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         self.tabBarController?.tabBar.layer.zPosition = 0
+        self.tabBarController?.tabBar.isUserInteractionEnabled = true
+
 
 //        UIView.animate(withDuration: 0.3) { [weak self] in
 //            self?.tabBarController?.tabBar.layer.zPosition = 0
@@ -98,6 +101,13 @@ class BottomDrawerVC: UIViewController {
         
         recognizer.setTranslation(CGPoint.zero, in: self.view)
         
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view is UIButton {
+            return false
+        }
+        return true
     }
     
     

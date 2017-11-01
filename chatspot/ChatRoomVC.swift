@@ -486,6 +486,21 @@ extension ChatRoomVC: UITableViewDelegate, UITableViewDataSource {
 		cell.message = message
 		cell.selectionStyle = UITableViewCellSelectionStyle.none
         cell.delegate = self
+        // check if previous message was by the same person:
+        if indexPath.row > 0 {
+            let previousMessage = messages[indexPath.row - 1]
+            if let prevAuthor = previousMessage.name, let currAuthor = message.name {
+                if currAuthor == prevAuthor {
+                    cell.sameAuthor = true
+                } else {
+                    cell.sameAuthor = false
+                }
+            } else {
+                cell.sameAuthor = false
+            }
+        } else {
+            cell.sameAuthor = false
+        }
 
 		return cell
 	}

@@ -34,6 +34,8 @@ class ChatMessageCell: UITableViewCell {
     
     @IBOutlet var messageImageBottomConstraint: NSLayoutConstraint!
     
+    var sameAuthor: Bool!
+    
     let imageCache = Shared.imageCache
     weak var delegate: ChatMessageCellDelegate?
     

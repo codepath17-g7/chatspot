@@ -8,6 +8,7 @@
 
 import UIKit
 import Haneke
+import FirebaseAuthUI
 
 class ChatroomCardView: UIView {
 
@@ -70,6 +71,12 @@ class ChatroomCardView: UIView {
                 chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
             }
             
+            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+                joinButton.isHidden = true
+            } else {
+                joinButton.isHidden = false
+            }
+            
             
         }
     }
@@ -103,5 +110,18 @@ class ChatroomCardView: UIView {
         joinButton.setRadiusWithShadow()
         
     }
+    
+    @IBAction func joinButtonClicked(_ sender: Any) {
+        print("joining room \(chatRoom.guid)")
+        let user = Auth.auth().currentUser!
+        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid)
+        joinButton.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.joinButton.isSelected = true
+        }
+    }
+    
+
+    
 
 }
