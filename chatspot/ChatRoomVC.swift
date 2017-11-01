@@ -18,7 +18,7 @@ import Photos
 import Haneke
 import PureLayout
 
-class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
+class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate {
     static var MAX_MESSAGES_LIMIT: UInt = 10
     
 	@IBOutlet weak var containerView: UIView!
@@ -375,11 +375,12 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         let alertController = UIAlertController(title: "Start an Activity!", message: "Enter an activity name to get started.", preferredStyle: .alert)
         
         let goAction = UIAlertAction(title: "Go!", style: .default) { (_) in
-            if let field = alertController.textFields?[0] {
+            if let field = alertController.textFields?[0],
+                let descriptionField = alertController.textFields?[1] {
                 // store your data
                 print("creatig activity \(field.text!)")
                 let user = ChatSpotClient.currentUser!
-                let activity = Activity.init(activityName: field.text!, activityStartedByName: user.name!, activityStartedByGuid: user.guid!, latitude: self.chatRoom.latitude, longitude: self.chatRoom.longitude)
+                let activity = Activity(activityName: field.text!, activityDescription: descriptionField.text ?? "", activityStartedByName: user.name!, activityStartedByGuid: user.guid!, latitude: self.chatRoom.latitude, longitude: self.chatRoom.longitude)
                 
                 ChatSpotClient.createActivtyForChatRoom(roomGuid: self.chatRoom.guid, activity: activity, success: {
                     print("Activity created")
@@ -395,10 +396,15 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         }
         
         alertController.addTextField { (textField) in
-            textField.placeholder = "ex: Volleyball"
+            textField.placeholder = "Activity name"
+            textField.delegate = self
             observer = NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { (notification) in
                 goAction.isEnabled = textField.text!.characters.count > 0
             }
+        }
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Short description"
         }
         
         alertController.addAction(goAction)
@@ -406,6 +412,13 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate {
         
         self.present(alertController, animated: true, completion: nil)
         
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if ((textField.text?.characters.count ?? 0) >= 20 && range.length == 0) {
+            return false
+        }
+        return true
     }
     
     @IBAction func addEmojiButtonClicked(_ sender: Any) {
