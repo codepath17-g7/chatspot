@@ -140,11 +140,9 @@ extension AroundMeView: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        if let chatRoomAnnotationView = view as? ChatRoomAnnotationView {
-            let guid = chatRoomAnnotationView.roomGuid
-            delegate.mapPinButtonClicked(roomGuid: guid)
-        }
+        let annotation = view.annotation as! ChatRoomAnnotation
+        let guid = annotation.room.guid
+        delegate.mapPinButtonClicked(roomGuid: guid!)
     }
     
     
@@ -157,12 +155,13 @@ extension AroundMeView: MKMapViewDelegate {
         }
         
         let chatRoomAnnotation = annotation as! ChatRoomAnnotation
-        var annotationView :ChatRoomAnnotationView?
+        var annotationView :MKAnnotationView?
 //        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: chatRoomAnnotation.room.guid) as? ChatRoomAnnotationView
-        
+        annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: chatRoomAnnotation.room.guid)
         if annotationView == nil {
-            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
+//            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
             
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: chatRoomAnnotation.room.guid)
             if chatRoomAnnotation.isUserNearBy() {
                 annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
             } else if chatRoomAnnotation.isUserJoined() {
@@ -174,7 +173,7 @@ extension AroundMeView: MKMapViewDelegate {
             annotationView?.annotation = chatRoomAnnotation
         }
         annotationView?.centerOffset = CGPoint(x: 0, y: (annotationView?.image?.size.height)! / -2);
-        annotationView?.configureDetailView()
+//        annotationView?.configureDetailView()
         return annotationView
     }
 }
