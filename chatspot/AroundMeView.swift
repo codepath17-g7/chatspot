@@ -162,15 +162,16 @@ extension AroundMeView: MKMapViewDelegate {
 //            annotationView = ChatRoomAnnotationView(roomAnnotation: chatRoomAnnotation, reuseIdentifier: chatRoomAnnotation.room.guid)
             
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: chatRoomAnnotation.room.guid)
-            if chatRoomAnnotation.isUserNearBy() {
-                annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
-            } else if chatRoomAnnotation.isUserJoined() {
-                annotationView?.image = #imageLiteral(resourceName: "PaddedBlueMapPin")
-            } else {
-                annotationView?.image = #imageLiteral(resourceName: "PaddedRedMapPin")
-            }
         } else {
             annotationView?.annotation = chatRoomAnnotation
+        }
+        
+        if chatRoomAnnotation.isUserNearBy() {
+            annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
+        } else if chatRoomAnnotation.isUserJoined() {
+            annotationView?.image = #imageLiteral(resourceName: "PaddedBlueMapPin")
+        } else {
+            annotationView?.image = #imageLiteral(resourceName: "PaddedRedMapPin")
         }
         annotationView?.centerOffset = CGPoint(x: 0, y: (annotationView?.image?.size.height)! / -2);
 //        annotationView?.configureDetailView()
