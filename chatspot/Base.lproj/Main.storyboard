@@ -626,8 +626,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DhE-GD-I7K">
+                                <rect key="frame" x="16" y="64" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="zGr-vj-lfS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ahl-Oz-yqE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="AfH-6V-GcD">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
@@ -658,24 +667,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="DhE-GD-I7K" secondAttribute="trailing" constant="16" id="14z-Z0-s8o"/>
+                            <constraint firstItem="DhE-GD-I7K" firstAttribute="leading" secondItem="cly-mX-V8U" secondAttribute="leading" constant="16" id="1Pz-cK-wMb"/>
                             <constraint firstItem="ahl-Oz-yqE" firstAttribute="leading" secondItem="cly-mX-V8U" secondAttribute="leading" id="Cns-Qu-iUD"/>
+                            <constraint firstItem="ahl-Oz-yqE" firstAttribute="top" secondItem="DhE-GD-I7K" secondAttribute="bottom" id="Cu8-Ah-Kvq"/>
                             <constraint firstItem="MmS-T2-lXU" firstAttribute="top" secondItem="ahl-Oz-yqE" secondAttribute="bottom" id="hIJ-W6-H4M"/>
-                            <constraint firstItem="ahl-Oz-yqE" firstAttribute="top" secondItem="cly-mX-V8U" secondAttribute="top" id="ptR-Zn-9Gp"/>
+                            <constraint firstItem="DhE-GD-I7K" firstAttribute="top" secondItem="xtP-7w-bTr" secondAttribute="bottom" id="tzI-bF-VVV"/>
                             <constraint firstAttribute="trailing" secondItem="ahl-Oz-yqE" secondAttribute="trailing" id="u2W-PC-xwe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vZM-Dx-nOo">
-                        <barButtonItem key="rightBarButtonItem" title="CLOSE" id="SdL-tM-XtN"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="vZM-Dx-nOo"/>
                     <connections>
                         <outlet property="actionButton" destination="m9A-h9-nQM" id="KhO-Qa-bkK"/>
-                        <outlet property="closeButton" destination="SdL-tM-XtN" id="Fvf-7e-mDE"/>
+                        <outlet property="desctiptionLabel" destination="DhE-GD-I7K" id="dLe-zf-Bed"/>
                         <outlet property="tableView" destination="ahl-Oz-yqE" id="GHU-ht-LG1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W3m-5d-1Oz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3298.4000000000001" y="732.68365817091455"/>
+            <point key="canvasLocation" x="-3164" y="720"/>
         </scene>
         <!--My Chatspots-->
         <scene sceneID="VTP-QY-fNF">

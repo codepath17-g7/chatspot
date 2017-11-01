@@ -14,6 +14,7 @@ import FirebaseDatabase
 
 let KEY_CREATED_AT = "createdAt"
 let KEY_ACTIVITY_NAME = "activityName"
+let KEY_ACTIVITY_DESCRIPTION = "activityDescription"
 let KEY_ONGOING = "isOngoing"
 let KEY_ACTIVITY_STARTED_BY_NAME = "activityStartedByName"
 let KEY_ACTIVITY_STARTED_BY_GUID = "activityStartedByGuid"
@@ -26,6 +27,7 @@ class Activity {
     var guid: String?
     var createdAt: Date?
     var activityName: String?
+    var activityDescription: String?
     var isOngoing: Bool?
     var activityStartedByName: String?
     var activityStartedByGuid: String?
@@ -34,6 +36,7 @@ class Activity {
     var usersJoined = [String:Bool]()
     
     convenience init(activityName: String,
+                     activityDescription: String,
                      activityStartedByName: String,
                      activityStartedByGuid: String,
                      latitude: Double?,
@@ -41,6 +44,7 @@ class Activity {
         
         self.init()
         self.activityName = activityName
+        self.activityDescription = activityDescription
         self.activityStartedByGuid = activityStartedByGuid
         self.activityStartedByName = activityStartedByName
         self.latitude = latitude
@@ -61,6 +65,10 @@ class Activity {
         
         if let activityName = obj[KEY_ACTIVITY_NAME] as? String {
             self.activityName = activityName
+        }
+        
+        if let activityDescription = obj[KEY_ACTIVITY_DESCRIPTION] as? String {
+            self.activityDescription = activityDescription
         }
         
         self.isOngoing = obj[KEY_ONGOING] as? Bool ?? false
@@ -92,6 +100,7 @@ class Activity {
             
             KEY_CREATED_AT: ServerValue.timestamp(),
             KEY_ACTIVITY_NAME: self.activityName ?? "Unknown",
+            KEY_ACTIVITY_DESCRIPTION: self.activityDescription ?? "Unknown",
             KEY_ONGOING: self.isOngoing ?? false,
             KEY_ACTIVITY_STARTED_BY_NAME: self.activityStartedByName ?? "Anonymous",
             KEY_ACTIVITY_STARTED_BY_GUID: self.activityStartedByGuid ?? "",

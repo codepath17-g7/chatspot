@@ -12,26 +12,33 @@ import PureLayout
 class ActivityDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var desctiptionLabel: UILabel!
     
     var activity: Activity!
-    var section0 = [User1]()
     var participatingUsers = [User1]()
-    var numOfSections = 1;
     var roomGuid: String?
+    
+    fileprivate var tableViewData = [SectionWithItems]()
+    private var userSection: SectionWithItems!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        closeButton.target = self
-        closeButton.action = #selector(close)
+        
+        navigationItem.setUpTitle(title: activity.activityName!)
+        desctiptionLabel.text = activity.activityDescription
+        view.backgroundColor = UIColor.ChatSpotColors.LighterGray
+        
+        navigationItem.rightBarButtonItem =
+            UIBarButtonItem(image: UIImage.init(named: "x-button"),
+                            style: UIBarButtonItemStyle.plain,
+                            target: self,
+                            action: #selector(close))
+        
         // Do any additional setup after loading the view.
         
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
-        
-        let aUser = User1(guid: "none", obj: ["name": "\(activity.activityStartedByName!) started \(activity.activityName!)"])
-        section0.append(aUser)
         
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -43,9 +50,16 @@ class ActivityDetailVC: UIViewController {
         
         activity.usersJoined.forEach({ (entry) in
             ChatSpotClient.getUserProfile(userGuid: entry.key, success: { (user) in
-                self.numOfSections = 2
+                
+                if (self.userSection == nil) {
+                    self.userSection = SectionWithItems("Participants", self.participatingUsers)
+                    self.tableViewData.insert(self.userSection, at: 0)
+                }
+                
                 self.participatingUsers.append(user)
+                self.userSection.sectionItems = self.participatingUsers
                 self.tableView.reloadData()
+                
             }, failure: {})
         })
         
@@ -55,54 +69,32 @@ class ActivityDetailVC: UIViewController {
         
         let userGuid = ChatSpotClient.currentUser.guid!
         
-        if (isCurrentUserJoined()) {
-            
-            print("Leaving activity")
-            
-            ChatSpotClient.leaveActivity(roomGuid: roomGuid!, activityGuid: activity.guid!, userGuid: userGuid, success: {
-                
-                self.activity.usersJoined.removeValue(forKey: userGuid)
-                
-                let index = self.participatingUsers.index { return $0.guid == userGuid} ?? -1
-                
-                if (index != -1) {
-                    self.participatingUsers.remove(at: index)
-                    self.tableView.reloadData()
-                    self.showActionButton()
-                }
-                
-            }, failure: {})
-        } else {
-            
-            print("Joining activity")
-            
-            ChatSpotClient.joinActivity(roomGuid: roomGuid!, activityGuid: activity.guid!, userGuid: userGuid, success: {
-                
-                self.activity.usersJoined[userGuid] = true
-                
-                self.participatingUsers.append(ChatSpotClient.currentUser)
-                
-                self.tableView.reloadData()
-                
-                self.showActionButton()
-                //
-            }, failure: {})
-        }
+        print("Joining activity")
         
+        ChatSpotClient.joinActivity(roomGuid: roomGuid!, activityGuid: activity.guid!, userGuid: userGuid, success: {
+
+            self.activity.usersJoined[userGuid] = true
+            self.participatingUsers.append(ChatSpotClient.currentUser)
+            self.userSection.sectionItems = self.participatingUsers
+            self.tableView.reloadData()
+            self.showActionButton()
+            
+        }, failure: {})
     }
     
     private func showActionButton() {
         
         actionButton.layer.cornerRadius = 4
         
-        if (isCurrentUserJoined()) {
+        if (!isCurrentUserJoined()) {
             
-            actionButton.setTitle("LEAVE ACTIVITY", for: .normal)
-            actionButton.backgroundColor = UIColor.red
+            actionButton.setTitle("Join", for: .normal)
+            actionButton.backgroundColor = UIColor.ChatSpotColors.PastelRed
         } else {
-            
-            actionButton.setTitle("JOIN ACTIVITY", for: .normal)
-            actionButton.backgroundColor = UIColor.ChatSpotColors.SelectedBlue
+            actionButton.isHidden = true
+            tableView.tableHeaderView = nil
+            tableViewData.append(SectionWithItems(" ", ["Leave \(activity.activityName!)"]))
+            tableView.reloadData()
         }
     }
     
@@ -111,11 +103,6 @@ class ActivityDetailVC: UIViewController {
         return activity.usersJoined.contains { (key, value) -> Bool in
             return key == ChatSpotClient.currentUser.guid
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print(activity)
-        self.title = activity.activityName!
     }
     
     func close() {
@@ -141,41 +128,80 @@ class ActivityDetailVC: UIViewController {
 }
 
 extension ActivityDetailVC: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return section0.count
-        } else {
-            return participatingUsers.count
-        }
+        return tableViewData[section].sectionItems.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return numOfSections
+        return tableViewData.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
-            return "Other people in the activity"
+        return tableViewData[section].sectionTitle
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.textColor = UIColor.ChatSpotColors.LightGray
         }
-        return nil
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let dataItem = tableViewData[indexPath.section]
+        if let rows = dataItem.sectionItems as? [String],
+            rows.first == "Leave \(activity.activityName!)" {
+            
+            let userGuid = ChatSpotClient.currentUser.guid!
+            ChatSpotClient.leaveActivity(roomGuid: self.roomGuid!, activityGuid: activity.guid!, userGuid: userGuid, success: {
+                self.activity?.usersJoined.removeValue(forKey: userGuid)
+                self.close()
+            }, failure: {})
+        }
         tableView.deselectRow(at: indexPath, animated:true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var user: User1?
-        if indexPath.section == 0 {
-            user = section0[indexPath.row]
-        } else {
-            user = participatingUsers[indexPath.row]
-            if (user?.guid == ChatSpotClient.currentUser.guid) {
-                user?.name = "You"
+    
+        let sectionItems = tableViewData[indexPath.section].sectionItems
+        var cell: UITableViewCell!
+        if let users = sectionItems as? [User1] {
+            let user = users[indexPath.row]
+            if (user.guid == ChatSpotClient.currentUser.guid) {
+                user.name = "You"
             }
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
+            (cell as! UserCell).user = user
+            
+        } else if let items = sectionItems as? [String] {
+            let item = items[indexPath.row]
+            
+            cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
+            
+            (cell as! UserCell).user = User1(guid: "dummy", obj: ["name": item])
+            
+            
+//            activityCell.action = { shouldJoin, activityGuid in
+//                
+//                let activity = activityItems.first(where: { (activity) -> Bool in activity.guid == activityGuid })
+//                let userGuid = ChatSpotClient.currentUser.guid!
+//                
+//                if (shouldJoin) {
+//                    print("Join activity \(activity!.activityName!)")
+//                    ChatSpotClient.joinActivity(roomGuid: self.chatroom.guid, activityGuid: activityGuid, userGuid: userGuid, success: {
+//                        activity?.usersJoined[userGuid] = true
+//                    }, failure: {})
+//                } else {
+//
+//                }
+//            }
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! UserCell
-        cell.user = user
+        
         return cell
     }
     

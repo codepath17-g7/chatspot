@@ -208,11 +208,11 @@ class ChatSpotClient {
     //MARK:- ChatRoom
     
     
-    static func observeMyAroundMeRoomGuid(success: @escaping (String) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+    static func observeMyAroundMeRoomGuid(success: @escaping (String?) -> (), failure: @escaping (Error?) -> ()) -> UInt{
         let chatroomsRef = Database.database().reference().child("users").child(userGuid).child("aroundMe")
         
         return chatroomsRef.queryOrderedByKey().observe(.value, with: { (snapshot: DataSnapshot) in
-            let roomGuid = snapshot.value as! String
+            let roomGuid = snapshot.value as? String
             success(roomGuid)
         }) { (error: Error?) in
             failure(error)
@@ -398,13 +398,13 @@ class ChatSpotClient {
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User, success: @escaping () -> (), failure: @escaping () -> ()) {
         userGuid = guid
         
-        let value: [String: String] = [
-            User1.KEY_DISPLAY_NAME: user.displayName!
-//            User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
-        ]
-        let ref = Database.database().reference()
-        ref.child("users").child(guid).updateChildValues(value)
-        
+//        let value: [String: String] = [
+//            User1.KEY_DISPLAY_NAME: user.displayName!
+////            User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
+//        ]
+//        let ref = Database.database().reference()
+//        ref.child("users").child(guid).updateChildValues(value)
+//        
         getUserProfile(userGuid: guid, success: { (user: User1) in
             currentUser = user
             success()
