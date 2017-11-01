@@ -76,13 +76,20 @@ class ChatroomCardView: UIView {
             } else {
                 joinButton.isHidden = false
             }
+<<<<<<< HEAD
             
             
+=======
+>>>>>>> 0da1114b5e923151e0d2e9e90aaf76f9e85c0914
         }
     }
     
     
 
+    @IBAction func onJoinClicked(_ sender: Any) {
+        print("joining room \(chatRoom.guid)")
+        ChatSpotClient.joinChatRoom(userGuid: ChatSpotClient.userGuid, roomGuid: chatRoom.guid)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -25,11 +25,11 @@ class BottomDrawerVC: UIViewController {
         self.mainFullVC.view.isHidden = true
 //        closeDrawer()
 
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
-        gesture.delegate = self
-        
-        view.addGestureRecognizer(gesture)
-        
+//        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
+//        gesture.delegate = self
+//        
+//        view.addGestureRecognizer(gesture)
+//        
         
         
         // Do any additional setup after loading the view.
@@ -201,6 +201,7 @@ class BottomDrawerVC: UIViewController {
 //            mainFullVC.view.isUserInteractionEnabled = false
 //
 //        }
+
 //        let direction = gesture.velocity(in: view).y
 //
 //        let y = self.view.frame.minY
@@ -216,8 +217,20 @@ class BottomDrawerVC: UIViewController {
 //        if (y == fullView && mainFullVC.tableView.contentOffset.y == 0 && direction > 0) || (y >= yComponent) || (y > fullView) {
 //            mainFullVC.tableView.isScrollEnabled = false
 //        } else {
+
 //            mainFullVC.tableView.isScrollEnabled = true
+//            
+//        } else {
+//            mainFullVC.tableView.isScrollEnabled = false
 //        }
+
+//        
+//        
+////        if (y == fullView && mainFullVC.tableView.contentOffset.y == 0 && direction > 0) || (y >= yComponent) || (y > fullView) {
+////            mainFullVC.tableView.isScrollEnabled = false
+////        } else {
+////            mainFullVC.tableView.isScrollEnabled = true
+////        }
 //        return false
 //    }
 

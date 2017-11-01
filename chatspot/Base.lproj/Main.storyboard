@@ -245,7 +245,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATW-MG-nIq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="660.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -263,22 +263,22 @@
                                                                 <constraint firstAttribute="width" constant="44" id="ibi-7W-9wZ"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crown" translatesAutoresizingMaskIntoConstraints="NO" id="GlI-LD-BEN">
-                                                            <rect key="frame" x="8" y="-5" width="25" height="25"/>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blue-cap" translatesAutoresizingMaskIntoConstraints="NO" id="GlI-LD-BEN">
+                                                            <rect key="frame" x="8" y="-4" width="25" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="25" id="8g6-OM-p2A"/>
                                                                 <constraint firstAttribute="height" constant="25" id="lfK-d9-fNT"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Eden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whv-6R-gEz">
-                                                            <rect key="frame" x="60" y="8" width="42" height="21"/>
+                                                            <rect key="frame" x="60" y="8" width="39.5" height="21"/>
                                                             <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:52 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLi-4i-V4R">
-                                                            <rect key="frame" x="110" y="11" width="62" height="17"/>
+                                                            <rect key="frame" x="107.5" y="11" width="60.5" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -291,7 +291,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="This is the contents of the message. Blah bkhsdkjfd sakfjdsf sdkjfg sdkjhfsdkjf " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csA-tj-VwX">
-                                                            <rect key="frame" x="60" y="37" width="307" height="61"/>
+                                                            <rect key="frame" x="60" y="37" width="307" height="59.5"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -311,7 +311,7 @@
                                                         <constraint firstItem="MLi-4i-V4R" firstAttribute="leading" secondItem="Whv-6R-gEz" secondAttribute="trailing" constant="8" id="4DC-Ls-FSc"/>
                                                         <constraint firstItem="csA-tj-VwX" firstAttribute="trailing" secondItem="uvT-7R-xVL" secondAttribute="trailingMargin" id="Dns-u4-o4i"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="leading" secondItem="yME-fo-Zy6" secondAttribute="trailing" constant="8" id="JBR-gA-eSH"/>
-                                                        <constraint firstItem="yME-fo-Zy6" firstAttribute="top" secondItem="GlI-LD-BEN" secondAttribute="bottom" constant="-12" id="OMd-sy-86x"/>
+                                                        <constraint firstItem="yME-fo-Zy6" firstAttribute="top" secondItem="GlI-LD-BEN" secondAttribute="bottom" constant="-13" id="OMd-sy-86x"/>
                                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="csA-tj-VwX" secondAttribute="bottom" constant="4" id="Sbf-nF-koN"/>
                                                         <constraint firstItem="Whv-6R-gEz" firstAttribute="top" secondItem="uvT-7R-xVL" secondAttribute="topMargin" id="Tq6-Wa-5kh"/>
                                                         <constraint firstItem="zGT-Cy-ZXC" firstAttribute="bottom" secondItem="uvT-7R-xVL" secondAttribute="bottomMargin" id="VXW-cb-zh2"/>
@@ -344,20 +344,20 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-r6-lax" userLabel="Right Line">
-                                                            <rect key="frame" x="217.5" y="21" width="133.5" height="1"/>
+                                                            <rect key="frame" x="217" y="21" width="134" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="gv2-Dz-EFP"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpD-1l-L1a">
-                                                            <rect key="frame" x="166" y="12" width="43.5" height="20"/>
+                                                            <rect key="frame" x="167" y="12" width="42" height="20"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5dW-oP-zN9" userLabel="Left Line">
-                                                            <rect key="frame" x="24" y="21" width="134" height="1"/>
+                                                            <rect key="frame" x="24" y="21" width="135" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="0JG-oE-N4e"/>
@@ -381,17 +381,17 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
                                         <rect key="frame" x="0.0" y="616.5" width="375" height="50.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaC-Rt-UDV">
-                                                <rect key="frame" x="8" y="677" width="33" height="27"/>
+                                                <rect key="frame" x="8" y="16.5" width="33" height="27"/>
                                                 <state key="normal" image="photo"/>
                                                 <connections>
                                                     <action selector="addPhotoButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="9Zh-qc-Muv"/>
                                                 </connections>
                                             </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
                                                 <rect key="frame" x="117" y="7" width="201" height="36.5"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
@@ -401,7 +401,7 @@
                                                 </connections>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-Wy-oBi">
-                                                <rect key="frame" x="326" y="671" width="41" height="33"/>
+                                                <rect key="frame" x="326" y="10.5" width="41" height="33"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                 <state key="normal" title="Send"/>
                                                 <connections>
@@ -409,14 +409,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQJ-9i-BAx">
-                                                <rect key="frame" x="79" y="675" width="30" height="31"/>
+                                                <rect key="frame" x="79" y="14.5" width="30" height="31"/>
                                                 <state key="normal" image="smiley"/>
                                                 <connections>
                                                     <action selector="addEmojiButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="bNa-0O-bWa"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijM-uE-cvC">
-                                                <rect key="frame" x="49" y="675" width="22" height="31"/>
+                                                <rect key="frame" x="49" y="14.5" width="22" height="31"/>
                                                 <state key="normal" image="lightning"/>
                                                 <connections>
                                                     <action selector="onAddActivity:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="15D-yX-v2m"/>
@@ -474,13 +474,13 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBJ-4M-Aju">
-                                    <rect key="frame" x="23" y="-4" width="104" height="20"/>
+                                    <rect key="frame" x="25.5" y="-4" width="99" height="20"/>
                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiR-MF-mHb">
-                                    <rect key="frame" x="35" y="10" width="81" height="32"/>
+                                    <rect key="frame" x="36.5" y="10" width="78.5" height="32"/>
                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -693,7 +693,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Chatspots" image="final pin" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -712,7 +712,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="around me button" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -731,7 +731,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -749,7 +749,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yyh-KS-hMb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WhN-pp-VEH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhN-pp-VEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -767,7 +767,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -785,7 +785,7 @@
             <objects>
                 <navigationController storyboardIdentifier="activityDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="g0T-YJ-1nU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nlM-sp-vNF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nlM-sp-vNF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -803,7 +803,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D8l-N6-nQd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aih-mQ-QlG">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aih-mQ-QlG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -820,7 +820,7 @@
     <resources>
         <image name="24hourfitlong" width="375" height="76"/>
         <image name="around me button" width="27" height="27"/>
-        <image name="crown" width="50" height="39"/>
+        <image name="blue-cap" width="29" height="23"/>
         <image name="final pin" width="27" height="30"/>
         <image name="ic_person" width="468" height="475"/>
         <image name="ic_play" width="200" height="159"/>
