@@ -70,12 +70,20 @@ class ChatroomCardView: UIView {
                 chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
             }
             
-            
+            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+                joinButton.isHidden = true
+            } else {
+                joinButton.isHidden = false
+            }
         }
     }
     
     
 
+    @IBAction func onJoinClicked(_ sender: Any) {
+        print("joining room \(chatRoom.guid)")
+        ChatSpotClient.joinChatRoom(userGuid: ChatSpotClient.userGuid, roomGuid: chatRoom.guid)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
