@@ -20,8 +20,7 @@ class AroundMeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setUpTitle(title: "Around Me")
-        
-        addBottomSheetView()
+        self.aroundMeView.delegate = self
         setupSearchBar()
         
 
@@ -32,20 +31,7 @@ class AroundMeVC: UIViewController {
     }
     
     
-    func addBottomSheetView() {
-        // 1- Init bottomSheetVC
-        let bottomSheetVC = ChatRoomDetailVC()
-        
-        // 2- Add bottomSheetVC as a child view
-        self.addChildViewController(bottomSheetVC)
-        self.view.addSubview(bottomSheetVC.view)
-        bottomSheetVC.didMove(toParentViewController: self)
-        
-        // 3- Adjust bottomSheet frame and initial position.
-        let height = view.frame.height
-        let width  = view.frame.width
-        bottomSheetVC.view.frame = CGRectMake(0, self.view.frame.maxY, width, height)
-    }
+
     
     
     
@@ -114,4 +100,62 @@ class AroundMeVC: UIViewController {
         })
     }
 
+}
+
+extension AroundMeVC: AroundMeViewDelegate {
+    
+    func hideDrawer() {
+        removeChildVC()
+    }
+    
+    func removeChildVC(){
+        for childVC in self.childViewControllers{
+            childVC.willMove(toParentViewController: nil)
+            childVC.view.removeFromSuperview()
+            childVC.removeFromParentViewController()
+        }
+    }
+    
+    
+    func mapPinButtonClicked(roomGuid: String) {
+        removeChildVC()
+        
+        if let chatRoom = ChatSpotClient.chatrooms[roomGuid] {
+            
+            let bottomDrawerVC = BottomDrawerVC()
+            
+            // create small view
+            let chatroomCardView = ChatroomCardView()
+            chatroomCardView.loadFromXib()
+            chatroomCardView.chatRoom = chatRoom
+
+            
+            // create fullsize view
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let chatroomDetailVC = storyboard.instantiateViewController(withIdentifier: "ChatRoomDetailVC") as! ChatRoomDetailVC
+            chatroomDetailVC.chatroom = chatRoom
+            
+            bottomDrawerVC.mainFullVC = chatroomDetailVC
+            bottomDrawerVC.smallDrawerView = chatroomCardView
+            
+            
+            
+            // add bottomDrawerVC as a child view
+            self.addChildViewController(bottomDrawerVC)
+            self.view.addSubview(bottomDrawerVC.view)
+            bottomDrawerVC.didMove(toParentViewController: self)
+            
+            
+            // Adjust bottomDrawerVC frame and initial position (below the screen)
+            let height = view.frame.height
+            let width  = view.frame.width
+            bottomDrawerVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+            
+        }
+        
+
+    }
+    
+
+    
 }

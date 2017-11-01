@@ -36,6 +36,7 @@ class ChatRoomDetailVC: UIViewController {
         
         setupUI()
         
+        
         tableViewData.append(SectionWithItems(" ", ["Leave \(chatroom.name!)"]))
         
         let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
@@ -75,8 +76,11 @@ class ChatRoomDetailVC: UIViewController {
             self.tableViewData.insert(self.activitySection, at: position)
             self.tableView.reloadData()
         }) {}
+        
     }
     
+    
+
     @objc private func close() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -105,7 +109,9 @@ class ChatRoomDetailVC: UIViewController {
             }
             
             DispatchQueue.main.async {
-                let headerView = ParallaxView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 150), image: bannerImage)
+                let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 76))
+                headerView.image = bannerImage
+//                let headerView = ParallaxView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 150), image: bannerImage)
                 self.tableView.tableHeaderView = headerView
                 self.tableView.tableHeaderView!.transform = self.tableView.transform
             }
@@ -169,11 +175,11 @@ class ChatRoomDetailVC: UIViewController {
 
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let headerView = self.tableView.tableHeaderView as? ParallaxView {
-            headerView.scrollViewDidScroll(scrollView: scrollView)
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if let headerView = self.tableView.tableHeaderView as? ParallaxView {
+//            headerView.scrollViewDidScroll(scrollView: scrollView)
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData[section].sectionItems.count

@@ -23,6 +23,10 @@
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="n6e-1s-5wP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Y1b-bK-1re" appends="YES" id="E7a-dd-yZf"/>
+                    </connections>
                 </mapView>
                 <imageView alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationbutton" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-GK-fjR">
                     <rect key="frame" x="315" y="607" width="40" height="40"/>
@@ -52,6 +56,11 @@
         <tapGestureRecognizer id="zBx-9d-s3s">
             <connections>
                 <action selector="onRecenterMap:" destination="-1" id="rvr-Yu-HxP"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="Y1b-bK-1re">
+            <connections>
+                <action selector="didTapAwayFromDrawer:" destination="-1" id="n5C-kE-GiL"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

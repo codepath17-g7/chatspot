@@ -11,6 +11,12 @@ import MapKit
 import FirebaseAuthUI
 
 
+@objc protocol AroundMeViewDelegate {
+    func mapPinButtonClicked(roomGuid: String)
+    func hideDrawer()
+}
+
+
 class AroundMeView: UIView {
 
     @IBOutlet var contentView: UIView!
@@ -20,6 +26,7 @@ class AroundMeView: UIView {
     var observers = [UInt]()
     var aroundMeRoomGuid: String?
     var chats: [String: ChatRoom1] = [:]
+    var delegate: AroundMeViewDelegate!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,6 +107,11 @@ class AroundMeView: UIView {
         mapView.setRegion(rgn, animated: true)
     }
     
+    @IBAction func didTapAwayFromDrawer(_ sender: UITapGestureRecognizer) {
+        delegate.hideDrawer()
+    }
+    
+    
 }
 
 //MARK:- MKMapViewDelegate
@@ -126,6 +138,16 @@ extension AroundMeView: MKMapViewDelegate {
         mapView.showsCompass = true
         mapView.showsUserLocation = true
     }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        if let chatRoomAnnotationView = view as? ChatRoomAnnotationView {
+            let guid = chatRoomAnnotationView.roomGuid
+            delegate.mapPinButtonClicked(roomGuid: guid)
+        }
+    }
+    
+    
     
 
     
