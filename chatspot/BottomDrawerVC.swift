@@ -22,7 +22,8 @@ class BottomDrawerVC: UIViewController {
         
         self.view.addSubview(smallDrawerView)
         self.view.addSubview(mainFullVC.view)
-        closeDrawer()
+        self.mainFullVC.view.isHidden = true
+//        closeDrawer()
 
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
         gesture.delegate = self
@@ -94,21 +95,35 @@ class BottomDrawerVC: UIViewController {
             self.view.frame = CGRect(x: 0, y: yComponent + translation.y, width: view.frame.width, height: view.frame.height)
             
             if self.view.frame.minY < yComponent {
-                UIView.animate(withDuration: 0.3) { [weak self] in
+                UIView.animate(withDuration: 0.3, animations: { [weak self] in
                     self?.smallDrawerView.alpha = 0
-//                    self?.smallDrawerView.removeFromSuperview()
-//                    self?.view.addSubview((self?.mainFullVC.view)!)
                     self?.mainFullVC.view.alpha = 1
-
-                }
+                    }, completion: { (finished: Bool) in
+                        self.smallDrawerView.isHidden = true
+                        self.mainFullVC.view.isHidden = false
+                })
+//                UIView.animate(withDuration: 0.3) { [weak self] in
+//                    self?.smallDrawerView.alpha = 0
+////                    self?.smallDrawerView.removeFromSuperview()
+////                    self?.view.addSubview((self?.mainFullVC.view)!)
+//                    self?.mainFullVC.view.alpha = 1
+//                }
+                
             } else {
-                UIView.animate(withDuration: 0.3) { [weak self] in
-                    self?.mainFullVC.view.alpha = 0
+                UIView.animate(withDuration: 0.3, animations: { [weak self] in
                     self?.smallDrawerView.alpha = 1
-
-//                    self?.mainFullVC.view.removeFromSuperview()
-//                    self?.view.addSubview((self?.smallDrawerView)!)
-                }
+                    self?.mainFullVC.view.alpha = 0
+                    }, completion: { (finished: Bool) in
+                        self.smallDrawerView.isHidden = false
+                        self.mainFullVC.view.isHidden = true
+                })
+//                UIView.animate(withDuration: 0.3) { [weak self] in
+//                    self?.mainFullVC.view.alpha = 0
+//                    self?.smallDrawerView.alpha = 1
+//
+////                    self?.mainFullVC.view.removeFromSuperview()
+////                    self?.view.addSubview((self?.smallDrawerView)!)
+//                }
             }
             
         } else if recognizer.state == .ended {
@@ -124,6 +139,8 @@ class BottomDrawerVC: UIViewController {
 //                self.view.layoutIfNeeded()
             })
         }
+        
+        // fix this: put BottomDrawerVC above navbar
         if self.view.frame.minY < (self.navigationController?.navigationBar.frame.maxY)! {
             self.navigationController?.navigationBar.layer.zPosition = -1
         } else {

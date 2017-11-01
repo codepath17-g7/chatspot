@@ -245,7 +245,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ATW-MG-nIq">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tbb-1z-WBL">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="660.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -381,17 +381,17 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
-                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="240" verticalCompressionResistancePriority="760" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M6h-xv-TnC" userLabel="Toolbar View">
                                         <rect key="frame" x="0.0" y="616.5" width="375" height="50.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaC-Rt-UDV">
-                                                <rect key="frame" x="8" y="16.5" width="33" height="27"/>
+                                                <rect key="frame" x="8" y="677" width="33" height="27"/>
                                                 <state key="normal" image="photo"/>
                                                 <connections>
                                                     <action selector="addPhotoButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="9Zh-qc-Muv"/>
                                                 </connections>
                                             </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="OGB-g9-AKX" customClass="GrowingTextView" customModule="GrowingTextView">
                                                 <rect key="frame" x="117" y="7" width="201" height="36.5"/>
                                                 <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
@@ -401,7 +401,7 @@
                                                 </connections>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AWo-Wy-oBi">
-                                                <rect key="frame" x="326" y="10.5" width="41" height="33"/>
+                                                <rect key="frame" x="326" y="671" width="41" height="33"/>
                                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                 <state key="normal" title="Send"/>
                                                 <connections>
@@ -409,14 +409,14 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQJ-9i-BAx">
-                                                <rect key="frame" x="79" y="14.5" width="30" height="31"/>
+                                                <rect key="frame" x="79" y="675" width="30" height="31"/>
                                                 <state key="normal" image="smiley"/>
                                                 <connections>
                                                     <action selector="addEmojiButtonClicked:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="bNa-0O-bWa"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijM-uE-cvC">
-                                                <rect key="frame" x="49" y="14.5" width="22" height="31"/>
+                                                <rect key="frame" x="49" y="675" width="22" height="31"/>
                                                 <state key="normal" image="lightning"/>
                                                 <connections>
                                                     <action selector="onAddActivity:" destination="tlQ-pR-ueF" eventType="touchUpInside" id="15D-yX-v2m"/>
