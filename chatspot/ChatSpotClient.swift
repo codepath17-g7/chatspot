@@ -398,13 +398,13 @@ class ChatSpotClient {
     static func registerIfNeeded(guid: String, user: FirebaseAuth.User, success: @escaping () -> (), failure: @escaping () -> ()) {
         userGuid = guid
         
-        let value: [String: String] = [
-            User1.KEY_DISPLAY_NAME: user.displayName!
-//            User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
-        ]
-        let ref = Database.database().reference()
-        ref.child("users").child(guid).updateChildValues(value)
-        
+//        let value: [String: String] = [
+//            User1.KEY_DISPLAY_NAME: user.displayName!
+////            User1.KEY_PROFILE_IMAGE: (user.photoURL?.absoluteString)!
+//        ]
+//        let ref = Database.database().reference()
+//        ref.child("users").child(guid).updateChildValues(value)
+//        
         getUserProfile(userGuid: guid, success: { (user: User1) in
             currentUser = user
             success()
