@@ -24,7 +24,7 @@ class AroundMeView: UIView {
     @IBOutlet weak var reCenter: UIImageView!
     var rooms: [ChatRoom1] = []
     var observers = [UInt]()
-    var aroundMeRoomGuid: String?
+//    var aroundMeRoomGuid: String?
     var chats: [String: ChatRoom1] = [:]
     var delegate: AroundMeViewDelegate!
 
@@ -75,8 +75,8 @@ class AroundMeView: UIView {
         if (newWindow != nil) {
             print("Map - Adding observer")
 
-            let observer1 = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
-                self.aroundMeRoomGuid = roomGuid
+            let observer1 = ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String?) in
+//                self.aroundMeRoomGuid = roomGuid!
                 self.reloadMap()
             }) { (error: Error?) in
             }

@@ -122,7 +122,10 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
                 }))
                 
 
-                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String) in
+                self.observers.append(ChatSpotClient.observeMyAroundMeRoomGuid(success: { (roomGuid: String?) in
+                    guard let roomGuid = roomGuid else {
+                        return
+                    }
                     print("Chat room -> \(roomGuid)")
                     self.chatRoom.guid = roomGuid
 //                    self.chatRoom.name = "Around Me"

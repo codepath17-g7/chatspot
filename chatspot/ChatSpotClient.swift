@@ -208,11 +208,11 @@ class ChatSpotClient {
     //MARK:- ChatRoom
     
     
-    static func observeMyAroundMeRoomGuid(success: @escaping (String) -> (), failure: @escaping (Error?) -> ()) -> UInt{
+    static func observeMyAroundMeRoomGuid(success: @escaping (String?) -> (), failure: @escaping (Error?) -> ()) -> UInt{
         let chatroomsRef = Database.database().reference().child("users").child(userGuid).child("aroundMe")
         
         return chatroomsRef.queryOrderedByKey().observe(.value, with: { (snapshot: DataSnapshot) in
-            let roomGuid = snapshot.value as! String
+            let roomGuid = snapshot.value as? String
             success(roomGuid)
         }) { (error: Error?) in
             failure(error)
