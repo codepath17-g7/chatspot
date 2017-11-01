@@ -83,11 +83,21 @@ class ChatListCell: UITableViewCell {
         super.awakeFromNib()
         unreadCountLabel.layer.cornerRadius = 12
         unreadCountLabel.layer.masksToBounds = true
-        
-        cardView.layer.shadowOffset = CGSize(width: 2, height: 2)
+
         cardView.layer.shadowRadius = 3.0
-        cardView.layer.shadowOpacity = 0.6
+        
+        let shadowSize : CGFloat = 3.0
+        let shadowPath = UIBezierPath(rect: CGRect(x: -shadowSize / 2,
+                                                   y: -shadowSize / 2,
+                                                   width: cardView.frame.size.width + shadowSize,
+                                              height: cardView.frame.size.height + shadowSize))
         cardView.layer.masksToBounds = false
+        cardView.layer.shadowColor = UIColor.black.cgColor
+        cardView.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cardView.layer.shadowOpacity = 0.5
+        cardView.layer.shadowPath = shadowPath.cgPath
+        
+        
         
     }
 
