@@ -51,12 +51,14 @@ class ChatListCell: UITableViewCell {
                 locationLabel.isHidden = true
             }
             
-            if (chatRoom.isAroundMe) {
-                memberCountLabel.text = String(describing: chatRoom.localUsers?.count ?? 0)
-            } else {
-                memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
-            }
-			
+            memberCountLabel.text = String(describing: (chatRoom.localUsers?.count ?? 0) + (chatRoom.users?.count ?? 0))
+            
+//            if (chatRoom.isAroundMe) {
+//                memberCountLabel.text = String(describing: chatRoom.localUsers?.count ?? 0)
+//            } else {
+//                memberCountLabel.text = String(describing: chatRoom.users?.count ?? 0)
+//            }
+//			
             lastMessageLabel.text = chatRoom.lastMessage
             
             self.updateConstraints()

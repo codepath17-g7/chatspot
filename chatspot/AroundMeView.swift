@@ -140,6 +140,10 @@ extension AroundMeView: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if (view.annotation is MKUserLocation) {
+            return
+        }
+        
         let annotation = view.annotation as! ChatRoomAnnotation
         let guid = annotation.room.guid
         delegate.mapPinButtonClicked(roomGuid: guid!)
