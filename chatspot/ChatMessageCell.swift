@@ -94,21 +94,16 @@ class ChatMessageCell: UITableViewCell {
         if message.mediaType == PHAssetMediaType.video.rawValue && message.mediaFileUrl != nil {
             print("Playing video")
             let movieURL = URL(string: message.mediaFileUrl!)
-            let images = [
-                
-                LightboxImage(
-                    imageURL: URL(string: message.thumbnailImageUrl!)!,
-                    text: "",
-                    videoURL: movieURL
-                )
-            ]
-            let controller = LightboxController(images: images)
-
-            // Use dynamic background.
-            controller.dynamicBackground = true
+            
+            
+            let player = AVPlayer(url: movieURL!)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
             let appdelegate = UIApplication.shared.delegate as! AppDelegate
             let topVc = UIViewController.topViewController(from: appdelegate.window?.rootViewController)
-            topVc?.present(controller, animated: true, completion: nil)
+            topVc?.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
 
         } else if message.attachment != nil && (message.attachment?.characters.count)! > 0 {
             let images = [
