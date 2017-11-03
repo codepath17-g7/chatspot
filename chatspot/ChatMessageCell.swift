@@ -226,7 +226,8 @@ class ChatMessageCell: UITableViewCell {
         authorProfileImage.isUserInteractionEnabled = true
         tapGesture.delegate = self
         
-        authorLevelImage.transform = CGAffineTransform(rotationAngle: (CGFloat)(-10.0.degreesToRadians))
+//        ImageView.transform = ImageView.transform.rotated(by: CGFloat(M_PI_2))
+        authorLevelImage.transform = CGAffineTransform(rotationAngle: (CGFloat)(-15.0.degreesToRadians))
         
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleCellLongPress))
         self.addGestureRecognizer(longPressGesture)

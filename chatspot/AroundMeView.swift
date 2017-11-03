@@ -171,11 +171,11 @@ extension AroundMeView: MKMapViewDelegate {
         }
         
         if chatRoomAnnotation.isUserNearBy() {
-            annotationView?.image = #imageLiteral(resourceName: "PaddedAroundMeMapPin")
+            annotationView?.image = #imageLiteral(resourceName: "aroundMeMapPin")
         } else if chatRoomAnnotation.isUserJoined() {
-            annotationView?.image = #imageLiteral(resourceName: "PaddedBlueMapPin")
+            annotationView?.image = #imageLiteral(resourceName: "blueMapPin")
         } else {
-            annotationView?.image = #imageLiteral(resourceName: "PaddedRedMapPin")
+            annotationView?.image = #imageLiteral(resourceName: "pinkMapPin")
         }
         annotationView?.centerOffset = CGPoint(x: 0, y: (annotationView?.image?.size.height)! / -2);
 //        annotationView?.configureDetailView()
