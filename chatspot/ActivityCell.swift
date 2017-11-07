@@ -39,8 +39,8 @@ class ActivityCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         actionButton.imageView?.contentMode = .scaleAspectFit
-        actionButton.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
-        actionButton.setImage(#imageLiteral(resourceName: "pink plus button"), for: .normal)
+        actionButton.setImage(#imageLiteral(resourceName: "plusButton"), for: .normal)
+        actionButton.setImage(#imageLiteral(resourceName: "checkButton"), for: .selected)
     }
     
     @IBAction func onTapAction(_ sender: Any) {

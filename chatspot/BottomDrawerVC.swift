@@ -35,7 +35,7 @@ class BottomDrawerVC: UIViewController {
         view.addGestureRecognizer(gesture)
         
         joinButt = UIButton(frame: CGRect(x: 329, y: 23, width: 30, height: 30))
-        joinButt.setImage(#imageLiteral(resourceName: "pink plus button"), for: .normal)
+        joinButt.setImage(#imageLiteral(resourceName: "plusButton"), for: .normal)
         joinButt.setRadiusWithShadow()
         joinButt.addTarget(self, action: #selector(joinClicked), for: .touchUpInside)
         self.view.addSubview(joinButt)
@@ -64,7 +64,7 @@ class BottomDrawerVC: UIViewController {
         print("joining room \(chatRoom.guid)")
         let user = Auth.auth().currentUser!
         ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid!)
-        joinButt!.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
+        joinButt!.setImage(#imageLiteral(resourceName: "checkButton"), for: .selected)
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.joinButt.isSelected = true
         }

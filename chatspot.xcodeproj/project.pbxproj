@@ -32,8 +32,6 @@
 		7679EA841F8E071A00DE16FA /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7679EA831F8E071A00DE16FA /* UserView.swift */; };
 		76967D4A1FA5BC730052B37C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76967D491FA5BC730052B37C /* UIViewController.swift */; };
 		76D949421FA59C59005A6E8A /* PHAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D949411FA59C59005A6E8A /* PHAsset.swift */; };
-		76E229681F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */; };
-		76E2296A1F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */; };
 		76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E2296B1F9B245B007049B0 /* StorageClient.swift */; };
 		76E3580A1F91A50900EC6B0C /* UIImageWithEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */; };
 		76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */; };
@@ -53,7 +51,6 @@
 		F21E501F1FA928FC00F4625F /* ChatroomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E501E1FA928FC00F4625F /* ChatroomCardView.swift */; };
 		F21E50211FA9295000F4625F /* ChatroomCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21E50201FA9295000F4625F /* ChatroomCardView.xib */; };
 		F21E50231FA93DF500F4625F /* BottomDrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */; };
-		F23BF8161FAA508C009918E1 /* BottomDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23BF8151FAA508C009918E1 /* BottomDrawerView.swift */; };
 		F254FCA21FA3E52500CBD616 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */; };
 		F254FCA31FA3E52500CBD616 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */; };
 		F254FCA41FA3E52500CBD616 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC861FA3E50B00CBD616 /* SF-Pro-Display-Bold.otf */; };
@@ -95,6 +92,8 @@
 		F28898921F9F0C87000C64DF /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28898911F9F0C87000C64DF /* Photos.framework */; };
 		F2A666511FA080A700EE8A4A /* ParallaxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A666501FA080A700EE8A4A /* ParallaxView.swift */; };
 		F2A666531FA11EB700EE8A4A /* SpecialAroundMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */; };
+		F2C6A2521FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2C6A2501FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib */; };
+		F2C6A2531FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C6A2511FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -143,8 +142,6 @@
 		76CDDEAB1FA318A70028DC19 /* Rengstorff Park.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Rengstorff Park.gpx"; path = "locations/Rengstorff Park.gpx"; sourceTree = "<group>"; };
 		76CDDEAC1FA31A040028DC19 /* Dodger Stadium.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Dodger Stadium.gpx"; path = "locations/Dodger Stadium.gpx"; sourceTree = "<group>"; };
 		76D949411FA59C59005A6E8A /* PHAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHAsset.swift; sourceTree = "<group>"; };
-		76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationDetailView.xib; sourceTree = "<group>"; };
-		76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationDetailView.swift; sourceTree = "<group>"; };
 		76E2296B1F9B245B007049B0 /* StorageClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageClient.swift; sourceTree = "<group>"; };
 		76E229701F9BFE8E007049B0 /* Golden Gate.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Golden Gate.gpx"; path = "locations/Golden Gate.gpx"; sourceTree = "<group>"; };
 		76E229711F9C005C007049B0 /* Oracle Arena.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Oracle Arena.gpx"; path = "locations/Oracle Arena.gpx"; sourceTree = "<group>"; };
@@ -171,7 +168,6 @@
 		F21E50201FA9295000F4625F /* ChatroomCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatroomCardView.xib; sourceTree = "<group>"; };
 		F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDrawerVC.swift; sourceTree = "<group>"; };
 		F230195A1FA1D46700006D7C /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "../../Library/Developer/Xcode/DerivedData/chatspot-fgkshavcpzelupglajjguiigxwnn/Build/Products/Debug-iphonesimulator/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
-		F23BF8151FAA508C009918E1 /* BottomDrawerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDrawerView.swift; sourceTree = "<group>"; };
 		F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BlackItalic.otf"; sourceTree = "<group>"; };
 		F254FC861FA3E50B00CBD616 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -214,6 +210,8 @@
 		F28898911F9F0C87000C64DF /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		F2A666501FA080A700EE8A4A /* ParallaxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxView.swift; sourceTree = "<group>"; };
 		F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialAroundMeCell.swift; sourceTree = "<group>"; };
+		F2C6A2501FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationDetailView.xib; sourceTree = "<group>"; };
+		F2C6A2511FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,13 +315,12 @@
 				7626201F1F9338BB008404F6 /* AroundMeView.swift */,
 				762620231F93D33D008404F6 /* ChatRoomAnnotationView.swift */,
 				762620251F93D51D008404F6 /* ChatRoomAnnotation.swift */,
-				76E229671F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib */,
-				76E229691F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift */,
+				F2C6A2501FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib */,
+				F2C6A2511FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift */,
 				8B0ACFB61FA1A21D00722B1D /* ActivityView.swift */,
 				8B0ACFB41FA1A21300722B1D /* ActivityView.xib */,
 				F21E501E1FA928FC00F4625F /* ChatroomCardView.swift */,
 				F21E50201FA9295000F4625F /* ChatroomCardView.xib */,
-				F23BF8151FAA508C009918E1 /* BottomDrawerView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -549,6 +546,7 @@
 				F21E50211FA9295000F4625F /* ChatroomCardView.xib in Resources */,
 				F254FCA71FA3E52500CBD616 /* SF-Pro-Display-HeavyItalic.otf in Resources */,
 				8B0ACFB51FA1A21300722B1D /* ActivityView.xib in Resources */,
+				F2C6A2521FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib in Resources */,
 				F254FCB41FA3E52500CBD616 /* SF-Pro-Text-Bold.otf in Resources */,
 				F254FCBF1FA3E52500CBD616 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
 				8BCDD9B51FA85FFE004DD84D /* MapCell.xib in Resources */,
@@ -556,7 +554,6 @@
 				F254FCB61FA3E52500CBD616 /* SF-Pro-Text-Heavy.otf in Resources */,
 				7626201E1F9338A7008404F6 /* AroundMeView.xib in Resources */,
 				F254FCA41FA3E52500CBD616 /* SF-Pro-Display-Bold.otf in Resources */,
-				76E229681F97BE09007049B0 /* ChatRoomAnnotationDetailView.xib in Resources */,
 				7679EA821F8E054600DE16FA /* UserView.xib in Resources */,
 				F254FCBB1FA3E52500CBD616 /* SF-Pro-Text-MediumItalic.otf in Resources */,
 				F254FCB91FA3E52500CBD616 /* SF-Pro-Text-LightItalic.otf in Resources */,
@@ -700,16 +697,15 @@
 				762620201F9338BB008404F6 /* AroundMeView.swift in Sources */,
 				3298CF641F92F8E900F9BBEE /* ChatRoom1.swift in Sources */,
 				8BCDD9B41FA85FFE004DD84D /* MapCell.swift in Sources */,
+				F2C6A2531FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift in Sources */,
 				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
 				76D949421FA59C59005A6E8A /* PHAsset.swift in Sources */,
 				8BCDD9BB1FA876E2004DD84D /* Date+Ago.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
-				F23BF8161FAA508C009918E1 /* BottomDrawerView.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,
 				8B0ACFBA1FA1CCDC00722B1D /* ActivityDetailVC.swift in Sources */,
 				2D93B1051F9D2B6800D6B80C /* UserCell.swift in Sources */,
-				76E2296A1F97C0B8007049B0 /* ChatRoomAnnotationDetailView.swift in Sources */,
 				F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */,
 				7679EA841F8E071A00DE16FA /* UserView.swift in Sources */,
 				F21E501F1FA928FC00F4625F /* ChatroomCardView.swift in Sources */,

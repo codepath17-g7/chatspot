@@ -290,8 +290,6 @@ extension UIColor {
     }
     
     struct ChatSpotColors {
-//        static let DarkBlue = UIColor(netHex: 0x172969)
-//        static let LightBlue = UIColor(netHex: 0x3eacec)
         
         static let SelectedBlue = UIColor(netHex: 0x2ABAE8)
         static let PastelRed = UIColor(netHex: 0xFF5858)

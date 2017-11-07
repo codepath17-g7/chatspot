@@ -87,9 +87,11 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "chatroomDetailSegue") {
-            let navigationVC = segue.destination as! UINavigationController
-            let destinationVC = navigationVC.topViewController as! ChatRoomDetailVC
-            destinationVC.chatroom = self.chatRoom
+            let detailVC = segue.destination as! ChatRoomDetailVC
+            detailVC.chatroom = self.chatRoom
+//            let navigationVC = segue.destination as! UINavigationController
+//            let destinationVC = navigationVC.topViewController as! ChatRoomDetailVC
+//            destinationVC.chatroom =
         }
     }
     

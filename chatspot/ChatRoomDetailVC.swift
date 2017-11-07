@@ -14,8 +14,6 @@ class ChatRoomDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var chatroom: ChatRoom1!
-    
     private var userList = [User1]()
     private var activityList = [Activity]()
     
@@ -23,16 +21,15 @@ class ChatRoomDetailVC: UIViewController {
     private var userSection: SectionWithItems!
     private var activitySection: SectionWithItems!
     
+    
+    var chatroom: ChatRoom1! {
+        didSet {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.setUpTitle(title: chatroom.name)
-        
-        navigationItem.rightBarButtonItem =
-            UIBarButtonItem(image: UIImage.init(named: "x-button"),
-                            style: UIBarButtonItemStyle.plain,
-                            target: self,
-                            action: #selector(close))
         
         setupUI()
         
@@ -42,7 +39,7 @@ class ChatRoomDetailVC: UIViewController {
         let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
         
         users?.keys.forEach({ (userGuid) in
-            //
+            
             ChatSpotClient.getUserProfile(userGuid: userGuid, success: { (user) in
                 
                 if (self.userSection == nil) {
@@ -79,43 +76,69 @@ class ChatRoomDetailVC: UIViewController {
         
     }
     
-    
-
     @objc private func close() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func setupUI() {
-        
+    private func setupUI() { //247, 247, 247
+        tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         
-        DispatchQueue.global(qos: .utility).async {
-            
-            var roomBanner: UIImage?
-            if let urlString = self.chatroom.banner,
-                let url = URL(string: urlString),
-                let data = try? Data(contentsOf: url),
-                let image = UIImage(data: data) {
-                print("Banner height - \(image.size.height)")
-                roomBanner = image
-            }
-            
-            guard let bannerImage = roomBanner else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 76))
-                headerView.image = bannerImage
-//                let headerView = ParallaxView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 150), image: bannerImage)
-                self.tableView.tableHeaderView = headerView
-                self.tableView.tableHeaderView!.transform = self.tableView.transform
-            }
+        
+//        DispatchQueue.global(qos: .utility).async {
+        var roomBanner: UIImage?
+        if let urlString = self.chatroom.banner,
+            let url = URL(string: urlString),
+            let data = try? Data(contentsOf: url),
+            let image = UIImage(data: data) {
+            print("Banner height - \(image.size.height)")
+            roomBanner = image
         }
+        
+        guard let bannerImage = roomBanner else {
+            print("problem")
+            return
+        }
+        
+        let chatroomTitleLabel = UILabel(frame: CGRect(x: 16, y: 16, width: 150, height: 130))
+        chatroomTitleLabel.attributedText = NSAttributedString(string: "\(self.chatroom.name!)", attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont.Chatspot.extraLarge])
+        chatroomTitleLabel.numberOfLines = 3
+        chatroomTitleLabel.sizeToFit()
+        
+
+        let closeButton = UIButton(frame: CGRect(x: 16, y: 16, width: 30, height: 30))
+        closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
+        closeButton.changeImageViewTo(color: .white)
+        closeButton.sizeToFit()
+        closeButton.addTarget(self, action: #selector(self.close), for: .touchUpInside)
+            
+//            DispatchQueue.main.async {
+        let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
+        headerView.image = bannerImage
+        
+        // Add a gradient
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = headerView.frame
+        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradient.locations = [0.2, 1]
+        headerView.layer.insertSublayer(gradient, at: 0)
+
+        self.tableView.tableHeaderView = headerView
+        self.tableView.tableHeaderView!.transform = self.tableView.transform
+
+        chatroomTitleLabel.frame.origin.y = headerView.frame.maxY - (16 + chatroomTitleLabel.frame.height)
+
+        self.view.addSubview(chatroomTitleLabel)
+        
+        self.view.addSubview(closeButton)
+        self.view.layoutIfNeeded()
+        
+//            }
+//        }
         
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
@@ -144,42 +167,27 @@ class ChatRoomDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if let headerView = tableView.tableHeaderView {
-            
-            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-            var headerFrame = headerView.frame
-            
-            //Comparison necessary to avoid infinite loop
-            if height != headerFrame.size.height {
-                headerFrame.size.height = height
-                headerView.frame = headerFrame
-                tableView.tableHeaderView = headerView
-            }
-        }
-    }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+////        if let headerView = tableView.tableHeaderView {
+//        
+////            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+////            var headerFrame = headerView.frame
+//            
+//            //Comparison necessary to avoid infinite loop
+//            if height != headerFrame.size.height {
+//                headerFrame.size.height = height
+//                headerView.frame = headerFrame
+//                tableView.tableHeaderView = headerView
+//            }
+//        }
+//    }
     
 }
 
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if let headerView = self.tableView.tableHeaderView as? ParallaxView {
-//            headerView.scrollViewDidScroll(scrollView: scrollView)
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData[section].sectionItems.count
@@ -192,6 +200,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return tableViewData[section].sectionTitle
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataItem = tableViewData[indexPath.section]
@@ -216,7 +225,12 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.font = UIFont.Chatspot.regularNavigationTitle
             headerTitle.textLabel?.textColor = UIColor.ChatSpotColors.LightGray
+//            headerTitle.alpha = 1
+            headerTitle.tintColor = UIColor.ChatSpotColors.LighterGray
+
+            
         }
     }
     
@@ -231,6 +245,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
             let item = leaveSectionItems[indexPath.row]
             cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
             (cell as! UserCell).name.text = item
+            cell.accessoryType = .none
         } else if let mapCellItems = sectionItems as? [CLLocationCoordinate2D] {
             let item = mapCellItems[indexPath.row]
             cell = tableView.dequeueReusableCell(withIdentifier: "mapCell")

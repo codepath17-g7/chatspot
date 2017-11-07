@@ -28,7 +28,7 @@
                         <outletCollection property="gestureRecognizers" destination="Y1b-bK-1re" appends="YES" id="E7a-dd-yZf"/>
                     </connections>
                 </mapView>
-                <imageView alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationbutton" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-GK-fjR">
+                <imageView alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="moveToCurrentLocationButton" translatesAutoresizingMaskIntoConstraints="NO" id="y8M-GK-fjR">
                     <rect key="frame" x="315" y="607" width="40" height="40"/>
                     <color key="backgroundColor" white="0.932373046875" alpha="1" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
@@ -65,6 +65,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="navigationbutton" width="36" height="37"/>
+        <image name="moveToCurrentLocationButton" width="36" height="37"/>
     </resources>
 </document>

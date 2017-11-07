@@ -68,14 +68,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RqF-un-Kmi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RqF-un-Kmi" secondAttribute="trailing" id="HPl-aX-mNU"/>
-                            <constraint firstItem="RqF-un-Kmi" firstAttribute="top" secondItem="ZLG-MI-Gee" secondAttribute="bottom" id="Zwb-7L-VaB"/>
+                            <constraint firstItem="RqF-un-Kmi" firstAttribute="top" secondItem="ZYh-03-2DV" secondAttribute="top" id="Tq6-ce-3NU"/>
                             <constraint firstItem="RqF-un-Kmi" firstAttribute="leading" secondItem="ZYh-03-2DV" secondAttribute="leading" id="pjC-Ze-nyv"/>
                             <constraint firstItem="Hws-Py-X5b" firstAttribute="top" secondItem="RqF-un-Kmi" secondAttribute="bottom" id="wHe-Rr-bC1"/>
                         </constraints>
@@ -89,7 +89,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x8I-DN-hja" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tdl-9c-hYv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-3442" y="2996"/>
+            <point key="canvasLocation" x="-2961.5" y="2247.5"/>
         </scene>
         <!--My Chats-->
         <scene sceneID="sxw-v0-Edt">
@@ -144,11 +144,12 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4Y-JC-7KX">
                                                             <rect key="frame" x="271" y="86.5" width="17.5" height="17"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
-                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="textColor" red="0.40784313725490196" green="0.40784313725490196" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people" translatesAutoresizingMaskIntoConstraints="NO" id="NiM-bB-EmD">
                                                             <rect key="frame" x="246.5" y="87.5" width="20.5" height="15"/>
+                                                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20.5" id="bgE-4e-WXf"/>
                                                                 <constraint firstAttribute="height" constant="15" id="oyY-HC-Gil"/>
@@ -344,20 +345,20 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="iWE-r6-lax" userLabel="Right Line">
-                                                            <rect key="frame" x="218" y="21" width="133" height="1"/>
+                                                            <rect key="frame" x="217.5" y="21" width="133.5" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="gv2-Dz-EFP"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpD-1l-L1a">
-                                                            <rect key="frame" x="166.5" y="12" width="43.5" height="20"/>
+                                                            <rect key="frame" x="166" y="12" width="43.5" height="20"/>
                                                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="5dW-oP-zN9" userLabel="Left Line">
-                                                            <rect key="frame" x="24" y="21" width="134.5" height="1"/>
+                                                            <rect key="frame" x="24" y="21" width="134" height="1"/>
                                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="0JG-oE-N4e"/>
@@ -480,7 +481,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18 members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oiR-MF-mHb">
-                                    <rect key="frame" x="34.5" y="10" width="81" height="32"/>
+                                    <rect key="frame" x="35" y="10" width="81" height="32"/>
                                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -509,7 +510,7 @@
                         <outlet property="tableView" destination="Tbb-1z-WBL" id="94i-xs-V4o"/>
                         <outlet property="toolbarBottomConstraint" destination="p9C-by-nSs" id="Ch1-f5-17B"/>
                         <outlet property="toolbarView" destination="M6h-xv-TnC" id="l5c-aw-pAG"/>
-                        <segue destination="D8l-N6-nQd" kind="presentation" identifier="chatroomDetailSegue" id="OzT-Ab-FVH"/>
+                        <segue destination="kER-1Q-3Mh" kind="presentation" identifier="chatroomDetailSegue" id="Cut-ej-Uch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3CF-ys-sA4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -693,7 +694,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Chatspots" image="chatspotsTabBarIcon" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -712,7 +713,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="aroundMeTabBarIcon" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -731,7 +732,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -749,7 +750,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yyh-KS-hMb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="WhN-pp-VEH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WhN-pp-VEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -767,7 +768,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vej-5k-I1I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -785,7 +786,7 @@
             <objects>
                 <navigationController storyboardIdentifier="activityDetailNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="g0T-YJ-1nU" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="nlM-sp-vNF">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nlM-sp-vNF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -798,24 +799,6 @@
             </objects>
             <point key="canvasLocation" x="-4031.1999999999998" y="734.48275862068976"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="SZc-D7-WGM">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="D8l-N6-nQd" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="aih-mQ-QlG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="kER-1Q-3Mh" kind="relationship" relationship="rootViewController" id="ZeB-eH-Huj"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2ti-VI-cy6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3442.4000000000001" y="2265.5172413793107"/>
-        </scene>
     </scenes>
     <resources>
         <image name="aroundMeTabBarIcon" width="27" height="27"/>
@@ -824,9 +807,9 @@
         <image name="fitnessCenterSmall" width="375" height="76"/>
         <image name="image-placeholder" width="300" height="300"/>
         <image name="lightning" width="22" height="31"/>
-        <image name="people" width="35" height="26"/>
+        <image name="people" width="37" height="25"/>
         <image name="photo" width="33" height="27"/>
-        <image name="profile" width="19" height="28"/>
+        <image name="profile" width="16" height="25"/>
         <image name="smiley" width="30" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>

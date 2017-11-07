@@ -41,27 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //}
         
         
-        
-//        // Translucent nav bar:
-//        UINavigationBar.appearance().shadowImage = UIImage()
-//        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-//        UINavigationBar.appearance().isTranslucent = true
-//        UINavigationBar.appearance().tintColor = .black
-//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont(name: "SFProDisplay-Semibold", size: 34)!]
-
-        // Red and white nav bar:
-//        UINavigationBar.appearance().tintColor = .white
-//        UINavigationBar.appearance().barTintColor = UIColor.ChatSpotColors.Red
-//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "SFProDisplay-Semibold", size: 20)!]
-        
-        
-//        // Gray nav bar:
-//        UINavigationBar.appearance().barTintColor = UIColor.ChatSpotColors.LighterGray
-
-//        UITabBar.appearance().tintColor = UIColor.ChatSpotColors.Red
-//        UITabBar.appearance().barTintColor = UIColor.ChatSpotColors.LighterGray
-        
-        
 //        Special navbar and tab bar:
         let image = UIImage(color: UIColor.ChatSpotColors.LighterGray)
         UINavigationBar.appearance().shadowImage = image
