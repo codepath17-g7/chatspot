@@ -21,6 +21,8 @@ class ChatRoomDetailVC: UIViewController {
     private var userSection: SectionWithItems!
     private var activitySection: SectionWithItems!
     
+    private var closeButton: UIButton!
+    
     
     var chatroom: ChatRoom1! {
         didSet {
@@ -76,7 +78,7 @@ class ChatRoomDetailVC: UIViewController {
         
     }
     
-    @objc private func close() {
+    func close() { //    @objc private
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -89,7 +91,6 @@ class ChatRoomDetailVC: UIViewController {
         tableView.dataSource = self
         
         
-//        DispatchQueue.global(qos: .utility).async {
         var roomBanner: UIImage?
         if let urlString = self.chatroom.banner,
             let url = URL(string: urlString),
@@ -109,14 +110,7 @@ class ChatRoomDetailVC: UIViewController {
         chatroomTitleLabel.numberOfLines = 3
         chatroomTitleLabel.sizeToFit()
         
-
-        let closeButton = UIButton(frame: CGRect(x: 16, y: 16, width: 30, height: 30))
-        closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
-        closeButton.changeImageViewTo(color: .white)
-        closeButton.sizeToFit()
-        closeButton.addTarget(self, action: #selector(self.close), for: .touchUpInside)
             
-//            DispatchQueue.main.async {
         let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
         headerView.image = bannerImage
         
@@ -126,19 +120,25 @@ class ChatRoomDetailVC: UIViewController {
         gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         gradient.locations = [0.2, 1]
         headerView.layer.insertSublayer(gradient, at: 0)
+        chatroomTitleLabel.frame.origin.y = headerView.frame.maxY - (16 + chatroomTitleLabel.frame.height)
+        
+        closeButton = UIButton(frame: CGRect(x: headerView.frame.origin.x + 16, y: headerView.frame.origin.y + 16, width: 24, height: 24))
+        closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
+        closeButton.changeImageViewTo(color: .white)
+        closeButton.sizeToFit()
+        closeButton.addTarget(self, action: #selector(ChatRoomDetailVC.close), for: .touchUpInside)
+        
+        headerView.addSubview(chatroomTitleLabel)
+        self.view.addSubview(closeButton)
 
         self.tableView.tableHeaderView = headerView
+        
+        
         self.tableView.tableHeaderView!.transform = self.tableView.transform
 
-        chatroomTitleLabel.frame.origin.y = headerView.frame.maxY - (16 + chatroomTitleLabel.frame.height)
 
-        self.view.addSubview(chatroomTitleLabel)
-        
-        self.view.addSubview(closeButton)
         self.view.layoutIfNeeded()
         
-//            }
-//        }
         
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
@@ -241,6 +241,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
             let user = userSectionItems[indexPath.row]
             cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
             (cell as! UserCell).user = user
+            cell.accessoryType = .disclosureIndicator
         } else if let leaveSectionItems = sectionItems as? [String] {
             let item = leaveSectionItems[indexPath.row]
             cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
@@ -255,7 +256,13 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "activityCell")
             let activityCell = cell as! ActivityCell
             activityCell.activity = item
-            activityCell.actionButton.isHidden = (item.activityName == "See All Activities")
+            if item.activityName == "See All Activities" {
+                activityCell.actionButton.isHidden = true
+                activityCell.accessoryType = .disclosureIndicator
+            } else {
+                activityCell.actionButton.isHidden = false
+                activityCell.accessoryType = .none
+            }
             
             activityCell.action = { shouldJoin, activityGuid in
                 

@@ -254,9 +254,15 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
         addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .selected)
         addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .selected)
         addActivityButton.setImage(addActivityButton.imageView?.image, for: .selected)
+        addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .highlighted)
+        addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .highlighted)
+        addActivityButton.setImage(addActivityButton.imageView?.image, for: .highlighted)
 		addPhotoButton.changeImageViewTo(color: .lightGray)
 		addEmojiButton.changeImageViewTo(color: .lightGray)
         addActivityButton.changeImageViewTo(color: .lightGray)
+        addEmojiButton.setImage(addEmojiButton.imageView?.image, for: .focused)
+        addPhotoButton.setImage(addPhotoButton.imageView?.image, for: .focused)
+        addActivityButton.setImage(addActivityButton.imageView?.image, for: .focused)
         
 		messageTextView.autoresizingMask = .flexibleWidth
         messageTextView.maxLength = 300
@@ -269,6 +275,9 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
         // maybe add these back
 //        toolbarView.layer.borderWidth = 0.3
 //        toolbarView.layer.borderColor = UIColor.ChatSpotColors.LightGray.cgColor
+        toolbarView.tintColor = UIColor.ChatSpotColors.LighterGray
+        toolbarView.backgroundColor = UIColor.ChatSpotColors.LighterGray
+
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes:[NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle]), for: .disabled)
         sendMessageButton.setAttributedTitle(NSAttributedString(string: "Send", attributes: [NSForegroundColorAttributeName: UIColor.ChatSpotColors.SelectedBlue, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
 , for: .normal)
@@ -374,10 +383,10 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
     
     @IBAction func onAddActivity(_ sender: UIButton) {
         print("Add activity tapped.")
-        
+        addActivityButton.isSelected = true
         var observer: Any?
         
-        let alertController = UIAlertController(title: "Start an Activity!", message: "Enter an activity name to get started.", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Start an Activity!", message: nil, preferredStyle: .alert)
         
         let goAction = UIAlertAction(title: "Go!", style: .default) { (_) in
             if let field = alertController.textFields?[0],
@@ -389,6 +398,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
                 
                 ChatSpotClient.createActivtyForChatRoom(roomGuid: self.chatRoom.guid, activity: activity, success: {
                     print("Activity created")
+                    self.addActivityButton.isSelected = false
                 }){}
             }
             
@@ -398,6 +408,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             NotificationCenter.default.removeObserver(observer!)
+            self.addActivityButton.isSelected = false
         }
         
         alertController.addTextField { (textField) in
@@ -861,34 +872,3 @@ extension ChatRoomVC: ISEmojiViewDelegate {
     
 }
 
-
-//MARK: ============ Object Extensions ============
-
-extension UIImageView {
-	func changeToColor(color: UIColor){
-		self.image = self.image!.withRenderingMode(.alwaysTemplate)
-		self.tintColor = color
-	}
-}
-
-extension UIButton {
-	func changeImageViewTo(color: UIColor){
-		let orginalImage = self.imageView?.image
-		let newColorImage = orginalImage?.withRenderingMode(.alwaysTemplate)
-		self.setImage(newColorImage, for: .normal)
-		self.tintColor = color
-	}
-}
-
-extension UIImage {
-    var roundedCorners: UIImage {
-        let rect = CGRect(origin:CGPoint(x: 0, y: 0), size: self.size)
-        UIGraphicsBeginImageContextWithOptions(self.size, false, 1)
-        UIBezierPath(
-            roundedRect: rect,
-            cornerRadius: 7.0
-            ).addClip()
-        self.draw(in: rect)
-        return UIGraphicsGetImageFromCurrentImageContext()!
-    }
-}

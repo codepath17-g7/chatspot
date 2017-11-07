@@ -274,7 +274,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
 	
 }
 
-
+//MARK: ============ Object Extensions ============
 
 extension UIColor {
     
@@ -313,6 +313,19 @@ extension UINavigationItem {
 }
 
 extension UIImage {
+    
+    var roundedCorners: UIImage {
+        let rect = CGRect(origin:CGPoint(x: 0, y: 0), size: self.size)
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 1)
+        UIBezierPath(
+            roundedRect: rect,
+            cornerRadius: 7.0
+            ).addClip()
+        self.draw(in: rect)
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    }
+    
+    // create a UIImage of just one solid color
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: .zero, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
@@ -357,3 +370,23 @@ extension UIFont {
         static let regularNavigationTitle = UIFont(name: AppFonts.semibold, size: AppSizes.regular)!
     }
 }
+
+
+extension UIImageView {
+    func changeToColor(color: UIColor){
+        self.image = self.image!.withRenderingMode(.alwaysTemplate)
+        self.tintColor = color
+    }
+}
+
+extension UIButton {
+    func changeImageViewTo(color: UIColor){
+        let orginalImage = self.imageView?.image
+        let newColorImage = orginalImage?.withRenderingMode(.alwaysTemplate)
+        self.tintColor = color
+        self.setImage(newColorImage, for: .normal)
+//        self.tintColor = color
+    }
+}
+
+
