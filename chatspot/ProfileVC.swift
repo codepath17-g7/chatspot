@@ -13,16 +13,13 @@ import FirebaseAuthUI
 
 class ProfileVC: UIViewController {
 
-    @IBOutlet weak var userView: UserView!
+//    @IBOutlet weak var userView: UserView!
     var user = Auth.auth().currentUser!
     
     var userProfile: User1!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setUpTitle(title: "Profile")
-
-
-        // Backedn is conencted, we can get current user info like this
         
         fetchUserProfile()
         
@@ -49,7 +46,7 @@ class ProfileVC: UIViewController {
     func fetchUserProfile() {
         ChatSpotClient.getUserProfile(userGuid: user.uid, success: { (userProfile: User1) in
             self.userProfile = userProfile
-            self.userView.prepare(user: userProfile, isSelf: true)
+//            self.userView.prepare(user: userProfile, isSelf: true)
         }) { 
             print("Could not get user profile for \(self.user.displayName ?? "") \(self.user.uid)")
         }
