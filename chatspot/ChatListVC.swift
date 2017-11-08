@@ -343,6 +343,7 @@ extension UIFont {
     
     struct AppSizes {
         static let extraLarge: CGFloat = 28.0
+        static let larger: CGFloat = 20.0
         static let large: CGFloat = 18.0
         static let regular: CGFloat = 17.0
         static let small: CGFloat = 14.0

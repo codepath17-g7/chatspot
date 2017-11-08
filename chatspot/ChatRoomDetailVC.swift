@@ -225,7 +225,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
-            headerTitle.textLabel?.font = UIFont.Chatspot.regularNavigationTitle
+            headerTitle.textLabel?.font = UIFont(name: UIFont.AppFonts.bigRegular, size: UIFont.AppSizes.larger)
             headerTitle.textLabel?.textColor = UIColor.ChatSpotColors.LightGray
             headerTitle.tintColor = UIColor.ChatSpotColors.LighterGray
         }
