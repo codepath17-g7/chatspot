@@ -615,21 +615,21 @@
                                                 <constraint firstAttribute="width" constant="100" id="PcE-Uv-UIm"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love my mom. she's so great" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYW-fb-lMI">
-                                            <rect key="frame" x="87" y="158" width="200" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="Dn5-6e-Fwc"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Janis Joplin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVU-fT-DCr">
                                             <rect key="frame" x="87" y="133" width="200" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="200" id="fEG-mO-nkm"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love my mom. she's so great" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYW-fb-lMI">
+                                            <rect key="frame" x="87" y="158" width="200" height="17"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="Dn5-6e-Fwc"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -671,6 +671,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="kph-OR-89o"/>
                     <connections>
+                        <outlet property="headerView" destination="pV0-Zd-73S" id="QjP-Bf-dpe"/>
+                        <outlet property="tableView" destination="zS6-BL-9hV" id="mlZ-1t-wOZ"/>
+                        <outlet property="userBannerImageView" destination="GeS-a1-tG9" id="gL9-4s-zv3"/>
+                        <outlet property="userProfilePictureImageView" destination="Auh-Kz-xlO" id="wG9-ND-dWj"/>
+                        <outlet property="userTaglineLabel" destination="qYW-fb-lMI" id="44j-u5-jwB"/>
+                        <outlet property="usernameLabel" destination="wVU-fT-DCr" id="WRt-eh-Cdv"/>
                         <segue destination="l4s-Pw-Lvl" kind="presentation" identifier="loggedOutSegue" id="INc-WK-H30"/>
                     </connections>
                 </viewController>
