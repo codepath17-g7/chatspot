@@ -193,7 +193,13 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
                     }
                     
                     self.currentActivity = activity
-                    self.activityView.activityInfoText.text = "\(activity.activityStartedByName!) started \(activity.activityName!)"
+                    let infoText = "\(activity.activityStartedByName!) started \(activity.activityName!)"
+//                    self.activityView.activityInfoText.text = "\(activity.activityStartedByName!) started \(activity.activityName!)"
+                    let attributedString = NSMutableAttributedString(string: infoText, attributes: [NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
+                    attributedString.addAttribute(NSFontAttributeName, value: UIFont.Chatspot.regular, range: NSRange(location: activity.activityStartedByName!.characters.count, length: 8))
+                    self.activityView.activityInfoText.attributedText = attributedString
+                    
+                    
                 }
             }, onUpdateActivity: { (activity) in
                 
@@ -212,11 +218,14 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
     
     func onActivityBannerTapped(_ sender: UIView) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "activityDetailNavigationController") as! UINavigationController
-        let activityDetailVC = navigationController.topViewController as! ActivityDetailVC
+        let activityDetailVC = storyboard.instantiateViewController(withIdentifier: "ActivityDetailVC") as! ActivityDetailVC
+        
+//        let navigationController = storyboard.instantiateViewController(withIdentifier: "activityDetailNavigationController") as! UINavigationController
+//        let activityDetailVC = navigationController.topViewController as! ActivityDetailVC
         activityDetailVC.activity = currentActivity
         activityDetailVC.roomGuid = chatRoom.guid
-        present(navigationController, animated: true)
+        self.navigationController?.pushViewController(activityDetailVC, animated: true)
+//        present(navigationController, animated: true)
     }
 
 //    func setUpInfiniteScrolling(){

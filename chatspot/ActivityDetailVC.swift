@@ -8,11 +8,12 @@
 
 import UIKit
 import PureLayout
+import MapKit
 
 class ActivityDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
     @IBOutlet weak var desctiptionLabel: UILabel!
     
     var activity: Activity!
@@ -25,8 +26,12 @@ class ActivityDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.setUpTitle(title: activity.activityName!)
+        tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         desctiptionLabel.text = activity.activityDescription
+        //        navigationItem.setUpTitle(title: activity.activityName!)
+
         view.backgroundColor = UIColor.ChatSpotColors.LighterGray
         
         navigationItem.rightBarButtonItem =
@@ -40,13 +45,16 @@ class ActivityDetailVC: UIViewController {
         let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "userCell")
         
+        let mapCellNib = UINib.init(nibName: "MapCell", bundle: nil)
+        tableView.register(mapCellNib, forCellReuseIdentifier: "mapCell")
+        
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         
-        showActionButton()
+        showJoinButton()
         
         activity.usersJoined.forEach({ (entry) in
             ChatSpotClient.getUserProfile(userGuid: entry.key, success: { (user) in
@@ -65,7 +73,7 @@ class ActivityDetailVC: UIViewController {
         
     }
     
-    @IBAction func onTapActionButton(_ sender: Any) {
+    @IBAction func onTapJoinButton(_ sender: Any) {
         
         let userGuid = ChatSpotClient.currentUser.guid!
         
@@ -77,21 +85,21 @@ class ActivityDetailVC: UIViewController {
             self.participatingUsers.append(ChatSpotClient.currentUser)
             self.userSection.sectionItems = self.participatingUsers
             self.tableView.reloadData()
-            self.showActionButton()
+            self.showJoinButton()
             
         }, failure: {})
     }
     
-    private func showActionButton() {
+    private func showJoinButton() {
         
-        actionButton.layer.cornerRadius = 4
+        joinButton.layer.cornerRadius = 4
         
         if (!isCurrentUserJoined()) {
             
-            actionButton.setTitle("Join", for: .normal)
-            actionButton.backgroundColor = UIColor.ChatSpotColors.PastelRed
+            joinButton.setTitle("Join", for: .normal)
+            joinButton.backgroundColor = UIColor.ChatSpotColors.PastelRed
         } else {
-            actionButton.isHidden = true
+            joinButton.isHidden = true
             tableView.tableHeaderView = nil
             tableViewData.append(SectionWithItems(" ", ["Leave \(activity.activityName!)"]))
             tableView.reloadData()
@@ -147,7 +155,9 @@ extension ActivityDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerTitle = view as? UITableViewHeaderFooterView {
+            headerTitle.textLabel?.font = UIFont.Chatspot.regularNavigationTitle
             headerTitle.textLabel?.textColor = UIColor.ChatSpotColors.LightGray
+            headerTitle.tintColor = UIColor.ChatSpotColors.LighterGray
         }
     }
     
@@ -177,6 +187,12 @@ extension ActivityDetailVC: UITableViewDelegate, UITableViewDataSource {
             
             cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
             (cell as! UserCell).user = user
+            cell.accessoryType = .disclosureIndicator
+            
+        } else if let mapCellItems = sectionItems as? [CLLocationCoordinate2D] {
+            let item = mapCellItems[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "mapCell")
+            (cell as! MapCell).setLocation(coordinate: item)
             
         } else if let items = sectionItems as? [String] {
             let item = items[indexPath.row]
@@ -184,7 +200,7 @@ extension ActivityDetailVC: UITableViewDelegate, UITableViewDataSource {
             cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
             
             (cell as! UserCell).user = User1(guid: "dummy", obj: ["name": item])
-            
+            cell.accessoryType = .none
             
 //            activityCell.action = { shouldJoin, activityGuid in
 //                
