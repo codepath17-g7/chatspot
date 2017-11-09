@@ -71,7 +71,7 @@ class ChatRoomDetailVC: UIViewController {
                 return
             }
             
-            self.activitySection = SectionWithItems("Activities", Array(activities.prefix(3)))
+            self.activitySection = SectionWithItems("Activities", Array(activities.prefix(2)))
             let seeAll = Activity()
             seeAll.activityName = "See All Activities"
             self.activitySection.sectionItems.append(seeAll)
@@ -241,37 +241,22 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
         var cell: UITableViewCell!
         if let userSectionItems = sectionItems as? [User1] {
             let user = userSectionItems[indexPath.row]
-            if let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell {
-                cell = userCell
-            } else {
-                cell = UserCell()
-            }
+            cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserCell
             (cell as! UserCell).user = user
             cell.accessoryType = .disclosureIndicator
         } else if let leaveSectionItems = sectionItems as? [String] {
             let item = leaveSectionItems[indexPath.row]
-            if let leaveCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell {
-                cell = leaveCell
-            } else {
-                cell = UserCell()
-            }
+            cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! UserCell
             (cell as! UserCell).name.text = item
             cell.accessoryType = .none
         } else if let mapCellItems = sectionItems as? [CLLocationCoordinate2D] {
             let item = mapCellItems[indexPath.row]
-            if let mapCell = tableView.dequeueReusableCell(withIdentifier: "mapCell") as? MapCell {
-                cell = mapCell
-            } else {
-                cell = MapCell()
-            }
+            cell = tableView.dequeueReusableCell(withIdentifier: "mapCell", for: indexPath) as! MapCell
             (cell as! MapCell).setLocation(coordinate: item)
         } else if let activityItems = sectionItems as? [Activity] {
             let item = activityItems[indexPath.row]
-            if let activityCell = tableView.dequeueReusableCell(withIdentifier: "activityCell") as? ActivityCell {
-                cell = activityCell
-            } else {
-                cell = ActivityCell()
-            }
+            cell = tableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityCell
+            
             let activityCell = cell as! ActivityCell
             activityCell.activity = item
             if item.activityName == "See All Activities" {
@@ -314,3 +299,27 @@ class SectionWithItems {
         self.sectionItems = sectionItems
     }
 }
+
+
+//            if let activityCell = tableView.dequeueReusableCell(withIdentifier: "activityCell") as? ActivityCell {
+//                cell = activityCell
+//            } else {
+//                cell = ActivityCell(style: .default, reuseIdentifier: "activityCell")
+//            }
+
+//            if let mapCell = tableView.dequeueReusableCell(withIdentifier: "mapCell", forIn) as? MapCell {
+//                cell = mapCell
+//            } //else {
+//                cell = MapCell(style: .default, reuseIdentifier: "mapCell")
+//            }
+//            if let leaveCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell {
+//                cell = leaveCell
+//            } else {
+//                cell = UserCell(style: .default, reuseIdentifier: "userCell")
+//            }
+
+//            if let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell {
+//                cell = userCell
+//            } else {
+//                cell = UserCell(style: .default, reuseIdentifier: "userCell")
+//            }

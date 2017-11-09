@@ -39,6 +39,8 @@ class ProfileView: UIView {
         let nib = UINib(nibName: "ProfileView", bundle: nil)
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+
         addSubview(contentView)
     }
     
@@ -51,6 +53,8 @@ class ProfileView: UIView {
             profilePictureImageView.image = #imageLiteral(resourceName: "image-placeholder")
         }
         
+        
+//        bannerImageView.frame = headerView.frame
         
         if let bannerUrlStr = user.bannerImage {
             bannerImageView.safeSetImageWith(urlStr: bannerUrlStr)
@@ -70,9 +74,11 @@ class ProfileView: UIView {
         }
         
         // Add semi-transparent gray layer
-        let grayOverlay = UIView(frame: headerView.frame)
+        let grayOverlay = UIView(frame: bannerImageView.frame)
         grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
         self.bannerImageView.addSubview(grayOverlay)
+        
+        layoutIfNeeded()
         
         usernameLabel.text = user.name
     
