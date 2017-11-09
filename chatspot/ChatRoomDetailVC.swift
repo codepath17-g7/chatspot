@@ -37,6 +37,11 @@ class ChatRoomDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCell")
+        tableView.register(UINib(nibName: "MapCell", bundle: nil), forCellReuseIdentifier: "mapCell")
+        tableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "activityCell")
+
+        
         setupUI()
         
         
@@ -143,16 +148,6 @@ class ChatRoomDetailVC: UIViewController {
 
 
         self.view.layoutIfNeeded()
-        
-        
-        let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "userCell")
-        
-        let mapCellNib = UINib.init(nibName: "MapCell", bundle: nil)
-        tableView.register(mapCellNib, forCellReuseIdentifier: "mapCell")
-        
-        let activityCellNib = UINib.init(nibName: "ActivityCell", bundle: nil)
-        tableView.register(activityCellNib, forCellReuseIdentifier: "activityCell")
         
         if !chatroom.isAroundMe,
             let latitude = chatroom.latitude,
