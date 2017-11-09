@@ -11,19 +11,21 @@ import FirebaseAuthUI
 
 class ProfileVC: UIViewController {
     
-    // note: hidebottombaronpush is set
-    
-    
     @IBOutlet weak var profileView: ProfileView!
-//    var currentUser = ChatSpotClient.currentUser
-//    var user: User1!
     fileprivate var tableViewData = [SectionWithItems]()
     private var badgeSection: SectionWithItems!
 
 
     var user: User1!
     var otherUserGuid: String?
-//    var isSelfProfile: Bool!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if navigationController?.restorationIdentifier == "ProfileNavigationController" {
+            return .default
+        } else {
+            return .lightContent
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,33 +34,13 @@ class ProfileVC: UIViewController {
         profileView.tableView.delegate = self
         
         if navigationController?.restorationIdentifier == "ProfileNavigationController" {
-//            isSelfProfile = true
             setupSelfProfile()
 
 
         } else {
-//            isSelfProfile = false
             setupOtherUserProfile()
         }
         
-        
-        ChatSpotClient.getBadges(userGuid: user.guid!, success: { (badges: [Badge]) in
-
-            if (badges.count == 0) {
-                return
-            }
-            
-            self.badgeSection = SectionWithItems("Badges", Array(badges.prefix(3)))
-//            let seeAll = Activity()
-            let seeAll = Badge(badgeType: .oneHundredMessagesSentInChannel, chatspotName: "See All Badges")
-//
-            self.badgeSection.sectionItems.append(seeAll)
-            self.tableViewData.insert(self.badgeSection, at: 0)
-            self.profileView.tableView.reloadData()
-
-        }, failure: {
-            print("Failure retrieving badges")
-        })
         
         let badgeCellNib = UINib.init(nibName: "BadgeCell", bundle: nil)
         profileView.tableView.register(badgeCellNib, forCellReuseIdentifier: "badgeCell")
@@ -66,10 +48,33 @@ class ProfileVC: UIViewController {
         let userCellNib = UINib.init(nibName: "UserCell", bundle: nil)
         profileView.tableView.register(userCellNib, forCellReuseIdentifier: "userCell")
         
+        setNeedsStatusBarAppearanceUpdate()
+
     }
     
+    
+    //if from profile tab click:
+    //-set user to current user
+    //-get current user badges
+    //-show logout cell
+    //-show edit profile button
+    //-tab bar visible
+    //-nav bar profile title set
     func setupSelfProfile(){
         user = ChatSpotClient.currentUser
+        ChatSpotClient.getBadges(userGuid: user.guid!, success: { (badges: [Badge]) in
+            if (badges.count == 0) {
+                return
+            }
+            self.badgeSection = SectionWithItems("Badges", Array(badges.prefix(3)))
+            let seeAll = Badge(badgeType: .oneHundredMessagesSentInChannel, chatspotName: "See All Badges")
+            self.badgeSection.sectionItems.append(seeAll)
+            self.tableViewData.insert(self.badgeSection, at: 0)
+            self.profileView.tableView.reloadData()
+            
+        }, failure: {
+            print("Failure retrieving badges")
+        })
         self.navigationItem.setUpTitle(title: "Profile")
         tableViewData.append(SectionWithItems(" ", ["Logout"]))
         
@@ -82,57 +87,56 @@ class ProfileVC: UIViewController {
         self.profileView.setupUserInfo(user: user)
 
         self.hidesBottomBarWhenPushed = false
-
-        //if from profile tab click:
-        //-get current user
-        //-get current user info and badges
-        //-show logout cell
-        //-show edit profile button
-        //-tab bar visible
-        //-nav bar profile title set
         
     }
     
-    func editProfile(){
-        
-    }
-    
+    //if viewing other user profile:
+    //-push onto nav stack (no title view in left bar button)
+    //-hide tab bar
+    //-make call to fetch user info
+    //-populate badge cells with badges
+    //-hide logout cell
+    //-hide edit profile button
     func setupOtherUserProfile(){//depending on how this VC is presented, change the nav left bar button item to be either a chevron or an x (and make navbar clear)
         
         ChatSpotClient.getUserProfile(userGuid: otherUserGuid!, success: { (user: User1) in
             self.user = user
             self.profileView.setupUserInfo(user: user)
-            ////            self.userView.prepare(user: userProfile, isSelf: true)
-            //            self.profileView.setupUserInfo(user: user, isSelf: true)
-            //        }) {
-            //            print("Could not get user profile for \(self.user.displayName ?? "") \(self.user.uid)")
-            //        }
-            //    }
-        }, failure: {})
+            
+            ChatSpotClient.getBadges(userGuid: self.user.guid!, success: { (badges: [Badge]) in
+                if (badges.count == 0) {
+                    return
+                }
+                self.badgeSection = SectionWithItems("Badges", Array(badges.prefix(3)))
+                let seeAll = Badge(badgeType: .oneHundredMessagesSentInChannel, chatspotName: "See All Badges")
+                self.badgeSection.sectionItems.append(seeAll)
+                self.tableViewData.insert(self.badgeSection, at: 0)
+                self.profileView.tableView.reloadData()
+                
+            }, failure: {
+                print("Failure retrieving badges")
+            })
+            
+        }, failure: {
+            print("Could not get user profile for \(self.user.name ?? "") \(String(describing: self.user.guid))")
+        })
         
         self.hidesBottomBarWhenPushed = true
         
+        
         self.navigationController?.navigationBar.isHidden = true
         
-        let closeButton = UIButton(frame: CGRect(x: profileView.headerView.frame.origin.x + 16, y: profileView.headerView.frame.origin.y + 16, width: 24, height: 24))
+        let closeButton = UIButton(frame: CGRect(x: profileView.headerView.frame.origin.x + 24, y: profileView.headerView.frame.origin.y + 28, width: 24, height: 24))
         closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
         closeButton.changeImageViewTo(color: .white)
         closeButton.sizeToFit()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
         self.view.addSubview(closeButton)
-
-        
-        
-        //
-        //if viewing other user profile:
-        //-push onto nav stack (no title view in left bar button)
-        //-hide tab bar
-        //-make call to fetch user info
-        //-populate badge cells with badges
-        //-hide logout cell
-        //-hide edit profile button
     }
     
+    func editProfile(){
+        
+    }
     
     func close() { //    @objc private
         self.dismiss(animated: true, completion: nil)

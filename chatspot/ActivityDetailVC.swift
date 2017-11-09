@@ -71,6 +71,17 @@ class ActivityDetailVC: UIViewController {
             }, failure: {})
         })
         
+//        TODO: add default gradient
+//        bannerImageView.image = nil
+//        
+//        // Pretty default gradient
+//        let gradient: CAGradientLayer = CAGradientLayer()
+//        gradient.frame = headerView.frame
+//        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+//        gradient.endPoint = CGPoint(x: 1, y: 1)
+//        gradient.colors = [UIColor.ChatSpotColors.BrightPink.cgColor, UIColor.ChatSpotColors.PastelRed.cgColor]
+//        headerView.layer.insertSublayer(gradient, at: 0)
+        
     }
     
     @IBAction func onTapJoinButton(_ sender: Any) {

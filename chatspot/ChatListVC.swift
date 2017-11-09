@@ -293,6 +293,7 @@ extension UIColor {
         
         static let SelectedBlue = UIColor(netHex: 0x2ABAE8)
         static let PastelRed = UIColor(netHex: 0xFF5858)
+        static let BrightPink = UIColor(netHex: 0xFF5AA2)
         static let LightestGray = UIColor(netHex: 0xFAFAFA)
         static let LighterGray = UIColor(netHex: 0xF1F1F1)
         static let LightGray = UIColor.lightGray

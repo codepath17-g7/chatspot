@@ -499,7 +499,10 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
     }
     
     func viewUserProfile(userID: String){
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+        profileVC.otherUserGuid = userID
+        self.present(profileVC, animated: true, completion: nil)
     }
 }
 

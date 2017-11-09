@@ -54,13 +54,28 @@ class ProfileView: UIView {
         
         if let bannerUrlStr = user.bannerImage {
             bannerImageView.safeSetImageWith(urlStr: bannerUrlStr)
+//            bannerImageView.layer.borderWidth = 0
+//            headerView.layer.masksToBounds
+            
         } else {
-        // TODO: change to pretty gradient
-            bannerImageView.image = #imageLiteral(resourceName: "image-placeholder")
+            bannerImageView.image = nil
+            
+            // Pretty default gradient
+            let gradient: CAGradientLayer = CAGradientLayer()
+            gradient.frame = headerView.frame
+            gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
+            gradient.endPoint = CGPoint(x: 1, y: 1)
+            gradient.colors = [UIColor.ChatSpotColors.BrightPink.cgColor, UIColor.ChatSpotColors.PastelRed.cgColor]
+            headerView.layer.insertSublayer(gradient, at: 0)
         }
         
-        usernameLabel.text = user.name
+        // Add semi-transparent gray layer
+        let grayOverlay = UIView(frame: headerView.frame)
+        grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
+        self.bannerImageView.addSubview(grayOverlay)
         
+        usernameLabel.text = user.name
+    
         if let tagline = user.tagline {
             userTaglineLabel.text = tagline
         }
@@ -70,11 +85,11 @@ class ProfileView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        profilePictureImageView.layer.cornerRadius = 7
+        profilePictureImageView.layer.cornerRadius = 4
         profilePictureImageView.layer.masksToBounds = true
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
-        tableView.separatorStyle = .none
-
+        tableView.separatorColor = UIColor.ChatSpotColors.LightGray
+        tableView.tableFooterView = UIView()
     }
 
 }

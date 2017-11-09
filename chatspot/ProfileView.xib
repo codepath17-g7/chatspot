@@ -9,11 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SF-Pro-Display-Semibold.otf">
-            <string>SFProDisplay-Semibold</string>
-        </array>
         <array key="SF-Pro-Text-Regular.otf">
             <string>SFProText-Regular</string>
+        </array>
+        <array key="SF-Pro-Text-Semibold.otf">
+            <string>SFProText-Semibold</string>
         </array>
     </customFonts>
     <objects>
@@ -37,35 +37,35 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="jg3-QW-pBk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rDp-W8-GC9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yrN-4t-oRa">
-                                <rect key="frame" x="137" y="25" width="100" height="100"/>
+                                <rect key="frame" x="129" y="55" width="116" height="116"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="BWg-kW-u2q"/>
-                                    <constraint firstAttribute="height" constant="100" id="Dhi-7Y-SJr"/>
+                                    <constraint firstAttribute="width" constant="116" id="BWg-kW-u2q"/>
+                                    <constraint firstAttribute="height" constant="116" id="Dhi-7Y-SJr"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Janis Joplin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5g-Pv-Frx">
-                                <rect key="frame" x="87" y="133" width="200" height="21"/>
+                                <rect key="frame" x="87" y="175" width="200" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="NoV-Qn-lwM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="SFProText-Semibold" family="SF Pro Text" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I love my mom. she's so great" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HF-b9-xLa">
-                                <rect key="frame" x="87" y="158" width="200" height="17"/>
+                                <rect key="frame" x="87" y="197" width="200" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="5hf-1B-t82"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -73,15 +73,14 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="rDp-W8-GC9" secondAttribute="bottom" id="24A-TU-eof"/>
                             <constraint firstAttribute="trailing" secondItem="rDp-W8-GC9" secondAttribute="trailing" id="6rr-RT-8VM"/>
-                            <constraint firstItem="6HF-b9-xLa" firstAttribute="top" secondItem="L5g-Pv-Frx" secondAttribute="bottom" constant="4" id="D5V-7u-tt3"/>
+                            <constraint firstItem="6HF-b9-xLa" firstAttribute="top" secondItem="L5g-Pv-Frx" secondAttribute="bottom" constant="2" id="D5V-7u-tt3"/>
                             <constraint firstItem="L5g-Pv-Frx" firstAttribute="centerX" secondItem="jg3-QW-pBk" secondAttribute="centerX" id="Mbc-Jz-DTE"/>
                             <constraint firstItem="rDp-W8-GC9" firstAttribute="top" secondItem="jg3-QW-pBk" secondAttribute="top" id="RGk-Pw-GBb"/>
-                            <constraint firstItem="yrN-4t-oRa" firstAttribute="top" secondItem="jg3-QW-pBk" secondAttribute="top" constant="25" id="S6e-87-4wv"/>
                             <constraint firstItem="6HF-b9-xLa" firstAttribute="centerX" secondItem="jg3-QW-pBk" secondAttribute="centerX" id="gj7-Xe-rVd"/>
                             <constraint firstItem="yrN-4t-oRa" firstAttribute="centerX" secondItem="jg3-QW-pBk" secondAttribute="centerX" id="kre-G1-Mri"/>
-                            <constraint firstItem="L5g-Pv-Frx" firstAttribute="top" secondItem="yrN-4t-oRa" secondAttribute="bottom" constant="8" id="mZK-yI-oMc"/>
                             <constraint firstItem="rDp-W8-GC9" firstAttribute="leading" secondItem="jg3-QW-pBk" secondAttribute="leading" id="pB1-I5-Fj1"/>
-                            <constraint firstAttribute="bottom" secondItem="6HF-b9-xLa" secondAttribute="bottom" constant="25" id="xeV-dN-54W"/>
+                            <constraint firstItem="L5g-Pv-Frx" firstAttribute="top" secondItem="yrN-4t-oRa" secondAttribute="bottom" constant="4" id="tgM-lw-8hb"/>
+                            <constraint firstItem="yrN-4t-oRa" firstAttribute="top" secondItem="jg3-QW-pBk" secondAttribute="top" constant="55" id="zB2-nl-Hln"/>
                         </constraints>
                     </view>
                 </tableView>
