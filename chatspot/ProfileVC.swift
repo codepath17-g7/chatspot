@@ -81,6 +81,8 @@ class ProfileVC: UIViewController {
         
         self.profileView.setupUserInfo(user: user)
 
+        self.hidesBottomBarWhenPushed = false
+
         //if from profile tab click:
         //-get current user
         //-get current user info and badges
@@ -107,6 +109,8 @@ class ProfileVC: UIViewController {
             //        }
             //    }
         }, failure: {})
+        
+        self.hidesBottomBarWhenPushed = true
         
         self.navigationController?.navigationBar.isHidden = true
         
@@ -200,7 +204,7 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
                 cell = BadgeCell()
             }
             (cell as! BadgeCell).badge = badge
-            if badge.chatspotName == "See All Badges" { // hacky. fix all this. 
+            if badge.chatspotName == "See All Badges" { // hacky. fix all this.
                 (cell as! BadgeCell).badgeImageView = nil
             }
             cell.accessoryType = .none

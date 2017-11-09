@@ -73,7 +73,7 @@ class ProfileView: UIView {
         profilePictureImageView.layer.cornerRadius = 7
         profilePictureImageView.layer.masksToBounds = true
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
-
+        tableView.separatorStyle = .none
 
     }
 

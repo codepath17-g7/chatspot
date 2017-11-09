@@ -586,22 +586,27 @@
         <!--Profile-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ProfileVC" title="Profile" hidesBottomBarWhenPushed="YES" id="BYZ-38-t0r" customClass="ProfileVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVC" title="Profile" id="BYZ-38-t0r" customClass="ProfileVC" customModule="chatspot" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3pn-Xo-wJa" customClass="ProfileView" customModule="chatspot" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3pn-Xo-wJa" customClass="ProfileView" customModule="chatspot" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3pn-Xo-wJa" secondAttribute="bottom" id="4It-VB-xi8"/>
+                            <constraint firstItem="3pn-Xo-wJa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="WmK-2G-tmh"/>
+                            <constraint firstItem="3pn-Xo-wJa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ZjI-un-6vq"/>
+                            <constraint firstAttribute="trailing" secondItem="3pn-Xo-wJa" secondAttribute="trailing" id="qr4-2H-RgX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kph-OR-89o"/>
                     <connections>
