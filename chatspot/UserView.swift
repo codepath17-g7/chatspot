@@ -260,17 +260,3 @@ extension UserView: UIImagePickerControllerDelegate, UINavigationControllerDeleg
     }
 }
 
-extension UIImageView {
-    open func safeSetImageWith(urlStr: String?) {
-        guard let urlStr = urlStr else {
-            return
-        }
-        
-        guard let url = URL(string: urlStr) else {
-            return
-        }
-        
-        setImageWith(url)
-    }
-
-}

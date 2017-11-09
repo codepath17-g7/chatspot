@@ -9,175 +9,132 @@
 import UIKit
 import FirebaseAuthUI
 
-
-
 class ProfileVC: UIViewController {
-
-//    @IBOutlet weak var userView: UserView!
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var userBannerImageView: UIImageView!
-    @IBOutlet weak var userProfilePictureImageView: UIImageView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userTaglineLabel: UILabel!
-    @IBOutlet weak var headerView: UIView!
+    // note: hidebottombaronpush is set
     
     
-    var user = Auth.auth().currentUser!
-//    var userProfile: User1!
-    
+    @IBOutlet weak var profileView: ProfileView!
+//    var currentUser = ChatSpotClient.currentUser
+//    var user: User1!
     fileprivate var tableViewData = [SectionWithItems]()
-    private var userSection: SectionWithItems!
-    private var activitySection: SectionWithItems!
-    private var isSelf: Bool!
+    private var badgeSection: SectionWithItems!
 
+
+    var user: User1!
+    var otherUserGuid: String?
+//    var isSelfProfile: Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileView.tableView.dataSource = self
+        profileView.tableView.delegate = self
+        
+        if navigationController?.restorationIdentifier == "ProfileNavigationController" {
+//            isSelfProfile = true
+            setupSelfProfile()
+
+
+        } else {
+//            isSelfProfile = false
+            setupOtherUserProfile()
+        }
+        
+        
+        ChatSpotClient.getBadges(userGuid: user.guid!, success: { (badges: [Badge]) in
+
+            if (badges.count == 0) {
+                return
+            }
+            
+            self.badgeSection = SectionWithItems("Badges", Array(badges.prefix(3)))
+//            let seeAll = Activity()
+            let seeAll = Badge(badgeType: .oneHundredMessagesSentInChannel, chatspotName: "See All Badges")
+//
+            self.badgeSection.sectionItems.append(seeAll)
+            self.tableViewData.insert(self.badgeSection, at: 0)
+            self.profileView.tableView.reloadData()
+
+        }, failure: {
+            print("Failure retrieving badges")
+        })
+        
+        let badgeCellNib = UINib.init(nibName: "BadgeCell", bundle: nil)
+        profileView.tableView.register(badgeCellNib, forCellReuseIdentifier: "badgeCell")
+        
+        let userCellNib = UINib.init(nibName: "UserCell", bundle: nil)
+        profileView.tableView.register(userCellNib, forCellReuseIdentifier: "userCell")
+        
+    }
+    
+    func setupSelfProfile(){
+        user = ChatSpotClient.currentUser
         self.navigationItem.setUpTitle(title: "Profile")
+        tableViewData.append(SectionWithItems(" ", ["Logout"]))
         
-        fetchUserProfile()
+        let rightItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editProfile))
         
-//        let userWithImage = User()
-        
-//        userWithImage.profileImage = user.photoURL?.absoluteString
-//        userWithImage.bannerImage = "https://i.ytimg.com/vi/uWmUdFIUtYs/maxresdefault.jpg"
-//        
-//        userWithImage.name = user.displayName //"John Snow"
-//        userWithImage.tagline = "Winter is coming"
-//    
-//        let userNoImage = User()
-//        userNoImage.name = "John Snow"
-//        userNoImage.tagline = "Winter is coming"
-        
-//        userView.prepare(user: userNoImage, isSelf: true)
-        
-//        userView.prepare(user: userWithImage, isSelf: true)
-//        userView.prepare(user: userWithImage, isSelf: true)
-        
+        rightItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regular], for: .normal)
 
-    }
-    
-    
-    private func setupUI() {
-        tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
-        tableView.estimatedRowHeight = 56
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
+        navigationItem.rightBarButtonItem = rightItem
         
-        
-        var roomBanner: UIImage?
-        if let urlString = self.chatroom.banner,
-            let url = URL(string: urlString),
-            let data = try? Data(contentsOf: url),
-            let image = UIImage(data: data) {
-            print("Banner height - \(image.size.height)")
-            roomBanner = image
-        }
-        
-        guard let bannerImage = roomBanner else {
-            print("problem")
-            return
-        }
-        
-//        let chatroomTitleLabel = UILabel(frame: CGRect(x: 16, y: 16, width: 150, height: 130))
-//        chatroomTitleLabel.attributedText = NSAttributedString(string: "\(self.chatroom.name!)", attributes: [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont.Chatspot.extraLarge])
-//        chatroomTitleLabel.numberOfLines = 3
-//        chatroomTitleLabel.sizeToFit()
-        
-        
-        let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
-        headerView.image = bannerImage
-        
-        // Add a gradient only if there is a banner picture
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = headerView.frame
-        gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradient.locations = [0.2, 1]
-        headerView.layer.insertSublayer(gradient, at: 0)
-        
+        self.profileView.setupUserInfo(user: user)
 
-        
-        
-        self.tableView.tableHeaderView = headerView
-        
-        
-//        self.tableView.tableHeaderView!.transform = self.tableView.transform
-        
-        
-        self.view.layoutIfNeeded()
-        
-        
-        let cellNib = UINib.init(nibName: "UserCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "userCell")
-        
-        let mapCellNib = UINib.init(nibName: "MapCell", bundle: nil)
-        tableView.register(mapCellNib, forCellReuseIdentifier: "mapCell")
-        
-        let activityCellNib = UINib.init(nibName: "ActivityCell", bundle: nil)
-        tableView.register(activityCellNib, forCellReuseIdentifier: "activityCell")
+        //if from profile tab click:
+        //-get current user
+        //-get current user info and badges
+        //-show logout cell
+        //-show edit profile button
+        //-tab bar visible
+        //-nav bar profile title set
         
     }
     
-    func setupUserData(user: User1, isSelf: Bool) {
-
-//        self.user = user
-        self.isSelf = isSelf
+    func editProfile(){
         
-        if let imgUrlStr = user.profileImage {
-            userProfilePictureImageView.safeSetImageWith(urlStr: imgUrlStr)
-        } else {
-            userProfilePictureImageView.image = #imageLiteral(resourceName: "image-placeholder")
-        }
-        
-        
-        if let bannerUrlStr = user.bannerImage {
-            userBannerImageView.safeSetImageWith(urlStr: bannerUrlStr)
-        } else {
-            userBannerImageView.image = UIImage()
-        }
-        
-        usernameLabel.text = user.name
-//        userNameField.text = user.name
-        
-        if let tagline = user.tagline {
-            userTaglineLabel.text = tagline
-//            userTaglineField.text = tagline
-        }
-        
-        if isSelf {
-            profileImage.showEditView()
-            bannerImage.showEditView()
-            
-            
-            sendMessageButton.isHidden = true
-            editUserNameButton.isHidden = false
-            editUserTaglineButton.isHidden = false
-        } else {
-            profileImage.hideEditView()
-            bannerImage.hideEditView()
-            
-            sendMessageButton.isHidden = false
-            editUserNameButton.isHidden = true
-            editUserTaglineButton.isHidden = true
-        }
-    }
-
-    
-    
-    func fetchUserProfile() {
-        ChatSpotClient.getUserProfile(userGuid: user.uid, success: { (userProfile: User1) in
-            self.setupUserData(user: userProfile, isSelf: true)
-//            self.userProfile = userProfile
-//            self.userView.prepare(user: userProfile, isSelf: true)
-        }) {
-            print("Could not get user profile for \(self.user.displayName ?? "") \(self.user.uid)")
-        }
     }
     
-    @IBAction func onLogout(_ sender: UIBarButtonItem) {
+    func setupOtherUserProfile(){//depending on how this VC is presented, change the nav left bar button item to be either a chevron or an x (and make navbar clear)
+        
+        ChatSpotClient.getUserProfile(userGuid: otherUserGuid!, success: { (user: User1) in
+            self.user = user
+            self.profileView.setupUserInfo(user: user)
+            ////            self.userView.prepare(user: userProfile, isSelf: true)
+            //            self.profileView.setupUserInfo(user: user, isSelf: true)
+            //        }) {
+            //            print("Could not get user profile for \(self.user.displayName ?? "") \(self.user.uid)")
+            //        }
+            //    }
+        }, failure: {})
+        
+        self.navigationController?.navigationBar.isHidden = true
+        
+        let closeButton = UIButton(frame: CGRect(x: profileView.headerView.frame.origin.x + 16, y: profileView.headerView.frame.origin.y + 16, width: 24, height: 24))
+        closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
+        closeButton.changeImageViewTo(color: .white)
+        closeButton.sizeToFit()
+        closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
+        self.view.addSubview(closeButton)
+
+        
+        
+        //
+        //if viewing other user profile:
+        //-push onto nav stack (no title view in left bar button)
+        //-hide tab bar
+        //-make call to fetch user info
+        //-populate badge cells with badges
+        //-hide logout cell
+        //-hide edit profile button
+    }
+    
+    
+    func close() { //    @objc private
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func logout() {
         do {
             try FUIAuth.defaultAuthUI()?.signOut()
             self.performSegue(withIdentifier: "loggedOutSegue", sender: self)
@@ -206,17 +163,17 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataItem = tableViewData[indexPath.section]
         if let rows = dataItem.sectionItems as? [String],
-            rows.first == "Leave \(chatroom.name!)" {
-            leaveRoom()
+            rows.first == "Logout" {
+            logout()
         }
         tableView.deselectRow(at: indexPath, animated:true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let dataItem = tableViewData[indexPath.section]
-        if (dataItem.sectionTitle == "Location") {
-            return 125
-        }
+//        let dataItem = tableViewData[indexPath.section]
+//        if (dataItem.sectionTitle == "Location") {
+//            return 125
+//        }
         return UITableViewAutomaticDimension
     }
     
@@ -235,51 +192,93 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionItems = tableViewData[indexPath.section].sectionItems
         var cell: UITableViewCell!
-        if let userSectionItems = sectionItems as? [User1] {
-            let user = userSectionItems[indexPath.row]
-            cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
-            (cell as! UserCell).user = user
-            cell.accessoryType = .disclosureIndicator
-        } else if let leaveSectionItems = sectionItems as? [String] {
-            let item = leaveSectionItems[indexPath.row]
-            cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
+        if let badgeSectionItems = sectionItems as? [Badge] {
+            let badge = badgeSectionItems[indexPath.row]
+            if let badgeCell = tableView.dequeueReusableCell(withIdentifier: "badgeCell") as? BadgeCell {
+                cell = badgeCell
+            } else {
+                cell = BadgeCell()
+            }
+            (cell as! BadgeCell).badge = badge
+            if badge.chatspotName == "See All Badges" { // hacky. fix all this. 
+                (cell as! BadgeCell).badgeImageView = nil
+            }
+            cell.accessoryType = .none
+        } else if let logoutSectionItems = sectionItems as? [String] {
+            let item = logoutSectionItems[indexPath.row]
+            if let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell {
+
+//            if let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell{
+                cell = userCell
+            } else {
+                cell = UserCell()
+            }
             (cell as! UserCell).name.text = item
             cell.accessoryType = .none
-        } else if let mapCellItems = sectionItems as? [CLLocationCoordinate2D] {
-            let item = mapCellItems[indexPath.row]
-            cell = tableView.dequeueReusableCell(withIdentifier: "mapCell")
-            (cell as! MapCell).setLocation(coordinate: item)
-        } else if let activityItems = sectionItems as? [Activity] {
-            let item = activityItems[indexPath.row]
-            cell = tableView.dequeueReusableCell(withIdentifier: "activityCell")
-            let activityCell = cell as! ActivityCell
-            activityCell.activity = item
-            if item.activityName == "See All Activities" {
-                activityCell.actionButton.isHidden = true
-                activityCell.accessoryType = .disclosureIndicator
-            } else {
-                activityCell.actionButton.isHidden = false
-                activityCell.accessoryType = .none
-            }
-            
-            activityCell.action = { shouldJoin, activityGuid in
-                
-                let activity = activityItems.first(where: { (activity) -> Bool in activity.guid == activityGuid })
-                let userGuid = ChatSpotClient.currentUser.guid!
-                
-                if (shouldJoin) {
-                    print("Join activity \(activity!.activityName!)")
-                    ChatSpotClient.joinActivity(roomGuid: self.chatroom.guid, activityGuid: activityGuid, userGuid: userGuid, success: {
-                        activity?.usersJoined[userGuid] = true
-                    }, failure: {})
-                } else {
-                    print("Leave activity \(activity!.activityName!)")
-                    ChatSpotClient.leaveActivity(roomGuid: self.chatroom.guid, activityGuid: activityGuid, userGuid: userGuid, success: {
-                        activity?.usersJoined.removeValue(forKey: userGuid)
-                    }, failure: {})
-                }
-            }
         }
         return cell
     }
+
 }
+
+
+//        let userWithImage = User()
+
+//        userWithImage.profileImage = user.photoURL?.absoluteString
+//        userWithImage.bannerImage = "https://i.ytimg.com/vi/uWmUdFIUtYs/maxresdefault.jpg"
+//
+//        userWithImage.name = user.displayName //"John Snow"
+//        userWithImage.tagline = "Winter is coming"
+//
+//        let userNoImage = User()
+//        userNoImage.name = "John Snow"
+//        userNoImage.tagline = "Winter is coming"
+
+//        userView.prepare(user: userNoImage, isSelf: true)
+
+//        userView.prepare(user: userWithImage, isSelf: true)
+//        userView.prepare(user: userWithImage, isSelf: true)
+
+
+
+
+//    func fetchUserProfile() {
+//        ChatSpotClient.getUserProfile(userGuid: user.guid, success: { (user: User1) in
+//            self.user = user
+////            self.userView.prepare(user: userProfile, isSelf: true)
+//            self.profileView.setupUserInfo(user: user, isSelf: true)
+//        }) {
+//            print("Could not get user profile for \(self.user.displayName ?? "") \(self.user.uid)")
+//        }
+//    }
+
+//        // Get current user info
+//        fetchUserProfile()
+
+
+
+
+//        let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
+//
+//        users?.keys.forEach({ (userGuid) in
+//
+//            ChatSpotClient.getUserProfile(userGuid: userGuid, success: { (user) in
+//
+//                if (self.userSection == nil) {
+//                    let seeAll = User1()
+//                    seeAll.name = "See All Members"
+//                    self.userList.append(seeAll)
+//                    self.userSection = SectionWithItems("Members", self.userList)
+//                    self.tableViewData.insert(self.userSection, at: self.tableViewData.count - 1)
+//                }
+//                self.userList.insert(user, at: self.userList.count - 1)
+//
+//                if (self.userList.count <= 3) {
+//                    self.userSection.sectionItems = self.userList
+//                    self.tableView.reloadData()
+//                }
+//
+//            }, failure: {})
+//        })
+
+

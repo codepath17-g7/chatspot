@@ -51,6 +51,11 @@
 		F21E501F1FA928FC00F4625F /* ChatroomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E501E1FA928FC00F4625F /* ChatroomCardView.swift */; };
 		F21E50211FA9295000F4625F /* ChatroomCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21E50201FA9295000F4625F /* ChatroomCardView.xib */; };
 		F21E50231FA93DF500F4625F /* BottomDrawerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */; };
+		F23BDC011FB39339002086B4 /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23BDC001FB39339002086B4 /* ProfileView.xib */; };
+		F23BDC031FB39355002086B4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23BDC021FB39355002086B4 /* ProfileView.swift */; };
+		F23BDC051FB39FDF002086B4 /* Badge.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23BDC041FB39FDF002086B4 /* Badge.swift */; };
+		F23BDC071FB3A49B002086B4 /* BadgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F23BDC061FB3A49B002086B4 /* BadgeCell.xib */; };
+		F23BDC091FB3A796002086B4 /* BadgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23BDC081FB3A796002086B4 /* BadgeCell.swift */; };
 		F254FCA21FA3E52500CBD616 /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */; };
 		F254FCA31FA3E52500CBD616 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */; };
 		F254FCA41FA3E52500CBD616 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F254FC861FA3E50B00CBD616 /* SF-Pro-Display-Bold.otf */; };
@@ -168,6 +173,11 @@
 		F21E50201FA9295000F4625F /* ChatroomCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatroomCardView.xib; sourceTree = "<group>"; };
 		F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomDrawerVC.swift; sourceTree = "<group>"; };
 		F230195A1FA1D46700006D7C /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "../../Library/Developer/Xcode/DerivedData/chatspot-fgkshavcpzelupglajjguiigxwnn/Build/Products/Debug-iphonesimulator/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
+		F23BDC001FB39339002086B4 /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		F23BDC021FB39355002086B4 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		F23BDC041FB39FDF002086B4 /* Badge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badge.swift; sourceTree = "<group>"; };
+		F23BDC061FB3A49B002086B4 /* BadgeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BadgeCell.xib; sourceTree = "<group>"; };
+		F23BDC081FB3A796002086B4 /* BadgeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeCell.swift; sourceTree = "<group>"; };
 		F254FC841FA3E50B00CBD616 /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		F254FC851FA3E50B00CBD616 /* SF-Pro-Display-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-BlackItalic.otf"; sourceTree = "<group>"; };
 		F254FC861FA3E50B00CBD616 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
@@ -296,6 +306,7 @@
 				7679EA7E1F8DFE8000DE16FA /* ChatRoom.swift */,
 				F2719F0D1F8DFCD900417517 /* Message.swift */,
 				3298CF611F92F8DF00F9BBEE /* User1.swift */,
+				F23BDC041FB39FDF002086B4 /* Badge.swift */,
 				3298CF631F92F8E900F9BBEE /* ChatRoom1.swift */,
 				3298CF651F92F91000F9BBEE /* Message1.swift */,
 				8B0811241FA03A18002337F1 /* Activity.swift */,
@@ -309,6 +320,8 @@
 				F2A666501FA080A700EE8A4A /* ParallaxView.swift */,
 				7679EA811F8E054600DE16FA /* UserView.xib */,
 				7679EA831F8E071A00DE16FA /* UserView.swift */,
+				F23BDC001FB39339002086B4 /* ProfileView.xib */,
+				F23BDC021FB39355002086B4 /* ProfileView.swift */,
 				76E358091F91A50900EC6B0C /* UIImageWithEditView.xib */,
 				76E3580D1F91A56B00EC6B0C /* UIImageWithEditView.swift */,
 				7626201D1F9338A7008404F6 /* AroundMeView.xib */,
@@ -444,6 +457,8 @@
 				8BCDD9B61FA87274004DD84D /* ActivityCell.swift */,
 				8BCDD9B71FA87274004DD84D /* ActivityCell.xib */,
 				F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */,
+				F23BDC061FB3A49B002086B4 /* BadgeCell.xib */,
+				F23BDC081FB3A796002086B4 /* BadgeCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -539,6 +554,7 @@
 				32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */,
 				F254FCA81FA3E52500CBD616 /* SF-Pro-Display-Light.otf in Resources */,
 				F28898901F9EA091000C64DF /* Localizable.stringsdict in Resources */,
+				F23BDC071FB3A49B002086B4 /* BadgeCell.xib in Resources */,
 				F254FCB81FA3E52500CBD616 /* SF-Pro-Text-Light.otf in Resources */,
 				F254FCB51FA3E52500CBD616 /* SF-Pro-Text-BoldItalic.otf in Resources */,
 				32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */,
@@ -561,6 +577,7 @@
 				F254FCA61FA3E52500CBD616 /* SF-Pro-Display-Heavy.otf in Resources */,
 				F254FCA91FA3E52500CBD616 /* SF-Pro-Display-LightItalic.otf in Resources */,
 				F254FCAD1FA3E52500CBD616 /* SF-Pro-Display-RegularItalic.otf in Resources */,
+				F23BDC011FB39339002086B4 /* ProfileView.xib in Resources */,
 				F254FCBE1FA3E52500CBD616 /* SF-Pro-Text-Semibold.otf in Resources */,
 				F254FCBD1FA3E52500CBD616 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				F254FCAA1FA3E52500CBD616 /* SF-Pro-Display-Medium.otf in Resources */,
@@ -707,11 +724,14 @@
 				8B0ACFBA1FA1CCDC00722B1D /* ActivityDetailVC.swift in Sources */,
 				2D93B1051F9D2B6800D6B80C /* UserCell.swift in Sources */,
 				F2719F0B1F8DF71600417517 /* ChatMessageCell.swift in Sources */,
+				F23BDC051FB39FDF002086B4 /* Badge.swift in Sources */,
 				7679EA841F8E071A00DE16FA /* UserView.swift in Sources */,
+				F23BDC091FB3A796002086B4 /* BadgeCell.swift in Sources */,
 				F21E501F1FA928FC00F4625F /* ChatroomCardView.swift in Sources */,
 				325F47991F91F71E00DE5C34 /* AuthViewController.swift in Sources */,
 				32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */,
 				7679EA7F1F8DFE8000DE16FA /* ChatRoom.swift in Sources */,
+				F23BDC031FB39355002086B4 /* ProfileView.swift in Sources */,
 				7679EA7B1F8DF27A00DE16FA /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

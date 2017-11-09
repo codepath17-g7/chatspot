@@ -436,4 +436,45 @@ class ChatSpotClient {
         success()
     }
     
+    static func getBadges(userGuid: String, success: @escaping ([Badge]) -> (), failure: @escaping () -> ()) {
+        let badge1 = Badge(badgeType: .oneHundredMessagesSentInChannel, chatspotName: "Rengstorff Park")
+        let badge2 = Badge(badgeType: .oneHundredMessagesSentInChannel, chatspotName: "Golden Gate Bridge")
+        success([badge1, badge2])
+//        let ref = Database.database().reference()
+//        
+//        ref.child("badges")
+//            .child(userGuid)
+//            .queryOrderedByKey()
+//            .observeSingleEvent(of: DataEventType.value, with: { (snapshot: DataSnapshot) in
+//                
+//                let dicts = snapshot.value as? [String : AnyObject] ?? [:]
+//                
+//                var badges = [Badge]()
+//                
+//                for dict in dicts {
+//                    let data = dict.value as! NSDictionary
+//                    let badge = Activity(guid: snapshot.key, obj: data)
+//                    badges.append(badge)
+//                }
+//                
+//                success(badges)
+//                
+//            }) { (error: Error) in
+//                
+//                failure()
+//            }
+        
+//        ref.child("users").child(userGuid).observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+//            let userDict = snapshot.value as? NSDictionary ?? [:]
+//            if userDict.count != 0 {
+//                let user = User1(guid: userGuid, obj: userDict)
+//                success(user)
+//            } else {
+//                failure()
+//            }
+//        })
+
+        
+    }
+    
 }
