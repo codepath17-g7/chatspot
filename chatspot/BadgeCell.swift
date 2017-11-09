@@ -18,6 +18,9 @@ class BadgeCell: UITableViewCell {
         didSet {
             badgeImageView.image = badge.badgeImage
             badgeInfoTextLabel.text = badge.chatspotName
+            if badge.chatspotName == "See All Badges" { // hacky. fix this (also in profileVC and chatroomdetailvc).
+                self.badgeImageView.image = nil
+            }
         }
     }
     

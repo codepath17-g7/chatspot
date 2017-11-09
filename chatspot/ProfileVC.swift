@@ -204,15 +204,10 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
                 cell = BadgeCell()
             }
             (cell as! BadgeCell).badge = badge
-            if badge.chatspotName == "See All Badges" { // hacky. fix all this.
-                (cell as! BadgeCell).badgeImageView = nil
-            }
             cell.accessoryType = .none
         } else if let logoutSectionItems = sectionItems as? [String] {
             let item = logoutSectionItems[indexPath.row]
             if let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell {
-
-//            if let userCell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserCell{
                 cell = userCell
             } else {
                 cell = UserCell()
