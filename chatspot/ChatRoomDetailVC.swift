@@ -132,7 +132,7 @@ class ChatRoomDetailVC: UIViewController {
         headerView.layer.insertSublayer(gradient, at: 0)
         chatroomTitleLabel.frame.origin.y = headerView.frame.maxY - (16 + chatroomTitleLabel.frame.height)
         
-        closeButton = UIButton(frame: CGRect(x: headerView.frame.origin.x + 16, y: headerView.frame.origin.y + 16, width: 24, height: 24))
+        closeButton = UIButton(frame: CGRect(x: headerView.frame.origin.x + 24, y: headerView.frame.origin.y + 28, width: 24, height: 24))
         closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
         closeButton.changeImageViewTo(color: .white)
         closeButton.sizeToFit()
