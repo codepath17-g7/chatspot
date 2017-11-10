@@ -131,7 +131,7 @@ class ProfileVC: UIViewController {
         closeButton.changeImageViewTo(color: .white)
         closeButton.sizeToFit()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
-        self.view.addSubview(closeButton)
+        self.profileView.headerView.insertSubview(closeButton, at: 0)
     }
     
     func editProfile(){

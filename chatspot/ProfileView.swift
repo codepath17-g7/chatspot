@@ -54,12 +54,9 @@ class ProfileView: UIView {
         }
         
         
-//        bannerImageView.frame = headerView.frame
         
         if let bannerUrlStr = user.bannerImage {
             bannerImageView.safeSetImageWith(urlStr: bannerUrlStr)
-//            bannerImageView.layer.borderWidth = 0
-//            headerView.layer.masksToBounds
             
         } else {
             bannerImageView.image = nil
@@ -72,13 +69,6 @@ class ProfileView: UIView {
             gradient.colors = [UIColor.ChatSpotColors.BrightPink.cgColor, UIColor.ChatSpotColors.PastelRed.cgColor]
             headerView.layer.insertSublayer(gradient, at: 0)
         }
-        
-        // Add semi-transparent gray layer
-        let grayOverlay = UIView(frame: bannerImageView.frame)
-        grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
-        self.bannerImageView.addSubview(grayOverlay)
-        
-        layoutIfNeeded()
         
         usernameLabel.text = user.name
     
@@ -96,6 +86,13 @@ class ProfileView: UIView {
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
         tableView.separatorColor = UIColor.ChatSpotColors.LightGray
         tableView.tableFooterView = UIView()
+        
+        // Add semi-transparent gray layer
+        let grayOverlay = UIView(frame: bannerImageView.frame)
+        grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
+        self.bannerImageView.addSubview(grayOverlay)
+//        layoutIfNeeded()
+        
     }
 
 }
