@@ -23,8 +23,7 @@ class ProfileView: UIView {
     fileprivate var user: User1!
     private var profileImageOriginalTransform: CGAffineTransform!
     private var profileImageOriginalCenter: CGPoint!
-    
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         initSubView()
@@ -54,11 +53,12 @@ class ProfileView: UIView {
         }
         
         
-        
+        // User has a banner image
         if let bannerUrlStr = user.bannerImage {
             bannerImageView.safeSetImageWith(urlStr: bannerUrlStr)
             
-        } else {
+        } else { // User doesn't have a banner image
+
             bannerImageView.image = nil
             
             // Pretty default gradient
@@ -70,6 +70,14 @@ class ProfileView: UIView {
             headerView.layer.insertSublayer(gradient, at: 0)
         }
         
+        // Add semi-transparent gray layer
+        let grayOverlay = UIView(frame: bannerImageView.frame)
+        grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
+        self.headerView.addSubview(grayOverlay)
+        layoutIfNeeded()
+        
+        headerView.isUserInteractionEnabled = true
+        bannerImageView.isUserInteractionEnabled = true
         usernameLabel.text = user.name
     
         if let tagline = user.tagline {
@@ -86,12 +94,6 @@ class ProfileView: UIView {
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
         tableView.separatorColor = UIColor.ChatSpotColors.LightGray
         tableView.tableFooterView = UIView()
-        
-        // Add semi-transparent gray layer
-        let grayOverlay = UIView(frame: bannerImageView.frame)
-        grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
-        self.bannerImageView.addSubview(grayOverlay)
-//        layoutIfNeeded()
         
     }
 

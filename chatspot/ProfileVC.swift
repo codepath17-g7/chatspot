@@ -33,6 +33,15 @@ class ProfileVC: UIViewController {
         profileView.tableView.dataSource = self
         profileView.tableView.delegate = self
         
+        profileView.tableView.register(UINib(nibName: "BadgeCell", bundle: nil), forCellReuseIdentifier: "badgeCell")
+        profileView.tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCell")
+
+//        let badgeCellNib = UINib.init(nibName: "BadgeCell", bundle: nil)
+//        profileView.tableView.register(badgeCellNib, forCellReuseIdentifier: "badgeCell")
+//        
+//        let userCellNib = UINib.init(nibName: "UserCell", bundle: nil)
+//        profileView.tableView.register(userCellNib, forCellReuseIdentifier: "userCell")
+        
         if navigationController?.restorationIdentifier == "ProfileNavigationController" {
             setupSelfProfile()
 
@@ -40,13 +49,6 @@ class ProfileVC: UIViewController {
         } else {
             setupOtherUserProfile()
         }
-        
-        
-        let badgeCellNib = UINib.init(nibName: "BadgeCell", bundle: nil)
-        profileView.tableView.register(badgeCellNib, forCellReuseIdentifier: "badgeCell")
-        
-        let userCellNib = UINib.init(nibName: "UserCell", bundle: nil)
-        profileView.tableView.register(userCellNib, forCellReuseIdentifier: "userCell")
         
         setNeedsStatusBarAppearanceUpdate()
 
@@ -102,7 +104,9 @@ class ProfileVC: UIViewController {
         ChatSpotClient.getUserProfile(userGuid: otherUserGuid!, success: { (user: User1) in
             self.user = user
             self.profileView.setupUserInfo(user: user)
+            self.addCloseButton()
             
+
             ChatSpotClient.getBadges(userGuid: self.user.guid!, success: { (badges: [Badge]) in
                 if (badges.count == 0) {
                     return
@@ -126,12 +130,15 @@ class ProfileVC: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = true
         
-        let closeButton = UIButton(frame: CGRect(x: profileView.headerView.frame.origin.x + 24, y: profileView.headerView.frame.origin.y + 28, width: 24, height: 24))
+    }
+    
+    func addCloseButton() {
+        let closeButton = UIButton(frame: CGRect(x: self.profileView.headerView.frame.origin.x + 24, y: self.profileView.headerView.frame.origin.y + 28, width: 24, height: 24))
         closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
         closeButton.changeImageViewTo(color: .white)
         closeButton.sizeToFit()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
-        self.profileView.headerView.insertSubview(closeButton, at: 0)
+        self.profileView.headerView.addSubview(closeButton)
     }
     
     func editProfile(){

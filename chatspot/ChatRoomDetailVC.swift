@@ -137,12 +137,12 @@ class ChatRoomDetailVC: UIViewController {
         closeButton.changeImageViewTo(color: .white)
         closeButton.sizeToFit()
         closeButton.addTarget(self, action: #selector(ChatRoomDetailVC.close), for: .touchUpInside)
-        headerView.isUserInteractionEnabled = true
         
         headerView.addSubview(chatroomTitleLabel)
         headerView.insertSubview(closeButton, at: 0)
 
         self.tableView.tableHeaderView = headerView
+        headerView.isUserInteractionEnabled = true
         self.tableView.tableHeaderView?.isUserInteractionEnabled = true
         
         
