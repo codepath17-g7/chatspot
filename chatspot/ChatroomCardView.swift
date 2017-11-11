@@ -25,7 +25,7 @@ class ChatroomCardView: UIView {
     
     @IBOutlet weak var cardView: UIView!
     
-//    @IBOutlet var joinButton: UIButton!
+    @IBOutlet var joinButton: UIButton!
     
     @IBOutlet weak var accountImageToAroundMeConstraint: NSLayoutConstraint!
     
@@ -68,16 +68,22 @@ class ChatroomCardView: UIView {
                     chatRoomImageView.hnk_setImageFromURL(url)
                 }
             } else {
-                chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
+                chatRoomImageView.image = #imageLiteral(resourceName: "image-placeholder")
+            }
+            joinButton.setRadiusWithShadow()
+            joinButton.isHidden = true
+            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+                joinButton.isHidden = true
+            } else {
+                joinButton.isHidden = false
+                self.bringSubview(toFront: joinButton)
             }
             
-//            joinButton.isHidden = true
-//            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
-//                joinButton.isHidden = true
-//            } else {
-//                joinButton.isHidden = false
-//                self.bringSubview(toFront: joinButton)
-//            }
+//            let joinButt = UIButton(frame: CGRect(x: 329, y: 23, width: 30, height: 30))
+//            joinButt.setImage(#imageLiteral(resourceName: "plusButton"), for: .normal)
+//            joinButt.setRadiusWithShadow()
+//            joinButt.addTarget(self, action: #selector(joinClicked), for: .touchUpInside)
+//            self.addSubview(joinButt)
             self.updateConstraints()
         }
     }
@@ -110,15 +116,15 @@ class ChatroomCardView: UIView {
         
     }
     
-//    @IBAction func joinButtonClicked(_ sender: Any) {
-//        print("joining room \(chatRoom.guid)")
-//        let user = Auth.auth().currentUser!
-//        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid)
-//        joinButton.setImage(#imageLiteral(resourceName: "blue check button"), for: .selected)
-//        UIView.animate(withDuration: 0.3) { [weak self] in
-//            self?.joinButton.isSelected = true
-//        }
-//    }
+    @IBAction func joinButtonClicked(_ sender: Any) {
+        print("joining room \(chatRoom.guid)")
+        let user = Auth.auth().currentUser!
+        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid)
+        joinButton.setImage(#imageLiteral(resourceName: "checkButton"), for: .selected)
+        UIView.animate(withDuration: 0.3) { [weak self] in
+            self?.joinButton.isSelected = true
+        }
+    }
     
 
     

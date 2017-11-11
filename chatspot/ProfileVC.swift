@@ -35,12 +35,6 @@ class ProfileVC: UIViewController {
         
         profileView.tableView.register(UINib(nibName: "BadgeCell", bundle: nil), forCellReuseIdentifier: "badgeCell")
         profileView.tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCell")
-
-//        let badgeCellNib = UINib.init(nibName: "BadgeCell", bundle: nil)
-//        profileView.tableView.register(badgeCellNib, forCellReuseIdentifier: "badgeCell")
-//        
-//        let userCellNib = UINib.init(nibName: "UserCell", bundle: nil)
-//        profileView.tableView.register(userCellNib, forCellReuseIdentifier: "userCell")
         
         if navigationController?.restorationIdentifier == "ProfileNavigationController" {
             setupSelfProfile()

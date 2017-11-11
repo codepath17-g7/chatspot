@@ -25,6 +25,7 @@
                 <outlet property="chatRoomImageView" destination="O5z-ot-C8X" id="qTS-dg-SsE"/>
                 <outlet property="chatRoomNameLabel" destination="AZp-ob-Itx" id="21s-Q7-CjJ"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="9Ks-yJ-ID1"/>
+                <outlet property="joinButton" destination="5Xu-vz-6qH" id="FiN-5o-rnd"/>
                 <outlet property="lastMessageLabel" destination="g4n-Vb-vDe" id="h8i-xc-4mK"/>
                 <outlet property="locationLabel" destination="ZxS-Nd-TJH" id="Dpk-qY-sxb"/>
                 <outlet property="memberCountLabel" destination="hBR-V7-XCx" id="d0W-fr-lnF"/>
@@ -46,36 +47,47 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="at Facebook HQ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxS-Nd-TJH">
-                            <rect key="frame" x="120" y="86.5" width="103" height="17"/>
+                            <rect key="frame" x="133" y="86.5" width="106" height="17"/>
                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZp-ob-Itx">
-                            <rect key="frame" x="8" y="84" width="104.5" height="21"/>
+                            <rect key="frame" x="8" y="84" width="117.5" height="21"/>
                             <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="oh cool, i can see you. blue shirt right?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4n-Vb-vDe">
-                            <rect key="frame" x="8" y="109.5" width="293.5" height="20"/>
+                            <rect key="frame" x="8" y="110" width="309.5" height="20"/>
                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBR-V7-XCx">
-                            <rect key="frame" x="255" y="86.5" width="16" height="17"/>
+                            <rect key="frame" x="271" y="86.5" width="17.5" height="17"/>
                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-JJ-eAu">
-                            <rect key="frame" x="230.5" y="87.5" width="20.5" height="15"/>
+                            <rect key="frame" x="246.5" y="87.5" width="20.5" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20.5" id="00s-wa-UJu"/>
                                 <constraint firstAttribute="height" constant="15" id="Tvl-Pk-San"/>
                             </constraints>
                         </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Xu-vz-6qH">
+                            <rect key="frame" x="328" y="92" width="31" height="31"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="6kZ-7w-Ecf"/>
+                                <constraint firstAttribute="width" constant="31" id="Nus-XV-uGx"/>
+                            </constraints>
+                            <state key="normal" image="plusButton"/>
+                            <connections>
+                                <action selector="joinButtonClicked:" destination="-1" eventType="touchUpInside" id="925-sh-C9S"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -83,16 +95,19 @@
                         <constraint firstItem="O5z-ot-C8X" firstAttribute="top" secondItem="iOr-Yh-TzH" secondAttribute="top" id="6mm-Nx-SOc"/>
                         <constraint firstItem="Vbo-JJ-eAu" firstAttribute="centerY" secondItem="AZp-ob-Itx" secondAttribute="centerY" id="CeF-Ss-rtw"/>
                         <constraint firstItem="g4n-Vb-vDe" firstAttribute="top" secondItem="AZp-ob-Itx" secondAttribute="bottom" constant="4.5" id="Cgr-8T-EWW"/>
+                        <constraint firstItem="5Xu-vz-6qH" firstAttribute="leading" secondItem="g4n-Vb-vDe" secondAttribute="trailing" constant="10.5" id="G8z-sY-XBC"/>
                         <constraint firstItem="ZxS-Nd-TJH" firstAttribute="centerY" secondItem="AZp-ob-Itx" secondAttribute="centerY" id="GKW-0I-Ah3"/>
+                        <constraint firstItem="5Xu-vz-6qH" firstAttribute="top" secondItem="O5z-ot-C8X" secondAttribute="bottom" constant="15.5" id="GSH-qd-9Jf"/>
+                        <constraint firstAttribute="trailing" secondItem="5Xu-vz-6qH" secondAttribute="trailing" constant="16" id="LwJ-OK-CVJ"/>
                         <constraint firstItem="hBR-V7-XCx" firstAttribute="centerY" secondItem="AZp-ob-Itx" secondAttribute="centerY" id="Sxd-UE-bQH"/>
                         <constraint firstAttribute="bottom" secondItem="g4n-Vb-vDe" secondAttribute="bottom" constant="8.5" id="Ug6-d3-JAZ"/>
                         <constraint firstItem="Vbo-JJ-eAu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AZp-ob-Itx" secondAttribute="trailing" constant="8" id="X8f-AG-UJg"/>
                         <constraint firstItem="AZp-ob-Itx" firstAttribute="top" secondItem="O5z-ot-C8X" secondAttribute="bottom" constant="8" id="Z8A-2z-Az1"/>
                         <constraint firstItem="ZxS-Nd-TJH" firstAttribute="leading" secondItem="AZp-ob-Itx" secondAttribute="trailing" constant="8" id="bDH-BL-oXr"/>
-                        <constraint firstAttribute="trailing" secondItem="g4n-Vb-vDe" secondAttribute="trailing" constant="73.5" id="dux-Fe-bp1"/>
                         <constraint firstItem="AZp-ob-Itx" firstAttribute="leading" secondItem="iOr-Yh-TzH" secondAttribute="leading" constant="8" id="igR-wf-aeq"/>
                         <constraint firstItem="Vbo-JJ-eAu" firstAttribute="leading" secondItem="ZxS-Nd-TJH" secondAttribute="trailing" constant="8" id="mfO-qh-uhh"/>
                         <constraint firstItem="g4n-Vb-vDe" firstAttribute="leading" secondItem="AZp-ob-Itx" secondAttribute="leading" id="ova-j7-F1P"/>
+                        <constraint firstAttribute="bottom" secondItem="5Xu-vz-6qH" secondAttribute="bottom" constant="15.5" id="sYU-y5-3c5"/>
                         <constraint firstItem="hBR-V7-XCx" firstAttribute="leading" secondItem="Vbo-JJ-eAu" secondAttribute="trailing" constant="4" id="tsX-fT-xpa"/>
                     </constraints>
                 </view>
@@ -110,6 +125,7 @@
     </objects>
     <resources>
         <image name="24hourfitlong" width="375" height="76"/>
-        <image name="people" width="35" height="26"/>
+        <image name="people" width="37" height="25"/>
+        <image name="plusButton" width="31" height="31"/>
     </resources>
 </document>

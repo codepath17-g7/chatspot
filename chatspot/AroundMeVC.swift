@@ -106,6 +106,8 @@ extension AroundMeVC: AroundMeViewDelegate {
     
     func hideDrawer() {
         removeChildVC()
+//        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isUserInteractionEnabled = true
     }
     
     func removeChildVC(){
@@ -114,9 +116,6 @@ extension AroundMeVC: AroundMeViewDelegate {
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()
         }
-        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.isUserInteractionEnabled = true
-
     }
     
     
@@ -142,17 +141,18 @@ extension AroundMeVC: AroundMeViewDelegate {
             bottomDrawerVC.smallDrawerView = chatroomCardView
             
             // Adjust bottomDrawerVC frame and initial position (below the screen)
-//            let height = view.frame.height
-//            let width  = view.frame.width
             bottomDrawerVC.view.frame.origin.y = self.view.frame.maxY
             bottomDrawerVC.view.isUserInteractionEnabled = true
-            self.tabBarController?.tabBar.isHidden = true
+
             
             // add bottomDrawerVC as a child view
             self.addChildViewController(bottomDrawerVC)
             self.view.addSubview(bottomDrawerVC.view)
             self.view.isUserInteractionEnabled = true
-            self.view.bringSubview(toFront: bottomDrawerVC.view)
+//            self.view.bringSubview(toFront: bottomDrawerVC.view)
+//            UIApplication.shared.keyWindow!.bringSubview(toFront: bottomDrawerVC.view)
+            UIApplication.shared.keyWindow!.insertSubview(bottomDrawerVC.view, aboveSubview: tabBarController!.tabBar)
+
 //            bottomDrawerVC.didMove(toParentViewController: self)
             
             
