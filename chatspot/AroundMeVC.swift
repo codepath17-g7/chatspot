@@ -27,10 +27,12 @@ class AroundMeVC: UIViewController {
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//    }
     
-    
+//    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+//        
+//    }
 
     
     
@@ -105,18 +107,32 @@ class AroundMeVC: UIViewController {
 extension AroundMeVC: AroundMeViewDelegate {
     
     func hideDrawer() {
-        removeChildVC()
-//        self.tabBarController?.tabBar.isHidden = false
-        self.tabBarController?.tabBar.isUserInteractionEnabled = true
+        if let childVC = self.childViewControllers.last as? BottomDrawerVC {
+            if childVC.isOpen {
+                childVC.closeDrawer() { () in
+                    self.removeChildVC()
+                }
+            } else {
+                self.removeChildVC()
+                // somehow animate a nice partialdrawerclosing
+//                childVC.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+            }
+//
+        }
+        
     }
     
     func removeChildVC(){
+        
         for childVC in self.childViewControllers {
             childVC.willMove(toParentViewController: nil)
             childVC.view.removeFromSuperview()
             childVC.removeFromParentViewController()
+            
+            print("removing last childvc")
         }
     }
+    
     
     
     func mapPinButtonClicked(roomGuid: String) {
@@ -127,8 +143,8 @@ extension AroundMeVC: AroundMeViewDelegate {
             let bottomDrawerVC = BottomDrawerVC()
             
             // create small view
-            let chatroomCardView = ChatroomCardView()
-            chatroomCardView.loadFromXib()
+            let chatroomCardView = ChatroomCardView(frame: CGRect(x: 0, y: 0, width: 375, height: 139))
+//            chatroomCardView.loadFromXib()
             chatroomCardView.chatRoom = chatRoom
 
             
@@ -139,30 +155,26 @@ extension AroundMeVC: AroundMeViewDelegate {
             
             bottomDrawerVC.mainFullVC = chatroomDetailVC
             bottomDrawerVC.smallDrawerView = chatroomCardView
+            bottomDrawerVC.view.addSubview(bottomDrawerVC.mainFullVC.view)
+            bottomDrawerVC.view.addSubview(bottomDrawerVC.smallDrawerView)
+            bottomDrawerVC.addChildViewController(chatroomDetailVC)
             
             // Adjust bottomDrawerVC frame and initial position (below the screen)
             bottomDrawerVC.view.frame.origin.y = self.view.frame.maxY
-            bottomDrawerVC.view.isUserInteractionEnabled = true
 
             
             // add bottomDrawerVC as a child view
-            self.addChildViewController(bottomDrawerVC)
-            self.view.addSubview(bottomDrawerVC.view)
-            self.view.isUserInteractionEnabled = true
-//            self.view.bringSubview(toFront: bottomDrawerVC.view)
-//            UIApplication.shared.keyWindow!.bringSubview(toFront: bottomDrawerVC.view)
+            addChildViewController(bottomDrawerVC)
+            view.addSubview(bottomDrawerVC.view)
+//            view.isUserInteractionEnabled = true
             UIApplication.shared.keyWindow!.insertSubview(bottomDrawerVC.view, aboveSubview: tabBarController!.tabBar)
 
-//            bottomDrawerVC.didMove(toParentViewController: self)
-            
-            
-
-            
         }
-        
-
     }
-    
-
-    
 }
+
+
+//            self.view.bringSubview(toFront: bottomDrawerVC.view)
+//            UIApplication.shared.keyWindow!.bringSubview(toFront: bottomDrawerVC.view)
+//            bottomDrawerVC.didMove(toParentViewController: self)
+

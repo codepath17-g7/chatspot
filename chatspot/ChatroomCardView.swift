@@ -56,9 +56,7 @@ class ChatroomCardView: UIView {
             }
             
             lastMessageLabel.text = chatRoom.lastMessage
-            
-            self.updateConstraints()
-            
+                        
             if let bannerString = chatRoom.banner {
                 guard let url = URL(string: bannerString) else { return }
                 chatRoomImageView.hnk_setImageFromURL(url)
@@ -70,20 +68,15 @@ class ChatroomCardView: UIView {
             } else {
                 chatRoomImageView.image = #imageLiteral(resourceName: "image-placeholder")
             }
+            
             joinButton.setRadiusWithShadow()
             joinButton.isHidden = true
             if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
                 joinButton.isHidden = true
             } else {
                 joinButton.isHidden = false
-                self.bringSubview(toFront: joinButton)
+//                self.bringSubview(toFront: joinButton)
             }
-            
-//            let joinButt = UIButton(frame: CGRect(x: 329, y: 23, width: 30, height: 30))
-//            joinButt.setImage(#imageLiteral(resourceName: "plusButton"), for: .normal)
-//            joinButt.setRadiusWithShadow()
-//            joinButt.addTarget(self, action: #selector(joinClicked), for: .touchUpInside)
-//            self.addSubview(joinButt)
             self.updateConstraints()
         }
     }
@@ -103,7 +96,7 @@ class ChatroomCardView: UIView {
         // standard initialization logic
         Bundle.main.loadNibNamed("ChatroomCardView", owner: self, options: nil)
         contentView!.frame = bounds
-        contentView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        contentView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView!)
         
         cardView.layer.shadowOffset = CGSize(width: 0, height: -3.0)
@@ -111,22 +104,29 @@ class ChatroomCardView: UIView {
         cardView.layer.shadowOpacity = 0.6
         cardView.layer.masksToBounds = false
         
-//        joinButton.setRadiusWithShadow()
-//        joinButton.isEnabled = true
+
         
     }
     
     @IBAction func joinButtonClicked(_ sender: Any) {
         print("joining room \(chatRoom.guid)")
-        let user = Auth.auth().currentUser!
-        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid)
+        let user = ChatSpotClient.currentUser!
+        ChatSpotClient.joinChatRoom(userGuid: user.guid!, roomGuid: chatRoom.guid)
         joinButton.setImage(#imageLiteral(resourceName: "checkButton"), for: .selected)
         UIView.animate(withDuration: 0.3) { [weak self] in
             self?.joinButton.isSelected = true
         }
     }
     
-
+    //    func joinClicked(){
+    //        print("joining room \(chatRoom.guid)")
+    //        let user = Auth.auth().currentUser!
+    //        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid!)
+    //        joinButt!.setImage(#imageLiteral(resourceName: "checkButton"), for: .selected)
+    //        UIView.animate(withDuration: 0.3) { [weak self] in
+    //            self?.joinButt.isSelected = true
+    //        }
+    //    }
     
 
 }

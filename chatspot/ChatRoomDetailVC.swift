@@ -36,16 +36,23 @@ class ChatRoomDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.register(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCell")
         tableView.register(UINib(nibName: "MapCell", bundle: nil), forCellReuseIdentifier: "mapCell")
         tableView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellReuseIdentifier: "activityCell")
-
+        tableView.estimatedRowHeight = 56
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         setupUI()
         
+        // if user belongs to the chatspot
+        if chatroom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+            tableViewData.append(SectionWithItems(" ", ["Leave \(chatroom.name!)"]))
+        } else {//if user doesn't belong to chatspot
+            // TODO: add join button
+        }
         
-        tableViewData.append(SectionWithItems(" ", ["Leave \(chatroom.name!)"]))
         
         let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
         
@@ -58,7 +65,12 @@ class ChatRoomDetailVC: UIViewController {
                     seeAll.name = "See All Members"
                     self.userList.append(seeAll)
                     self.userSection = SectionWithItems("Members", self.userList)
-                    self.tableViewData.insert(self.userSection, at: self.tableViewData.count - 1)
+                    if self.tableViewData.count > 0 {
+                        self.tableViewData.insert(self.userSection, at: self.tableViewData.count - 1)
+                    } else {
+                        self.tableViewData.insert(self.userSection, at: self.tableViewData.count)
+                    }
+                    
                 }
                 self.userList.insert(user, at: self.userList.count - 1)
                 
@@ -88,17 +100,27 @@ class ChatRoomDetailVC: UIViewController {
     }
     
     func close() { //    @objc private
-        self.dismiss(animated: true, completion: nil)
+        if let parentVC = self.parent as? BottomDrawerVC {
+            parentVC.closeDrawer(completion: nil)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+//        if presentingViewController?.restorationIdentifier == "AroundMeVC" {
+//            self.dismiss(animated: false, completion: {
+//                let aroundMeVC = self.presentingViewController as! AroundMeVC
+//                aroundMeVC.hideDrawer()
+//            })
+//        } else {
+        
+//        }
+        
     }
     
     private func setupUI() { //247, 247, 247
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
-        tableView.estimatedRowHeight = 56
-        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorColor = UIColor.lightGray
         tableView.tableFooterView = UIView()
-        tableView.delegate = self
-        tableView.dataSource = self
+
         
         
         var roomBanner: UIImage?
@@ -136,7 +158,7 @@ class ChatRoomDetailVC: UIViewController {
         closeButton.setImage(#imageLiteral(resourceName: "xIcon"), for: .normal)
         closeButton.changeImageViewTo(color: .white)
         closeButton.sizeToFit()
-        closeButton.addTarget(self, action: #selector(ChatRoomDetailVC.close), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
         
         headerView.addSubview(chatroomTitleLabel)
         headerView.insertSubview(closeButton, at: 0)
@@ -160,31 +182,19 @@ class ChatRoomDetailVC: UIViewController {
     }
     
     func leaveRoom() {
+        print("leaveroom called")
         ChatSpotClient.leaveChatRoom(userGuid: Auth.auth().currentUser!.uid, roomGuid: chatroom.guid)
-        performSegue(withIdentifier: "unwindToChatList", sender: self)
+        tableViewData.removeLast()
+//        tableView.reloadSections(indexSet, with: .automatic)
+        tableView.deleteSections(IndexSet(integer: tableViewData.count), with: .automatic) // this may not work. test it
+//        tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+        
+        if let parentVC = self.parent as? BottomDrawerVC {
+//            parentVC.closeDrawer(completion: nil)
+        } else {
+           performSegue(withIdentifier: "unwindToChatList", sender: self)
+        }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        
-////        if let headerView = tableView.tableHeaderView {
-//        
-////            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-////            var headerFrame = headerView.frame
-//            
-//            //Comparison necessary to avoid infinite loop
-//            if height != headerFrame.size.height {
-//                headerFrame.size.height = height
-//                headerView.frame = headerFrame
-//                tableView.tableHeaderView = headerView
-//            }
-//        }
-//    }
     
 }
 

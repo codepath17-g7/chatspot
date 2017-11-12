@@ -17,65 +17,29 @@ class BottomDrawerVC: UIViewController {
     let partialViewTopY = UIScreen.main.bounds.height - 139
     let fullViewTopY = UIScreen.main.bounds.minY
     var isOpen = false
-//    var joinButt: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.isUserInteractionEnabled = true
         
-        view.addSubview(mainFullVC.view)
-        view.addSubview(smallDrawerView)
-//        mainFullVC.view.isHidden = true
-        smallDrawerView.isUserInteractionEnabled = true
+        
+//        view.addSubview(mainFullVC.view)
+//        view.insertSubview(smallDrawerView, at: 0)
+//        view.addSubview(smallDrawerView)
+        
+//        smallDrawerView.bringSubview(toFront: smallDrawerView.joinButton)
 
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(panGesture))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
-        
-//        joinButt = UIButton(frame: CGRect(x: 329, y: 23, width: 30, height: 30))
-//        joinButt.setImage(#imageLiteral(resourceName: "plusButton"), for: .normal)
-//        joinButt.setRadiusWithShadow()
-//        joinButt.addTarget(self, action: #selector(joinClicked), for: .touchUpInside)
-//        self.view.addSubview(joinButt)
-        
-        
-        
-        
-//        if self.smallDrawerView.chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
-//            joinButt.isHidden = true
-//        } else {
-//            joinButt.isHidden = false
-//            self.view.bringSubview(toFront: smallDrawerView)
-//
-//            self.view.bringSubview(toFront: joinButt)
-//            
-//        }
         self.view.layoutIfNeeded()
-        
     }
-    
-    
-//    func joinClicked(){
-//        let chatRoom = self.smallDrawerView.chatRoom!
-//        print("joining room \(chatRoom.guid)")
-//        let user = Auth.auth().currentUser!
-//        ChatSpotClient.joinChatRoom(userGuid: user.uid, roomGuid: chatRoom.guid!)
-//        joinButt!.setImage(#imageLiteral(resourceName: "checkButton"), for: .selected)
-//        UIView.animate(withDuration: 0.3) { [weak self] in
-//            self?.joinButt.isSelected = true
-//        }
-//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.tabBarController?.tabBar.isUserInteractionEnabled = false
 
-        // do this only for map pin click
         UIView.animate(withDuration: 0.3) { () in
-//            self.tabBarController?.tabBar.layer.zPosition = (self.view.layer.zPosition) - 50
-//            self.tabBarController?.tabBar.isHidden = true
-//            self.parent!.tabBarController?.tabBar.isHidden = true
-            self.tabBarController?.tabBar.isUserInteractionEnabled = false
             
             // set up initial short height for partial view
             self.view.frame.origin.y = self.partialViewTopY
@@ -84,44 +48,39 @@ class BottomDrawerVC: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-
+        super.viewWillDisappear(animated)
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            print("animation called!!!!!")
+        self.tabBarController?.tabBar.isUserInteractionEnabled = true
+        
+        UIView.animate(withDuration: 0.3, animations: { () in
             
-            self?.view.frame.origin.y = UIScreen.main.bounds.height
-//            let frame = self?.view.frame
-//            self?.view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height, width: frame!.width, height: frame!.height)
+            self.view.frame.origin.y = UIScreen.main.bounds.height
+            
             }, completion: { (finished: Bool) in
                 self.mainFullVC.view.removeFromSuperview()
                 self.smallDrawerView.removeFromSuperview()
-//                self.joinButt.removeFromSuperview()
-
+                self.removeChildVC()
             })
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-//        self.tabBarController?.tabBar.layer.zPosition = 0
-//        self.tabBarController?.tabBar.isHidden = false
-//        self.parent?.tabBarController?.tabBar.isHidden = false
-
         self.tabBarController?.tabBar.isUserInteractionEnabled = true
-
-
-//        UIView.animate(withDuration: 0.3) { [weak self] in
-//            self?.tabBarController?.tabBar.layer.zPosition = 0
-//        }
     }
     
-    
+    func removeChildVC(){
+        for childVC in self.childViewControllers {
+            childVC.willMove(toParentViewController: nil)
+            childVC.view.removeFromSuperview()
+            childVC.removeFromParentViewController()
+            print("removing children")
+        }
+    }
 
     
     
     func panGesture(recognizer: UIPanGestureRecognizer) {
-        
         let translation = recognizer.translation(in: view)
         let velocity = recognizer.velocity(in: view)
-//        let point = recognizer.location(in: view)
         
         if recognizer.state == .began {
 
@@ -150,26 +109,20 @@ class BottomDrawerVC: UIViewController {
                 if velocity.y < 0 { //opening drawer
 
                     self.openDrawer()
-                } else if !isOpen && velocity.y > 0 { // if drawer is closed and velocity is pulling downwards
+//                } //else if !isOpen && velocity.y > 0 { // if drawer is closed and velocity is pulling downwards
 //                    self.dismiss(animated: true, completion: nil)
-                    (self.parent as! AroundMeVC).removeChildVC()
-                    return
+//                    (self.parent as! AroundMeVC).removeChildVC()
+//                    return
                 } else { //closing drawer
-                    self.closeDrawer()
-                    
+                    self.closeDrawer(completion: nil)
                 }
-//            self.view.layoutIfNeeded()
 
-//                self.view.layoutIfNeeded()
-//            })
         }
         
-        // fix this: put BottomDrawerVC above navbar
-        if self.view.frame.origin.y < (self.navigationController?.navigationBar.frame.maxY)! { //if the drawer is over the navbar
-//            self.navigationController?.navigationBar.layer.zPosition = -1
+        // if the drawer is over the navbar
+        if self.view.frame.origin.y < (self.navigationController?.navigationBar.frame.maxY)! {
             self.navigationController?.navigationBar.isUserInteractionEnabled = false
         } else {
-//            self.navigationController?.navigationBar.layer.zPosition = 0
             self.navigationController?.navigationBar.isUserInteractionEnabled = true
 
         }
@@ -178,38 +131,28 @@ class BottomDrawerVC: UIViewController {
     }
     
     func openDrawer(){
-
-        
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.view.frame.origin.y = 0
             self?.mainFullVC.view.alpha = 1
             self?.smallDrawerView.alpha = 0
             self?.view.layoutIfNeeded()
-            }, completion: { (finished: Bool) in
-//                self.smallDrawerView.isHidden = true
-//                self.mainFullVC.view.isHidden = false
-
-                self.isOpen = true
-                self.mainFullVC.view.isUserInteractionEnabled = true
-
+        }, completion: { (finished: Bool) in
+            self.isOpen = true
+            self.mainFullVC.view.isUserInteractionEnabled = true
         })
         
     }
     
-    func closeDrawer(){
+    func closeDrawer(completion: (() -> Void)?){
         UIView.animate(withDuration: 0.3, animations: { [weak self] () in
             self?.view.frame.origin.y = (self?.partialViewTopY)!
             self?.smallDrawerView.alpha = 1
             self?.mainFullVC.view.alpha = 0
             self?.view.layoutIfNeeded()
 
-            }, completion: { (finished: Bool) in
-//                self.smallDrawerView.isHidden = false
-//                self.mainFullVC.view.isHidden = true
-//                self.present(self.mainFullVC, animated: false, completion: nil)
-                self.isOpen = false
-                self.mainFullVC.view.isUserInteractionEnabled = false
-
+        }, completion: { (finished: Bool) in
+            self.isOpen = false
+            self.mainFullVC.view.isUserInteractionEnabled = false
         })
     }
     
@@ -352,3 +295,12 @@ class BottomDrawerVC: UIViewController {
 //        tabBarFrame?.origin.y = self.view.frame.size.height + (tabBarFrame?.size.height)!
 //        self.tabBarController?.tabBar.frame = tabBarFrame!
 //        self.tabBarController?.tabBar.isEnabled = false
+
+
+
+//                self.smallDrawerView.isHidden = false
+//                self.mainFullVC.view.isHidden = true
+//                self.present(self.mainFullVC, animated: false, completion: nil)
+//                self.parent?.present(self.mainFullVC, animated: false, completion: nil)
+//                self.smallDrawerView.isHidden = true
+//                self.mainFullVC.view.isHidden = false
