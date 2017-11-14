@@ -56,7 +56,7 @@ class ChatroomCardView: UIView {
             }
             
             lastMessageLabel.text = chatRoom.lastMessage
-                        
+            
             if let bannerString = chatRoom.banner {
                 guard let url = URL(string: bannerString) else { return }
                 chatRoomImageView.hnk_setImageFromURL(url)
@@ -69,14 +69,9 @@ class ChatroomCardView: UIView {
                 chatRoomImageView.image = #imageLiteral(resourceName: "image-placeholder")
             }
             
-            joinButton.setRadiusWithShadow()
-            joinButton.isHidden = true
-            if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
-                joinButton.isHidden = true
-            } else {
-                joinButton.isHidden = false
-//                self.bringSubview(toFront: joinButton)
-            }
+            updateJoinButtonView()
+            
+            
             self.updateConstraints()
         }
     }
@@ -104,8 +99,20 @@ class ChatroomCardView: UIView {
         cardView.layer.shadowOpacity = 0.6
         cardView.layer.masksToBounds = false
         
+        joinButton.setRadiusWithShadow()
+    }
+    
+    func updateJoinButtonView(){
+//        joinButton.isHidden = true
+        if chatRoom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+            joinButton.isHidden = true
+            print("join button is hidden")
+        } else {
+            joinButton.isHidden = false
+            print("join button is visible")
+        }
+        self.layoutIfNeeded()
 
-        
     }
     
     @IBAction func joinButtonClicked(_ sender: Any) {

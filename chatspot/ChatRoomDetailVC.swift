@@ -24,11 +24,13 @@ class ChatRoomDetailVC: UIViewController {
     private var closeButton: UIButton!
     
     
-    var chatroom: ChatRoom1! {
-        didSet {
-            
-        }
-    }
+    var chatroom: ChatRoom1!// {
+//        didSet {
+//            // if user belongs to the chatspot
+//           
+//
+//        }
+//    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -44,17 +46,10 @@ class ChatRoomDetailVC: UIViewController {
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        setupUI()
-        
-        // if user belongs to the chatspot
-        if chatroom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
-            tableViewData.append(SectionWithItems(" ", ["Leave \(chatroom.name!)"]))
-        } else {//if user doesn't belong to chatspot
-            // TODO: add join button
-        }
-        
-        
         let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
+        
+        
+        setupUI()
         
         users?.keys.forEach({ (userGuid) in
             
@@ -97,44 +92,37 @@ class ChatRoomDetailVC: UIViewController {
             self.tableView.reloadData()
         }) {}
         
+        if chatroom.users?.index(forKey: ChatSpotClient.userGuid) != nil {
+            tableViewData.append(SectionWithItems(" ", ["Leave \(chatroom.name!)"]))
+        } else {//if user doesn't belong to chatspot
+            // TODO: add join button
+        }
+        
     }
     
-    func close() { //    @objc private
+    func close() {
         if let parentVC = self.parent as? BottomDrawerVC {
             parentVC.closeDrawer(completion: nil)
         } else {
             self.dismiss(animated: true, completion: nil)
         }
-//        if presentingViewController?.restorationIdentifier == "AroundMeVC" {
-//            self.dismiss(animated: false, completion: {
-//                let aroundMeVC = self.presentingViewController as! AroundMeVC
-//                aroundMeVC.hideDrawer()
-//            })
-//        } else {
-        
-//        }
-        
     }
     
     private func setupUI() { //247, 247, 247
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
         tableView.separatorColor = UIColor.lightGray
         tableView.tableFooterView = UIView()
+        
+        let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
+        headerView.image = #imageLiteral(resourceName: "image-placeholder")
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let urlString = self.chatroom.banner, let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                print("Banner height - \(image.size.height)")
+                DispatchQueue.main.async {
+                    headerView.image = image
 
-        
-        
-        var roomBanner: UIImage?
-        if let urlString = self.chatroom.banner,
-            let url = URL(string: urlString),
-            let data = try? Data(contentsOf: url),
-            let image = UIImage(data: data) {
-            print("Banner height - \(image.size.height)")
-            roomBanner = image
-        }
-        
-        guard let bannerImage = roomBanner else {
-            print("problem")
-            return
+                }
+            }
         }
         
         let chatroomTitleLabel = UILabel(frame: CGRect(x: 16, y: 16, width: 150, height: 130))
@@ -143,8 +131,7 @@ class ChatRoomDetailVC: UIViewController {
         chatroomTitleLabel.sizeToFit()
         
             
-        let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
-        headerView.image = bannerImage
+        
         
         // Add a gradient
         let gradient: CAGradientLayer = CAGradientLayer()
@@ -185,12 +172,10 @@ class ChatRoomDetailVC: UIViewController {
         print("leaveroom called")
         ChatSpotClient.leaveChatRoom(userGuid: Auth.auth().currentUser!.uid, roomGuid: chatroom.guid)
         tableViewData.removeLast()
-//        tableView.reloadSections(indexSet, with: .automatic)
-        tableView.deleteSections(IndexSet(integer: tableViewData.count), with: .automatic) // this may not work. test it
-//        tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+        tableView.deleteSections(IndexSet(integer: tableViewData.count), with: .automatic)
         
         if let parentVC = self.parent as? BottomDrawerVC {
-//            parentVC.closeDrawer(completion: nil)
+            parentVC.updateJoinButton()
         } else {
            performSegue(withIdentifier: "unwindToChatList", sender: self)
         }
@@ -280,7 +265,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
                 let userGuid = ChatSpotClient.currentUser.guid!
                 
                 if (shouldJoin) {
-                    print("Join activity \(activity!.activityName!)")
+                    print("Join activity \(activity!.activityName!)") // fix: activity doesn't have a name
                     ChatSpotClient.joinActivity(roomGuid: self.chatroom.guid, activityGuid: activityGuid, userGuid: userGuid, success: {
                         activity?.usersJoined[userGuid] = true
                     }, failure: {})

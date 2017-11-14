@@ -72,7 +72,7 @@ class ChatListCell: UITableViewCell {
                     chatRoomImageView.hnk_setImageFromURL(url)
                 }
             } else {
-                chatRoomImageView.image = #imageLiteral(resourceName: "24hourfitlong")
+                chatRoomImageView.image = #imageLiteral(resourceName: "fitnessCenterSmall")
             }
             
             

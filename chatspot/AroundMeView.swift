@@ -131,7 +131,7 @@ extension AroundMeView: MKMapViewDelegate {
 //        mapView.showAnnotations(mapView.annotations, animated: true)
     }
     
-    func centerMap() {
+    func centerMap() { // TODO: fix this to be user's current location?
         let rgn = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(37.5644565, -122.1683781), 65000, 65000);
         mapView.setRegion(rgn, animated: false)
         mapView.isZoomEnabled = true

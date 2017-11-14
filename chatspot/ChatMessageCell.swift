@@ -127,7 +127,7 @@ class ChatMessageCell: UITableViewCell {
         
         print("urlString:")
         print(urlString)
-        //                imageCache.fetch(key: <#T##String#>, formatName: Format(name: "original"), failure: <#T##Fetch.Failer?##Fetch.Failer?##(Error?) -> ()#>, success: <#T##((UIImage) -> ())?##((UIImage) -> ())?##(UIImage) -> ()#>)
+
         imageCache.fetch(key: urlString).onSuccess { (image) in
             print("was able to set image from cache using key string")
             
@@ -139,7 +139,7 @@ class ChatMessageCell: UITableViewCell {
                 guard let url = URL(string: urlString) else { return }
                 print("url:")
                 print(url)
-                self.messageImageView.hnk_setImageFromURL(url, placeholder: #imageLiteral(resourceName: "default-placeholder-300x300"), format: Format(name: "original"), failure: { (e: Error?) in
+                self.messageImageView.hnk_setImageFromURL(url, placeholder: #imageLiteral(resourceName: "image-placeholder"), format: Format(name: "original"), failure: { (e: Error?) in
                     print("there was an error setting the imageview with the url: \(String(describing: e?.localizedDescription))")
                 }, success: { (image: UIImage) in
                     self.messageImageView.image = image

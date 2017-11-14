@@ -40,7 +40,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-Yh-TzH">
                     <rect key="frame" x="0.0" y="1" width="375" height="138"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="24hourfitlong" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-ot-C8X">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="fitnessCenterSmall" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-ot-C8X">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="76" id="we0-ey-ZmB"/>
@@ -51,24 +51,28 @@
                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Oracle Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZp-ob-Itx">
                             <rect key="frame" x="8" y="84" width="117.5" height="21"/>
                             <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="18"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="oh cool, i can see you. blue shirt right?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4n-Vb-vDe">
                             <rect key="frame" x="8" y="110" width="309.5" height="20"/>
                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBR-V7-XCx">
                             <rect key="frame" x="271" y="86.5" width="17.5" height="17"/>
                             <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <size key="shadowOffset" width="0.0" height="0.0"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="people" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-JJ-eAu">
                             <rect key="frame" x="246.5" y="87.5" width="20.5" height="15"/>
@@ -99,6 +103,7 @@
                         <constraint firstItem="5Xu-vz-6qH" firstAttribute="top" secondItem="O5z-ot-C8X" secondAttribute="bottom" constant="15.5" id="GSH-qd-9Jf"/>
                         <constraint firstAttribute="trailing" secondItem="5Xu-vz-6qH" secondAttribute="trailing" constant="16" id="LwJ-OK-CVJ"/>
                         <constraint firstItem="hBR-V7-XCx" firstAttribute="centerY" secondItem="AZp-ob-Itx" secondAttribute="centerY" id="Sxd-UE-bQH"/>
+                        <constraint firstItem="5Xu-vz-6qH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g4n-Vb-vDe" secondAttribute="trailing" priority="900" constant="10.5" id="UWl-mG-kro"/>
                         <constraint firstAttribute="bottom" secondItem="g4n-Vb-vDe" secondAttribute="bottom" constant="8.5" id="Ug6-d3-JAZ"/>
                         <constraint firstItem="Vbo-JJ-eAu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AZp-ob-Itx" secondAttribute="trailing" constant="8" id="X8f-AG-UJg"/>
                         <constraint firstItem="AZp-ob-Itx" firstAttribute="top" secondItem="O5z-ot-C8X" secondAttribute="bottom" constant="8" id="Z8A-2z-Az1"/>
@@ -123,7 +128,7 @@
         </view>
     </objects>
     <resources>
-        <image name="24hourfitlong" width="375" height="76"/>
+        <image name="fitnessCenterSmall" width="375" height="76"/>
         <image name="people" width="37" height="25"/>
         <image name="plusButton" width="31" height="31"/>
     </resources>

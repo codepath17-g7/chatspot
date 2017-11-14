@@ -22,19 +22,7 @@ class AroundMeVC: UIViewController {
         self.navigationItem.setUpTitle(title: "Around Me")
         self.aroundMeView.delegate = self
         setupSearchBar()
-        
-
-        
     }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//    }
-    
-//    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-//        
-//    }
-
-    
     
     
 // FIXME: needs work
@@ -49,7 +37,7 @@ class AroundMeVC: UIViewController {
         searchView.addConstraint(NSLayoutConstraint(item: searchView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: UIScreen.main.bounds.width))
         searchView.addConstraint(NSLayoutConstraint(item: searchView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: navigationController!.navigationBar.bounds.height))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(open))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(openSearchBar))
         
         // Search bar.
         searchBar = UISearchBar()
@@ -77,7 +65,7 @@ class AroundMeVC: UIViewController {
         searchBar.alpha = 0
     }
     
-    func open() {
+    func openSearchBar() {
         
         let isClosing = leftConstraint.priority == UILayoutPriorityDefaultHigh
         
@@ -107,16 +95,25 @@ class AroundMeVC: UIViewController {
 extension AroundMeVC: AroundMeViewDelegate {
     
     func hideDrawer() {
+        // slide down, remove child
+        
         if let childVC = self.childViewControllers.last as? BottomDrawerVC {
-            if childVC.isOpen {
-                childVC.closeDrawer() { () in
-                    self.removeChildVC()
-                }
-            } else {
+            UIView.animate(withDuration: 0.3, animations: {
+                childVC.view.frame.origin.y = self.view.frame.maxY
+
+            }, completion: { (finished: Bool) in
                 self.removeChildVC()
-                // somehow animate a nice partialdrawerclosing
-//                childVC.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-            }
+            })
+
+//            if childVC.isOpen {
+//                childVC.closeDrawer() { () in
+//                    self.removeChildVC()
+//                }
+//            } else {
+//                self.removeChildVC()
+//                // somehow animate a nice partialdrawerclosing
+////                childVC.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+//            }
 //
         }
         
@@ -144,7 +141,6 @@ extension AroundMeVC: AroundMeViewDelegate {
             
             // create small view
             let chatroomCardView = ChatroomCardView(frame: CGRect(x: 0, y: 0, width: 375, height: 139))
-//            chatroomCardView.loadFromXib()
             chatroomCardView.chatRoom = chatRoom
 
             
@@ -166,15 +162,9 @@ extension AroundMeVC: AroundMeViewDelegate {
             // add bottomDrawerVC as a child view
             addChildViewController(bottomDrawerVC)
             view.addSubview(bottomDrawerVC.view)
-//            view.isUserInteractionEnabled = true
             UIApplication.shared.keyWindow!.insertSubview(bottomDrawerVC.view, aboveSubview: tabBarController!.tabBar)
 
         }
     }
 }
-
-
-//            self.view.bringSubview(toFront: bottomDrawerVC.view)
-//            UIApplication.shared.keyWindow!.bringSubview(toFront: bottomDrawerVC.view)
-//            bottomDrawerVC.didMove(toParentViewController: self)
 
