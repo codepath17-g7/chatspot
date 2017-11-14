@@ -108,6 +108,7 @@
                         <constraint firstItem="Vbo-JJ-eAu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AZp-ob-Itx" secondAttribute="trailing" constant="8" id="X8f-AG-UJg"/>
                         <constraint firstItem="AZp-ob-Itx" firstAttribute="top" secondItem="O5z-ot-C8X" secondAttribute="bottom" constant="8" id="Z8A-2z-Az1"/>
                         <constraint firstItem="ZxS-Nd-TJH" firstAttribute="leading" secondItem="AZp-ob-Itx" secondAttribute="trailing" constant="8" id="bDH-BL-oXr"/>
+                        <constraint firstAttribute="trailing" secondItem="O5z-ot-C8X" secondAttribute="trailing" id="gPb-XT-lBa"/>
                         <constraint firstItem="AZp-ob-Itx" firstAttribute="leading" secondItem="iOr-Yh-TzH" secondAttribute="leading" constant="8" id="igR-wf-aeq"/>
                         <constraint firstItem="Vbo-JJ-eAu" firstAttribute="leading" secondItem="ZxS-Nd-TJH" secondAttribute="trailing" constant="8" id="mfO-qh-uhh"/>
                         <constraint firstItem="g4n-Vb-vDe" firstAttribute="leading" secondItem="AZp-ob-Itx" secondAttribute="leading" id="ova-j7-F1P"/>
