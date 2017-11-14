@@ -96,7 +96,6 @@ extension AroundMeVC: AroundMeViewDelegate {
     
     func hideDrawer() {
         // slide down, remove child
-        
         if let childVC = self.childViewControllers.last as? BottomDrawerVC {
             UIView.animate(withDuration: 0.3, animations: {
                 childVC.view.frame.origin.y = self.view.frame.maxY
@@ -104,19 +103,7 @@ extension AroundMeVC: AroundMeViewDelegate {
             }, completion: { (finished: Bool) in
                 self.removeChildVC()
             })
-
-//            if childVC.isOpen {
-//                childVC.closeDrawer() { () in
-//                    self.removeChildVC()
-//                }
-//            } else {
-//                self.removeChildVC()
-//                // somehow animate a nice partialdrawerclosing
-////                childVC.dismiss(animated: <#T##Bool#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-//            }
-//
         }
-        
     }
     
     func removeChildVC(){
@@ -131,7 +118,6 @@ extension AroundMeVC: AroundMeViewDelegate {
     }
     
     
-    
     func mapPinButtonClicked(roomGuid: String) {
         removeChildVC()
         
@@ -144,6 +130,12 @@ extension AroundMeVC: AroundMeViewDelegate {
             chatroomCardView.chatRoom = chatRoom
 
             
+            
+            
+//            let verticalConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: bottomDrawerVC.view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+//            let widthConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 100)
+//            let heightConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 100)
+            
             // create fullsize view
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let chatroomDetailVC = storyboard.instantiateViewController(withIdentifier: "ChatRoomDetailVC") as! ChatRoomDetailVC
@@ -154,6 +146,14 @@ extension AroundMeVC: AroundMeViewDelegate {
             bottomDrawerVC.view.addSubview(bottomDrawerVC.mainFullVC.view)
             bottomDrawerVC.view.addSubview(bottomDrawerVC.smallDrawerView)
             bottomDrawerVC.addChildViewController(chatroomDetailVC)
+            
+            chatroomCardView.translatesAutoresizingMaskIntoConstraints = false
+            let leadingConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: bottomDrawerVC.view, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0)
+            let trailingConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: bottomDrawerVC.view, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
+//            let bottomConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: bottomDrawerVC.view, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0)
+//            let heightConstraint = NSLayoutConstraint(item: chatroomCardView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 139)
+            bottomDrawerVC.view.addConstraints([leadingConstraint, trailingConstraint])
+
             
             // Adjust bottomDrawerVC frame and initial position (below the screen)
             bottomDrawerVC.view.frame.origin.y = self.view.frame.maxY
