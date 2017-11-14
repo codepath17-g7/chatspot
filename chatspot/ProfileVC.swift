@@ -18,6 +18,7 @@ class ProfileVC: UIViewController {
 
     var user: User1!
     var otherUserGuid: String?
+    var pushed: Bool = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if navigationController?.restorationIdentifier == "ProfileNavigationController" {
@@ -98,7 +99,12 @@ class ProfileVC: UIViewController {
         ChatSpotClient.getUserProfile(userGuid: otherUserGuid!, success: { (user: User1) in
             self.user = user
             self.profileView.setupUserInfo(user: user)
-            self.addCloseButton()
+            if self.pushed {
+                self.setupBackButton()
+            } else {
+                self.addCloseButton()
+                self.navigationController?.navigationBar.isHidden = true
+            }
             
 
             ChatSpotClient.getBadges(userGuid: self.user.guid!, success: { (badges: [Badge]) in
@@ -121,9 +127,6 @@ class ProfileVC: UIViewController {
         
         self.hidesBottomBarWhenPushed = true
         
-        
-        self.navigationController?.navigationBar.isHidden = true
-        
     }
     
     func addCloseButton() {
@@ -133,6 +136,14 @@ class ProfileVC: UIViewController {
         closeButton.sizeToFit()
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
         self.profileView.headerView.addSubview(closeButton)
+    }
+    
+    func setupBackButton(){
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     func editProfile(){

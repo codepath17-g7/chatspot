@@ -23,14 +23,7 @@ class ChatRoomDetailVC: UIViewController {
     
     private var closeButton: UIButton!
     
-    
-    var chatroom: ChatRoom1!// {
-//        didSet {
-//            // if user belongs to the chatspot
-//           
-//
-//        }
-//    }
+    var chatroom: ChatRoom1!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -181,6 +174,34 @@ class ChatRoomDetailVC: UIViewController {
         }
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if segue.identifier == "ChatroomDetailToProfileSegue"{
+//            let profileVC = segue.destination as! ProfileVC
+//            
+//            if let cell = sender as? UserCell {
+//                print("cell is usercell")
+//                
+//                if let indexPath = tableView.indexPath(for: cell) {
+//                
+//                    let dataItem = tableViewData[indexPath.section]
+//                    let rows = dataItem.sectionItems as! [User1]
+//                    let user = rows[indexPath.row]
+//                    
+//                    profileVC.otherUserGuid = user.guid
+//                    profileVC.user = user
+//                    profileVC.pushed = true
+//                }
+////                movieDetailsVC.movie = filteredMovieList[indexPath.row]
+//            }
+////            if let cell = sender as? MovieCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
+////                print("inside of if let")
+////                movieDetailsVC.movie = filteredMovieList[indexPath.row]
+////            }
+//
+//        }
+//    }
+    
 }
 
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
@@ -204,7 +225,32 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
         if let rows = dataItem.sectionItems as? [String],
              rows.first == "Leave \(chatroom.name!)" {
             leaveRoom()
+        } else if let rows = dataItem.sectionItems as? [User1] {
+//            let cell = tableView.cellForRow(at: indexPath) as! UserCell
+            let user = rows[indexPath.row]
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            performSegue(withIdentifier: "ChatroomDetailToProfileSegue", sender: cell)
+            let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfileVC") as! ProfileVC
+            profileVC.otherUserGuid = user.guid
+            profileVC.user = user
+            profileVC.pushed = true
+            self.navigationController?.pushViewController(profileVC, animated: true)
+//                print("there is a nav")
+//                self.navigationController?.pushViewController(profileVC, animated: true)
+//            } else {
+//                print("there isn't a nav")
+//                if let parentVC = self.parent as? BottomDrawerVC {
+//                    parentVC.navigationController?.pushViewController(profileVC, animated: true)
+//                } else if let parentVC = self.parent as? ChatRoomVC {
+//                    parentVC.navigationController?.pushViewController(profileVC, animated: true)
+//
+//                }
+//            }
+            
+        } else if let rows = dataItem.sectionItems as? [Activity] {
+            
         }
+        
         tableView.deselectRow(at: indexPath, animated:true)
     }
     

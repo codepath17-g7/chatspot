@@ -43,6 +43,7 @@ class AroundMeView: UIView {
         nib.instantiate(withOwner: self, options: nil)
         contentView.frame = bounds
         addSubview(contentView)
+        mapView.tintColor = UIColor.ChatSpotColors.DarkerSelectedBlue
     }
     
     override func awakeFromNib() {
@@ -103,6 +104,7 @@ class AroundMeView: UIView {
     
     @IBAction func onRecenterMap(_ sender: UITapGestureRecognizer) {
         print("Recenter map")
+//        let region = MKCoordinateRegionMake
         let rgn = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 65000, 65000);
         mapView.setRegion(rgn, animated: true)
     }
@@ -155,6 +157,9 @@ extension AroundMeView: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is MKUserLocation) {
+//            let pin = mapView.viewForAnnotation(annotation) as? MKPinAnnotationView ?? MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
+//            pin.pinTintColor = UIColor.purpleColor()
+//            return pin
             return nil
         }
         
