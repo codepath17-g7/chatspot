@@ -65,6 +65,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="moveToCurrentLocationButton" width="36" height="37"/>
+        <image name="moveToCurrentLocationButton" width="37" height="37"/>
     </resources>
 </document>

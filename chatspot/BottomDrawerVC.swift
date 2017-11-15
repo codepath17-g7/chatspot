@@ -20,13 +20,16 @@ class BottomDrawerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.addSubview(mainFullVC.view)
+        view.addSubview(smallDrawerView)
         
+        smallDrawerView.translatesAutoresizingMaskIntoConstraints = false
+        let leadingConstraint = NSLayoutConstraint(item: smallDrawerView, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: smallDrawerView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.trailing, multiplier: 1, constant: 0)
         
-//        view.addSubview(mainFullVC.view)
-//        view.insertSubview(smallDrawerView, at: 0)
-//        view.addSubview(smallDrawerView)
-        
-//        smallDrawerView.bringSubview(toFront: smallDrawerView.joinButton)
+        view.addConstraints([leadingConstraint, trailingConstraint])
+
 
         let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan))
         panGesture.delegate = self

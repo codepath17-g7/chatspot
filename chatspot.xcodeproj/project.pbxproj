@@ -99,6 +99,9 @@
 		F2A666531FA11EB700EE8A4A /* SpecialAroundMeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */; };
 		F2C6A2521FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2C6A2501FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib */; };
 		F2C6A2531FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C6A2511FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift */; };
+		F2FF7C591FBC0FD200896E10 /* SearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FF7C581FBC0FD200896E10 /* SearchView.xib */; };
+		F2FF7C5B1FBC0FFB00896E10 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FF7C5A1FBC0FFB00896E10 /* SearchView.swift */; };
+		F2FF7C631FBCFEBC00896E10 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FF7C621FBCFEBC00896E10 /* EditProfileVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -222,6 +225,9 @@
 		F2A666521FA11EB700EE8A4A /* SpecialAroundMeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialAroundMeCell.swift; sourceTree = "<group>"; };
 		F2C6A2501FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatRoomAnnotationDetailView.xib; sourceTree = "<group>"; };
 		F2C6A2511FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomAnnotationDetailView.swift; sourceTree = "<group>"; };
+		F2FF7C581FBC0FD200896E10 /* SearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchView.xib; sourceTree = "<group>"; };
+		F2FF7C5A1FBC0FFB00896E10 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		F2FF7C621FBCFEBC00896E10 /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +333,8 @@
 				7626201D1F9338A7008404F6 /* AroundMeView.xib */,
 				7626201F1F9338BB008404F6 /* AroundMeView.swift */,
 				762620231F93D33D008404F6 /* ChatRoomAnnotationView.swift */,
+				F2FF7C581FBC0FD200896E10 /* SearchView.xib */,
+				F2FF7C5A1FBC0FFB00896E10 /* SearchView.swift */,
 				762620251F93D51D008404F6 /* ChatRoomAnnotation.swift */,
 				F2C6A2501FAD156700A4A132 /* ChatRoomAnnotationDetailView.xib */,
 				F2C6A2511FAD156700A4A132 /* ChatRoomAnnotationDetailView.swift */,
@@ -441,6 +449,7 @@
 				2DCF58E01F9CB8050014BBD0 /* ChatRoomDetailVC.swift */,
 				8B0ACFB81FA1CCDC00722B1D /* ActivityDetailVC.swift */,
 				F21E50221FA93DF500F4625F /* BottomDrawerVC.swift */,
+				F2FF7C621FBCFEBC00896E10 /* EditProfileVC.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -581,6 +590,7 @@
 				F254FCBE1FA3E52500CBD616 /* SF-Pro-Text-Semibold.otf in Resources */,
 				F254FCBD1FA3E52500CBD616 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				F254FCAA1FA3E52500CBD616 /* SF-Pro-Display-Medium.otf in Resources */,
+				F2FF7C591FBC0FD200896E10 /* SearchView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +709,7 @@
 				3298CF661F92F91000F9BBEE /* Message1.swift in Sources */,
 				8B0ACFB71FA1A21D00722B1D /* ActivityView.swift in Sources */,
 				76E3580E1F91A56B00EC6B0C /* UIImageWithEditView.swift in Sources */,
+				F2FF7C5B1FBC0FFB00896E10 /* SearchView.swift in Sources */,
 				8BCDD9B81FA87274004DD84D /* ActivityCell.swift in Sources */,
 				76E2296C1F9B245B007049B0 /* StorageClient.swift in Sources */,
 				8B92720C1F9082590041FC35 /* Storage.swift in Sources */,
@@ -718,6 +729,7 @@
 				8BD2DB711F92FBC20073ABBC /* LocationManager.swift in Sources */,
 				76D949421FA59C59005A6E8A /* PHAsset.swift in Sources */,
 				8BCDD9BB1FA876E2004DD84D /* Date+Ago.swift in Sources */,
+				F2FF7C631FBCFEBC00896E10 /* EditProfileVC.swift in Sources */,
 				F2719F091F8DF6F500417517 /* ChatListCell.swift in Sources */,
 				F2719EFF1F8DF50300417517 /* ChatListVC.swift in Sources */,
 				F2719F0E1F8DFCD900417517 /* Message.swift in Sources */,

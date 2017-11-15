@@ -91,7 +91,6 @@ class ChatroomCardView: UIView {
         // standard initialization logic
         Bundle.main.loadNibNamed("ChatroomCardView", owner: self, options: nil)
         contentView!.frame = bounds
-//        contentView!.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(contentView!)
         
         cardView.layer.shadowOffset = CGSize(width: 0, height: -3.0)

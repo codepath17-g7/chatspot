@@ -147,7 +147,13 @@ class ProfileVC: UIViewController {
     }
     
     func editProfile(){
-        
+        performSegue(withIdentifier: "EditProfileSegue", sender: self)
+    }
+    
+    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let editProfileNav = segue.destination as? UINavigationController, let editProfileVC = editProfilenav.roo  {
+            
+        }
     }
     
     func close() { //    @objc private

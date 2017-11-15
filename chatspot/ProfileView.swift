@@ -114,23 +114,3 @@ extension UIImageView {
     
 }
 
-
-//        if isSelf {
-////            profileImage.showEditView()
-////            bannerImage.showEditView()
-////
-////
-////            sendMessageButton.isHidden = true
-////            editUserNameButton.isHidden = false
-////            editUserTaglineButton.isHidden = false
-//        } else {
-////            profileImage.hideEditView()
-////            bannerImage.hideEditView()
-////
-////            sendMessageButton.isHidden = false
-////            editUserNameButton.isHidden = true
-////            editUserTaglineButton.isHidden = true
-//        }
-
-//        profilePictureImageView.layer.borderWidth = 5
-//        profilePictureImageView.layer.borderColor = UIColor.white.cgColor
