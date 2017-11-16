@@ -237,7 +237,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
 	
     func setRoomName (_ roomName: String) {
         chatRoomNameLabel.attributedText = NSAttributedString(string: roomName, attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.Chatspot.regularNavigationTitle])
-        messageTextView.attributedPlaceHolder = NSAttributedString(string: "Message \(roomName)", attributes: [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regular])
+        messageTextView.attributedPlaceHolder = NSAttributedString(string: "Hey \(roomName)", attributes: [NSForegroundColorAttributeName: UIColor.lightGray, NSFontAttributeName: UIFont.Chatspot.regular])
 
     }
     
@@ -245,6 +245,11 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         setRoomName(chatRoom.name)
+        
+        
+        messageTextView.textContainerInset.left = 8
+        messageTextView.textContainerInset.right = 8
+        messageTextView.textContainerInset.bottom = 5
         
         let userCount = chatRoom.isAroundMe ? chatRoom.localUsers?.count : chatRoom.users?.count
         
