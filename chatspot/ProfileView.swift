@@ -13,10 +13,10 @@ class ProfileView: UIView {
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet fileprivate weak var bannerImageView: UIImageView!
-    @IBOutlet fileprivate weak var profilePictureImageView: UIImageView!
-    @IBOutlet fileprivate weak var usernameLabel: UILabel!
-    @IBOutlet fileprivate weak var userTaglineLabel: UILabel!
+    @IBOutlet weak var bannerImageView: UIImageView!
+    @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userTaglineLabel: UILabel!
     
     @IBOutlet weak var headerView: UIView!
     
@@ -70,19 +70,23 @@ class ProfileView: UIView {
             headerView.layer.insertSublayer(gradient, at: 0)
         }
         
-        // Add semi-transparent gray layer
+        // Add semi-transparent gray layer // TODO: put this in the storyboard ProfileView.xib
         let grayOverlay = UIView(frame: bannerImageView.frame)
         grayOverlay.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
         self.headerView.addSubview(grayOverlay)
-        layoutIfNeeded()
+        
         
         headerView.isUserInteractionEnabled = true
         bannerImageView.isUserInteractionEnabled = true
+        
         usernameLabel.text = user.name
-    
         if let tagline = user.tagline {
             userTaglineLabel.text = tagline
         }
+        headerView.bringSubview(toFront: usernameLabel)
+        headerView.bringSubview(toFront: userTaglineLabel)
+        headerView.bringSubview(toFront: profilePictureImageView)
+        layoutIfNeeded()
         
     }
     

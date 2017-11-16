@@ -314,6 +314,7 @@ extension AroundMeVC: AroundMeViewDelegate {
                 self.removeChildVC()
             })
         }
+        tabBarController?.tabBar.isUserInteractionEnabled = true
     }
     
     func removeChildVC(){

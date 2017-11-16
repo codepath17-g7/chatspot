@@ -72,7 +72,7 @@ class ProfileVC: UIViewController {
         }, failure: {
             print("Failure retrieving badges")
         })
-        self.navigationItem.setUpTitle(title: "Profile")
+        navigationItem.setUpTitle(title: "Profile")
         tableViewData.append(SectionWithItems(" ", ["Logout"]))
         
         let rightItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editProfile))
@@ -81,10 +81,14 @@ class ProfileVC: UIViewController {
 
         navigationItem.rightBarButtonItem = rightItem
         
-        self.profileView.setupUserInfo(user: user)
+        setupUserInformation(user: user)
 
-        self.hidesBottomBarWhenPushed = false
+        hidesBottomBarWhenPushed = false
         
+    }
+    
+    func setupUserInformation(user: User1){
+        profileView.setupUserInfo(user: user)
     }
     
     //if viewing other user profile:
@@ -98,7 +102,7 @@ class ProfileVC: UIViewController {
         
         ChatSpotClient.getUserProfile(userGuid: otherUserGuid!, success: { (user: User1) in
             self.user = user
-            self.profileView.setupUserInfo(user: user)
+            self.setupUserInformation(user: user)
             if self.pushed {
                 self.setupBackButton()
             } else {
@@ -139,21 +143,49 @@ class ProfileVC: UIViewController {
     }
     
     func setupBackButton(){
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.isTranslucent = true
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     func editProfile(){
         performSegue(withIdentifier: "EditProfileSegue", sender: self)
     }
     
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let editProfileNav = segue.destination as? UINavigationController, let editProfileVC = editProfilenav.roo  {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let editProfileNav = segue.destination as? UINavigationController, let editProfileVC = editProfileNav.topViewController as? EditProfileVC  {
+            editProfileVC.loadViewIfNeeded()
+            editProfileVC.user = user
+            editProfileVC.bannerImageView.image = profileView.bannerImageView.image
+            editProfileVC.profilePicImageView.image =
+            profileView.profilePictureImageView.image
+            editProfileVC.usernameTextField.text = profileView.usernameLabel.text
+            editProfileVC.taglineTextField.text = profileView.userTaglineLabel.text
             
         }
+        
+    }
+    
+    
+    @IBAction func saveProfileEdits(segue: UIStoryboardSegue) {
+        
+        let editedProfileVC = segue.source as! EditProfileVC
+        setupUserInformation(user: editedProfileVC.user)
+        view.layoutIfNeeded()
+
+        
+//        self.profileView.bannerImageView =
+//        let detailViewController = segue.sourceViewController as! DetailTableViewController
+//        let index = detailViewController.index
+//        let modelString = detailViewController.editedModel
+//        models[index!] = modelString!
+//        tableView.reloadData()
+    }
+    
+    @IBAction func cancelProfileEdits(segue: UIStoryboardSegue) {
+        
     }
     
     func close() { //    @objc private
@@ -302,4 +334,16 @@ extension ProfileVC: UITableViewDelegate, UITableViewDataSource {
 //            }, failure: {})
 //        })
 
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let editProfileVC = storyboard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+//        let navVC = UINavigationController(rootViewController: editProfileVC)
+
+
+//        let editProfileNav = storyboard.instantiateViewController(withIdentifier: "EditProfileNavController") as! UINavigationController
+
+//        let appdelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        var tableViewController = mainStoryboard.instantiateViewControllerWithIdentifier("TableViewController") as! HomeViewController
+//        let navigationVC = UINavigationController(rootViewController: tableViewController)
+//        appdelegate.window!.rootViewController = navigationVC
 
