@@ -20,7 +20,7 @@ class ChatRoomDetailVC: UIViewController {
     fileprivate var tableViewData = [SectionWithItems]()
     private var userSection: SectionWithItems!
     private var activitySection: SectionWithItems!
-    
+    var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
     private var closeButton: UIButton!
     
     var chatroom: ChatRoom1!
@@ -39,11 +39,24 @@ class ChatRoomDetailVC: UIViewController {
         tableView.estimatedRowHeight = 56
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
+        setupUsers()
         
+        setupActivities()
         
         setupUI()
         
+        
+        if (self.parent as? BottomDrawerVC) == nil  {
+            print("Parent is a chatroom")
+            let panDownToDismissGesture = UIPanGestureRecognizer(target: self, action: #selector(panDownToDismiss))
+            panDownToDismissGesture.delegate = self
+            view.addGestureRecognizer(panDownToDismissGesture)
+        }
+    }
+    
+    
+    func setupUsers(){
+        let users = chatroom.isAroundMe ? chatroom.localUsers : chatroom.users
         users?.keys.forEach({ (userGuid) in
             
             ChatSpotClient.getUserProfile(userGuid: userGuid, success: { (user) in
@@ -69,7 +82,9 @@ class ChatRoomDetailVC: UIViewController {
                 
             }, failure: {})
         })
-        
+    }
+    
+    func setupActivities(){
         ChatSpotClient.getActivities(roomGuid: chatroom.guid, success: { (activities) in
             
             if (activities.count == 0) {
@@ -90,8 +105,30 @@ class ChatRoomDetailVC: UIViewController {
         } else {//if user doesn't belong to chatspot
             // TODO: add join button
         }
-        
     }
+    
+    
+    
+    func panDownToDismiss(sender: UIPanGestureRecognizer){
+        let touchPoint = sender.location(in: self.view?.window)
+        
+        if sender.state == UIGestureRecognizerState.began {
+            initialTouchPoint = touchPoint
+        } else if sender.state == UIGestureRecognizerState.changed {
+            if touchPoint.y - initialTouchPoint.y > 0 {
+                self.view.frame = CGRect(x: 0, y: touchPoint.y - initialTouchPoint.y, width: self.view.frame.size.width, height: self.view.frame.size.height)
+            }
+        } else if sender.state == UIGestureRecognizerState.ended || sender.state == UIGestureRecognizerState.cancelled {
+            if touchPoint.y - initialTouchPoint.y > 100 {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
+                })
+            }
+        }
+    }
+    
     
     func close() {
         if let parentVC = self.parent as? BottomDrawerVC {
@@ -108,8 +145,9 @@ class ChatRoomDetailVC: UIViewController {
         
         let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
         headerView.image = #imageLiteral(resourceName: "image-placeholder")
+        headerView.contentMode = .scaleAspectFill
         DispatchQueue.global(qos: .userInitiated).async {
-            if let urlString = self.chatroom.banner, let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+            if let urlString = self.chatroom.fullSizeBanner, let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 print("Banner height - \(image.size.height)")
                 DispatchQueue.main.async {
                     headerView.image = image
@@ -173,35 +211,6 @@ class ChatRoomDetailVC: UIViewController {
            performSegue(withIdentifier: "unwindToChatList", sender: self)
         }
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        if segue.identifier == "ChatroomDetailToProfileSegue"{
-//            let profileVC = segue.destination as! ProfileVC
-//            
-//            if let cell = sender as? UserCell {
-//                print("cell is usercell")
-//                
-//                if let indexPath = tableView.indexPath(for: cell) {
-//                
-//                    let dataItem = tableViewData[indexPath.section]
-//                    let rows = dataItem.sectionItems as! [User1]
-//                    let user = rows[indexPath.row]
-//                    
-//                    profileVC.otherUserGuid = user.guid
-//                    profileVC.user = user
-//                    profileVC.pushed = true
-//                }
-////                movieDetailsVC.movie = filteredMovieList[indexPath.row]
-//            }
-////            if let cell = sender as? MovieCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
-////                print("inside of if let")
-////                movieDetailsVC.movie = filteredMovieList[indexPath.row]
-////            }
-//
-//        }
-//    }
-    
 }
 
 extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
@@ -219,7 +228,7 @@ extension ChatRoomDetailVC: UITableViewDelegate, UITableViewDataSource {
         return tableViewData[section].sectionTitle
     }
     
-    
+    // TODO: allow cells to be clicked and show the extended lists
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dataItem = tableViewData[indexPath.section]
         if let rows = dataItem.sectionItems as? [String],
@@ -361,3 +370,32 @@ class SectionWithItems {
 //            } else {
 //                cell = UserCell(style: .default, reuseIdentifier: "userCell")
 //            }
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if segue.identifier == "ChatroomDetailToProfileSegue"{
+//            let profileVC = segue.destination as! ProfileVC
+//
+//            if let cell = sender as? UserCell {
+//                print("cell is usercell")
+//
+//                if let indexPath = tableView.indexPath(for: cell) {
+//
+//                    let dataItem = tableViewData[indexPath.section]
+//                    let rows = dataItem.sectionItems as! [User1]
+//                    let user = rows[indexPath.row]
+//
+//                    profileVC.otherUserGuid = user.guid
+//                    profileVC.user = user
+//                    profileVC.pushed = true
+//                }
+////                movieDetailsVC.movie = filteredMovieList[indexPath.row]
+//            }
+////            if let cell = sender as? MovieCollectionViewCell, let indexPath = collectionView.indexPath(for: cell) {
+////                print("inside of if let")
+////                movieDetailsVC.movie = filteredMovieList[indexPath.row]
+////            }
+//
+//        }
+//    }
+

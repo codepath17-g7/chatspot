@@ -11,6 +11,7 @@ import Foundation
 class ChatRoom1 {
     static let KEY_NAME = "name"
     static let KEY_BANNER = "banner"
+    static let KEY_FULL_SIZE_BANNER = "fullSizeBanner"
     static let KEY_DESCRIPTION = "description"
     static let KEY_LATITUDE = "latitude"
     static let KEY_LONGITUDE = "longitude"
@@ -24,6 +25,7 @@ class ChatRoom1 {
     var title: String!
     var createdAt: Double = 0
     var banner: String?
+    var fullSizeBanner: String?
     var longitude: Double!
     var latitude: Double!
     var users: [String:Bool]? // these users joined the room manually
@@ -41,6 +43,10 @@ class ChatRoom1 {
             self.banner = banner
         }
         
+        if let fullSizeBanner = obj[ChatRoom1.KEY_FULL_SIZE_BANNER] as? String {
+            self.fullSizeBanner = fullSizeBanner
+        }
+    
         if let name = obj[ChatRoom1.KEY_NAME] as? String {
             self.name = name
         }
