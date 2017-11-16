@@ -40,7 +40,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iOr-Yh-TzH">
                     <rect key="frame" x="0.0" y="1" width="375" height="138"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="fitnessCenterSmall" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-ot-C8X">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="long-image-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="O5z-ot-C8X">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="76" id="we0-ey-ZmB"/>
@@ -129,7 +129,7 @@
         </view>
     </objects>
     <resources>
-        <image name="fitnessCenterSmall" width="375" height="76"/>
+        <image name="long-image-placeholder" width="355" height="76"/>
         <image name="people" width="37" height="25"/>
         <image name="plusButton" width="31" height="31"/>
     </resources>

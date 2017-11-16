@@ -120,7 +120,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icL-dG-MFg">
                                                     <rect key="frame" x="10" y="10" width="355" height="139.5"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="fitnessCenterSmall" translatesAutoresizingMaskIntoConstraints="NO" id="ps2-tl-bcJ">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="long-image-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="ps2-tl-bcJ">
                                                             <rect key="frame" x="0.0" y="0.0" width="355" height="76"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="76" id="P9D-tR-JTq"/>
@@ -260,7 +260,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="244.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="yME-fo-Zy6">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="yME-fo-Zy6">
                                                             <rect key="frame" x="8" y="8" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="J9W-vQ-Ahz"/>
@@ -872,7 +872,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ol1-do-0Fj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My Chatspots" image="chatspotsTabBarIcon" id="Ab7-RO-esu"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oa6-3H-12g">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Oa6-3H-12g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -891,7 +891,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="shS-2w-g5P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Around Me" image="aroundMeTabBarIcon" id="DEi-1I-pBR"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cg6-qc-Bbo">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cg6-qc-Bbo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -910,7 +910,7 @@
                 <navigationController restorationIdentifier="ProfileNavigationController" storyboardIdentifier="ProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="wZY-1h-ACk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="0M2-oz-a3L"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cHG-j7-m8m">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cHG-j7-m8m">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -928,7 +928,7 @@
             <objects>
                 <navigationController storyboardIdentifier="EditProfileNavController" automaticallyAdjustsScrollViewInsets="NO" id="Xls-xy-gmb" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="u10-4B-0tq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="u10-4B-0tq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -947,8 +947,9 @@
         <image name="blueCap" width="29" height="23"/>
         <image name="camera" width="31" height="28"/>
         <image name="chatspotsTabBarIcon" width="39" height="31"/>
-        <image name="fitnessCenterSmall" width="375" height="76"/>
+        <image name="image-placeholder" width="300" height="300"/>
         <image name="lightning" width="22" height="31"/>
+        <image name="long-image-placeholder" width="355" height="76"/>
         <image name="people" width="37" height="25"/>
         <image name="photo" width="33" height="27"/>
         <image name="playButtonOverlay" width="1024" height="1024"/>
