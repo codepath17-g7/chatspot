@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="l4s-Pw-Lvl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="17A405" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Y8P-rZ-HUd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="SF-Pro-Display-Bold.otf">
-            <string>SFProDisplay-Bold</string>
+        <array key="SF-Pro-Display-Semibold.otf">
+            <string>SFProDisplay-Semibold</string>
         </array>
         <array key="SF-Pro-Text-Bold.otf">
             <string>SFProText-Bold</string>
@@ -538,10 +538,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaL-lJ-Faz">
-                                <rect key="frame" x="152" y="310.5" width="71" height="46"/>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="28"/>
+                                <rect key="frame" x="107" y="310" width="160" height="46"/>
+                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Grn-xF-SX6"/>
+                                    <constraint firstAttribute="height" constant="46" id="Jod-vP-8XZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
                                 <state key="normal" title="Login">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="onLogin:" destination="Y8P-rZ-HUd" eventType="touchUpInside" id="7tr-3E-K9v"/>
@@ -556,12 +561,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="4Se-pY-6id"/>
                     <connections>
+                        <outlet property="loginButton" destination="HaL-lJ-Faz" id="cwc-vm-HCu"/>
                         <segue destination="qGN-Ra-ftD" kind="presentation" identifier="loggedInSegue" id="n2V-00-uwO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ei6-Bo-c62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-613.60000000000002" y="-1073.6131934032985"/>
+            <point key="canvasLocation" x="-1543.2" y="-903.59820089955031"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="HL3-wo-mGY">
@@ -611,13 +617,13 @@
                     <navigationItem key="navigationItem" id="kph-OR-89o"/>
                     <connections>
                         <outlet property="profileView" destination="3pn-Xo-wJa" id="G80-yb-h3r"/>
-                        <segue destination="l4s-Pw-Lvl" kind="presentation" identifier="loggedOutSegue" id="INc-WK-H30"/>
                         <segue destination="Xls-xy-gmb" kind="presentation" identifier="EditProfileSegue" id="Deu-u0-G1g"/>
+                        <segue destination="Y8P-rZ-HUd" kind="presentation" identifier="loggedOutSegue" id="tZU-nb-slv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-754" y="1518"/>
+            <point key="canvasLocation" x="-754" y="1411"/>
         </scene>
         <!--Edit ProfileVC-->
         <scene sceneID="vPh-dx-Smr">
@@ -916,24 +922,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OVZ-HR-cYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-754.39999999999998" y="704.79760119940033"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="2M5-Wg-a5q">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l4s-Pw-Lvl" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vej-5k-I1I">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y8P-rZ-HUd" kind="relationship" relationship="rootViewController" id="Rp7-ls-NdM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fje-JW-vcS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1552.8" y="-1073.6131934032985"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cHn-hK-3ku">

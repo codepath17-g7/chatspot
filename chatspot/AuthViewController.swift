@@ -22,8 +22,15 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
     fileprivate(set) var auth: Auth? = Auth.auth()
     fileprivate(set) var authUI: FUIAuth? = FUIAuth.defaultAuthUI()
     fileprivate(set) var customAuthUIDelegate: FUIAuthDelegate!
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginButton.layer.cornerRadius = 4
+        loginButton.backgroundColor = UIColor.ChatSpotColors.SelectedBlue
     }
     
     override func viewWillAppear(_ animated: Bool) {
