@@ -10,7 +10,6 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import Firebase
-import MBProgressHUD
 import ISEmojiView
 import GrowingTextView
 import ImagePickerSheetController

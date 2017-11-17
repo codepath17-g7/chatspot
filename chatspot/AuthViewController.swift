@@ -51,10 +51,6 @@ class AuthViewController: UIViewController, FUIAuthDelegate{
         self.navigationController?.isToolbarHidden = true;
     }
 
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: FirebaseAuth.User?, error: Error?) {
         guard let authError = error else { return }
