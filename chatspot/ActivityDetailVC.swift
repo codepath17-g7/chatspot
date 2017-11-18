@@ -125,7 +125,8 @@ class ActivityDetailVC: UIViewController {
     }
     
     func close() {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
+//        dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

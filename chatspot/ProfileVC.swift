@@ -59,6 +59,8 @@ class ProfileVC: UIViewController {
     //-nav bar profile title set
     func setupSelfProfile(){
         user = ChatSpotClient.currentUser
+        navigationController?.navigationBar.isTranslucent = false
+
         ChatSpotClient.getBadges(userGuid: user.guid!, success: { (badges: [Badge]) in
             if (badges.count == 0) {
                 return

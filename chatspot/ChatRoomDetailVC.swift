@@ -138,7 +138,7 @@ class ChatRoomDetailVC: UIViewController {
         }
     }
     
-    private func setupUI() { //247, 247, 247
+    private func setupUI() { //gray color: 247, 247, 247
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
         tableView.separatorColor = UIColor.lightGray
         tableView.tableFooterView = UIView()
@@ -146,6 +146,7 @@ class ChatRoomDetailVC: UIViewController {
         let headerView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200))
         headerView.image = #imageLiteral(resourceName: "image-placeholder")
         headerView.contentMode = .scaleAspectFill
+        headerView.clipsToBounds = true
         DispatchQueue.global(qos: .userInitiated).async {
             if let urlString = self.chatroom.fullSizeBanner, let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
                 print("Banner height - \(image.size.height)")

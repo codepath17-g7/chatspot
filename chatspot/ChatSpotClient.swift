@@ -95,6 +95,8 @@ class ChatSpotClient {
                     success()
                 }
         }
+        
+        // Add logic to remove activity if no users are in it
     }
     
     static func listenForActivities(roomGuid: String,

@@ -25,20 +25,18 @@ class ChatListVC: UIViewController {
 		tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorStyle = .none
         
-        // Heads Up Display
         setupAndTriggerHUD()
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.setUpTitle(title: "Chatspots")
         tableView.backgroundColor = UIColor.ChatSpotColors.LighterGray
-        
 
         if let aroundMeRoomGuid = ChatSpotClient.currentUser.aroundMe {
             updateAroundMeRoom(aroundMeRoomGuid)
         }
 
-
         self.tableView.reloadData()
+        
         KRProgressHUD.dismiss()
         
         startObservingAroundMeRoomGuid()
@@ -55,7 +53,18 @@ class ChatListVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(appGoingToBackground(notification:)),
                                                name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = true
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isTranslucent = false
 
+        observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
+        observers.removeAll()
     }
     
     // This is an unwind segue
@@ -194,11 +203,7 @@ class ChatListVC: UIViewController {
             return firstHasUnread && !secondHasUnread
         })
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        observers.forEach { ChatSpotClient.removeObserver(handle: $0) }
-        observers.removeAll()
-    }
+
     
     @objc func appGoingToBackground(notification: NSNotification) {
         saveAllUnreadCounts()

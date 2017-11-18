@@ -67,13 +67,7 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isTranslucent = false
-
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
-        navigationController?.navigationBar.isTranslucent = true
 
         if chatRoom.guid == nil {
             print("Not attached to a room")
@@ -218,13 +212,9 @@ class ChatRoomVC: UIViewController, ChatMessageCellDelegate, UITextFieldDelegate
     func onActivityBannerTapped(_ sender: UIView) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let activityDetailVC = storyboard.instantiateViewController(withIdentifier: "ActivityDetailVC") as! ActivityDetailVC
-        
-//        let navigationController = storyboard.instantiateViewController(withIdentifier: "activityDetailNavigationController") as! UINavigationController
-//        let activityDetailVC = navigationController.topViewController as! ActivityDetailVC
         activityDetailVC.activity = currentActivity
         activityDetailVC.roomGuid = chatRoom.guid
         self.navigationController?.pushViewController(activityDetailVC, animated: true)
-//        present(navigationController, animated: true)
     }
 
 //    func setUpInfiniteScrolling(){

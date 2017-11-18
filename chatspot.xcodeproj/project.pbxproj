@@ -15,7 +15,6 @@
 		32963D631F8B1BAD00E05CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */; };
 		32963D681F8B1BAD00E05CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D661F8B1BAD00E05CF3 /* Main.storyboard */; };
 		32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32963D691F8B1BAD00E05CF3 /* Assets.xcassets */; };
-		32963D6D1F8B1BAD00E05CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */; };
 		32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */; };
 		3298CF5E1F92A6DB00F9BBEE /* ChatSpotClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF5D1F92A6DB00F9BBEE /* ChatSpotClient.swift */; };
 		3298CF621F92F8DF00F9BBEE /* User1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3298CF611F92F8DF00F9BBEE /* User1.swift */; };
@@ -123,7 +122,6 @@
 		32963D621F8B1BAD00E05CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32963D671F8B1BAD00E05CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32963D691F8B1BAD00E05CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		32963D6C1F8B1BAD00E05CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32963D6E1F8B1BAD00E05CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "chatspot/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3298CF5D1F92A6DB00F9BBEE /* ChatSpotClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSpotClient.swift; sourceTree = "<group>"; };
@@ -272,7 +270,6 @@
 				F2029D651FBD7ECB00236EEF /* Deprecated */,
 				32963D661F8B1BAD00E05CF3 /* Main.storyboard */,
 				32963D691F8B1BAD00E05CF3 /* Assets.xcassets */,
-				32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */,
 				F2719EFD1F8D54E700417517 /* chatspot.entitlements */,
 				32963D741F8B1E1C00E05CF3 /* GoogleService-Info.plist */,
 				32963D6E1F8B1BAD00E05CF3 /* Info.plist */,
@@ -556,7 +553,6 @@
 				F254FCAB1FA3E52500CBD616 /* SF-Pro-Display-MediumItalic.otf in Resources */,
 				F254FCAC1FA3E52500CBD616 /* SF-Pro-Display-Regular.otf in Resources */,
 				F254FCB71FA3E52500CBD616 /* SF-Pro-Text-HeavyItalic.otf in Resources */,
-				32963D6D1F8B1BAD00E05CF3 /* LaunchScreen.storyboard in Resources */,
 				F254FCB11FA3E52500CBD616 /* SF-Pro-Display-ThinItalic.otf in Resources */,
 				32963D751F8B1E1C00E05CF3 /* GoogleService-Info.plist in Resources */,
 				32963D6A1F8B1BAD00E05CF3 /* Assets.xcassets in Resources */,
@@ -755,14 +751,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		32963D6B1F8B1BAD00E05CF3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				32963D6C1F8B1BAD00E05CF3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -866,6 +854,7 @@
 			baseConfigurationReference = EB554F053E4F4C88392020DA /* Pods-chatspot.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = chatspot/chatspot.entitlements;
 				DEVELOPMENT_TEAM = 875WVS57Q6;
 				INFOPLIST_FILE = chatspot/Info.plist;
@@ -881,6 +870,7 @@
 			baseConfigurationReference = 28AB81330CFBAF813EF019BE /* Pods-chatspot.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = chatspot/chatspot.entitlements;
 				DEVELOPMENT_TEAM = 875WVS57Q6;
 				INFOPLIST_FILE = chatspot/Info.plist;

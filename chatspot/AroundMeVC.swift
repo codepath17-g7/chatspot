@@ -15,86 +15,87 @@ class AroundMeVC: UIViewController, UISearchBarDelegate {
     var navView: UIView!
     var searchBar: UISearchBar!
     var leftConstraint: NSLayoutConstraint!
-    var widthConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setUpTitle(title: "Around Me")
         self.aroundMeView.delegate = self
-        setupSearchBar()
+//        setupSearchBar()
     }
 
     func setupSearchBar(){
-        // Background view.
-        navView = UIView()
-        navView.backgroundColor = UIColor.ChatSpotColors.LighterGray
-        navView.translatesAutoresizingMaskIntoConstraints = false
-        navigationItem.titleView = navView
-        navView.superview!.addConstraint(NSLayoutConstraint(item: navView, attribute: .top, relatedBy: .equal, toItem: navView.superview!, attribute: .top, multiplier: 1, constant: 0))
-        navView.addConstraint(NSLayoutConstraint(item: navView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: UIScreen.main.bounds.width))
-        navView.addConstraint(NSLayoutConstraint(item: navView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: navigationController!.navigationBar.bounds.height))
+        
+        // Expandable area.
+        let expandableView = ExpandableView()
+        navigationItem.titleView = expandableView
+        
         
         // Search button.
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(open))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(toggle))
+        
+        
+        expandableView.superview!.addConstraint(NSLayoutConstraint(item: expandableView, attribute: .right, relatedBy: .equal, toItem: expandableView.superview!, attribute: .right, multiplier: 1, constant: 60))
+
         
         // Search bar.
         searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        navView.addSubview(searchBar)
-        
-        navView.addConstraint(NSLayoutConstraint(item: searchBar, attribute: .centerY, relatedBy: .equal, toItem: navView, attribute: .centerY, multiplier: 1, constant: 0))
-        leftConstraint = NSLayoutConstraint(item: searchBar, attribute: .left, relatedBy: .equal, toItem: navigationItem.titleView, attribute: .leftMargin, multiplier: 1, constant: 0)
-        leftConstraint.priority = UILayoutPriorityDefaultLow // Starts out as low priority so it has no effect.
-        navView.addConstraint(leftConstraint)
-        
-        navView.addConstraint(NSLayoutConstraint(item: navigationItem.titleView!, attribute: .right, relatedBy: .equal, toItem: searchBar, attribute: .right, multiplier: 1, constant: 56))
-        widthConstraint = NSLayoutConstraint(item: searchBar, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: 10)
-        widthConstraint.priority = UILayoutPriorityDefaultHigh  // Starts out as high priority so it does have effect.
-        navView.addConstraint(widthConstraint)
+        expandableView.addSubview(searchBar)
+        leftConstraint = searchBar.leftAnchor.constraint(equalTo: expandableView.leftAnchor)
+        leftConstraint.isActive = false
+        searchBar.rightAnchor.constraint(equalTo: expandableView.rightAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: expandableView.topAnchor).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: expandableView.bottomAnchor).isActive = true
         
         // Remove search bar border.
         searchBar.layer.borderColor = UIColor.ChatSpotColors.LighterGray.cgColor
         searchBar.layer.borderWidth = 1
-        
+
         // Match background color.
         searchBar.barTintColor = UIColor.ChatSpotColors.LighterGray
-        
-        // Search bar starts invisible.
-        searchBar.alpha = 0
     }
     
-    func open() {
+    
+    
+    @objc func toggle() {
         
-        let isClosing = leftConstraint.priority == UILayoutPriorityDefaultHigh
+        let isOpen = leftConstraint.isActive == true
         
-        if isClosing {
-            leftConstraint.priority = UILayoutPriorityDefaultLow
-            widthConstraint.priority = UILayoutPriorityDefaultHigh
+        // Inactivating the left constraint closes the expandable header.
+        if isOpen {
+            leftConstraint.isActive = false
             navigationItem.setUpTitle(title: "Around Me")
             navigationItem.leftBarButtonItem?.customView?.alpha = 0
-
         } else {
-            leftConstraint.priority = UILayoutPriorityDefaultHigh
-            widthConstraint.priority = UILayoutPriorityDefaultLow
+            leftConstraint.isActive = true
+
         }
-        
         // Animate change to visible.
-        UIView.animate(withDuration: 2.0, animations: {
-            // Switch the priorities to make search bar expand.
-            self.searchBar.alpha = isClosing ? 0 : 1
-            self.navigationItem.leftBarButtonItem?.customView?.alpha = isClosing ? 1 : 0
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            self.navigationItem.titleView?.layoutIfNeeded()
             self.searchBar.layoutIfNeeded()
-            if !isClosing {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        })
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            self.navigationItem.titleView?.alpha = isOpen ? 0 : 1
+            self.navigationItem.leftBarButtonItem?.customView?.alpha = isOpen ? 1 : 0
+//            self.navigationItem.titleView?.layoutIfNeeded()
+//            self.searchBar.layoutIfNeeded()
+        },  completion: { (finished: Bool) in
+            if !isOpen {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
                     self.navigationItem.leftBarButtonItem = nil
-                    UIView.animate(withDuration: 1.0, animations: {
+                    UIView.animate(withDuration: 1.5, animations: {
                         self.searchBar.layoutIfNeeded()
                     })
-                }
+//                }
             }
-        },  completion: { (finished: Bool) in
+
 
         })
+
+
     }
 }
 
@@ -155,6 +156,25 @@ extension AroundMeVC: AroundMeViewDelegate {
             UIApplication.shared.keyWindow!.insertSubview(bottomDrawerVC.view, aboveSubview: tabBarController!.tabBar)
 
         }
+    }
+}
+
+class ExpandableView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = UIColor.ChatSpotColors.LighterGray
+        translatesAutoresizingMaskIntoConstraints = false
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        return UILayoutFittingExpandedSize
+//        return CGSize(width: 300, height: 44)
     }
 }
 

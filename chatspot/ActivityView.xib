@@ -22,28 +22,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="John Doe started an activity!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IjA-Ne-rnv">
-                    <rect key="frame" x="16" y="16" width="327" height="17"/>
+                    <rect key="frame" x="16" y="10" width="327" height="20.5"/>
                     <fontDescription key="fontDescription" name="SFProText-Regular" family="SF Pro Text" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LW6-Cd-OlH">
-                    <rect key="frame" x="351" y="18" width="8" height="13"/>
+                    <rect key="frame" x="351" y="9" width="8" height="22"/>
                     <state key="normal" image="chevron"/>
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="IjA-Ne-rnv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="GFs-tD-U0w"/>
+                <constraint firstItem="LW6-Cd-OlH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="4P8-jD-Rc4"/>
                 <constraint firstItem="IjA-Ne-rnv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="QQ4-gn-gPd"/>
-                <constraint firstItem="LW6-Cd-OlH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="Z1S-5X-hJf"/>
-                <constraint firstAttribute="bottom" secondItem="IjA-Ne-rnv" secondAttribute="bottom" constant="16" id="Zci-jv-cG7"/>
+                <constraint firstItem="IjA-Ne-rnv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="U0O-5F-cZv"/>
                 <constraint firstItem="LW6-Cd-OlH" firstAttribute="leading" secondItem="IjA-Ne-rnv" secondAttribute="trailing" constant="8" id="eOG-br-tN6"/>
                 <constraint firstAttribute="trailing" secondItem="LW6-Cd-OlH" secondAttribute="trailing" constant="16" id="pih-3m-N10"/>
-                <constraint firstAttribute="bottom" secondItem="LW6-Cd-OlH" secondAttribute="bottom" constant="18" id="wmb-YQ-AJI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="35.5" y="-248.5"/>
