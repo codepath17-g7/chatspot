@@ -34,7 +34,7 @@ class AroundMeVC: UIViewController, UISearchBarDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(toggle))
         
         
-        expandableView.superview!.addConstraint(NSLayoutConstraint(item: expandableView, attribute: .right, relatedBy: .equal, toItem: expandableView.superview!, attribute: .right, multiplier: 1, constant: 60))
+//        expandableView.superview!.addConstraint(NSLayoutConstraint(item: expandableView, attribute: .right, relatedBy: .equal, toItem: expandableView.superview!, attribute: .right, multiplier: 1, constant: 60))
 
         
         // Search bar.
@@ -73,30 +73,27 @@ class AroundMeVC: UIViewController, UISearchBarDelegate {
         // Animate change to visible.
         
         UIView.animate(withDuration: 1.5, animations: {
-            self.navigationItem.titleView?.layoutIfNeeded()
-            self.searchBar.layoutIfNeeded()
+//            self.navigationItem.titleView?.layoutIfNeeded()
+//            self.searchBar.layoutIfNeeded()
+            self.navigationController?.view.layoutIfNeeded()
         })
         
         UIView.animate(withDuration: 1.5, animations: {
             self.navigationItem.titleView?.alpha = isOpen ? 0 : 1
             self.navigationItem.leftBarButtonItem?.customView?.alpha = isOpen ? 1 : 0
-//            self.navigationItem.titleView?.layoutIfNeeded()
-//            self.searchBar.layoutIfNeeded()
         },  completion: { (finished: Bool) in
             if !isOpen {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
                     self.navigationItem.leftBarButtonItem = nil
                     UIView.animate(withDuration: 1.5, animations: {
-                        self.searchBar.layoutIfNeeded()
+//                        self.searchBar.layoutIfNeeded()
+                        self.navigationController?.view.layoutIfNeeded()
                     })
-//                }
             }
-
-
         })
-
-
     }
+    
+    //            self.navigationItem.titleView?.layoutIfNeeded()
+    //            self.searchBar.layoutIfNeeded()
 }
 
 extension AroundMeVC: AroundMeViewDelegate {
